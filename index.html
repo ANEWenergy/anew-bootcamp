@@ -253,6 +253,15 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .tip b{color:var(--gold)}
 .supbox{margin:12px 18px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:13px}
 .supbox b{font-family:'Sora';font-size:13px}
+.toolpanel{margin:14px 16px;background:linear-gradient(160deg,rgba(243,144,25,.10),var(--card2));border:1px solid rgba(243,144,25,.35);border-radius:16px;padding:15px 15px 16px}
+.toolpanel .toolhdr{display:flex;flex-direction:column;gap:2px;margin-bottom:8px}
+.toolpanel .toolkicker{font-family:'Sora';font-weight:700;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--orange)}
+.toolpanel .toolhdr b{font-family:'Sora';font-weight:800;font-size:18px;color:#fff;margin-top:2px}
+.toolpanel .toolblurb{font-size:12.5px;color:var(--muted);margin-top:1px}
+.toolpanel .toolinstr{font-size:13px;line-height:1.45;margin:4px 0 12px}
+.toolpanel .toolbtns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.toolpanel .toolinstall{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:'Sora';font-weight:700;font-size:14.5px;border-radius:14px;padding:13px;color:#1a1003;background:linear-gradient(120deg,var(--orange),var(--yellow));box-shadow:0 8px 22px -10px rgba(243,144,25,.6)}
+.toolpanel .toolyt{text-align:center;text-decoration:none;font-size:13px;color:var(--orange);padding:4px}
 .suprow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line)}
 .suprow:last-child{border:none}
 .suprow a{color:#8fd3ff;text-decoration:none}
@@ -697,6 +706,54 @@ Object.defineProperty(window, 'COURSE', {
 
 /* ---------- trade catalog ---------- */
 const CATS = ['all','Molding & Plastics','Machining & CAM','Welding & Fabrication','Electrical & Controls','Design & CAD','Quality & Operations'];
+const TOOLS = {
+  'kicad':{name:'KiCad', url:'https://www.kicad.org/download/', vid:'0WCi1rhueH4', blurb:L('Free, open-source PCB design suite used worldwide.','Suite de dise\u00f1o de PCB gratuita y de c\u00f3digo abierto usada en todo el mundo.')},
+  'fusion':{name:'Autodesk Fusion (360)', url:'https://www.autodesk.com/products/fusion-360/education', vid:'Izh99EnGLGw', blurb:L('Free 1-year student license. Full CAD, CAM and simulation.','Licencia de estudiante gratis por 1 a\u00f1o. CAD, CAM y simulaci\u00f3n completos.')},
+  'arduino':{name:'Arduino IDE', url:'https://www.arduino.cc/en/software', vid:'zJ-LqeX_fLU', blurb:L('Free, open-source tool for programming microcontrollers.','Herramienta gratuita y de c\u00f3digo abierto para programar microcontroladores.')},
+  'freecad':{name:'FreeCAD', url:'https://www.freecad.org/downloads.php', vid:'8VPYTTnqmfs', blurb:L('Free, open-source parametric 3D CAD with FEM and CAM.','CAD 3D param\u00e9trico gratuito y de c\u00f3digo abierto con FEM y CAM.')},
+  'librecad':{name:'LibreCAD', url:'https://librecad.org/', vid:'Vv2-6Q_8gQw', blurb:L('Free, open-source 2D CAD for technical drawings.','CAD 2D gratuito y de c\u00f3digo abierto para dibujos t\u00e9cnicos.')},
+  'openplc':{name:'OpenPLC', url:'https://openplcproject.com/', vid:'1_nd0FLh4n0', blurb:L('Free, open-source PLC editor (all 5 IEC 61131-3 languages).','Editor de PLC gratuito y de c\u00f3digo abierto (los 5 lenguajes IEC 61131-3).')},
+  'blender':{name:'Blender', url:'https://www.blender.org/download/', vid:'z-Xl9tGqH14', blurb:L('Free, open-source 3D modeling, rendering and design.','Modelado 3D, renderizado y dise\u00f1o gratuitos y de c\u00f3digo abierto.')},
+  'projectlibre':{name:'ProjectLibre', url:'https://www.projectlibre.com/', vid:'9xwR4JCBaIU', blurb:L('Free, open-source project management (Gantt, WBS, critical path).','Gesti\u00f3n de proyectos gratuita y de c\u00f3digo abierto (Gantt, WBS, ruta cr\u00edtica).')},
+  'tinkercad':{name:'Tinkercad', url:'https://www.tinkercad.com/', vid:'60xfIu-lqAs', blurb:L('Free Autodesk browser tool for 3D, electronics and code.','Herramienta gratuita de Autodesk en el navegador para 3D, electr\u00f3nica y c\u00f3digo.')},
+};
+const TRADE_TOOL = {
+  'mold':'fusion',
+  'plasticpart':'fusion',
+  'moldflow':'fusion',
+  'molddesign':'fusion',
+  'material':'tinkercad',
+  'cnc':'fusion',
+  'multiaxis':'fusion',
+  'cycle':'fusion',
+  'cadcam':'fusion',
+  'weld':'fusion',
+  'seal':'fusion',
+  'sheet':'fusion',
+  'diestamp':'fusion',
+  'fixture':'fusion',
+  'wire':'fusion',
+  'embedded':'arduino',
+  'pcb':'fusion',
+  'pcbmfg':'fusion',
+  'robot':'openplc',
+  'power':'openplc',
+  'battery':'tinkercad',
+  'industrial':'blender',
+  'styling':'blender',
+  'drawing':'fusion',
+  'assembly':'freecad',
+  'facility':'fusion',
+  'maint':'freecad',
+  'nesting':'fusion',
+  'pid':'fusion',
+  'logic':'fusion',
+  'pm':'projectlibre',
+  'cost':'projectlibre',
+  'quality':'projectlibre',
+  'safety':'projectlibre',
+};
+
 const TRADES = [
  {id:'mold', ic:'mold', title:'Advanced Mold Making', cat:'Molding & Plastics', live:true, mods:5, deep:true,
   blurb:'Plastic injection mold making \u2014 deep Material Science + supplier sourcing.', lang:'EN \u00B7 ES'},
@@ -2738,6 +2795,32 @@ function tradeBanner(tradeId){
   </svg></div>`;
 }
 
+/* ---------- software tool panel ----------
+   Shows the recommended (free / student) software for a trade, with an install
+   link and an intro video, plus instructions to install it and use it for the
+   hands-on part of the learning. Sits above the curriculum on the course page. */
+function toolPanel(tradeId){
+  const key = TRADE_TOOL[tradeId];
+  if(!key) return '';
+  const tool = TOOLS[key];
+  if(!tool) return '';
+  const heading = tr2('Software for this trade','Software para este oficio');
+  const instr = tr2(
+    'Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
+    'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.');
+  return `<div class="toolpanel">
+    <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${tool.name}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
+    <p class="toolinstr">${instr}</p>
+    <div class="video embed" onclick="playVideo('${tool.vid}')">
+      <img class="vthumb" src="https://i.ytimg.com/vi/${tool.vid}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="pl"></div><div class="vt">${tr2('Watch intro','Ver introducci\u00f3n')}</div></div>
+    <div class="toolbtns">
+      <a class="toolinstall" href="${tool.url}" target="_blank" rel="noopener noreferrer">\u2913 ${tr2('Install','Instalar')} ${tool.name}</a>
+      <a class="toolyt" href="https://www.youtube.com/watch?v=${tool.vid}" target="_blank" rel="noopener noreferrer">${tr2('Open on YouTube','Abrir en YouTube')} \u2197</a>
+    </div>
+  </div>`;
+}
+
 function renderHome(){
   const o=coursePct();
   const tradeId=(state.trade)||'mold';
@@ -2796,6 +2879,7 @@ function renderHome(){
      <div class="ringrow" style="margin-top:12px"><div class="pring" style="--p:${o}"><div class="inner"><b>${o}%</b><span>${t('overall').toUpperCase()}</span></div></div>
        <div class="stat3"><div class="stat"><b>${lessonsCompleted()}/${lessonsTotal()}</b><span>${t('lessons')}</span></div>
          <div class="stat"><b>${state.streak}</b><span>${t('streak')}</span></div></div></div></div>
+   ${toolPanel(tradeId)}
    <div class="sect">${t('modules')}</div>${mods}<div style="height:10px"></div>`;
 }
 

@@ -2581,6 +2581,9 @@ function renderIntro(){
 }
 // Each slide gets an equal share of the song; when the song plays we follow its clock.
 function startIntroTimeline(){
+  // When the Listen narration is driving the tour, it controls pacing \u2014 don't let
+  // the auto/music timeline also advance slides or end the intro.
+  if(state.introNarrating){ return; }
   const total=INTRO_SLIDES.length;
   const perSlide=SONG_DURATION/total; // ~20.8s per slide across the song
   const bar=document.getElementById('introprogbar');
@@ -2627,34 +2630,78 @@ function introSlideText(){
 }
 function updateIntroListenBtn(btn){
   if(!btn) return;
-  const on=state.reading;
+  const on=state.introNarrating;
   btn.className='introlisten'+(on?' on':'');
   btn.setAttribute('aria-label', on? t('raStop') : t('raPlay'));
   btn.innerHTML = on ? '\u23F8\uFE0F '+t('introListenStop') : '\uD83D\uDD0A '+t('introListen');
 }
+/* Continuous narration: tapping Listen reads the current slide, then advances
+   to the next slide and reads it, and so on to the end of the intro \u2014 a hands-free
+   guided tour for slower readers. Tapping again stops. */
 function introListen(){
   if(!ttsSupported()){ toast(t('introListen')+' \u2014 \u2715'); return; }
-  if(state.reading){ stopReading(); return; }
+  if(state.introNarrating){ introNarrateToggleOff(); return; }
+  state.introNarrating=true;
+  clearIntroTimers();            // take over from the auto/music timeline while narrating
+  try{ musicStop(); }catch(e){}  // pause the song so the narration is clear
+  const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+  introNarrateCurrent();
+}
+function introNarrateStop(){
+  // Quiet stop: halt narration without side effects. Used when the user manually
+  // navigates (next/prev/jump/skip) \u2014 those callers re-render or leave on their own.
+  state.introNarrating=false;
+  state.introNarrateToken=(state.introNarrateToken||0)+1; // invalidate pending continuation
+  stopReading();
+  const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+}
+function introNarrateToggleOff(){
+  // Full stop from the Listen button mid-intro: also resume music + auto timeline.
+  const was=state.introNarrating;
+  introNarrateStop();
+  if(was && state.screen==='intro'){
+    try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}
+    startIntroTimeline();
+  }
+}
+function introNarrateCurrent(){
+  if(!state.introNarrating) return;
+  const myToken=(state.introNarrateToken||0)+1; state.introNarrateToken=myToken;
   const parts=introSlideText();
-  speakText(parts);
+  speakText(parts, function(){
+    // finished reading this slide
+    if(!state.introNarrating || myToken!==state.introNarrateToken) return;
+    if(state.intro < INTRO_SLIDES.length-1){
+      // advance to the next slide and keep narrating after a short beat
+      state.intro++; renderIntro(); introSlideSound();
+      setTimeout(function(){
+        if(state.introNarrating && myToken===state.introNarrateToken){ introNarrateCurrent(); }
+      }, 650);
+    } else {
+      // reached the last slide \u2014 finish the tour
+      state.introNarrating=false;
+      const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+      setTimeout(function(){ if(state.screen==='intro'){ endIntro(); } }, 900);
+    }
+  });
   const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
 }
 function introNext(){
-  clearIntroTimers(); stopReading();
+  clearIntroTimers(); introNarrateStop();
   if(state.intro<INTRO_SLIDES.length-1){state.intro++;renderIntro();introSlideSound();}
   else { endIntro(); }
 }
 function introPrev(){
-  clearIntroTimers(); stopReading();
+  clearIntroTimers(); introNarrateStop();
   if(state.intro>0){state.intro--;renderIntro();introSlideSound();}
   else { renderIntro(); }
 }
 function introGo(k){
-  clearIntroTimers(); stopReading();
+  clearIntroTimers(); introNarrateStop();
   state.intro=k; renderIntro(); introSlideSound();
 }
 function introSkip(){
-  clearIntroTimers(); stopReading();
+  clearIntroTimers(); introNarrateStop();
   sfx('tap');
   state.screen='signup'; render();
   /* keep the music playing into the learner area instead of stopping it */

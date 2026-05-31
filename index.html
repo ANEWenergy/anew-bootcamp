@@ -254,6 +254,7 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .supbox{margin:12px 18px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:13px}
 .supbox b{font-family:'Sora';font-size:13px}
 .toolpanel{margin:14px 16px;background:linear-gradient(160deg,rgba(243,144,25,.10),var(--card2));border:1px solid rgba(243,144,25,.35);border-radius:16px;padding:15px 15px 16px}
+.toolpanel .video{margin:10px 0 2px;border-radius:12px}
 .toolpanel .toolhdr{display:flex;flex-direction:column;gap:2px;margin-bottom:8px}
 .toolpanel .toolkicker{font-family:'Sora';font-weight:700;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--orange)}
 .toolpanel .toolhdr b{font-family:'Sora';font-weight:800;font-size:18px;color:#fff;margin-top:2px}
@@ -2842,7 +2843,7 @@ function toolPanel(tradeId){
   return `<div class="toolpanel">
     <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${displayName}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
     <p class="toolinstr">${instr}</p>
-    <div class="video embed" onclick="playVideo('${vid}')">
+    <div class="video embed" onclick="playVideo('${vid}', this)">
       <img class="vthumb" src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
       <div class="pl"></div><div class="vt">${tr2('Watch intro','Ver introducci\u00f3n')}</div></div>
     <div class="toolbtns">
@@ -2983,7 +2984,7 @@ function renderLesson(){
      <h2 style="margin:8px 0 0;font-size:20px">${tr(l.title)}</h2></div>
    <div class="obj"><span class="pill ghost">${t('obj')}</span><p>${tr(l.obj)}</p></div>
    ${l.video
-     ? `<div class="video embed" id="vidbox" onclick="playVideo('${l.video}')">
+     ? `<div class="video embed" id="vidbox" onclick="playVideo('${l.video}', this)">
           <img class="vthumb" src="https://i.ytimg.com/vi/${l.video}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
           <div class="pl"></div><div class="vt">${t('watch')}</div></div>
         <div class="videocap"><a href="https://www.youtube.com/watch?v=${l.video}" target="_blank" rel="noopener noreferrer">${t('openyt')} \u2197</a></div>`
@@ -3122,14 +3123,16 @@ function openModule(id){state.activeModule=id;state.activeLesson=null;state.inQu
 function closeModule(){stopReading();state.activeModule=null;state.activeLesson=null;state.inQuiz=false;state.tab='home';try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
 function openLesson(id){state.activeLesson=id;state.inQuiz=false;try{ if(songEl){ songEl.pause(); } synthMusicStop(); }catch(e){}render();app.scrollTop=0;}
 function closeLesson(){stopReading();state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
-function playVideo(id){
-  const box=document.getElementById('vidbox');
+function playVideo(id, el){
+  /* Play in-app: works for any video box (lesson OR tool panel). Use the box
+     that was clicked; fall back to #vidbox for older callers. */
+  const box = el || (window.event && window.event.currentTarget) || document.getElementById('vidbox');
   if(!box) return;
   box.removeAttribute('onclick');
   box.classList.add('playing');
   // Inject the player on the user click so autoplay is treated as a user gesture.
-  box.innerHTML='<iframe id="ytframe" src="https://www.youtube.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1" '
-    +'title="ANEW lesson video" frameborder="0" '
+  box.innerHTML='<iframe class="ytframe" src="https://www.youtube.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1" '
+    +'title="Boot Camp video" frameborder="0" '
     +'allow="autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope; clipboard-write" '
     +'allowfullscreen></iframe>'
     +'<button class="vidfallback" onclick="event.stopPropagation();window.open(\'https://www.youtube.com/watch?v='+id+'\',\'_blank\',\'noopener\')">'

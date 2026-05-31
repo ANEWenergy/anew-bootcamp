@@ -700,99 +700,708 @@ const CATS = ['all','Molding & Plastics','Machining & CAM','Welding & Fabricatio
 const TRADES = [
  {id:'mold', ic:'mold', title:'Advanced Mold Making', cat:'Molding & Plastics', live:true, mods:5, deep:true,
   blurb:'Plastic injection mold making \u2014 deep Material Science + supplier sourcing.', lang:'EN \u00B7 ES'},
- {id:'plasticpart', ic:'part', title:'Plastic Part Design', cat:'Molding & Plastics',
+ {id:'plasticpart', ic:'part', title:'Plastic Part Design', cat:'Molding & Plastics', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Designing manufacturable plastic parts for injection molding.',
-  outline:['Wall thickness & draft','Ribs, bosses & gussets','Living hinges & snaps','Tolerances & fits','Design for assembly']},
- {id:'moldflow', ic:'moldflow', title:'Mold Flow Simulations', cat:'Molding & Plastics',
+  syllabus:[
+    {module:L('Design Fundamentals','Fundamentos de Dise\u00f1o'), topics:[
+      L('Wall thickness & uniformity','Espesor de pared y uniformidad'),
+      L('Draft angles for ejection','\u00c1ngulos de salida para la expulsi\u00f3n'),
+      L('Ribs, bosses & gussets','Costillas, bujes y refuerzos'),
+      L('Radii & stress concentration','Radios y concentraci\u00f3n de esfuerzos'),
+      L('Shrinkage & warpage basics','Conceptos de contracci\u00f3n y alabeo'),
+      L('Material selection for parts','Selecci\u00f3n de material para piezas'),
+      L('Surface finish & texture','Acabado superficial y textura'),
+      L('Tolerances & fits','Tolerancias y ajustes')]},
+    {module:L('Features & Assembly','Caracter\u00edsticas y Ensamblaje'), topics:[
+      L('Living hinges','Bisagras integradas'),
+      L('Snap fits','Encajes a presi\u00f3n'),
+      L('Press fits & inserts','Ajustes a presi\u00f3n e insertos'),
+      L('Threads & fasteners','Roscas y sujetadores'),
+      L('Undercuts & side actions','Socavados y acciones laterales'),
+      L('Design for assembly (DFA)','Dise\u00f1o para ensamblaje (DFA)'),
+      L('Tolerance stack-ups','Acumulaci\u00f3n de tolerancias')]},
+    {module:L('Manufacturability & Review','Manufacturabilidad y Revisi\u00f3n'), topics:[
+      L('Gate location & flow','Ubicaci\u00f3n de compuerta y flujo'),
+      L('Sink marks & voids','Marcas de hundimiento y vac\u00edos'),
+      L('Weld lines & air traps','L\u00edneas de uni\u00f3n y atrapamiento de aire'),
+      L('Cost drivers in part design','Factores de costo en el dise\u00f1o'),
+      L('DFM review checklist','Lista de verificaci\u00f3n DFM'),
+      L('Prototyping & validation','Prototipado y validaci\u00f3n')]}]},
+ {id:'moldflow', ic:'moldflow', title:'Mold Flow Simulations', cat:'Molding & Plastics', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Simulating fill, pack, and cooling before cutting steel.',
-  outline:['Fill analysis basics','Gate & runner placement','Warpage & sink','Cooling simulation','Reading results']},
- {id:'molddesign', ic:'design', title:'Mold Design', cat:'Molding & Plastics',
+  syllabus:[
+    {module:L('Simulation Basics','Conceptos de Simulaci\u00f3n'), topics:[
+      L('Why simulate before cutting steel','Por qu\u00e9 simular antes de cortar acero'),
+      L('Mesh types & quality','Tipos de malla y calidad'),
+      L('Material data & rheology','Datos de material y reolog\u00eda'),
+      L('Process settings setup','Configuraci\u00f3n de par\u00e1metros de proceso'),
+      L('Fill analysis basics','Conceptos de an\u00e1lisis de llenado')]},
+    {module:L('Fill, Pack & Cool','Llenado, Empaque y Enfriamiento'), topics:[
+      L('Gate & runner placement','Ubicaci\u00f3n de compuertas y canales'),
+      L('Balancing the flow','Balanceo del flujo'),
+      L('Pack & hold pressure','Presi\u00f3n de empaque y sostenimiento'),
+      L('Cooling line layout','Dise\u00f1o de l\u00edneas de enfriamiento'),
+      L('Cycle time estimation','Estimaci\u00f3n de tiempo de ciclo'),
+      L('Weld lines & air traps','L\u00edneas de uni\u00f3n y atrapamiento de aire')]},
+    {module:L('Results & Optimization','Resultados y Optimizaci\u00f3n'), topics:[
+      L('Reading fill results','Lectura de resultados de llenado'),
+      L('Warpage prediction','Predicci\u00f3n de alabeo'),
+      L('Sink & shrinkage analysis','An\u00e1lisis de hundimiento y contracci\u00f3n'),
+      L('Iterating gate & cooling','Iteraci\u00f3n de compuerta y enfriamiento'),
+      L('Validating against the press','Validaci\u00f3n contra la prensa'),
+      L('Reporting to the tool maker','Reporte al fabricante de moldes')]}]},
+ {id:'molddesign', ic:'design', title:'Mold Design', cat:'Molding & Plastics', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Designing injection molds \u2014 features, actions, and tolerances.',
-  outline:['Mold base & layout','Gates, runners, venting','Cooling design','Undercuts & actions','Tolerance stack-ups']},
- {id:'material', ic:'moldflow', title:'Material Science', cat:'Molding & Plastics',
+  syllabus:[
+    {module:L('Mold Architecture','Arquitectura del Molde'), topics:[
+      L('Mold base & plate layout','Base del molde y disposici\u00f3n de placas'),
+      L('Cavity & core basics','Conceptos de cavidad y n\u00facleo'),
+      L('Parting line selection','Selecci\u00f3n de l\u00ednea de partici\u00f3n'),
+      L('Number of cavities','N\u00famero de cavidades'),
+      L('Mold materials & steels','Materiales y aceros para moldes')]},
+    {module:L('Feed, Cool & Action','Alimentaci\u00f3n, Enfriamiento y Acciones'), topics:[
+      L('Gates, runners & sprues','Compuertas, canales y bebederos'),
+      L('Hot runner vs cold runner','Canal caliente vs canal fr\u00edo'),
+      L('Venting design','Dise\u00f1o de venteo'),
+      L('Cooling circuit design','Dise\u00f1o del circuito de enfriamiento'),
+      L('Undercuts: slides & lifters','Socavados: correderas y elevadores'),
+      L('Ejection systems','Sistemas de expulsi\u00f3n')]},
+    {module:L('Tolerances & Build','Tolerancias y Construcci\u00f3n'), topics:[
+      L('Tolerance stack-ups','Acumulaci\u00f3n de tolerancias'),
+      L('Shut-offs & sealing','Cierres y sellado'),
+      L('Surface finish specs','Especificaciones de acabado'),
+      L('Maintenance & wear','Mantenimiento y desgaste'),
+      L('Mold trials & tuning','Pruebas y ajuste del molde'),
+      L('Documentation & handoff','Documentaci\u00f3n y entrega')]}]},
+ {id:'material', ic:'moldflow', title:'Material Science', cat:'Molding & Plastics', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Polymers, metals, and composites for manufacturing.',
-  outline:['Thermoplastic vs thermoset','Material families','Additives & fillers','Composites','Selecting materials']},
- {id:'cnc', ic:'cnc', title:'CNC Machine Operations', cat:'Machining & CAM',
+  syllabus:[
+    {module:L('Polymer Families','Familias de Pol\u00edmeros'), topics:[
+      L('Thermoplastic vs thermoset','Termopl\u00e1stico vs termoestable'),
+      L('Olefins vs crystallines','Olefinas vs cristalinos'),
+      L('Common resins & uses','Resinas comunes y usos'),
+      L('Flexible materials & Shore hardness','Materiales flexibles y dureza Shore'),
+      L('Additives & fillers','Aditivos y rellenos')]},
+    {module:L('Metals & Composites','Metales y Compuestos'), topics:[
+      L('Steel grades & uses','Grados de acero y usos'),
+      L('Aluminum alloys','Aleaciones de aluminio'),
+      L('Mechanical properties','Propiedades mec\u00e1nicas'),
+      L('Composites & fibers','Compuestos y fibras'),
+      L('Corrosion & coatings','Corrosi\u00f3n y recubrimientos')]},
+    {module:L('Selection & Testing','Selecci\u00f3n y Pruebas'), topics:[
+      L('Matching material to function','Adecuar material a la funci\u00f3n'),
+      L('Cost vs performance','Costo vs desempe\u00f1o'),
+      L('Shrinkage & dimensional stability','Contracci\u00f3n y estabilidad dimensional'),
+      L('Mechanical test methods (ASTM)','M\u00e9todos de prueba mec\u00e1nica (ASTM)'),
+      L('Quality standards (ISO)','Normas de calidad (ISO)'),
+      L('Drying & material handling','Secado y manejo de material')]}]},
+ {id:'cnc', ic:'cnc', title:'CNC Machine Operations', cat:'Machining & CAM', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Operating CNC mills and lathes safely and accurately.',
-  outline:['Machine components & safety','Workholding & setup','G54 & work offsets','Tool changes & probing','First-article checks']},
- {id:'multiaxis', ic:'multiaxis', title:'Multi-Axis Machining', cat:'Machining & CAM',
+  syllabus:[
+    {module:L('Machine & Safety','M\u00e1quina y Seguridad'), topics:[
+      L('CNC mill & lathe components','Componentes de fresadora y torno CNC'),
+      L('Safety & PPE','Seguridad y EPP'),
+      L('Machine startup & homing','Arranque y referencia de m\u00e1quina'),
+      L('Coordinate systems','Sistemas de coordenadas'),
+      L('Reading a setup sheet','Lectura de hoja de configuraci\u00f3n')]},
+    {module:L('Setup & Workholding','Configuraci\u00f3n y Sujeci\u00f3n'), topics:[
+      L('Workholding & fixtures','Sujeci\u00f3n y fixtures'),
+      L('Tooling & tool changes','Herramientas y cambios de herramienta'),
+      L('Work offsets (G54)','Offsets de trabajo (G54)'),
+      L('Tool length & probing','Longitud de herramienta y palpado'),
+      L('Feeds & speeds basics','Conceptos de avances y velocidades')]},
+    {module:L('Running & Quality','Operaci\u00f3n y Calidad'), topics:[
+      L('Loading & verifying programs','Carga y verificaci\u00f3n de programas'),
+      L('First-article inspection','Inspecci\u00f3n de primera pieza'),
+      L('In-process measurement','Medici\u00f3n en proceso'),
+      L('Chips, coolant & maintenance','Viruta, refrigerante y mantenimiento'),
+      L('Troubleshooting common issues','Soluci\u00f3n de problemas comunes')]}]},
+ {id:'multiaxis', ic:'multiaxis', title:'Multi-Axis Machining', cat:'Machining & CAM', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'3, 4, and 5-axis strategies for complex geometry.',
-  outline:['3 vs 4 vs 5-axis','Indexing vs simultaneous','Toolpath strategies','Collision avoidance','Surface finishing']},
- {id:'cycle', ic:'clock', title:'Calculating Cycle Times', cat:'Machining & CAM',
+  syllabus:[
+    {module:L('Axis Strategies','Estrategias de Ejes'), topics:[
+      L('3 vs 4 vs 5-axis','3 vs 4 vs 5 ejes'),
+      L('Indexing vs simultaneous','Indexado vs simult\u00e1neo'),
+      L('Rotary & trunnion setups','Configuraciones rotativas y trunnion'),
+      L('When to use multi-axis','Cu\u00e1ndo usar multieje')]},
+    {module:L('Toolpaths & Geometry','Trayectorias y Geometr\u00eda'), topics:[
+      L('Toolpath strategies','Estrategias de trayectoria'),
+      L('Tool orientation & lead/lag','Orientaci\u00f3n de herramienta y lead/lag'),
+      L('Collision avoidance','Prevenci\u00f3n de colisiones'),
+      L('Surface finishing passes','Pasadas de acabado superficial'),
+      L('Tool reach & holders','Alcance de herramienta y portaherramientas')]},
+    {module:L('Verification & Output','Verificaci\u00f3n y Salida'), topics:[
+      L('Simulation & verification','Simulaci\u00f3n y verificaci\u00f3n'),
+      L('Post-processing for the machine','Posprocesamiento para la m\u00e1quina'),
+      L('Setup sheets & documentation','Hojas de configuraci\u00f3n y documentaci\u00f3n'),
+      L('First-article & inspection','Primera pieza e inspecci\u00f3n'),
+      L('Optimizing cycle time','Optimizaci\u00f3n del tiempo de ciclo')]}]},
+ {id:'cycle', ic:'clock', title:'Calculating Cycle Times', cat:'Machining & CAM', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Estimating and optimizing process cycle times for costing.',
-  outline:['Cycle-time anatomy','Feeds & speeds math','Cooling & ejection time','Bottleneck analysis','Costing from cycle time']},
- {id:'cadcam', ic:'cad', title:'CAD/CAM/CAE Programming', cat:'Machining & CAM',
+  syllabus:[
+    {module:L('Cycle-Time Anatomy','Anatom\u00eda del Tiempo de Ciclo'), topics:[
+      L('Elements of a cycle','Elementos de un ciclo'),
+      L('Cutting vs non-cutting time','Tiempo de corte vs sin corte'),
+      L('Rapid moves & approach','Movimientos r\u00e1pidos y aproximaci\u00f3n'),
+      L('Tool changes & dwell','Cambios de herramienta y pausas')]},
+    {module:L('Calculating Time','C\u00e1lculo del Tiempo'), topics:[
+      L('Feeds & speeds math','Matem\u00e1tica de avances y velocidades'),
+      L('Material removal rate','Tasa de remoci\u00f3n de material'),
+      L('Cooling & ejection time (molding)','Tiempo de enfriamiento y expulsi\u00f3n (moldeo)'),
+      L('Load/unload & handling','Carga/descarga y manejo'),
+      L('Setup time amortization','Amortizaci\u00f3n del tiempo de preparaci\u00f3n')]},
+    {module:L('Optimization & Costing','Optimizaci\u00f3n y Costeo'), topics:[
+      L('Bottleneck analysis','An\u00e1lisis de cuellos de botella'),
+      L('Reducing non-value time','Reducci\u00f3n de tiempo sin valor'),
+      L('Costing from cycle time','Costeo a partir del tiempo de ciclo'),
+      L('Throughput & capacity','Rendimiento y capacidad'),
+      L('Reporting & tracking','Reporte y seguimiento')]}]},
+ {id:'cadcam', ic:'cad', title:'CAD/CAM/CAE Programming', cat:'Machining & CAM', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Fusion360 across design, manufacture, and engineering analysis.',
-  outline:['CAD modeling basics','CAM setup & stock','Simulation & verification','Post-processing','Revision control']},
- {id:'weld', ic:'weld', title:'Automated Welding', cat:'Welding & Fabrication',
+  syllabus:[
+    {module:L('CAD Modeling','Modelado CAD'), topics:[
+      L('Sketching & constraints','Bocetado y restricciones'),
+      L('Features & parametric design','Caracter\u00edsticas y dise\u00f1o param\u00e9trico'),
+      L('Assemblies & joints','Ensamblajes y uniones'),
+      L('Drawings & dimensions','Dibujos y dimensiones'),
+      L('Design intent & revisions','Intenci\u00f3n de dise\u00f1o y revisiones')]},
+    {module:L('CAM Programming','Programaci\u00f3n CAM'), topics:[
+      L('CAM setup & stock','Configuraci\u00f3n CAM y material en bruto'),
+      L('2D & 3D toolpaths','Trayectorias 2D y 3D'),
+      L('Tool library & speeds','Biblioteca de herramientas y velocidades'),
+      L('Simulation & verification','Simulaci\u00f3n y verificaci\u00f3n'),
+      L('Post-processing','Posprocesamiento')]},
+    {module:L('CAE & Workflow','CAE y Flujo de Trabajo'), topics:[
+      L('Engineering analysis (FEA basics)','An\u00e1lisis de ingenier\u00eda (conceptos FEA)'),
+      L('Tolerance & fit checks','Verificaci\u00f3n de tolerancias y ajustes'),
+      L('Data exchange & formats','Intercambio de datos y formatos'),
+      L('Revision control','Control de revisiones'),
+      L('Collaboration & cloud','Colaboraci\u00f3n y nube')]}]},
+ {id:'weld', ic:'weld', title:'Automated Welding', cat:'Welding & Fabrication', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Robotic and automated welding fundamentals and cells.',
-  outline:['Weld safety & PPE','Joint types & prep','Robot weld paths','Seam tracking','Inspection & defects']},
- {id:'seal', ic:'wire', title:'Seal Dispensing', cat:'Welding & Fabrication',
+  syllabus:[
+    {module:L('Welding Foundations','Fundamentos de Soldadura'), topics:[
+      L('Weld safety & PPE','Seguridad y EPP en soldadura'),
+      L('Joint types & prep','Tipos de junta y preparaci\u00f3n'),
+      L('Weld symbols & prints','S\u00edmbolos de soldadura y planos'),
+      L('Process basics (MIG/TIG/spot)','Conceptos de proceso (MIG/TIG/punto)'),
+      L('Materials & weldability','Materiales y soldabilidad')]},
+    {module:L('Automation & Cells','Automatizaci\u00f3n y Celdas'), topics:[
+      L('Robotic weld cells','Celdas de soldadura rob\u00f3tica'),
+      L('Robot weld paths','Trayectorias de soldadura rob\u00f3tica'),
+      L('Seam tracking','Seguimiento de costura'),
+      L('Fixturing for welding','Sujeci\u00f3n para soldadura'),
+      L('Cycle & throughput','Ciclo y rendimiento')]},
+    {module:L('Quality & Inspection','Calidad e Inspecci\u00f3n'), topics:[
+      L('Weld defects','Defectos de soldadura'),
+      L('Visual inspection','Inspecci\u00f3n visual'),
+      L('NDT basics','Conceptos de ensayos no destructivos'),
+      L('Distortion control','Control de distorsi\u00f3n'),
+      L('Standards & documentation','Normas y documentaci\u00f3n')]}]},
+ {id:'seal', ic:'wire', title:'Seal Dispensing', cat:'Welding & Fabrication', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Automated gasket and seal dispensing systems.',
-  outline:['Dispense fundamentals','Material & cure','Robot dispense paths','Bead quality control','Maintenance']},
- {id:'sheet', ic:'sheet', title:'Sheet Metal Stamping & Fabrication', cat:'Welding & Fabrication',
+  syllabus:[
+    {module:L('Dispensing Fundamentals','Fundamentos de Dispensado'), topics:[
+      L('What seal dispensing is','Qu\u00e9 es el dispensado de sellos'),
+      L('FIPG vs CIPG gaskets','Juntas FIPG vs CIPG'),
+      L('Materials & cure types','Materiales y tipos de curado'),
+      L('Bead geometry','Geometr\u00eda del cord\u00f3n'),
+      L('Substrate prep & adhesion','Preparaci\u00f3n de sustrato y adhesi\u00f3n')]},
+    {module:L('Automated Systems','Sistemas Automatizados'), topics:[
+      L('Pumps, valves & meters','Bombas, v\u00e1lvulas y medidores'),
+      L('Robot dispense paths','Trayectorias de dispensado rob\u00f3tico'),
+      L('Mix ratio & 2-part systems','Relaci\u00f3n de mezcla y sistemas de 2 partes'),
+      L('Flow & pressure control','Control de flujo y presi\u00f3n'),
+      L('Temperature effects','Efectos de la temperatura')]},
+    {module:L('Quality & Maintenance','Calidad y Mantenimiento'), topics:[
+      L('Bead quality inspection','Inspecci\u00f3n de calidad del cord\u00f3n'),
+      L('Leak & seal testing','Pruebas de fuga y sellado'),
+      L('Common defects','Defectos comunes'),
+      L('System maintenance','Mantenimiento del sistema'),
+      L('Documentation & traceability','Documentaci\u00f3n y trazabilidad')]}]},
+ {id:'sheet', ic:'sheet', title:'Sheet Metal Stamping & Fabrication', cat:'Welding & Fabrication', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Stamping, forming, and fabricating sheet metal parts.',
-  outline:['Material & gauges','Bend allowance & K-factor','Die & press basics','Forming & deep draw','Finishing']},
- {id:'fixture', ic:'fixture', title:'Fixture Design', cat:'Welding & Fabrication',
+  syllabus:[
+    {module:L('Material & Layout','Material y Disposici\u00f3n'), topics:[
+      L('Sheet materials & gauges','Materiales de l\u00e1mina y calibres'),
+      L('Bend allowance & K-factor','Tolerancia de doblez y factor K'),
+      L('Flat patterns','Patrones planos'),
+      L('Nesting for yield','Anidamiento para aprovechamiento'),
+      L('Grain direction','Direcci\u00f3n del grano')]},
+    {module:L('Forming & Stamping','Formado y Estampado'), topics:[
+      L('Press & die basics','Conceptos de prensa y dado'),
+      L('Blanking & piercing','Punzonado y perforaci\u00f3n'),
+      L('Bending & forming','Doblado y formado'),
+      L('Deep draw','Embutido profundo'),
+      L('Progressive dies','Dados progresivos')]},
+    {module:L('Finishing & Quality','Acabado y Calidad'), topics:[
+      L('Deburring & edges','Desbarbado y bordes'),
+      L('Welding & joining sheet','Soldadura y uni\u00f3n de l\u00e1mina'),
+      L('Surface finishing & coating','Acabado superficial y recubrimiento'),
+      L('Springback & tolerances','Recuperaci\u00f3n el\u00e1stica y tolerancias'),
+      L('Inspection methods','M\u00e9todos de inspecci\u00f3n')]}]},
+ {id:'fixture', ic:'fixture', title:'Fixture Design', cat:'Welding & Fabrication', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Designing workholding and assembly fixtures.',
-  outline:['Locating principles (3-2-1)','Clamping strategy','Datum & repeatability','Poka-yoke','Fixture materials']},
- {id:'wire', ic:'wire', title:'Electrical Wire Schematics', cat:'Electrical & Controls',
+  syllabus:[
+    {module:L('Locating Principles','Principios de Localizaci\u00f3n'), topics:[
+      L('3-2-1 locating','Localizaci\u00f3n 3-2-1'),
+      L('Datums & repeatability','Datums y repetibilidad'),
+      L('Degrees of freedom','Grados de libertad'),
+      L('Locators & rest pads','Localizadores y apoyos')]},
+    {module:L('Clamping & Build','Sujeci\u00f3n y Construcci\u00f3n'), topics:[
+      L('Clamping strategy','Estrategia de sujeci\u00f3n'),
+      L('Clamp types & force','Tipos de prensa y fuerza'),
+      L('Poka-yoke (error proofing)','Poka-yoke (a prueba de errores)'),
+      L('Fixture materials','Materiales para fixtures'),
+      L('Modular vs dedicated','Modular vs dedicado')]},
+    {module:L('Use & Validation','Uso y Validaci\u00f3n'), topics:[
+      L('Fixtures for machining','Fixtures para mecanizado'),
+      L('Fixtures for assembly & weld','Fixtures para ensamblaje y soldadura'),
+      L('Gauging & checking fixtures','Fixtures de calibraci\u00f3n y verificaci\u00f3n'),
+      L('Validation & capability','Validaci\u00f3n y capacidad'),
+      L('Maintenance & wear','Mantenimiento y desgaste')]}]},
+ {id:'wire', ic:'wire', title:'Electrical Wire Schematics', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Reading and drawing industrial wiring schematics.',
-  outline:['Symbols & conventions','Power vs control','Reading a ladder diagram','Wire numbering','Troubleshooting']},
- {id:'embedded', ic:'chip', title:'Embedded Microprocessor Programming', cat:'Electrical & Controls', live:true, mods:1, deep:true, lang:'EN \u00b7 ES',
+  syllabus:[
+    {module:L('Reading Schematics','Lectura de Esquemas'), topics:[
+      L('Symbols & conventions','S\u00edmbolos y convenciones'),
+      L('Power vs control circuits','Circuitos de potencia vs control'),
+      L('Ladder diagrams','Diagramas de escalera'),
+      L('Wire numbering & labeling','Numeraci\u00f3n y etiquetado de cables'),
+      L('Reading a panel layout','Lectura de disposici\u00f3n de panel')]},
+    {module:L('Drawing & Standards','Dibujo y Normas'), topics:[
+      L('Drawing conventions','Convenciones de dibujo'),
+      L('Terminal blocks & connectors','Bloques de terminales y conectores'),
+      L('Wire gauge & ampacity','Calibre de cable y ampacidad'),
+      L('Grounding & bonding','Puesta a tierra y conexi\u00f3n'),
+      L('Codes & standards (NEC/IEC)','C\u00f3digos y normas (NEC/IEC)')]},
+    {module:L('Troubleshooting','Soluci\u00f3n de Problemas'), topics:[
+      L('Continuity & meter use','Continuidad y uso del mult\u00edmetro'),
+      L('Tracing a fault','Rastreo de una falla'),
+      L('Documentation & redlines','Documentaci\u00f3n y correcciones'),
+      L('Panel build practices','Pr\u00e1cticas de construcci\u00f3n de panel'),
+      L('Safety & lockout','Seguridad y bloqueo')]}]},
+ {id:'embedded', ic:'chip', title:'Embedded Microprocessor Programming', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Programming microcontrollers for manufacturing devices.',
-  outline:['Microcontroller basics','GPIO & sensors','Timers & interrupts','Communication buses','Debugging']},
- {id:'pcb', ic:'pcb', title:'Printed Circuit Board Design & Mfg', cat:'Electrical & Controls', live:true, mods:3, deep:true, lang:'EN \u00b7 ES',
-  blurb:'PCB layout through to fabrication and assembly.',
-  outline:['Schematic capture','Layout & routing','Design rules','Gerbers & fab','Assembly & test']},
- {id:'robot', ic:'robot', title:'Robotics & PLC Programming', cat:'Electrical & Controls',
+  syllabus:[
+    {module:L('Microprocessor Fundamentals','Fundamentos del Microprocesador'), topics:[
+      L('Microcontroller basics (CPU core, flash & RAM, on-chip peripherals)','Conceptos b\u00e1sicos del microcontrolador (n\u00facleo CPU, flash y RAM, perif\u00e9ricos integrados)'),
+      L('Number systems & registers (binary, hex, bit manipulation)','Sistemas num\u00e9ricos y registros (binario, hex, manipulaci\u00f3n de bits)'),
+      L('Memory: flash vs RAM (non-volatile vs volatile)','Memoria: flash vs RAM (no vol\u00e1til vs vol\u00e1til)'),
+      L('The firmware loop (setup then main loop)','El bucle de firmware (configuraci\u00f3n y luego bucle principal)'),
+      L('Toolchain & build (compiler, linker, flashing)','Cadena de herramientas y compilaci\u00f3n (compilador, enlazador, grabado)')]},
+    {module:L('I/O, Sensors & Timing','E/S, Sensores y Temporizaci\u00f3n'), topics:[
+      L('GPIO & reading sensors (digital vs analog inputs, the ADC)','GPIO y lectura de sensores (entradas digitales vs anal\u00f3gicas, el ADC)'),
+      L('Driving outputs (LEDs, relays, PWM)','Control de salidas (LEDs, rel\u00e9s, PWM)'),
+      L('Timers & interrupts (polling vs interrupts, timed events)','Temporizadores e interrupciones (sondeo vs interrupciones, eventos temporizados)'),
+      L('Analog input & conversion (ADC, scaling, filtering)','Entrada anal\u00f3gica y conversi\u00f3n (ADC, escalado, filtrado)'),
+      L('Real-time basics & scheduling','Conceptos de tiempo real y planificaci\u00f3n')]},
+    {module:L('Communication & Deployment','Comunicaci\u00f3n y Despliegue'), topics:[
+      L('Communication buses (UART, I2C, SPI)','Buses de comunicaci\u00f3n (UART, I2C, SPI)'),
+      L('Debugging with SWD/JTAG (flashing, stepping, inspecting)','Depuraci\u00f3n con SWD/JTAG (grabar, avanzar, inspeccionar)'),
+      L('Low power & sleep modes (wake on interrupt, battery life)','Bajo consumo y modos de reposo (despertar por interrupci\u00f3n, vida de bater\u00eda)'),
+      L('Firmware reliability & watchdogs','Fiabilidad del firmware y watchdogs'),
+      L('Updating firmware in the field','Actualizaci\u00f3n de firmware en campo')]}
+  ]},
+ {id:'pcb', ic:'pcb', title:'PCB Design with Microprocessors', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
+  blurb:'Schematic, layout, power, signal, and communications design.',
+  syllabus:[
+    {module:L('PCB Design with Microprocessors','Dise\u00f1o de PCB con Microprocesadores'), topics:[
+      L('Schematic Capture & Design Files (netlists, BOM, reference designators, footprints/land patterns)','Captura de Esquemas y Archivos de Dise\u00f1o (netlists, BOM, designadores de referencia, huellas/patrones de tierra)'),
+      L('PCB Stackup & Materials (layer count, copper weight, FR-4 and substrates)','Apilado y Materiales de PCB (n\u00famero de capas, peso del cobre, FR-4 y sustratos)'),
+      L('Microprocessor I/O & Logic Levels (push-pull, open-drain, tri-state, TTL/CMOS/LVCMOS/LVDS, level shifting, pull-ups/downs)','E/S del Microprocesador y Niveles L\u00f3gicos (push-pull, drenaje abierto, triestado, TTL/CMOS/LVCMOS/LVDS, cambio de nivel, pull-ups/downs)'),
+      L('Clocking & Timing (crystals, oscillators, clock distribution, jitter, propagation delay, rise/fall time)','Reloj y Temporizaci\u00f3n (cristales, osciladores, distribuci\u00f3n de reloj, jitter, retardo de propagaci\u00f3n, tiempo de subida/bajada)'),
+      L('Decoupling & Bypass Strategy (bypass/bulk capacitors, capacitor types, ESR/ESL)','Estrategia de Desacople y Bypass (capacitores de bypass/volumen, tipos de capacitor, ESR/ESL)'),
+      L('Discrete Components (resistors, inductors, ferrite beads, diodes, MOSFETs, BJTs, gate drive)','Componentes Discretos (resistencias, inductores, perlas de ferrita, diodos, MOSFET, BJT, gate drive)'),
+      L('Vias, Planes & Routing (via types, stitching, copper pours, ground/power planes, plane splits, return paths)','V\u00edas, Planos y Enrutamiento (tipos de v\u00eda, cosido, vertidos de cobre, planos de tierra/potencia, divisiones de plano, caminos de retorno)'),
+      L('Programming & Debug Interfaces (JTAG, SWD)','Interfaces de Programaci\u00f3n y Depuraci\u00f3n (JTAG, SWD)'),
+      L('Design Verification (DRC, ERC, controlled impedance, length matching)','Verificaci\u00f3n del Dise\u00f1o (DRC, ERC, impedancia controlada, emparejamiento de longitud)'),
+      L('Manufacturing & Assembly (Gerber/drill/pick-and-place, solder mask, silkscreen, surface finishes, SMT vs through-hole, reflow/wave, packages, DFM/DFT/DFA, panelization, fiducials)','Fabricaci\u00f3n y Ensamblaje (Gerber/perforaci\u00f3n/pick-and-place, m\u00e1scara de soldadura, serigraf\u00eda, acabados, SMT vs orificio pasante, reflujo/ola, encapsulados, DFM/DFT/DFA, panelizaci\u00f3n, fiduciales)')]},
+    {module:L('Power & Signal Processing','Procesamiento de Potencia y Se\u00f1al'), topics:[
+      L('Voltage Rails & Operating Voltage','Rieles de Voltaje y Voltaje de Operaci\u00f3n'),
+      L('Linear & LDO Regulators','Reguladores Lineales y LDO'),
+      L('Switching Regulators & DC-DC Converters (buck, boost, buck-boost, switching frequency)','Reguladores Conmutados y Convertidores DC-DC (buck, boost, buck-boost, frecuencia de conmutaci\u00f3n)'),
+      L('Power Integrity (ripple, transient response, PI)','Integridad de Potencia (rizado, respuesta transitoria, PI)'),
+      L('Signal Integrity (SI, crosstalk, controlled/characteristic impedance, differential pairs)','Integridad de Se\u00f1al (SI, diafon\u00eda, impedancia controlada/caracter\u00edstica, pares diferenciales)'),
+      L('Analog vs Digital & Mixed-Signal Design','Anal\u00f3gico vs Digital y Dise\u00f1o de Se\u00f1al Mixta'),
+      L('Data Conversion (ADC/DAC, sampling rate, resolution, noise floor, SNR)','Conversi\u00f3n de Datos (ADC/DAC, tasa de muestreo, resoluci\u00f3n, piso de ruido, SNR)'),
+      L('Grounding Strategies (analog/digital ground, star ground)','Estrategias de Tierra (tierra anal\u00f3gica/digital, tierra en estrella)'),
+      L('Protection & Derating (TVS/Schottky/Zener diodes, ESD, fuses, current rating, derating)','Protecci\u00f3n y Derrateo (diodos TVS/Schottky/Zener, ESD, fusibles, corriente nominal, derrateo)'),
+      L('Thermal Management (thermal vias, heatsinks)','Gesti\u00f3n T\u00e9rmica (v\u00edas t\u00e9rmicas, disipadores)')]},
+    {module:L('Communications','Comunicaciones'), topics:[
+      L('SPI & UART','SPI y UART'),
+      L('I2C & I3C','I2C e I3C'),
+      L('CAN Bus','Bus CAN'),
+      L('RS-232 & RS-485','RS-232 y RS-485'),
+      L('USB','USB'),
+      L('Ethernet (RGMII/MII)','Ethernet (RGMII/MII)'),
+      L('Parallel Buses','Buses Paralelos'),
+      L('Wireless Protocols (Wi-Fi, Bluetooth/BLE, Zigbee, LoRa, NFC, cellular/LTE, sub-GHz)','Protocolos Inal\u00e1mbricos (Wi-Fi, Bluetooth/BLE, Zigbee, LoRa, NFC, celular/LTE, sub-GHz)'),
+      L('RF Design (antenna matching, impedance matching networks, microstrip/stripline)','Dise\u00f1o de RF (acoplamiento de antena, redes de acoplamiento de impedancia, microstrip/stripline)'),
+      L('EMI/EMC & Signal Quality (EMI/EMC, crosstalk, ESD protection)','EMI/EMC y Calidad de Se\u00f1al (EMI/EMC, diafon\u00eda, protecci\u00f3n ESD)')]}
+  ]},
+ {id:'pcbmfg', ic:'pcb', title:'PCB Manufacturing', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
+  blurb:'Fabricating, assembling, and testing printed circuit boards.',
+  syllabus:[
+    {module:L('Bare Board Fabrication','Fabricaci\u00f3n de la Placa Desnuda'), topics:[
+      L('Reading Fabrication Files (Gerbers, drill files, fab drawing, stackup notes)','Lectura de Archivos de Fabricaci\u00f3n (Gerbers, archivos de perforaci\u00f3n, plano de fabricaci\u00f3n, notas de apilado)'),
+      L('Substrate & Laminate Prep (FR-4, copper-clad laminate, prepreg, cores)','Preparaci\u00f3n de Sustrato y Laminado (FR-4, laminado revestido de cobre, prepreg, n\u00facleos)'),
+      L('Imaging & Etching (photoresist, develop, etch, strip; subtractive process)','Imagen y Grabado (fotoresina, revelado, grabado, decapado; proceso sustractivo)'),
+      L('Drilling & Routing (CNC drill, hole sizes, registration, depth control)','Perforaci\u00f3n y Fresado (perforaci\u00f3n CNC, tama\u00f1os de agujero, registro, control de profundidad)'),
+      L('Plating & Through-Holes (electroless copper, electroplating, plated through-holes)','Metalizado y Orificios Pasantes (cobre por deposici\u00f3n, electrodeposici\u00f3n, orificios metalizados)'),
+      L('Multilayer Lamination & Layer Registration','Laminaci\u00f3n Multicapa y Registro de Capas'),
+      L('Solder Mask & Silkscreen Application','Aplicaci\u00f3n de M\u00e1scara de Soldadura y Serigraf\u00eda'),
+      L('Surface Finishes (HASL, ENIG, OSP, immersion silver/tin)','Acabados Superficiales (HASL, ENIG, OSP, plata/esta\u00f1o por inmersi\u00f3n)'),
+      L('Routing, V-Scoring & Panelization (tabs, mouse-bites, fiducials)','Fresado, Ranurado en V y Panelizaci\u00f3n (pesta\u00f1as, mouse-bites, fiduciales)'),
+      L('Electrical Test of Bare Boards (flying probe, bed-of-nails)','Prueba El\u00e9ctrica de Placas Desnudas (sonda volante, cama de clavos)')]},
+    {module:L('Assembly (SMT & Through-Hole)','Ensamblaje (SMT y Orificio Pasante)'), topics:[
+      L('Solder Paste & Stencils (paste types, stencil design, aperture, print)','Pasta de Soldadura y Esténciles (tipos de pasta, dise\u00f1o de est\u00e9ncil, abertura, impresi\u00f3n)'),
+      L('Pick-and-Place (feeders, nozzles, placement accuracy, programming)','Pick-and-Place (alimentadores, boquillas, precisi\u00f3n de colocaci\u00f3n, programaci\u00f3n)'),
+      L('Reflow Soldering & Thermal Profiles (preheat, soak, reflow, cooling)','Soldadura por Reflujo y Perfiles T\u00e9rmicos (precalentamiento, remojo, reflujo, enfriamiento)'),
+      L('Through-Hole & Wave Soldering (hand, selective, wave)','Orificio Pasante y Soldadura por Ola (manual, selectiva, ola)'),
+      L('Component Packages & Handling (SMD packages, BGA, fine pitch, MSD/moisture)','Encapsulados de Componentes y Manejo (encapsulados SMD, BGA, paso fino, MSD/humedad)'),
+      L('Cleaning & Conformal Coating','Limpieza y Recubrimiento Conformal'),
+      L('Rework & Repair (hot air, BGA rework, touch-up)','Retrabajo y Reparaci\u00f3n (aire caliente, retrabajo de BGA, retoque)'),
+      L('ESD Control & Handling in Assembly','Control de ESD y Manejo en el Ensamblaje')]},
+    {module:L('Test, Quality & Standards','Prueba, Calidad y Normas'), topics:[
+      L('Inspection: AOI & X-Ray (automated optical, hidden joints, BGA voids)','Inspecci\u00f3n: AOI y Rayos X (\u00f3ptica automatizada, juntas ocultas, vac\u00edos en BGA)'),
+      L('In-Circuit & Functional Test (ICT, boundary scan, functional fixtures)','Prueba En Circuito y Funcional (ICT, boundary scan, fixtures funcionales)'),
+      L('Solder Joint Quality & Defects (bridging, tombstoning, voids, cold joints)','Calidad de Juntas y Defectos (puentes, tombstoning, vac\u00edos, juntas fr\u00edas)'),
+      L('IPC Standards (IPC-A-610 acceptability, IPC-A-600, class 1/2/3)','Normas IPC (aceptabilidad IPC-A-610, IPC-A-600, clase 1/2/3)'),
+      L('DFM for Manufacturing (panelization, spacing, testability)','DFM para Fabricaci\u00f3n (panelizaci\u00f3n, espaciado, testabilidad)'),
+      L('Traceability & Process Control (lot tracking, SPC, yield)','Trazabilidad y Control de Proceso (seguimiento de lotes, SPC, rendimiento)'),
+      L('Environmental & Reliability Testing (thermal cycling, vibration, burn-in)','Pruebas Ambientales y de Fiabilidad (ciclado t\u00e9rmico, vibraci\u00f3n, burn-in)'),
+      L('RoHS, Lead-Free & Safety Compliance','RoHS, Sin Plomo y Cumplimiento de Seguridad')]}
+  ]},
+ {id:'robot', ic:'robot', title:'Robotics & PLC Programming', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Programming robots and PLCs for automated cells.',
-  outline:['PLC I/O & ladder logic','Robot coordinate frames','Teaching points','Cell integration','Safety interlocks']},
- {id:'power', ic:'power', title:'Power System Designs', cat:'Electrical & Controls',
+  syllabus:[
+    {module:L('Robotics Foundations','Fundamentos de Rob\u00f3tica'), topics:[
+      L('Robot types & axes','Tipos de robot y ejes'),
+      L('Coordinate frames','Marcos de coordenadas'),
+      L('Teaching & jogging','Ense\u00f1anza y desplazamiento manual'),
+      L('Tool center point (TCP)','Punto central de herramienta (TCP)'),
+      L('End effectors','Efectores finales')]},
+    {module:L('PLC Programming','Programaci\u00f3n de PLC'), topics:[
+      L('PLC I/O & wiring','E/S y cableado de PLC'),
+      L('Ladder logic','L\u00f3gica de escalera'),
+      L('Timers & counters','Temporizadores y contadores'),
+      L('Sensors & actuators','Sensores y actuadores'),
+      L('HMI basics','Conceptos de HMI')]},
+    {module:L('Cells & Safety','Celdas y Seguridad'), topics:[
+      L('Cell integration','Integraci\u00f3n de celda'),
+      L('Robot-PLC communication','Comunicaci\u00f3n robot-PLC'),
+      L('Safety interlocks & guarding','Enclavamientos de seguridad y resguardos'),
+      L('Sequencing & cycle','Secuenciamiento y ciclo'),
+      L('Commissioning & debugging','Puesta en marcha y depuraci\u00f3n')]}]},
+ {id:'power', ic:'power', title:'Power System Designs', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Designing power generation, storage, and distribution.',
-  outline:['Loads & sizing','Distribution basics','Storage fundamentals','Protection & safety','Controls overview']},
- {id:'battery', ic:'battery', title:'Battery Fundamentals', cat:'Electrical & Controls',
+  syllabus:[
+    {module:L('Loads & Sizing','Cargas y Dimensionamiento'), topics:[
+      L('Load analysis','An\u00e1lisis de carga'),
+      L('Voltage & current basics','Conceptos de voltaje y corriente'),
+      L('Sizing conductors','Dimensionamiento de conductores'),
+      L('Single vs three phase','Monof\u00e1sico vs trif\u00e1sico'),
+      L('Power factor','Factor de potencia')]},
+    {module:L('Distribution & Storage','Distribuci\u00f3n y Almacenamiento'), topics:[
+      L('Distribution basics','Conceptos de distribuci\u00f3n'),
+      L('Transformers','Transformadores'),
+      L('Energy storage fundamentals','Fundamentos de almacenamiento de energ\u00eda'),
+      L('Renewables & inverters','Renovables e inversores'),
+      L('Backup & UPS','Respaldo y UPS')]},
+    {module:L('Protection & Controls','Protecci\u00f3n y Controles'), topics:[
+      L('Breakers & fuses','Interruptores y fusibles'),
+      L('Grounding & safety','Puesta a tierra y seguridad'),
+      L('Protection coordination','Coordinaci\u00f3n de protecciones'),
+      L('Monitoring & controls','Monitoreo y controles'),
+      L('Codes & compliance','C\u00f3digos y cumplimiento')]}]},
+ {id:'battery', ic:'battery', title:'Battery Fundamentals', cat:'Electrical & Controls', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Core battery concepts for energy products (general industry).',
-  outline:['Cell chemistry basics','Packs & modules','Charge/discharge','Thermal & safety','Testing fundamentals']},
- {id:'industrial', ic:'design', title:'Industrial Design', cat:'Design & CAD',
+  syllabus:[
+    {module:L('Cell Fundamentals','Fundamentos de Celda'), topics:[
+      L('Cell chemistry basics','Conceptos de qu\u00edmica de celda'),
+      L('Lithium-ion & alternatives','Iones de litio y alternativas'),
+      L('Voltage, capacity & energy','Voltaje, capacidad y energ\u00eda'),
+      L('Charge & discharge curves','Curvas de carga y descarga'),
+      L('Cycle life & aging','Vida \u00fatil y envejecimiento')]},
+    {module:L('Packs & Systems','Paquetes y Sistemas'), topics:[
+      L('Cells, modules & packs','Celdas, m\u00f3dulos y paquetes'),
+      L('Series & parallel config','Configuraci\u00f3n serie y paralelo'),
+      L('Battery management systems (BMS)','Sistemas de gesti\u00f3n (BMS)'),
+      L('Balancing','Balanceo'),
+      L('Connectors & busbars','Conectores y barras')]},
+    {module:L('Thermal, Safety & Test','T\u00e9rmico, Seguridad y Prueba'), topics:[
+      L('Thermal management','Gesti\u00f3n t\u00e9rmica'),
+      L('Safety & thermal runaway','Seguridad y fuga t\u00e9rmica'),
+      L('Testing fundamentals','Fundamentos de prueba'),
+      L('Standards & transport','Normas y transporte'),
+      L('Recycling & second life','Reciclaje y segunda vida')]}]},
+ {id:'industrial', ic:'design', title:'Industrial Design', cat:'Design & CAD', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Form, function, and manufacturability of products.',
-  outline:['Design language','Ergonomics','Material & finish','Sketch to CAD','DFM review']},
- {id:'styling', ic:'design', title:'Product Styling', cat:'Design & CAD',
+  syllabus:[
+    {module:L('Design Foundations','Fundamentos de Dise\u00f1o'), topics:[
+      L('Design language & form','Lenguaje de dise\u00f1o y forma'),
+      L('Form vs function','Forma vs funci\u00f3n'),
+      L('Ergonomics & human factors','Ergonom\u00eda y factores humanos'),
+      L('Sketching & ideation','Bocetado e ideaci\u00f3n'),
+      L('Mood boards & research','Tableros de inspiraci\u00f3n e investigaci\u00f3n')]},
+    {module:L('From Concept to CAD','Del Concepto al CAD'), topics:[
+      L('Sketch to CAD','Del boceto al CAD'),
+      L('Materials & finishes','Materiales y acabados'),
+      L('Color, texture & CMF','Color, textura y CMF'),
+      L('Prototyping methods','M\u00e9todos de prototipado'),
+      L('Renders & presentation','Renders y presentaci\u00f3n')]},
+    {module:L('Manufacturability','Manufacturabilidad'), topics:[
+      L('Design for manufacturing','Dise\u00f1o para fabricaci\u00f3n'),
+      L('Cost & production volume','Costo y volumen de producci\u00f3n'),
+      L('Tolerances & assembly','Tolerancias y ensamblaje'),
+      L('Sustainability in design','Sostenibilidad en el dise\u00f1o'),
+      L('Design review','Revisi\u00f3n de dise\u00f1o')]}]},
+ {id:'styling', ic:'design', title:'Product Styling', cat:'Design & CAD', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Surfacing and aesthetic refinement of products.',
-  outline:['Surface continuity','Parting lines & aesthetics','Texture & color','Renders','Styling review']},
- {id:'drawing', ic:'drawing', title:'2D & 3D Drawings & Revision Control', cat:'Design & CAD',
+  syllabus:[
+    {module:L('Surfacing Basics','Conceptos de Superficies'), topics:[
+      L('Surface continuity (G0/G1/G2)','Continuidad de superficie (G0/G1/G2)'),
+      L('Class-A surfaces','Superficies clase A'),
+      L('Curvature & highlights','Curvatura y reflejos'),
+      L('Parting lines & aesthetics','L\u00edneas de partici\u00f3n y est\u00e9tica')]},
+    {module:L('Aesthetic Refinement','Refinamiento Est\u00e9tico'), topics:[
+      L('Proportion & stance','Proporci\u00f3n y postura'),
+      L('Texture & color','Textura y color'),
+      L('Material & finish (CMF)','Material y acabado (CMF)'),
+      L('Brand & visual identity','Marca e identidad visual'),
+      L('Detailing & transitions','Detallado y transiciones')]},
+    {module:L('Presentation','Presentaci\u00f3n'), topics:[
+      L('Rendering','Renderizado'),
+      L('Lighting & scenes','Iluminaci\u00f3n y escenas'),
+      L('Styling review','Revisi\u00f3n de estilo'),
+      L('Communicating intent','Comunicaci\u00f3n de la intenci\u00f3n'),
+      L('Handoff to engineering','Entrega a ingenier\u00eda')]}]},
+ {id:'drawing', ic:'drawing', title:'2D & 3D Drawings & Revision Control', cat:'Design & CAD', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Engineering drawings, GD&T, and revision management.',
-  outline:['Views & projections','Dimensioning & GD&T','Title blocks','BOMs','Revision control']},
- {id:'assembly', ic:'assembly', title:'Complex Assembly Design & Management', cat:'Design & CAD',
+  syllabus:[
+    {module:L('Engineering Drawings','Dibujos de Ingenier\u00eda'), topics:[
+      L('Views & projections','Vistas y proyecciones'),
+      L('Orthographic & section views','Vistas ortogr\u00e1ficas y de secci\u00f3n'),
+      L('Dimensioning basics','Conceptos de acotaci\u00f3n'),
+      L('Title blocks & notes','Cuadros de t\u00edtulo y notas'),
+      L('Scale & sheet sizes','Escala y tama\u00f1os de hoja')]},
+    {module:L('GD&T & Tolerancing','GD&T y Tolerancias'), topics:[
+      L('GD&T fundamentals','Fundamentos de GD&T'),
+      L('Datums & feature control','Datums y control de caracter\u00edsticas'),
+      L('Tolerance stack-ups','Acumulaci\u00f3n de tolerancias'),
+      L('Fits & limits','Ajustes y l\u00edmites'),
+      L('Inspection from drawings','Inspecci\u00f3n a partir de dibujos')]},
+    {module:L('BOMs & Revision Control','BOMs y Control de Revisiones'), topics:[
+      L('Bills of materials','Listas de materiales'),
+      L('Revision letters & ECOs','Letras de revisi\u00f3n y ECOs'),
+      L('Drawing release process','Proceso de liberaci\u00f3n de dibujos'),
+      L('PDM/PLM basics','Conceptos de PDM/PLM'),
+      L('Archiving & standards','Archivo y normas')]}]},
+ {id:'assembly', ic:'assembly', title:'Complex Assembly Design & Management', cat:'Design & CAD', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Managing large multi-part assemblies and their builds.',
-  outline:['Top-down vs bottom-up','Mates & constraints','Sub-assemblies','Interference checks','Assembly BOMs']},
- {id:'facility', ic:'factory', title:'Facility Design', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Assembly Modeling','Modelado de Ensamblaje'), topics:[
+      L('Top-down vs bottom-up','De arriba a abajo vs de abajo a arriba'),
+      L('Mates & constraints','Uniones y restricciones'),
+      L('Sub-assemblies','Subensamblajes'),
+      L('Skeletons & references','Esqueletos y referencias'),
+      L('Large assembly performance','Rendimiento de ensamblajes grandes')]},
+    {module:L('Validation','Validaci\u00f3n'), topics:[
+      L('Interference & clearance checks','Verificaci\u00f3n de interferencia y holgura'),
+      L('Motion & mechanisms','Movimiento y mecanismos'),
+      L('Tolerance in assemblies','Tolerancia en ensamblajes'),
+      L('Exploded views','Vistas explotadas'),
+      L('Assembly drawings','Dibujos de ensamblaje')]},
+    {module:L('Management','Gesti\u00f3n'), topics:[
+      L('Assembly BOMs','BOMs de ensamblaje'),
+      L('Configurations & variants','Configuraciones y variantes'),
+      L('Revision & change control','Control de revisiones y cambios'),
+      L('Collaboration & data','Colaboraci\u00f3n y datos'),
+      L('Build sequence & instructions','Secuencia de armado e instrucciones')]}]},
+ {id:'facility', ic:'factory', title:'Facility Design', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Laying out manufacturing facilities and flow.',
-  outline:['Process flow','Cell layout','Utilities & services','Safety zoning','Capacity planning']},
- {id:'maint', ic:'wrench', title:'Machine Maintenance', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Process Flow','Flujo de Proceso'), topics:[
+      L('Process flow mapping','Mapeo de flujo de proceso'),
+      L('Material flow & logistics','Flujo de material y log\u00edstica'),
+      L('Value stream basics','Conceptos de flujo de valor'),
+      L('Bottlenecks & balancing','Cuellos de botella y balanceo')]},
+    {module:L('Layout & Utilities','Disposici\u00f3n y Servicios'), topics:[
+      L('Cell & line layout','Disposici\u00f3n de celdas y l\u00edneas'),
+      L('Utilities & services','Servicios e instalaciones'),
+      L('Safety zoning','Zonificaci\u00f3n de seguridad'),
+      L('Ergonomics & workstations','Ergonom\u00eda y estaciones de trabajo'),
+      L('Storage & WIP','Almacenamiento y WIP')]},
+    {module:L('Capacity & Planning','Capacidad y Planeaci\u00f3n'), topics:[
+      L('Capacity planning','Planeaci\u00f3n de capacidad'),
+      L('Scalability & growth','Escalabilidad y crecimiento'),
+      L('Lean layout principles','Principios de disposici\u00f3n esbelta'),
+      L('Simulation of flow','Simulaci\u00f3n de flujo'),
+      L('Review & optimization','Revisi\u00f3n y optimizaci\u00f3n')]}]},
+ {id:'maint', ic:'wrench', title:'Machine Maintenance', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Preventive and corrective maintenance practices.',
-  outline:['PM scheduling','Lubrication & wear','Troubleshooting','Spare parts','Downtime tracking']},
- {id:'nesting', ic:'nest', title:'Nesting & Factory Travelers', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Maintenance Basics','Conceptos de Mantenimiento'), topics:[
+      L('Preventive vs corrective','Preventivo vs correctivo'),
+      L('PM scheduling','Programaci\u00f3n de PM'),
+      L('Lubrication & wear','Lubricaci\u00f3n y desgaste'),
+      L('Reading equipment manuals','Lectura de manuales de equipo')]},
+    {module:L('Troubleshooting','Soluci\u00f3n de Problemas'), topics:[
+      L('Diagnostic approach','Enfoque de diagn\u00f3stico'),
+      L('Mechanical troubleshooting','Diagn\u00f3stico mec\u00e1nico'),
+      L('Electrical troubleshooting','Diagn\u00f3stico el\u00e9ctrico'),
+      L('Root cause analysis','An\u00e1lisis de causa ra\u00edz'),
+      L('Predictive maintenance','Mantenimiento predictivo')]},
+    {module:L('Operations','Operaciones'), topics:[
+      L('Spare parts management','Gesti\u00f3n de repuestos'),
+      L('Downtime tracking','Seguimiento de tiempo muerto'),
+      L('Work orders & CMMS','\u00d3rdenes de trabajo y CMMS'),
+      L('Safety & lockout/tagout','Seguridad y bloqueo/etiquetado'),
+      L('Reliability metrics','M\u00e9tricas de confiabilidad')]}]},
+ {id:'nesting', ic:'nest', title:'Nesting & Factory Travelers', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Material nesting and shop-floor traveler documentation.',
-  outline:['Nesting for yield','Traveler structure','Routing steps','Tracking WIP','Sign-offs']},
- {id:'pid', ic:'pid', title:'P&ID Diagramming', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Nesting for Yield','Anidamiento para Aprovechamiento'), topics:[
+      L('Nesting fundamentals','Fundamentos de anidamiento'),
+      L('Material yield & scrap','Aprovechamiento y desperdicio'),
+      L('Grain & orientation','Grano y orientaci\u00f3n'),
+      L('Common-line cutting','Corte de l\u00ednea com\u00fan'),
+      L('Nesting software basics','Conceptos de software de anidamiento')]},
+    {module:L('Factory Travelers','Viajeros de Planta'), topics:[
+      L('Traveler structure','Estructura del viajero'),
+      L('Routing steps','Pasos de ruta'),
+      L('Operation sequencing','Secuenciamiento de operaciones'),
+      L('Sign-offs & approvals','Firmas y aprobaciones'),
+      L('Linking to the BOM','Enlace con el BOM')]},
+    {module:L('Tracking & Control','Seguimiento y Control'), topics:[
+      L('Tracking WIP','Seguimiento de WIP'),
+      L('Barcodes & scanning','C\u00f3digos de barras y escaneo'),
+      L('Traceability','Trazabilidad'),
+      L('Yield reporting','Reporte de aprovechamiento'),
+      L('Continuous improvement','Mejora continua')]}]},
+ {id:'pid', ic:'pid', title:'P&ID Diagramming', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Piping & instrumentation diagrams for process systems.',
-  outline:['P&ID symbols','Instrument tags','Line & valve types','Reading a P&ID','Drafting standards']},
- {id:'logic', ic:'logic', title:'System Logic Diagrams', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('P&ID Basics','Conceptos de P&ID'), topics:[
+      L('What a P&ID shows','Qu\u00e9 muestra un P&ID'),
+      L('P&ID symbols','S\u00edmbolos de P&ID'),
+      L('Line types & numbering','Tipos de l\u00ednea y numeraci\u00f3n'),
+      L('Equipment representation','Representaci\u00f3n de equipos')]},
+    {module:L('Instruments & Valves','Instrumentos y V\u00e1lvulas'), topics:[
+      L('Instrument tags & ISA','Etiquetas de instrumento e ISA'),
+      L('Valve types & symbols','Tipos de v\u00e1lvula y s\u00edmbolos'),
+      L('Control loops','Lazos de control'),
+      L('Sensors & transmitters','Sensores y transmisores'),
+      L('Interlocks & logic','Enclavamientos y l\u00f3gica')]},
+    {module:L('Reading & Drafting','Lectura y Dibujo'), topics:[
+      L('Reading a P&ID','Lectura de un P&ID'),
+      L('Drafting standards','Normas de dibujo'),
+      L('Revisions & redlines','Revisiones y correcciones'),
+      L('Linking to process flow','Enlace con el flujo de proceso'),
+      L('Handoff & documentation','Entrega y documentaci\u00f3n')]}]},
+ {id:'logic', ic:'logic', title:'System Logic Diagrams', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Logic and control diagrams for systems.',
-  outline:['Logic symbols','Sequence diagrams','State logic','Interlocks','Documentation']},
- {id:'pm', ic:'pm', title:'Project Management', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Logic Fundamentals','Fundamentos de L\u00f3gica'), topics:[
+      L('Logic symbols & gates','S\u00edmbolos l\u00f3gicos y compuertas'),
+      L('Boolean basics','Conceptos booleanos'),
+      L('Truth tables','Tablas de verdad'),
+      L('Combinational vs sequential','Combinacional vs secuencial')]},
+    {module:L('System Diagrams','Diagramas de Sistema'), topics:[
+      L('Sequence diagrams','Diagramas de secuencia'),
+      L('State logic & state machines','L\u00f3gica de estados y m\u00e1quinas de estado'),
+      L('Timing diagrams','Diagramas de temporizaci\u00f3n'),
+      L('Interlocks','Enclavamientos'),
+      L('Fault & alarm logic','L\u00f3gica de fallas y alarmas')]},
+    {module:L('Documentation','Documentaci\u00f3n'), topics:[
+      L('Drafting logic diagrams','Dibujo de diagramas l\u00f3gicos'),
+      L('Standards & conventions','Normas y convenciones'),
+      L('Linking to PLC code','Enlace con c\u00f3digo PLC'),
+      L('Reviews & validation','Revisiones y validaci\u00f3n'),
+      L('Maintenance & updates','Mantenimiento y actualizaciones')]}]},
+ {id:'pm', ic:'pm', title:'Project Management', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Planning and running manufacturing projects.',
-  outline:['Scope & WBS','Scheduling','Resourcing','Risk & change','Status reporting']},
- {id:'cost', ic:'cost', title:'Purchasing & Project Costing', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Planning','Planeaci\u00f3n'), topics:[
+      L('Scope & WBS','Alcance y WBS'),
+      L('Deliverables & milestones','Entregables e hitos'),
+      L('Estimating effort','Estimaci\u00f3n de esfuerzo'),
+      L('Stakeholders','Interesados')]},
+    {module:L('Scheduling & Resources','Programaci\u00f3n y Recursos'), topics:[
+      L('Scheduling & Gantt charts','Programaci\u00f3n y diagramas de Gantt'),
+      L('Critical path','Ruta cr\u00edtica'),
+      L('Resourcing & teams','Asignaci\u00f3n de recursos y equipos'),
+      L('Budgeting','Presupuesto'),
+      L('Risk & change management','Gesti\u00f3n de riesgo y cambios')]},
+    {module:L('Execution & Reporting','Ejecuci\u00f3n y Reporte'), topics:[
+      L('Tracking progress','Seguimiento del avance'),
+      L('Status reporting','Reporte de estado'),
+      L('Issue & risk logs','Registros de problemas y riesgos'),
+      L('Agile vs waterfall','\u00c1gil vs cascada'),
+      L('Closeout & lessons learned','Cierre y lecciones aprendidas')]}]},
+ {id:'cost', ic:'cost', title:'Purchasing & Project Costing', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Sourcing, quoting, and costing manufacturing work.',
-  outline:['Cost drivers','Quoting & RFQs','Supplier selection','Should-cost','Margins']},
- {id:'quality', ic:'quality', title:'Quality Controls & Statistical Analytics', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Cost Drivers','Factores de Costo'), topics:[
+      L('Elements of cost','Elementos del costo'),
+      L('Material & labor','Material y mano de obra'),
+      L('Machine & overhead','M\u00e1quina y gastos generales'),
+      L('Should-cost analysis','An\u00e1lisis de costo objetivo')]},
+    {module:L('Sourcing & Quoting','Abastecimiento y Cotizaci\u00f3n'), topics:[
+      L('RFQs & quoting','RFQs y cotizaci\u00f3n'),
+      L('Supplier selection','Selecci\u00f3n de proveedores'),
+      L('Negotiation basics','Conceptos de negociaci\u00f3n'),
+      L('Purchase orders','\u00d3rdenes de compra'),
+      L('Lead time & logistics','Tiempo de entrega y log\u00edstica')]},
+    {module:L('Margins & Control','M\u00e1rgenes y Control'), topics:[
+      L('Markup vs margin','Margen sobre costo vs margen'),
+      L('Quoting a finished part','Cotizaci\u00f3n de pieza terminada'),
+      L('Cost tracking','Seguimiento de costos'),
+      L('Budget vs actual','Presupuesto vs real'),
+      L('Cost reduction','Reducci\u00f3n de costos')]}]},
+ {id:'quality', ic:'quality', title:'Quality Controls & Statistical Analytics', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'SPC, inspection, and quality systems.',
-  outline:['Inspection methods','SPC & control charts','Cpk & capability','Gauge R&R','CAPA']},
- {id:'safety', ic:'safety', title:'Safety & Regulatory Compliance', cat:'Quality & Operations',
+  syllabus:[
+    {module:L('Inspection','Inspecci\u00f3n'), topics:[
+      L('Inspection methods','M\u00e9todos de inspecci\u00f3n'),
+      L('Measurement tools','Instrumentos de medici\u00f3n'),
+      L('CMM basics','Conceptos de CMM'),
+      L('Gauge R&R','R&R de instrumentos'),
+      L('Sampling plans','Planes de muestreo')]},
+    {module:L('Statistical Control','Control Estad\u00edstico'), topics:[
+      L('SPC & control charts','SPC y gr\u00e1ficos de control'),
+      L('Cpk & capability','Cpk y capacidad'),
+      L('Variation & causes','Variaci\u00f3n y causas'),
+      L('Pareto & histograms','Pareto e histogramas'),
+      L('Reading the data','Lectura de los datos')]},
+    {module:L('Quality Systems','Sistemas de Calidad'), topics:[
+      L('ISO 9001 & QMS','ISO 9001 y SGC'),
+      L('CAPA & root cause','CAPA y causa ra\u00edz'),
+      L('FMEA basics','Conceptos de FMEA'),
+      L('Audits','Auditor\u00edas'),
+      L('Continuous improvement','Mejora continua')]}]},
+ {id:'safety', ic:'safety', title:'Safety & Regulatory Compliance', cat:'Quality & Operations', live:true, preview:true, mods:3, deep:true, lang:'EN \u00b7 ES',
   blurb:'Workplace safety and regulatory standards.',
-  outline:['Hazard ID','Lockout/tagout','PPE','Regulatory frameworks','Audits']},
+  syllabus:[
+    {module:L('Hazard Awareness','Conciencia de Peligros'), topics:[
+      L('Hazard identification','Identificaci\u00f3n de peligros'),
+      L('Risk assessment','Evaluaci\u00f3n de riesgos'),
+      L('PPE','Equipo de protecci\u00f3n personal'),
+      L('Machine guarding','Resguardo de m\u00e1quinas'),
+      L('Ergonomics','Ergonom\u00eda')]},
+    {module:L('Procedures','Procedimientos'), topics:[
+      L('Lockout/tagout','Bloqueo/etiquetado'),
+      L('Hazard communication','Comunicaci\u00f3n de peligros'),
+      L('Emergency response','Respuesta a emergencias'),
+      L('Confined space & heights','Espacios confinados y alturas'),
+      L('Chemical & fire safety','Seguridad qu\u00edmica y contra incendios')]},
+    {module:L('Compliance','Cumplimiento'), topics:[
+      L('Regulatory frameworks (OSHA/ISO)','Marcos regulatorios (OSHA/ISO)'),
+      L('Recordkeeping','Mantenimiento de registros'),
+      L('Audits & inspections','Auditor\u00edas e inspecciones'),
+      L('Training programs','Programas de capacitaci\u00f3n'),
+      L('Safety culture','Cultura de seguridad')]}]},
 ];
 
 /* ---------- state & progress ---------- */
@@ -1861,19 +2470,25 @@ function renderHub(){
   // matched trades first (only when not filtering/searching), then live, then the rest
   list.sort((a,b)=>{
     if(state.cat==='all'&&!q){const ma=matches.includes(a.id)?1:0,mb=matches.includes(b.id)?1:0;if(ma!==mb)return mb-ma;}
-    return (b.live?1:0)-(a.live?1:0);
+    const ra=(a.live&&!a.preview)?2:(a.live?1:0);   // ready=2, building/preview=1, soon=0
+    const rb=(b.live&&!b.preview)?2:(b.live?1:0);
+    return rb-ra;
   });
   let chips=CATS.map(c=>`<div class="chip ${state.cat===c?'on':''}" onclick="setCat('${c}')">${c==='all'?t('all'):c}</div>`).join('');
   let cards=list.map(tr=>{
     const live=tr.live;
+    const ready=live && !tr.preview;     // "Ready" only for fully-built trades (Mold)
     const isMatch=matches.includes(tr.id);
-    const modcount = live ? (ANEW.content[tr.id] ? ANEW.content[tr.id].modules.length : (tr.mods||0)) : (tr.outline?tr.outline.length:0);
-    return `<div class="tcard ${live?'live':'soon'} ${isMatch?'matched':''}" onclick="openTrade('${tr.id}')">
+    // module count: loaded content -> its modules; preview -> syllabus length; else catalog mods/outline
+    const modcount = ready
+        ? (ANEW.content[tr.id] ? ANEW.content[tr.id].modules.length : (tr.mods||0))
+        : (tr.syllabus ? tr.syllabus.length : (tr.mods || (tr.outline?tr.outline.length:0)));
+    return `<div class="tcard ${ready?'live':'soon'} ${isMatch?'matched':''}" onclick="openTrade('${tr.id}')">
       ${isMatch?`<div class="matchflag">\u2728 ${t('svMatchBadge')}</div>`:''}
       <div class="tico">${svg(IC[tr.ic])}</div>
       <div class="tinfo"><b>${tr.title}</b><span>${tr.blurb}</span>
-        <div class="tmeta">${live?`<span class="mtag go">\u2713 ${t('ready')}</span><span class="mtag">${modcount} ${t('modules')}</span><span class="mtag">${tr.lang}</span>`
-              :`<span class="mtag">${t('building')}</span><span class="mtag">${modcount} ${t('modules')}</span>`}</div>
+        <div class="tmeta">${ready?`<span class="mtag go">\u2713 ${t('ready')}</span><span class="mtag">${modcount} ${t('modules')}</span><span class="mtag">${tr.lang}</span>`
+              :`<span class="mtag">${t('building')}</span><span class="mtag">${modcount} ${t('modules')}</span>${tr.lang?`<span class="mtag">${tr.lang}</span>`:''}`}</div>
       </div><div class="chev">\u203A</div></div>`;
   }).join('');
   const hasMatches=matches.length>0;
@@ -1893,7 +2508,7 @@ function renderHub(){
       <input id="q" placeholder="${t('searchph')}" value="${state.query}" oninput="onSearch(this.value)"></div>
     <div class="catrow">${chips}</div>
     ${cards||`<div class="hubcount">\u2014</div>`}
-    <div class="hubcount">${TRADES.length} trades \u00B7 3 fully built, drill-down ready</div>
+    <div class="hubcount">${TRADES.length} trades \u00B7 1 ready to explore, more in development</div>
     <div style="height:14px"></div>`;
 }
 function setCat(c){state.cat=c;render();}
@@ -1904,6 +2519,14 @@ function openTrade(id){
      it is paused only on an actual video lesson (see openLesson). */
   try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}
   const tr=TRADES.find(x=>x.id===id);
+  if(tr && tr.preview){
+    /* Preview trade: curriculum is still in development. Go straight to the
+       course home, which shows the planned syllabus (no lesson content loads). */
+    state.trade=id;state.screen='course';state.tab='home';
+    state.activeModule=null;state.activeLesson=null;state.inQuiz=false;
+    render();app.scrollTop=0;
+    return;
+  }
   if(tr && tr.live){
     /* Live trades are content-backed: their lesson/quiz data lives in
        each trade's own .html file in trades/ and is fetched on demand. Show a
@@ -1989,26 +2612,44 @@ function renderHome(){
         <div class="chev">${unlocked?'\u203A':'\uD83D\uDD12'}</div></div>`;
     });
   } else {
-    // Content not loaded yet (or unavailable): show the planned curriculum
-    // outline from the catalog so the trade is never an empty screen.
-    const outline=cat.outline||[];
-    if(outline.length){
-      mods+=`<div class="muted" style="padding:2px 2px 10px;font-size:13px">${tr2('Planned curriculum \u2014 lessons load when you open a module.','Currículo planeado \u2014 las lecciones se cargan al abrir un módulo.')}</div>`;
-      outline.forEach((o2,i)=>{
-        mods+=`<div class="mod locked">
-          <div class="mnum">${i+1}</div>
-          <div class="minfo"><b>${o2}</b><span>${tr2('In development','En desarrollo')}</span>
-            <div class="mbar"><i style="width:0%"></i></div></div>
-          <div class="chev">\uD83D\uDD12</div></div>`;
+    // Content not loaded yet (or unavailable): show the planned curriculum so
+    // the trade is never an empty screen. Two shapes are supported:
+    //   cat.syllabus = [{module:L(...), topics:[L(...), ...]}, ...]  (grouped)
+    //   cat.outline  = ['topic', 'topic', ...]                        (flat)
+    if(cat.syllabus && cat.syllabus.length){
+      mods+=`<div class="muted" style="padding:2px 2px 12px;font-size:13px">${tr2('Planned curriculum \u2014 here is what this trade will cover. Lessons are in development.','Currículo planeado \u2014 esto es lo que cubrirá este oficio. Las lecciones están en desarrollo.')}</div>`;
+      let n=0;
+      cat.syllabus.forEach((sec,si)=>{
+        mods+=`<div style="font-family:'Sora';font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin:${si?18:4}px 2px 8px">${tr2('Module','Módulo')} ${si+1} \u00B7 ${tr(sec.module)}</div>`;
+        (sec.topics||[]).forEach((tp)=>{
+          n++;
+          mods+=`<div class="mod locked">
+            <div class="mnum">${n}</div>
+            <div class="minfo"><b>${tr(tp)}</b><span>${tr2('In development','En desarrollo')}</span>
+              <div class="mbar"><i style="width:0%"></i></div></div>
+            <div class="chev">\uD83D\uDD12</div></div>`;
+        });
       });
     } else {
-      mods+=`<div class="muted" style="padding:10px 2px">${tr2('Lessons are being prepared for this trade.','Las lecciones de este oficio se están preparando.')}</div>`;
+      const outline=cat.outline||[];
+      if(outline.length){
+        mods+=`<div class="muted" style="padding:2px 2px 10px;font-size:13px">${tr2('Planned curriculum \u2014 lessons are in development.','Currículo planeado \u2014 las lecciones están en desarrollo.')}</div>`;
+        outline.forEach((o2,i)=>{
+          mods+=`<div class="mod locked">
+            <div class="mnum">${i+1}</div>
+            <div class="minfo"><b>${o2}</b><span>${tr2('In development','En desarrollo')}</span>
+              <div class="mbar"><i style="width:0%"></i></div></div>
+            <div class="chev">\uD83D\uDD12</div></div>`;
+        });
+      } else {
+        mods+=`<div class="muted" style="padding:10px 2px">${tr2('Lessons are being prepared for this trade.','Las lecciones de este oficio se están preparando.')}</div>`;
+      }
     }
   }
   app.innerHTML=`${topbar()}
    <div style="padding:14px 16px 0"><button class="back" onclick="sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0">\u2039 ${t('backhub')}</button></div>
    <div class="hero fade"><div class="greet">${t('welcome')}${firstName()?', '+firstName():''}</div>
-     <div class="greetname">${tr(COURSE.title)}</div>
+     <div class="greetname">${cat.title ? tr(cat.title) : tr(COURSE.title)}</div>
      <div class="tradechip" onclick="state.screen='hub';render()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>${t('changetrade')}</div>
      <div class="ringrow" style="margin-top:12px"><div class="pring" style="--p:${o}"><div class="inner"><b>${o}%</b><span>${t('overall').toUpperCase()}</span></div></div>
        <div class="stat3"><div class="stat"><b>${lessonsCompleted()}/${lessonsTotal()}</b><span>${t('lessons')}</span></div>

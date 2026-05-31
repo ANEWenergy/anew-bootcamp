@@ -372,6 +372,13 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .ssgate.todo span{font-size:12.5px;color:var(--muted)}
 .ssgate .ssgatego{font-family:'Sora';font-weight:700;font-size:12.5px;color:var(--orange);margin-top:2px}
 .ssgate.done{background:rgba(75,168,75,.12);border:1px solid rgba(75,168,75,.4);color:#9be29b;font-family:'Sora';font-weight:700;font-size:13px;flex-direction:row;align-items:center;gap:6px}
+.ssalert{border-radius:14px;padding:13px 15px;cursor:pointer;text-align:center;background:linear-gradient(135deg,rgba(243,144,25,.22),rgba(245,197,24,.12));border:2px solid var(--orange);animation:ssblink 1.3s ease-in-out infinite}
+@keyframes ssblink{0%,100%{border-color:var(--orange);box-shadow:0 0 0 0 rgba(243,144,25,.5)}50%{border-color:var(--yellow);box-shadow:0 0 16px 2px rgba(243,144,25,.45)}}
+.ssalert-top{font-family:'Sora';font-weight:800;font-size:13px;color:var(--yellow);letter-spacing:.2px}
+.ssalert-mid{font-size:15px;color:#fff;margin:5px 0 3px}
+.ssalert-mid b{font-family:'Sora';font-weight:800}
+.ssalert-go{font-family:'Sora';font-weight:700;font-size:12.5px;color:var(--orange)}
+@media (prefers-reduced-motion: reduce){.ssalert{animation:none}}
 .privacycard{border-color:rgba(75,168,75,.4);background:linear-gradient(160deg,rgba(75,168,75,.08),var(--card2))}
 .privacylist{list-style:none;padding:0;margin:8px 0 0}
 .privacylist li{position:relative;padding:5px 0 5px 24px;font-size:13px;line-height:1.45;color:var(--text)}
@@ -898,6 +905,56 @@ const TRADE_TOOL_OVER = {
   'logic':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
   'material':{cap:L('Materials & Material Selection','Materiales y Selecci\u00f3n de Materiales'), vid:'580l8i9iISI'},
 };
+
+/* Spanish translations for trade titles & categories. Titles in TRADES are
+   plain English strings; these helpers return the Spanish version when the UI
+   language is Spanish. Edit a translation here in one line. */
+const TRADE_TITLE_ES = {
+  'Advanced Mold Making':'Fabricaci\u00f3n Avanzada de Moldes',
+  'Plastic Part Design':'Dise\u00f1o de Piezas Pl\u00e1sticas',
+  'Mold Flow Simulations':'Simulaciones de Flujo de Molde',
+  'Mold Design':'Dise\u00f1o de Moldes',
+  'Material Science':'Ciencia de Materiales',
+  'CNC Machine Operations':'Operaci\u00f3n de M\u00e1quinas CNC',
+  'Multi-Axis Machining':'Mecanizado Multieje',
+  'Calculating Cycle Times':'C\u00e1lculo de Tiempos de Ciclo',
+  'CAD/CAM/CAE Programming':'Programaci\u00f3n CAD/CAM/CAE',
+  'Automated Welding':'Soldadura Automatizada',
+  'Seal Dispensing':'Dispensado de Sellador',
+  'Sheet Metal Stamping & Fabrication':'Estampado y Fabricaci\u00f3n de Chapa',
+  'Metal Stamping & Die Design':'Estampado de Metal y Dise\u00f1o de Troqueles',
+  'Fixture Design':'Dise\u00f1o de Sujeciones',
+  'Electrical Wire Schematics':'Esquemas El\u00e9ctricos de Cableado',
+  'Embedded Microprocessor Programming':'Programaci\u00f3n de Microprocesadores',
+  'PCB Design with Microprocessors':'Dise\u00f1o de PCB con Microprocesadores',
+  'PCB Manufacturing':'Fabricaci\u00f3n de PCB',
+  'Robotics & PLC Programming':'Rob\u00f3tica y Programaci\u00f3n PLC',
+  'Power System Designs':'Dise\u00f1o de Sistemas El\u00e9ctricos',
+  'Battery Fundamentals':'Fundamentos de Bater\u00edas',
+  'Industrial Design':'Dise\u00f1o Industrial',
+  'Product Styling':'Estilizado de Productos',
+  '2D & 3D Drawings & Revision Control':'Dibujos 2D y 3D y Control de Revisiones',
+  'Complex Assembly Design & Management':'Dise\u00f1o y Gesti\u00f3n de Ensamblajes Complejos',
+  'Facility Design':'Dise\u00f1o de Instalaciones',
+  'Machine Maintenance':'Mantenimiento de M\u00e1quinas',
+  'Nesting & Factory Travelers':'Anidamiento y Hojas de Ruta de F\u00e1brica',
+  'P&ID Diagramming':'Diagramas P&ID',
+  'System Logic Diagrams':'Diagramas de L\u00f3gica de Sistemas',
+  'Project Management':'Gesti\u00f3n de Proyectos',
+  'Purchasing & Project Costing':'Compras y Costeo de Proyectos',
+  'Quality Controls & Statistical Analytics':'Control de Calidad y An\u00e1lisis Estad\u00edstico',
+  'Safety & Regulatory Compliance':'Seguridad y Cumplimiento Normativo'
+};
+const TRADE_CAT_ES = {
+  'Molding & Plastics':'Moldeo y Pl\u00e1sticos',
+  'Machining & CAM':'Mecanizado y CAM',
+  'Welding & Fabrication':'Soldadura y Fabricaci\u00f3n',
+  'Electrical & Controls':'El\u00e9ctrica y Controles',
+  'Design & CAD':'Dise\u00f1o y CAD',
+  'Quality & Operations':'Calidad y Operaciones'
+};
+function tradeTitle(tr){ if(!tr) return ''; return (state.lang==='es' && TRADE_TITLE_ES[tr.title]) ? TRADE_TITLE_ES[tr.title] : tr.title; }
+function tradeCat(tr){ if(!tr) return ''; var c=(typeof tr==='string')?tr:tr.cat; return (state.lang==='es' && TRADE_CAT_ES[c]) ? TRADE_CAT_ES[c] : c; }
 
 const TRADES = [
  {id:'mold', ic:'mold', title:'Advanced Mold Making', cat:'Molding & Plastics', live:true, mods:5, deep:true,
@@ -2395,7 +2452,7 @@ function renderIntro(){
     const list=famTrades(s.cat);
     // show the family symbol big, plus an animated rotating "card" of each trade in the family
     const chips=list.map((tradeItem,idx)=>`<div class="famtrade ${idx===0?'on':''}" data-idx="${idx}">
-        <div class="famtradeic">${svg(tradeItem.ic)}</div><span>${tradeItem.title}</span></div>`).join('');
+        <div class="famtradeic">${svg(tradeItem.ic)}</div><span>${tradeTitle(tradeItem)}</span></div>`).join('');
     artHtml=`<div class="introart fam"><div class="introglow"></div><div class="introic">${svg(s.ic)}</div></div>
       ${`<div class="introtag">${t('introFamTag')}</div>`}
       <h2 class="introh">${t(s.tk)}</h2>
@@ -2692,9 +2749,9 @@ function renderMatches(){
       <div class="matchrank">${i+1}</div>
       <div class="matchic">${tr0.ic||''}</div>
       <div class="matchbody">
-        <div class="matchtitle">${tr0.title}</div>
+        <div class="matchtitle">${tradeTitle(tr0)}</div>
         <div class="matchwhy">${t('svFit')} ${whyMatch(id)}</div>
-        <div class="matchcat">${tr0.cat}${tr0.live?` \u00B7 <b style="color:var(--green)">${t('available')}</b>`:` \u00B7 ${t('soon')}`}</div>
+        <div class="matchcat">${tradeCat(tr0)}${tr0.live?` \u00B7 <b style="color:var(--green)">${t('available')}</b>`:` \u00B7 ${t('soon')}`}</div>
       </div>
       <svg class="matcharrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </div>`;
@@ -2778,7 +2835,7 @@ function renderHub(){
     const rb=(b.live&&!b.preview)?2:(b.live?1:0);
     return rb-ra;
   });
-  let chips=CATS.map(c=>`<div class="chip ${state.cat===c?'on':''}" onclick="setCat('${c}')">${c==='all'?t('all'):c}</div>`).join('');
+  let chips=CATS.map(c=>`<div class="chip ${state.cat===c?'on':''}" onclick="setCat('${c}')">${c==='all'?t('all'):tradeCat(c)}</div>`).join('');
   let cards=list.map(tr=>{
     const live=tr.live;
     const ready=live && !tr.preview;     // "Ready" only for fully-built trades (Mold)
@@ -2790,7 +2847,7 @@ function renderHub(){
     return `<div class="tcard ${ready?'live':'soon'} ${isMatch?'matched':''}" onclick="openTrade('${tr.id}')">
       ${isMatch?`<div class="matchflag">\u2728 ${t('svMatchBadge')}</div>`:''}
       <div class="tico">${svg(IC[tr.ic])}</div>
-      <div class="tinfo"><b>${tr.title}</b><span>${tr.blurb}</span>
+      <div class="tinfo"><b>${tradeTitle(tr)}</b><span>${tr.blurb}</span>
         <div class="tmeta">${ready?`<span class="mtag go">\u2713 ${t('ready')}</span><span class="mtag">${modcount} ${t('modules')}</span><span class="mtag">${tr.lang}</span>`
               :`<span class="mtag">${t('building')}</span><span class="mtag">${modcount} ${t('modules')}</span>${tr.lang?`<span class="mtag">${tr.lang}</span>`:''}`}</div>
       </div><div class="chev">\u203A</div></div>`;
@@ -2804,15 +2861,19 @@ function renderHub(){
         <button class="finderbtn" onclick="retakeSurvey()">${hasMatches?t('svRetake'):t('svFind')} \u2192</button>
       </div></div>`;
   app.innerHTML=`${hubtop()}
+    ${(function(){
+      var passed=softSkillsPassed(), expired=softSkillsExpired();
+      if(passed) return `<div style="padding:10px 16px 2px"><div class="ssgate done" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">\u2705 ${tr2('Shop Ready \u2014 complete','Listo para el Taller \u2014 completo')} \u00b7 <span class="muted" style="font-size:11px">${tr2('refresher in','repaso en')} ${softSkillsDaysLeft()} ${tr2('days','d\u00edas')}</span></div></div>`;
+      return `<div style="padding:10px 16px 2px"><div class="ssalert" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">
+        <div class="ssalert-top">\u26A0\uFE0F ${tr2('This must be completed before you continue','Debes completar esto antes de continuar')}</div>
+        <div class="ssalert-mid">\uD83C\uDFC6 <b>${tr2('Shop Ready: How to Win at Work','Listo para el Taller: C\u00f3mo Triunfar en el Trabajo')}</b></div>
+        <div class="ssalert-go">${expired?tr2('3-month refresher \u2014 tap to begin','Repaso de 3 meses \u2014 toca para empezar'):tr2('Tap to begin \u2014 it\u2019s short and easy','Toca para empezar \u2014 es corto y f\u00e1cil')} \u2192</div>
+      </div></div>`;
+    })()}
     <div class="hubhead fade"><span class="pill lvl">UK Manufacturing Boot Camp</span>
       <h2>${t('hub')}</h2><p>${t('hubExplain')}</p></div>
     ${bootcampBanner()}
     ${finderBanner}
-    ${(function(){
-      var passed=softSkillsPassed(), expired=softSkillsExpired();
-      if(passed) return `<div style="padding:0 16px 6px"><div class="ssgate done" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">\u2705 ${tr2('Shop Ready \u2014 complete','Listo para el Taller \u2014 completo')} \u00b7 <span class="muted" style="font-size:11px">${tr2('refresher in','repaso en')} ${softSkillsDaysLeft()} ${tr2('days','d\u00edas')}</span></div></div>`;
-      return `<div style="padding:0 16px 6px"><div class="ssgate todo" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">\uD83C\uDFC6 <b>${tr2('Start here: Shop Ready','Empieza aqu\u00ed: Listo para el Taller')}</b><span>${expired?tr2('Quick 3-month refresher needed to keep going.','Necesitas un repaso r\u00e1pido de 3 meses para continuar.'):tr2('Required before any trade lesson \u2014 it\u2019s short and easy.','Requerido antes de cualquier lecci\u00f3n \u2014 es corto y f\u00e1cil.')}</span><span class="ssgatego">${tr2('Begin','Empezar')} \u2192</span></div></div>`;
-    })()}
     <div style="padding:4px 16px 12px">
       <button class="btn" style="width:100%;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
     </div>
@@ -2872,7 +2933,7 @@ function renderLoadingTrade(){
       <div style="text-align:center">
       <div class="tico" style="margin:24px auto 14px">${svg(IC[tr.ic]||IC.mold)}</div>
       <div class="spinner" style="margin:10px auto;width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:anewspin 0.8s linear infinite"></div>
-      <h3 style="margin-top:14px">${tr.title}</h3>
+      <h3 style="margin-top:14px">${tradeTitle(tr)}</h3>
       <p class="muted">${t('loadingTrade')||'Loading module\u2026'}</p>
       </div>
     </div>
@@ -2885,7 +2946,7 @@ function renderLoadError(){
       <button class="back" onclick="state.screen='hub';render()">\u2039 ${t('backhub')}</button>
       <div class="soonbox">
         <div class="tico">${svg(IC[tr.ic]||IC.mold)}</div>
-        <h3>${tr.title}</h3>
+        <h3>${tradeTitle(tr)}</h3>
         <p>${t('loadErrorBody')||'This module could not be loaded. Check that its content file is present next to index.html, then try again.'}</p>
         <div class="muted" style="font-size:12px;margin:6px 0 12px">${state.loadError||''}</div>
         <button class="btn" onclick="openTrade('${state.trade}')">${t('retry')||'Try again'}</button>
@@ -2899,7 +2960,7 @@ function renderTradeSoon(){
   app.innerHTML=`${hubtop()}
     <div class="soonwrap fade"><button class="back" onclick="state.screen='hub';render()">\u2039 ${t('backhub')}</button>
       <div class="soonbox"><div class="tico">${svg(IC[tr.ic])}</div>
-        <span class="pill soon">${t('comingsoon')}</span><h3>${tr.title}</h3><p>${tr.blurb}</p>
+        <span class="pill soon">${t('comingsoon')}</span><h3>${tradeTitle(tr)}</h3><p>${tr.blurb}</p>
         <div class="outline"><div style="font-family:'Sora';font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:left;margin:6px 0 2px">${t('plannedmods')}</div>${ol}</div>
         <div style="height:14px"></div>
         <button class="btn" onclick="toast('\u2713 ' + '${t('notify')}')">${t('notify')}</button>
@@ -3115,7 +3176,7 @@ function renderHome(){
    <div style="padding:14px 16px 0"><button class="back" onclick="${state.parentPreview?'exitParentPreview()':`sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0`}">\u2039 ${state.parentPreview?tr2('Back to portal','Volver al portal'):t('backhub')}</button></div>
    ${tradeBanner(tradeId)}
    <div class="hero fade"><div class="greet">${t('welcome')}${firstName()?', '+firstName():''}</div>
-     <div class="greetname">${cat.title ? tr(cat.title) : tr(COURSE.title)}</div>
+     <div class="greetname">${cat && cat.title ? tradeTitle(cat) : tr(COURSE.title)}</div>
      <div class="tradechip" onclick="state.screen='hub';render()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>${t('changetrade')}</div>
      <div class="ringrow" style="margin-top:12px"><div class="pring" style="--p:${o}"><div class="inner"><b>${o}%</b><span>${t('overall').toUpperCase()}</span></div></div>
        <div class="stat3"><div class="stat"><b>${lessonsCompleted()}/${lessonsTotal()}</b><span>${t('lessons')}</span></div>
@@ -3306,7 +3367,7 @@ function renderProfile(){
        <div style="margin-top:8px">${contact}</div></div>
      ${(p.matches&&p.matches.length)?`<div class="card"><b style="font-family:'Sora';font-size:14px">${t('svResultT')}</b>
        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
-       ${p.matches.map((id,i)=>{const tr0=TRADES.find(x=>x.id===id);return tr0?`<div class="suprow" style="cursor:pointer" onclick="openTrade('${id}')"><span><b style="font-weight:600">${i+1}. ${tr0.title}</b><br><span class="muted" style="font-size:12px">${t('svFit')} ${whyMatch(id)}</span></span><span class="muted">\u203A</span></div>`:'';}).join('')}
+       ${p.matches.map((id,i)=>{const tr0=TRADES.find(x=>x.id===id);return tr0?`<div class="suprow" style="cursor:pointer" onclick="openTrade('${id}')"><span><b style="font-weight:600">${i+1}. ${tradeTitle(tr0)}</b><br><span class="muted" style="font-size:12px">${t('svFit')} ${whyMatch(id)}</span></span><span class="muted">\u203A</span></div>`:'';}).join('')}
        </div></div>`:''}
      <button class="btn ghost" onclick="retakeSurvey()">${(p.matches&&p.matches.length)?t('svRetake'):t('svFind')}</button>
      <div style="height:8px"></div>

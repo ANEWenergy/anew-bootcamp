@@ -333,6 +333,23 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .emailcard .qa-a{color:#5c5347}
 .emailcard .qa-tag{color:#b9701a;background:#f6e6cf}
 .emailcard .qa-tag.ai{color:#2f6f9e;background:#dcebf5}
+.monitorbadge{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:18px;background:rgba(75,168,75,.14);border:1px solid rgba(75,168,75,.45);border-radius:12px;padding:6px 10px;line-height:1}
+.monitorbadge small{font-family:'Sora';font-weight:700;font-size:8.5px;letter-spacing:.4px;color:#9be29b;text-transform:uppercase}
+.livecard{border-color:rgba(75,168,75,.4)}
+.livedot{width:10px;height:10px;border-radius:50%;background:#4BA84B;box-shadow:0 0 0 0 rgba(75,168,75,.6);animation:livepulse 1.8s infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(75,168,75,.55)}70%{box-shadow:0 0 0 9px rgba(75,168,75,0)}100%{box-shadow:0 0 0 0 rgba(75,168,75,0)}}
+.smsbubble{background:rgba(80,160,220,.10);border:1px solid rgba(80,160,220,.35);border-radius:14px;border-bottom-left-radius:4px;padding:11px 13px;font-size:13px;line-height:1.5;margin:4px 0 12px;color:var(--text)}
+.smsfrom{font-family:'Sora';font-weight:700;font-size:11px;color:#8fd0ff;margin-bottom:4px}
+.smslink{color:#8fd0ff;text-decoration:underline}
+.freqrow{display:flex;gap:7px;margin-top:10px}
+.freqbtn{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-family:'Sora';font-weight:700;font-size:12px;border-radius:10px;padding:9px 4px;cursor:pointer}
+.freqbtn.on{border-color:var(--green);background:rgba(75,168,75,.18);color:#9be29b}
+.privacycard{border-color:rgba(75,168,75,.4);background:linear-gradient(160deg,rgba(75,168,75,.08),var(--card2))}
+.privacylist{list-style:none;padding:0;margin:8px 0 0}
+.privacylist li{position:relative;padding:5px 0 5px 24px;font-size:13px;line-height:1.45;color:var(--text)}
+.privacylist li::before{content:'\u2713';position:absolute;left:0;top:5px;color:#9be29b;font-weight:800}
+.ppbanner{display:flex;align-items:center;gap:8px;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff;font-size:12.5px;font-weight:600;padding:9px 14px;line-height:1.3}
+.ppbanner button{margin-left:auto;flex-shrink:0;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'Sora';font-weight:700;font-size:11px;border-radius:20px;padding:5px 11px;cursor:pointer}
 .suprow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line)}
 .suprow:last-child{border:none}
 .suprow a{color:#8fd3ff;text-decoration:none}
@@ -3001,7 +3018,8 @@ function renderHome(){
     }
   }
   app.innerHTML=`${topbar()}
-   <div style="padding:14px 16px 0"><button class="back" onclick="sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0">\u2039 ${t('backhub')}</button></div>
+   ${parentPreviewBanner()}
+   <div style="padding:14px 16px 0"><button class="back" onclick="${state.parentPreview?'exitParentPreview()':`sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0`}">\u2039 ${state.parentPreview?tr2('Back to portal','Volver al portal'):t('backhub')}</button></div>
    ${tradeBanner(tradeId)}
    <div class="hero fade"><div class="greet">${t('welcome')}${firstName()?', '+firstName():''}</div>
      <div class="greetname">${cat.title ? tr(cat.title) : tr(COURSE.title)}</div>
@@ -3055,6 +3073,7 @@ function renderModule(){
       <div class="chev">${unlocked?'\u203A':'\uD83D\uDD12'}</div></div>`;
   }).join('');
   app.innerHTML=`${topbar()}
+   ${parentPreviewBanner()}
    <div style="padding:12px 16px 0"><button class="back" onclick="closeModule()">\u2039 ${t('modules')}</button></div>
    ${moduleBanner(state.trade||'mold', mIdx, m.title)}
    <div class="lessonhead fade">
@@ -3078,6 +3097,7 @@ function renderLesson(){
   if(l.suppliers){sup=`<div class="supbox"><b>${t('suppliers')}</b>
     ${l.suppliers.map(s=>`<div class="suprow"><span><b style="font-weight:600">${s.n}</b><br><span class="muted">${tr(s.d)}</span></span><a href="https://${s.w}" target="_blank">${s.w} \u2197</a></div>`).join('')}</div>`;}
   app.innerHTML=`${topbar()}
+   ${parentPreviewBanner()}
    <div class="lessonhead fade"><button class="back" onclick="closeLesson()">\u2039 ${t('backlessons')}</button>
      <h2 style="margin:8px 0 0;font-size:20px">${tr(l.title)}</h2></div>
    <div class="obj"><span class="pill ghost">${t('obj')}</span><p>${tr(l.obj)}</p></div>
@@ -3242,7 +3262,7 @@ function renderParentGate(){
       <div class="safeitem"><span>\uD83D\uDEE1\uFE0F</span><div><b>${tr2('Kid-safe by design','Seguro para ni\u00f1os por dise\u00f1o')}</b><br><span class="muted">${tr2('Lessons and the AI tutor are filtered for age-appropriate content.','Las lecciones y el tutor con IA se filtran para contenido apropiado para su edad.')}</span></div></div>
       <div class="safeitem"><span>\uD83D\uDC41\uFE0F</span><div><b>${tr2('Monitored learning','Aprendizaje supervisado')}</b><br><span class="muted">${tr2('You can review the questions your learner asks and the answers they receive.','Puedes revisar las preguntas que hace tu aprendiz y las respuestas que recibe.')}</span></div></div>
       <div class="safeitem"><span>\uD83D\uDD14</span><div><b>${tr2('You\u2019ll be notified','Te notificaremos')}</b><br><span class="muted">${tr2('If our safeguards flag a concern, we alert you. (No system is perfect, so we focus on prompt, honest notification.)','Si nuestras protecciones detectan una preocupaci\u00f3n, te avisamos. (Ning\u00fan sistema es perfecto, por eso priorizamos una notificaci\u00f3n pronta y honesta.)')}</span></div></div>
-      <div class="safeitem"><span>\uD83D\uDD12</span><div><b>${tr2('Your data, respected','Tus datos, respetados')}</b><br><span class="muted">${tr2('We collect only what\u2019s needed to run the program and never sell personal data.','Recopilamos solo lo necesario para operar el programa y nunca vendemos datos personales.')}</span></div></div>
+      <div class="safeitem"><span>\uD83D\uDD12</span><div><b>${tr2('Your data, respected','Tus datos, respetados')}</b><br><span class="muted">${tr2('We collect only what\u2019s needed to run the program. We never sell your child\u2019s data \u2014 their interests, progress, or personal information \u2014 and never share it with advertisers.','Recopilamos solo lo necesario para operar el programa. Nunca vendemos los datos de tu hijo/a \u2014 sus intereses, progreso o informaci\u00f3n personal \u2014 ni los compartimos con anunciantes.')}</span></div></div>
     </div>
     <div class="card">
       <b style="font-family:'Sora';font-size:14px">${tr2('Consent','Consentimiento')}</b>
@@ -3272,6 +3292,29 @@ function saveParentConsent(){
   state.screen='parent'; render(); app.scrollTop=0;
 }
 
+function parentPreviewBanner(){
+  if(!state.parentPreview) return '';
+  return `<div class="ppbanner">\uD83D\uDC40 ${tr2('Parent preview \u2014 this is exactly what your child sees.','Vista de padre \u2014 esto es exactamente lo que ve tu hijo/a.')}
+    <button onclick="exitParentPreview()">${tr2('Exit preview','Salir')}</button></div>`;
+}
+function openParentPreview(){
+  /* Open the REAL learner view so parents see exactly what their child sees.
+     For the demo we open the fully-built trade (Advanced Mold Making) if the
+     child's current trade isn't loaded. A "Parent preview" banner is shown and
+     the back action returns to the portal. */
+  state.parentPreview = true;
+  sfx('tap');
+  var id = (state.trade) || 'mold';
+  // prefer a live/content-backed trade so real lessons are visible
+  var tr = TRADES.find(function(x){return x.id===id;});
+  if(!tr || !tr.live){ id='mold'; }
+  openTrade(id);
+}
+function exitParentPreview(){
+  state.parentPreview = false;
+  state.activeLesson=null; state.activeModule=null; state.inQuiz=false;
+  sfx('tap'); state.screen='parent'; render(); app.scrollTop=0;
+}
 function renderParent(){
   const child = parentChildName();
   const done=lessonsCompleted(), total=lessonsTotal(), pct=coursePct();
@@ -3280,8 +3323,21 @@ function renderParent(){
     <button class="back" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\u2039 ${tr2('Back','Atr\u00e1s')}</button>
     <div class="demobadge">${tr2('DEMONSTRATION \u2014 sample data','DEMOSTRACI\u00d3N \u2014 datos de ejemplo')}</div>
     <div class="card">
-      <h3 style="margin:0;font-family:'Sora'">${tr2('Parent Portal','Portal de Padres')}</h3>
-      <p class="muted" style="margin:4px 0 0;font-size:13px">${tr2('Learner','Aprendiz')}: <b style="color:var(--text)">${child}</b> \u00B7 ${tr(COURSE.title)}</p>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div><h3 style="margin:0;font-family:'Sora'">${tr2('Parent Portal','Portal de Padres')}</h3>
+        <p class="muted" style="margin:4px 0 0;font-size:13px">${tr2('Learner','Aprendiz')}: <b style="color:var(--text)">${child}</b> \u00B7 ${tr(COURSE.title)}</p></div>
+        <span class="monitorbadge" title="${tr2('Monitoring active','Supervisi\u00f3n activa')}">\uD83D\uDEE1\uFE0F\uD83D\uDC41\uFE0F<small>${tr2('Monitoring','Supervisi\u00f3n')}</small></span>
+      </div>
+    </div>
+    <div class="card livecard">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="livedot"></span><b style="font-family:'Sora';font-size:14px">${tr2('Where your child is right now','D\u00f3nde est\u00e1 tu hijo/a ahora')}</b>
+      </div>
+      <div class="suprow"><span>${tr2('Current module','M\u00f3dulo actual')}</span><b>${tr2('Module 2 \u00b7 Mold Design','M\u00f3dulo 2 \u00b7 Dise\u00f1o de Moldes')}</b></div>
+      <div class="suprow"><span>${tr2('Current lesson','Lecci\u00f3n actual')}</span><b>${tr2('Parting lines & draft','L\u00edneas de partici\u00f3n y \u00e1ngulos')}</b></div>
+      <div class="suprow"><span>${tr2('Status','Estado')}</span><b style="color:#9be29b">${tr2('Active now','Activo ahora')}</b></div>
+      <div class="suprow"><span>${tr2('Last activity','\u00daltima actividad')}</span><b>${tr2('2 minutes ago','hace 2 minutos')}</b></div>
+      <button class="btn" style="width:100%;margin-top:12px;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="openParentPreview()">\uD83D\uDC40 ${tr2('See what your child is learning','Ver lo que tu hijo/a est\u00e1 aprendiendo')}</button>
     </div>
     <div class="card">
       <b style="font-family:'Sora';font-size:14px">${tr2('Progress','Progreso')}</b>
@@ -3312,6 +3368,37 @@ function renderParent(){
       <div class="suprow"><span>${tr2('Safety alerts','Alertas de seguridad')}</span><b style="color:#9be29b">${tr2('On','Activado')}</b></div>
       <div class="suprow"><span>${tr2('Daily time limit (sample)','L\u00edmite de tiempo diario (ejemplo)')}</span><b>90 min</b></div>
       <button class="btn ghost" style="margin-top:12px" onclick="sfx('tap');state.screen='parentdigest';render();app.scrollTop=0">${tr2('Preview the weekly digest','Ver el resumen semanal')} \u203A</button>
+    </div>
+    <div class="card">
+      <b style="font-family:'Sora';font-size:14px">\uD83D\uDCF1 ${tr2('Text message updates','Actualizaciones por mensaje de texto')}</b>
+      <p class="muted" style="font-size:12.5px;margin:4px 0 10px">${tr2('Get a periodic text with your child\u2019s progress and a secure link back to this portal.','Recibe un mensaje peri\u00f3dico con el progreso de tu hijo/a y un enlace seguro a este portal.')}</p>
+      <div class="smsbubble">
+        <div class="smsfrom">ANEW Boot Camp</div>
+        ${tr2('Hi! '+child+' completed 2 lessons today and is doing great in Mold Design \uD83D\uDEE0\uFE0F. View progress: ','\u00a1Hola! '+child+' complet\u00f3 2 lecciones hoy y va muy bien en Dise\u00f1o de Moldes \uD83D\uDEE0\uFE0F. Ver progreso: ')}<span class="smslink">learnmfg.io/p/\u2022\u2022\u2022\u2022</span>
+      </div>
+      <div class="suprow"><span>${tr2('Send updates','Enviar actualizaciones')}</span><b style="color:#9be29b">${tr2('Daily','Diario')}</b></div>
+      <div class="freqrow">
+        <button class="freqbtn on">${tr2('Daily','Diario')}</button>
+        <button class="freqbtn">${tr2('Every few days','Cada pocos d\u00edas')}</button>
+        <button class="freqbtn">${tr2('Weekly','Semanal')}</button>
+      </div>
+      <p class="muted" style="font-size:11px;margin:8px 0 0">${tr2('The link opens only your portal, on your device. Standard message rates may apply.','El enlace abre solo tu portal, en tu dispositivo. Pueden aplicar tarifas de mensajes.')}</p>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <b style="font-family:'Sora';font-size:14px">\uD83D\uDCCD ${tr2('Check-in location (optional)','Ubicaci\u00f3n de registro (opcional)')}</b>
+        <span class="pill pill-ok">${tr2('Off','Desactivado')}</span>
+      </div>
+      <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('Off by default. If you choose to turn it on, you (the parent) can see a check-in location when your child starts a session. You control this \u2014 it is never on without your consent, and it can be switched off anytime.','Desactivado por defecto. Si decides activarlo, t\u00fa (el padre/tutor) puedes ver una ubicaci\u00f3n de registro cuando tu hijo/a inicia una sesi\u00f3n. T\u00fa lo controlas: nunca est\u00e1 activo sin tu consentimiento y puedes apagarlo cuando quieras.')}</p>
+    </div>
+    <div class="card privacycard">
+      <b style="font-family:'Sora';font-size:14px">\uD83D\uDD12 ${tr2('Our promise on your child\u2019s data','Nuestra promesa sobre los datos de tu hijo/a')}</b>
+      <ul class="privacylist">
+        <li>${tr2('We never sell your child\u2019s data \u2014 not their interests, progress, or any personal information.','Nunca vendemos los datos de tu hijo/a: ni sus intereses, ni su progreso, ni informaci\u00f3n personal.')}</li>
+        <li>${tr2('We never share it with advertisers.','Nunca los compartimos con anunciantes.')}</li>
+        <li>${tr2('We collect only what\u2019s needed to run the program.','Recopilamos solo lo necesario para operar el programa.')}</li>
+        <li>${tr2('You can request deletion of your child\u2019s data at any time.','Puedes solicitar la eliminaci\u00f3n de los datos de tu hijo/a en cualquier momento.')}</li>
+      </ul>
     </div>
     <p class="muted" style="font-size:11px;text-align:center;line-height:1.5">${tr2('This portal is a demonstration. In the live program, controls and notifications are fully active.','Este portal es una demostraci\u00f3n. En el programa real, los controles y las notificaciones est\u00e1n totalmente activos.')}</p>
   </div>`;

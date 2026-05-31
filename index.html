@@ -2362,6 +2362,20 @@ const tabbarEl=document.getElementById('tabbar');
 const overlayEl=document.getElementById('overlay');
 
 function render(){
+  /* Reliable scroll-to-top: whenever the view changes (screen / trade /
+     module / lesson / tab), reset the scroll position AFTER the browser has
+     painted the new content. Doing it synchronously can fail because layout
+     isn't final yet, which is why opening a trade could land mid/bottom page. */
+  var viewKey=[state.screen,state.trade,state.activeModule,state.activeLesson,state.inQuiz?'q':'',state.tab].join('|');
+  if(viewKey!==render._lastViewKey){
+    render._lastViewKey=viewKey;
+    try{
+      requestAnimationFrame(function(){
+        if(app){ app.scrollTop=0; }
+        try{ window.scrollTo(0,0); }catch(e){}
+      });
+    }catch(e){ if(app){ app.scrollTop=0; } }
+  }
   renderOverlay();
   if(state.screen==='lang'){renderLang();tabbarEl.innerHTML='';return;}
   if(state.screen==='intro'){renderIntro();tabbarEl.innerHTML='';return;}

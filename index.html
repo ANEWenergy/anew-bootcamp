@@ -618,7 +618,7 @@ const UI = {
     svWelcome3:'Every trade stays open \u2014 explore them all',
     svWelcomeNote:'Takes about a minute. You can skip or retake it anytime.',
     svBegin:'Start the quiz',backlesson:'Back to lesson',
-    hubExplain:'Browse 32 manufacturing trades. Not sure where to start? Take the quick quiz below and we\u2019ll point you to trades that fit you.',
+    hubExplain:'Browse 35 manufacturing trades. Not sure where to start? Take the quick quiz below and we\u2019ll point you to trades that fit you.',
     hubFinderT:'Not sure which trade fits you?',
     hubFinderB:'Answer 8 quick questions and we\u2019ll suggest 3 trades that match what you enjoy.',
     hubFinderDoneT:'Your matches are highlighted below',
@@ -690,7 +690,7 @@ const UI = {
     svWelcome3:'Todos los oficios siguen abiertos \u2014 expl\u00F3ralos',
     svWelcomeNote:'Toma cerca de un minuto. Puedes saltarlo o repetirlo cuando quieras.',
     svBegin:'Comenzar el cuestionario',backlesson:'Volver a la lecci\u00F3n',
-    hubExplain:'Explora 32 oficios de manufactura. \u00BFNo sabes por d\u00F3nde empezar? Haz el cuestionario r\u00E1pido y te mostraremos oficios que encajan contigo.',
+    hubExplain:'Explora 35 oficios de manufactura. \u00BFNo sabes por d\u00F3nde empezar? Haz el cuestionario r\u00E1pido y te mostraremos oficios que encajan contigo.',
     hubFinderT:'\u00BFNo sabes qu\u00E9 oficio encaja contigo?',
     hubFinderB:'Responde 8 preguntas r\u00E1pidas y te sugerimos 3 oficios que coinciden con lo que disfrutas.',
     hubFinderDoneT:'Tus coincidencias est\u00E1n resaltadas abajo',
@@ -844,6 +844,7 @@ const TOOLS = {
   'projectlibre':{name:'ProjectLibre', url:'https://www.projectlibre.com/', vid:'9xwR4JCBaIU', free:true, blurb:L('Free, open-source project management (Gantt, WBS, critical path).','Gesti\u00f3n de proyectos gratuita y de c\u00f3digo abierto (Gantt, WBS, ruta cr\u00edtica).')},
   'tinkercad':{name:'Tinkercad', url:'https://www.tinkercad.com/', vid:'60xfIu-lqAs', free:true, blurb:L('Free Autodesk browser tool for 3D, electronics and code.','Herramienta gratuita de Autodesk en el navegador para 3D, electr\u00f3nica y c\u00f3digo.')},
   'visualcomp':{name:'Visual Components / KUKA.Sim', url:'https://www.visualcomponents.com/companies/academia/', vid:'3wUFy8Dovyo', free:false, price:'$ \u2014 (request academic quote)', blurb:L('Professional robot simulation & offline programming (KUKA.Sim add-on). Academic licenses are request-based.','Simulaci\u00f3n de robots y programaci\u00f3n fuera de l\u00ednea de nivel profesional (complemento KUKA.Sim). Las licencias acad\u00e9micas se solicitan.')},
+  'tandem':{name:'Autodesk Tandem', url:'https://intandem.autodesk.com/', vid:'I8sNN74MzJM', free:true, blurb:L('Autodesk\u2019s cloud digital-twin platform. A free version lets students import Revit/IFC models, build a twin and connect sample sensors.','Plataforma de gemelo digital en la nube de Autodesk. Una versi\u00f3n gratuita permite a los estudiantes importar modelos Revit/IFC, crear un gemelo y conectar sensores de ejemplo.')},
 };
 const TRADE_TOOL = {
   'mold':'fusion',
@@ -880,6 +881,7 @@ const TRADE_TOOL = {
   'cost':'projectlibre',
   'quality':'projectlibre',
   'safety':'projectlibre',
+  'digitaltwin':'tandem',
 };
 
 const TRADE_TOOL_OVER = {
@@ -905,6 +907,7 @@ const TRADE_TOOL_OVER = {
   'pid':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
   'logic':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
   'material':{cap:L('Materials & Material Selection','Materiales y Selecci\u00f3n de Materiales'), vid:'580l8i9iISI'},
+  'digitaltwin':{cap:L('Digital Twin: Build & Operate','Gemelo Digital: Construir y Operar'), vid:'I8sNN74MzJM'},
 };
 
 /* Spanish translations for trade titles & categories. Titles in TRADES are
@@ -944,7 +947,8 @@ const TRADE_TITLE_ES = {
   'Project Management':'Gesti\u00f3n de Proyectos',
   'Purchasing & Project Costing':'Compras y Costeo de Proyectos',
   'Quality Controls & Statistical Analytics':'Control de Calidad y An\u00e1lisis Estad\u00edstico',
-  'Safety & Regulatory Compliance':'Seguridad y Cumplimiento Normativo'
+  'Safety & Regulatory Compliance':'Seguridad y Cumplimiento Normativo',
+  'Factory Industrial Design + Digital Twin':'Dise\u00f1o Industrial de F\u00e1brica + Gemelo Digital'
 };
 const TRADE_CAT_ES = {
   'Molding & Plastics':'Moldeo y Pl\u00e1sticos',
@@ -1699,6 +1703,33 @@ const TRADES = [
       L('Audits & inspections','Auditor\u00edas e inspecciones'),
       L('Training programs','Programas de capacitaci\u00f3n'),
       L('Safety culture','Cultura de seguridad')]}]},
+ {id:'digitaltwin', ic:'factory', title:'Factory Industrial Design + Digital Twin', cat:'Design & CAD', live:true, preview:true, mods:4, deep:true, lang:'EN \u00b7 ES',
+  blurb:'Design a complete factory floor and build a living digital twin with Autodesk Tandem to train staff and run operations.',
+  syllabus:[
+    {module:L('Factory Layout & Design','Dise\u00f1o y Distribuci\u00f3n de F\u00e1brica'), topics:[
+      L('Factory design fundamentals','Fundamentos del dise\u00f1o de f\u00e1brica'),
+      L('2D-to-3D layout with Factory Design Utilities','Distribuci\u00f3n 2D a 3D con Factory Design Utilities'),
+      L('Asset & equipment libraries','Bibliotecas de activos y equipos'),
+      L('Material flow & line balancing','Flujo de materiales y balanceo de l\u00ednea'),
+      L('Clearances, safety zones & ergonomics','Espacios libres, zonas de seguridad y ergonom\u00eda')]},
+    {module:L('Building the Digital Twin','Construyendo el Gemelo Digital'), topics:[
+      L('What is a digital twin?','\u00bfQu\u00e9 es un gemelo digital?'),
+      L('Getting started in Autodesk Tandem','Primeros pasos en Autodesk Tandem'),
+      L('Importing models from Revit & Inventor','Importar modelos de Revit e Inventor'),
+      L('Classifying assets & spaces','Clasificar activos y espacios'),
+      L('Specifying asset data requirements','Especificar requisitos de datos de activos')]},
+    {module:L('Live Data & Operations','Datos en Vivo y Operaciones'), topics:[
+      L('Connecting IoT sensors & streams','Conectar sensores IoT y flujos de datos'),
+      L('Real-time dashboards & views','Tableros y vistas en tiempo real'),
+      L('Time navigation & historical data','Navegaci\u00f3n temporal y datos hist\u00f3ricos'),
+      L('Asset performance & maintenance tracking','Rendimiento de activos y seguimiento de mantenimiento'),
+      L('Linking O&M manuals & documentation','Vincular manuales de O&M y documentaci\u00f3n')]},
+    {module:L('Training & Replication','Capacitaci\u00f3n y Replicaci\u00f3n'), topics:[
+      L('Immersive floor-staff training in the twin','Capacitaci\u00f3n inmersiva del personal en el gemelo'),
+      L('Standard work & guided procedures','Trabajo est\u00e1ndar y procedimientos guiados'),
+      L('Templates to replicate across facilities','Plantillas para replicar entre instalaciones'),
+      L('Handover & continuous improvement','Entrega y mejora continua'),
+      L('Measuring training outcomes','Medir resultados de la capacitaci\u00f3n')]}]},
 ];
 
 /* ---------- state & progress ---------- */

@@ -379,6 +379,7 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .ssalert-mid b{font-family:'Sora';font-weight:800}
 .ssalert-go{font-family:'Sora';font-weight:700;font-size:12.5px;color:var(--orange)}
 @media (prefers-reduced-motion: reduce){.ssalert{animation:none}}
+.ssproof{background:rgba(75,168,75,.08);border:1px solid rgba(75,168,75,.3);border-radius:11px;padding:8px 12px;margin-top:10px}
 .privacycard{border-color:rgba(75,168,75,.4);background:linear-gradient(160deg,rgba(75,168,75,.08),var(--card2))}
 .privacylist{list-style:none;padding:0;margin:8px 0 0}
 .privacylist li{position:relative;padding:5px 0 5px 24px;font-size:13px;line-height:1.45;color:var(--text)}
@@ -3549,8 +3550,34 @@ function renderParent(){
       <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('We monitor lessons and AI tutor chats for age-appropriateness and signs of distress. Flagged items appear here and trigger an email to you.','Supervisamos las lecciones y los chats con el tutor de IA para verificar que sean apropiados y detectar se\u00f1ales de angustia. Los elementos marcados aparecen aqu\u00ed y te env\u00edan un correo.')}</p>
     </div>
     <div class="card" style="border-color:rgba(243,144,25,.4)">
-      <b style="font-family:'Sora';font-size:14px">\uD83C\uDFC6 ${tr2('Shop Ready \u2014 required foundation','Listo para el Taller \u2014 base obligatoria')}</b>
-      <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('Every learner must complete \u201cShop Ready: How to Win at Work\u201d before starting any trade \u2014 covering respect, reliability, professional conduct and language, proper clothing, cleanliness, and listening. It is required to be accepted into the program, and we repeat it every 3 months so these workforce habits stick.','Cada aprendiz debe completar \u201cListo para el Taller: C\u00f3mo Triunfar en el Trabajo\u201d antes de empezar cualquier oficio \u2014 cubre respeto, confiabilidad, conducta y lenguaje profesional, vestimenta adecuada, limpieza y saber escuchar. Es obligatorio para ser aceptado en el programa, y lo repetimos cada 3 meses para que estos h\u00e1bitos perduren.')}</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <b style="font-family:'Sora';font-size:14px">\uD83C\uDFC6 ${tr2('Shop Ready \u2014 required foundation','Listo para el Taller \u2014 base obligatoria')}</b>
+        ${(function(){
+          var rec=(state.profile&&state.profile.softSkills)||null;
+          var passedNow = (typeof softSkillsPassed==='function') ? softSkillsPassed() : !!rec;
+          if(rec && passedNow) return `<span class="pill pill-ok">\u2705 ${tr2('Passed','Aprobado')}</span>`;
+          if(rec && !passedNow) return `<span class="pill pill-care">\uD83D\uDD01 ${tr2('Refresher due','Repaso pendiente')}</span>`;
+          return `<span class="pill pill-care">${tr2('Not yet','A\u00fan no')}</span>`;
+        })()}
+      </div>
+      ${(function(){
+        var rec=(state.profile&&state.profile.softSkills)||null;
+        // Demo fallback: if no real record, show a sample completed state so the
+        // parent view is meaningful in the demonstration.
+        var demo=false;
+        if(!rec){ rec={date:new Date(Date.now()-12*86400000).toISOString(), score:80}; demo=true; }
+        var d=new Date(rec.date);
+        var dateStr=d.toLocaleDateString(state.lang==='es'?'es-ES':'en-US',{year:'numeric',month:'short',day:'numeric'});
+        var left=(typeof softSkillsDaysLeft==='function' && !demo) ? softSkillsDaysLeft() : Math.max(0, 90-12);
+        return `<div class="ssproof">
+          <div class="suprow"><span>${tr2('Status','Estado')}</span><b style="color:#9be29b">\u2705 ${tr2('Completed','Completado')}</b></div>
+          <div class="suprow"><span>${tr2('Score','Puntaje')}</span><b>${rec.score}%</b></div>
+          <div class="suprow"><span>${tr2('Date completed','Fecha de finalizaci\u00f3n')}</span><b>${dateStr}</b></div>
+          <div class="suprow"><span>${tr2('Next refresher','Pr\u00f3ximo repaso')}</span><b>${left} ${tr2('days','d\u00edas')}</b></div>
+          ${demo?`<div class="muted" style="font-size:11px;margin-top:6px">${tr2('Sample completion shown for this demonstration.','Finalizaci\u00f3n de ejemplo para esta demostraci\u00f3n.')}</div>`:''}
+        </div>`;
+      })()}
+      <p class="muted" style="font-size:12.5px;margin:10px 0 0">${tr2('Every learner must complete \u201cShop Ready: How to Win at Work\u201d before starting any trade \u2014 covering respect, reliability, professional conduct and language, proper clothing, cleanliness, and listening. It is required to be accepted into the program, and we repeat it every 3 months so these workforce habits stick.','Cada aprendiz debe completar \u201cListo para el Taller: C\u00f3mo Triunfar en el Trabajo\u201d antes de empezar cualquier oficio \u2014 cubre respeto, confiabilidad, conducta y lenguaje profesional, vestimenta adecuada, limpieza y saber escuchar. Es obligatorio para ser aceptado en el programa, y lo repetimos cada 3 meses para que estos h\u00e1bitos perduren.')}</p>
     </div>
     <div class="card">
       <b style="font-family:'Sora';font-size:14px">${tr2('AI tutor \u2014 questions & answers','Tutor de IA \u2014 preguntas y respuestas')}</b>

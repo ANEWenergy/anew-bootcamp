@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANEW Boot Camp — Embedded Microprocessors</title>
+<style>
+  html,body{margin:0;height:100%;background:#1b1b1f;color:#f3f3f5;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{height:100%;display:grid;place-items:center;text-align:center;padding:24px}
+  .card{max-width:420px}
+  h1{font-size:20px;margin:0 0 6px} p{opacity:.8;line-height:1.6;font-size:14px}
+  a.btn{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:12px;
+    background:linear-gradient(140deg,#ffb347,#f39019);color:#241500;
+    font-weight:700;text-decoration:none}
+  .spin{width:30px;height:30px;margin:18px auto;border:3px solid #3a3a40;
+    border-top-color:#f39019;border-radius:50%;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TRADE: Embedded Microprocessors  (id: embedded)
+     This file works two ways:
+       1) The index.html hub loads it on demand and runs the content
+          script below to register this trade's lessons.
+       2) Opened on its own, it launches the full simulator focused
+          on this trade.
+     To update this trade, edit the content script below and drop the
+     file back into the package next to index.html.
+     ============================================================ -->
+<div class="wrap"><div class="card">
+  <h1>ANEW Boot Camp — Embedded Microprocessors</h1>
+  <div class="spin"></div>
+  <p id="msg">Opening the Boot Camp simulator…</p>
+  <a class="btn" id="manual" href="index.html#trade=embedded" style="display:none">Open the simulator →</a>
+</div></div>
+
+<!-- The trade's lesson/quiz content. The hub reads THIS script by id. -->
+<script id="trade-content" type="text/anew-trade">
+/* trades/embedded.js — Embedded Microprocessor Programming
+   Loaded on demand by the index.html hub. Relies on the global helper
+   L(en,es) defined in the hub. Registers via ANEW.registerTrade('embedded', COURSE_EMB). */
+(function(){
+'use strict';
+var _L = (typeof L==='function') ? L : function(en,es){return {en:en,es:es||en};};
+
+var E1 = {
+ id:'e1',
+ title:_L('Microprocessor Fundamentals','Fundamentos del Microprocesador'),
+ sub:_L('8 lessons \u00b7 Level 1','8 lecciones \u00b7 Nivel 1'),
+ lessons:[
+  {id:'e1l1',
+   title:_L('Microcontroller Basics','Conceptos B\u00e1sicos del Microcontrolador'),
+   obj:_L('Describe what a microcontroller is and the main blocks inside it.','Describir qu\u00e9 es un microcontrolador y los bloques principales que contiene.'),
+   body:[
+     {p:_L('A microcontroller is a small computer on one chip: a CPU core, memory for program and data, and built-in peripherals to talk to the outside world. It runs your firmware to control a device.','Un microcontrolador es una peque\u00f1a computadora en un chip: un n\u00facleo CPU, memoria para programa y datos, y perif\u00e9ricos integrados para comunicarse con el exterior. Ejecuta tu firmware para controlar un dispositivo.')},
+     {ul:[_L('CPU core \u2014 executes instructions.','N\u00facleo CPU \u2014 ejecuta instrucciones.'),
+          _L('Flash & RAM \u2014 store the program and working data.','Flash y RAM \u2014 almacenan el programa y los datos de trabajo.'),
+          _L('Peripherals \u2014 GPIO, timers, ADC, and communication buses.','Perif\u00e9ricos \u2014 GPIO, temporizadores, ADC y buses de comunicaci\u00f3n.')]}],
+   quiz:[
+     {tag:'check',stem:_L('A microcontroller combines a CPU, memory, and what else on one chip?','Un microcontrolador combina una CPU, memoria y \u00bfqu\u00e9 m\u00e1s en un chip?'),
+      opts:[_L('Built-in peripherals','Perif\u00e9ricos integrados'),_L('A power outlet','Un enchufe'),_L('A display panel','Un panel de pantalla'),_L('A cooling fan','Un ventilador')],a:0,
+      fb:_L('Peripherals (GPIO, timers, ADC, buses) are built into the chip.','Los perif\u00e9ricos (GPIO, temporizadores, ADC, buses) est\u00e1n integrados en el chip.')}]},
+  {id:'e1l2',
+   title:_L('GPIO & Reading Sensors','GPIO y Lectura de Sensores'),
+   obj:_L('Explain GPIO pins and how a processor reads a digital or analog sensor.','Explicar los pines GPIO y c\u00f3mo un procesador lee un sensor digital o anal\u00f3gico.'),
+   body:[
+     {p:_L('GPIO (general-purpose input/output) pins can be set as inputs to read a signal or outputs to drive one. A digital sensor reports high/low directly; an analog sensor must pass through the ADC to become a number.','Los pines GPIO (entrada/salida de prop\u00f3sito general) se configuran como entradas para leer una se\u00f1al o salidas para controlarla. Un sensor digital reporta alto/bajo directamente; un sensor anal\u00f3gico debe pasar por el ADC para convertirse en un n\u00famero.')}],
+   tip:_L('Configure an input pin\u2019s pull-up or pull-down so it reads a known level when nothing is driving it.','Configura el pull-up o pull-down de un pin de entrada para que lea un nivel conocido cuando nada lo controla.'),
+   quiz:[
+     {tag:'check',stem:_L('To read a varying analog sensor as a number, the signal must go through the:','Para leer un sensor anal\u00f3gico variable como un n\u00famero, la se\u00f1al debe pasar por el:'),
+      opts:[_L('ADC','ADC'),_L('DAC','DAC'),_L('UART','UART'),_L('Fuse','Fusible')],a:0,
+      fb:_L('The ADC converts the analog level into a digital value.','El ADC convierte el nivel anal\u00f3gico en un valor digital.')},
+     {tag:'recall',stem:_L('A GPIO pin can be configured as an input or an:','Un pin GPIO se puede configurar como entrada o como:'),
+      opts:[_L('Output','Salida'),_L('Antenna','Antena'),_L('Resistor','Resistencia')],a:0,
+      fb:_L('GPIO = input or output.','GPIO = entrada o salida.')}]},
+  {id:'e1l3',
+   title:_L('Timers & Interrupts','Temporizadores e Interrupciones'),
+   obj:_L('Explain why timers and interrupts let a processor react without constant polling.','Explicar por qu\u00e9 los temporizadores y las interrupciones permiten al procesador reaccionar sin sondeo constante.'),
+   body:[
+     {p:_L('Instead of constantly checking (polling) a pin, an interrupt lets hardware notify the CPU the instant an event happens, so it can respond immediately and otherwise do other work or sleep. Timers generate precise, repeating events.','En lugar de revisar constantemente (sondear) un pin, una interrupci\u00f3n permite que el hardware notifique a la CPU en el instante en que ocurre un evento, para responder de inmediato y, mientras tanto, hacer otra cosa o dormir. Los temporizadores generan eventos precisos y repetitivos.')}],
+   quiz:[
+     {tag:'check',stem:_L('What is the advantage of an interrupt over polling?','\u00bfCu\u00e1l es la ventaja de una interrupci\u00f3n sobre el sondeo?'),
+      opts:[_L('The CPU responds instantly without constant checking','La CPU responde al instante sin revisar constantemente'),_L('It uses more pins','Usa m\u00e1s pines'),_L('It needs no code','No necesita c\u00f3digo'),_L('It increases voltage','Aumenta el voltaje')],a:0,
+      fb:_L('Interrupts free the CPU from polling and react immediately.','Las interrupciones liberan a la CPU del sondeo y reaccionan de inmediato.')}]},
+  {id:'e1l4',
+   title:_L('Communication Buses','Buses de Comunicaci\u00f3n'),
+   obj:_L('Match SPI, I2C and UART to typical embedded uses.','Asociar SPI, I2C y UART con usos t\u00edpicos embebidos.'),
+   body:[
+     {ul:[_L('UART \u2014 simple two-wire link to another device or a PC.','UART \u2014 enlace simple de dos cables a otro dispositivo o a una PC.'),
+          _L('I2C \u2014 two wires shared by many addressed devices; great for lots of small sensors.','I2C \u2014 dos cables compartidos por muchos dispositivos direccionados; ideal para muchos sensores peque\u00f1os.'),
+          _L('SPI \u2014 fast synchronous link for displays, memory, and high-rate sensors.','SPI \u2014 enlace s\u00edncrono r\u00e1pido para pantallas, memoria y sensores de alta tasa.')]}],
+   quiz:[
+     {tag:'check',stem:_L('You need to connect many small sensors using only two shared wires. Best bus?','Necesitas conectar muchos sensores peque\u00f1os usando solo dos cables compartidos. \u00bfMejor bus?'),
+      opts:[_L('I2C','I2C'),_L('Ethernet','Ethernet'),_L('USB','USB'),_L('CAN','CAN')],a:0,
+      fb:_L('I2C shares two wires among many addressed devices.','I2C comparte dos cables entre muchos dispositivos direccionados.')}]},
+  {id:'e1l5',
+   title:_L('The Firmware Loop','El Bucle de Firmware'),
+   obj:_L('Describe the setup-then-loop structure most embedded programs use.','Describir la estructura de configuraci\u00f3n y luego bucle que usan la mayor\u00eda de los programas embebidos.'),
+   body:[
+     {p:_L('Most embedded firmware runs a one-time setup (configure pins, clocks, peripherals) and then an endless main loop that reads inputs, decides, and drives outputs \u2014 often assisted by interrupts for time-critical events.','La mayor\u00eda del firmware embebido ejecuta una configuraci\u00f3n \u00fanica (configurar pines, relojes, perif\u00e9ricos) y luego un bucle principal sin fin que lee entradas, decide y controla salidas \u2014 a menudo asistido por interrupciones para eventos cr\u00edticos en tiempo.')}],
+   quiz:[
+     {tag:'check',stem:_L('A typical embedded program is structured as:','Un programa embebido t\u00edpico se estructura como:'),
+      opts:[_L('One-time setup, then an endless loop','Configuraci\u00f3n \u00fanica, luego un bucle sin fin'),_L('A single line that exits','Una sola l\u00ednea que termina'),_L('Random execution','Ejecuci\u00f3n aleatoria'),_L('Only interrupts, no loop','Solo interrupciones, sin bucle')],a:0,
+      fb:_L('Setup once, then loop forever \u2014 the classic embedded pattern.','Configurar una vez, luego repetir para siempre \u2014 el patr\u00f3n embebido cl\u00e1sico.')}]},
+  {id:'e1l6',
+   title:_L('Memory: Flash vs RAM','Memoria: Flash vs RAM'),
+   obj:_L('Contrast flash and RAM and what each holds in an embedded system.','Contrastar flash y RAM y qu\u00e9 contiene cada una en un sistema embebido.'),
+   body:[
+     {ul:[_L('Flash \u2014 non-volatile; keeps your program (and constants) when power is off.','Flash \u2014 no vol\u00e1til; conserva tu programa (y constantes) cuando no hay energ\u00eda.'),
+          _L('RAM \u2014 volatile; holds working variables while running and is lost at power-off.','RAM \u2014 vol\u00e1til; guarda variables de trabajo mientras se ejecuta y se pierde al apagar.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Where is your program stored so it survives a power cycle?','\u00bfD\u00f3nde se almacena tu programa para que sobreviva un apagado?'),
+      opts:[_L('Flash','Flash'),_L('RAM','RAM'),_L('A capacitor','Un capacitor'),_L('The ADC','El ADC')],a:0,
+      fb:_L('Flash is non-volatile and keeps the program without power.','Flash es no vol\u00e1til y conserva el programa sin energ\u00eda.')}]},
+  {id:'e1l7',
+   title:_L('Debugging with SWD/JTAG','Depuraci\u00f3n con SWD/JTAG'),
+   obj:_L('Explain how SWD/JTAG let you load firmware and step through code.','Explicar c\u00f3mo SWD/JTAG permiten cargar firmware y avanzar paso a paso por el c\u00f3digo.'),
+   body:[
+     {p:_L('A debug probe connects to the chip over SWD or JTAG to flash firmware, pause the CPU, inspect variables, and step line by line \u2014 the fastest way to find why code misbehaves.','Una sonda de depuraci\u00f3n se conecta al chip por SWD o JTAG para grabar firmware, pausar la CPU, inspeccionar variables y avanzar l\u00ednea por l\u00ednea \u2014 la forma m\u00e1s r\u00e1pida de hallar por qu\u00e9 falla el c\u00f3digo.')}],
+   quiz:[
+     {tag:'check',stem:_L('Which lets you pause the CPU and inspect variables while debugging?','\u00bfQu\u00e9 permite pausar la CPU e inspeccionar variables al depurar?'),
+      opts:[_L('A debug probe over SWD/JTAG','Una sonda de depuraci\u00f3n por SWD/JTAG'),_L('A bigger battery','Una bater\u00eda m\u00e1s grande'),_L('A louder buzzer','Un zumbador m\u00e1s fuerte'),_L('A wider trace','Una pista m\u00e1s ancha')],a:0,
+      fb:_L('SWD/JTAG debug probes flash and step through code.','Las sondas SWD/JTAG graban y recorren el c\u00f3digo paso a paso.')}]},
+  {id:'e1l8',
+   title:_L('Low Power & Sleep Modes','Bajo Consumo y Modos de Reposo'),
+   obj:_L('Explain how sleep modes and interrupts extend battery life.','Explicar c\u00f3mo los modos de reposo y las interrupciones extienden la vida de la bater\u00eda.'),
+   body:[
+     {p:_L('Battery devices spend most time asleep. The CPU drops into a low-power sleep mode and an interrupt (a timer or a pin) wakes it only when there is work to do, dramatically extending battery life.','Los dispositivos a bater\u00eda pasan la mayor parte del tiempo dormidos. La CPU entra en un modo de reposo de bajo consumo y una interrupci\u00f3n (un temporizador o un pin) la despierta solo cuando hay trabajo, extendiendo enormemente la vida de la bater\u00eda.')}],
+   tip:_L('Wake on interrupt, do the minimum, sleep again \u2014 the golden rule of battery-powered firmware.','Despierta por interrupci\u00f3n, haz lo m\u00ednimo, vuelve a dormir \u2014 la regla de oro del firmware a bater\u00eda.'),
+   quiz:[
+     {tag:'check',stem:_L('What wakes a sleeping low-power microcontroller when work is needed?','\u00bfQu\u00e9 despierta a un microcontrolador de bajo consumo dormido cuando hay trabajo?'),
+      opts:[_L('An interrupt (timer or pin)','Una interrupci\u00f3n (temporizador o pin)'),_L('A louder clock','Un reloj m\u00e1s fuerte'),_L('More RAM','M\u00e1s RAM'),_L('A thicker trace','Una pista m\u00e1s gruesa')],a:0,
+      fb:_L('An interrupt wakes the CPU only when there is something to do.','Una interrupci\u00f3n despierta la CPU solo cuando hay algo que hacer.')}]}
+ ]
+};
+
+var COURSE_EMB = {
+  id:'embedded',
+  title:_L('Embedded Microprocessor Programming','Programaci\u00f3n de Microprocesadores Embebidos'),
+  modules:[ E1 ]
+};
+
+if (typeof ANEW !== 'undefined' && ANEW.registerTrade) {
+  ANEW.registerTrade('embedded', COURSE_EMB);
+}
+})();
+</script>
+
+<!-- Bootstrap: register-in-hub OR launch-standalone. -->
+<script>
+(function(){
+  var TID = 'embedded';
+  function runContent(){
+    var s = document.getElementById('trade-content');
+    if (!s) return false;
+    try { (0, eval)(s.textContent); return true; } catch(e) { return false; }
+  }
+  // Mode 1: loaded inside the hub (ANEW already exists) -> just register.
+  if (window.ANEW && window.ANEW.registerTrade) { runContent(); return; }
+  // Mode 2: opened directly -> go to the hub focused on this trade.
+  var target = 'index.html#trade=' + encodeURIComponent(TID);
+  var msg = document.getElementById('msg'), manual = document.getElementById('manual');
+  try { window.location.replace(target); } catch(e) {}
+  // Fallback if the redirect is blocked (rare on file://): show a button.
+  setTimeout(function(){
+    if (msg) msg.textContent = 'If the simulator did not open automatically:';
+    if (manual) manual.style.display = 'inline-block';
+  }, 1200);
+})();
+</script>
+</body>
+</html>

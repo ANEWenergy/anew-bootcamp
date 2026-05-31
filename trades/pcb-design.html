@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANEW Boot Camp — PCB Design</title>
+<style>
+  html,body{margin:0;height:100%;background:#1b1b1f;color:#f3f3f5;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{height:100%;display:grid;place-items:center;text-align:center;padding:24px}
+  .card{max-width:420px}
+  h1{font-size:20px;margin:0 0 6px} p{opacity:.8;line-height:1.6;font-size:14px}
+  a.btn{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:12px;
+    background:linear-gradient(140deg,#ffb347,#f39019);color:#241500;
+    font-weight:700;text-decoration:none}
+  .spin{width:30px;height:30px;margin:18px auto;border:3px solid #3a3a40;
+    border-top-color:#f39019;border-radius:50%;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TRADE: PCB Design  (id: pcb)
+     This file works two ways:
+       1) The index.html hub loads it on demand and runs the content
+          script below to register this trade's lessons.
+       2) Opened on its own, it launches the full simulator focused
+          on this trade.
+     To update this trade, edit the content script below and drop the
+     file back into the package next to index.html.
+     ============================================================ -->
+<div class="wrap"><div class="card">
+  <h1>ANEW Boot Camp — PCB Design</h1>
+  <div class="spin"></div>
+  <p id="msg">Opening the Boot Camp simulator…</p>
+  <a class="btn" id="manual" href="index.html#trade=pcb" style="display:none">Open the simulator →</a>
+</div></div>
+
+<!-- The trade's lesson/quiz content. The hub reads THIS script by id. -->
+<script id="trade-content" type="text/anew-trade">
+/* trades/pcb.js — Printed Circuit Board Design & Manufacturing
+   Loaded on demand by the index.html hub. Relies on the global helper
+   L(en,es) defined in the hub. Registers via ANEW.registerTrade('pcb', COURSE_PCB).
+   Content authored from the ANEW "PCB Design with Microprocessors" outline. */
+(function(){
+'use strict';
+var _L = (typeof L==='function') ? L : function(en,es){return {en:en,es:es||en};};
+
+/* ---------- Module 1: PCB Design with Microprocessors ---------- */
+var P1 = {
+ id:'p1',
+ title:_L('PCB Design with Microprocessors','Dise\u00f1o de PCB con Microprocesadores'),
+ sub:_L('10 lessons \u00b7 Level 1','10 lecciones \u00b7 Nivel 1'),
+ lessons:[
+  {id:'p1l1',
+   title:_L('Schematic Capture & Design Files','Captura de Esquemas y Archivos de Dise\u00f1o'),
+   obj:_L('Identify the core schematic-capture outputs and what each one feeds downstream.','Identificar las salidas principales de la captura de esquemas y qu\u00e9 alimenta cada una.'),
+   body:[
+     {p:_L('Schematic capture is where the design begins: you place components and draw the electrical connections between them. The schematic then generates the files the rest of the flow depends on.','La captura de esquemas es donde empieza el dise\u00f1o: colocas componentes y dibujas las conexiones el\u00e9ctricas entre ellos. El esquema genera luego los archivos de los que depende el resto del flujo.')},
+     {h:_L('Key outputs','Salidas clave')},
+     {ul:[_L('Netlist \u2014 the master list of which pins connect to which nets; the layout tool uses it to enforce connectivity.','Netlist \u2014 la lista maestra de qu\u00e9 pines conectan con qu\u00e9 nodos; la herramienta de layout la usa para forzar la conectividad.'),
+          _L('BOM (Bill of Materials) \u2014 every part, quantity, and value needed to build the board.','BOM (Lista de Materiales) \u2014 cada pieza, cantidad y valor necesarios para construir la placa.'),
+          _L('Reference designators \u2014 unique labels (R1, C3, U2) that tie a schematic symbol to a physical part.','Designadores de referencia \u2014 etiquetas \u00fanicas (R1, C3, U2) que vinculan un s\u00edmbolo del esquema con una pieza f\u00edsica.'),
+          _L('Footprints / land patterns \u2014 the copper pad shapes each part solders to on the board.','Huellas / patrones de tierra \u2014 las formas de pad de cobre donde se suelda cada pieza en la placa.')]}],
+   tip:_L('A footprint that does not match the real part is the most common cause of an unbuildable first board \u2014 verify against the datasheet.','Una huella que no coincide con la pieza real es la causa m\u00e1s com\u00fan de una primera placa no fabricable \u2014 verifica contra la hoja de datos.'),
+   quiz:[
+     {tag:'check',stem:_L('Which file tells the layout tool which pins must be electrically connected?','\u00bfQu\u00e9 archivo le dice a la herramienta de layout qu\u00e9 pines deben estar conectados el\u00e9ctricamente?'),
+      opts:[_L('BOM','BOM'),_L('Netlist','Netlist'),_L('Gerber','Gerber'),_L('Silkscreen','Serigraf\u00eda')],a:1,
+      fb:_L('The netlist is the connectivity master list driving the layout.','El netlist es la lista maestra de conectividad que gu\u00eda el layout.')},
+     {tag:'check',stem:_L('R1, C3 and U2 are examples of what?','\u00bfR1, C3 y U2 son ejemplos de qu\u00e9?'),
+      opts:[_L('Net names','Nombres de nodos'),_L('Reference designators','Designadores de referencia'),_L('Layer names','Nombres de capa'),_L('Footprints','Huellas')],a:1,
+      fb:_L('Reference designators uniquely label each component.','Los designadores de referencia etiquetan de forma \u00fanica cada componente.')},
+     {tag:'recall',stem:_L('The land pattern a part solders to is called its:','El patr\u00f3n al que se suelda una pieza se llama su:'),
+      opts:[_L('Netlist','Netlist'),_L('Footprint','Huella'),_L('BOM line','L\u00ednea de BOM')],a:1,
+      fb:_L('The footprint (land pattern) defines the solder pads.','La huella (patr\u00f3n de tierra) define los pads de soldadura.')}]},
+  {id:'p1l2',
+   title:_L('PCB Stackup & Materials','Apilado de PCB y Materiales'),
+   obj:_L('Describe what a layer stackup is and the role of copper weight and FR-4 substrate.','Describir qu\u00e9 es un apilado de capas y el rol del peso del cobre y el sustrato FR-4.'),
+   body:[
+     {p:_L('The stackup is the cross-section of the board: how many copper layers, how thick each is, and what insulating material separates them.','El apilado es la secci\u00f3n transversal de la placa: cu\u00e1ntas capas de cobre, qu\u00e9 grosor tiene cada una y qu\u00e9 material aislante las separa.')},
+     {ul:[_L('Layer count \u2014 2-layer boards are cheapest; 4+ layers add dedicated power and ground planes for cleaner signals.','N\u00famero de capas \u2014 las de 2 capas son las m\u00e1s baratas; 4+ capas a\u00f1aden planos dedicados de potencia y tierra para se\u00f1ales m\u00e1s limpias.'),
+          _L('Copper weight \u2014 measured in oz/ft\u00b2; 1 oz is typical, heavier copper carries more current.','Peso del cobre \u2014 medido en oz/ft\u00b2; 1 oz es t\u00edpico, cobre m\u00e1s grueso conduce m\u00e1s corriente.'),
+          _L('FR-4 \u2014 the standard glass-epoxy substrate; specialized substrates exist for high-frequency or high-temperature work.','FR-4 \u2014 el sustrato est\u00e1ndar de vidrio-epoxi; existen sustratos especializados para alta frecuencia o alta temperatura.')]}],
+   quiz:[
+     {tag:'check',stem:_L('What is the most common PCB substrate material?','\u00bfCu\u00e1l es el material de sustrato de PCB m\u00e1s com\u00fan?'),
+      opts:[_L('Aluminum','Aluminio'),_L('FR-4 glass-epoxy','Vidrio-epoxi FR-4'),_L('Ceramic','Cer\u00e1mica'),_L('Polyimide film','Pel\u00edcula de poliimida')],a:1,
+      fb:_L('FR-4 glass-epoxy is the industry default substrate.','El vidrio-epoxi FR-4 es el sustrato est\u00e1ndar de la industria.')},
+     {tag:'check',stem:_L('You need more current capacity on a trace. Which stackup choice helps most directly?','Necesitas m\u00e1s capacidad de corriente en una pista. \u00bfQu\u00e9 elecci\u00f3n de apilado ayuda m\u00e1s directamente?'),
+      opts:[_L('Heavier copper weight','Mayor peso del cobre'),_L('Thinner substrate','Sustrato m\u00e1s delgado'),_L('More silkscreen','M\u00e1s serigraf\u00eda'),_L('Smaller vias','V\u00edas m\u00e1s peque\u00f1as')],a:0,
+      fb:_L('Heavier copper (more oz/ft\u00b2) carries more current.','M\u00e1s cobre (m\u00e1s oz/ft\u00b2) conduce m\u00e1s corriente.')}]},
+  {id:'p1l3',
+   title:_L('Microprocessor I/O & Logic Levels','E/S del Microprocesador y Niveles L\u00f3gicos'),
+   obj:_L('Distinguish push-pull, open-drain and tri-state outputs and recognize when level shifting is needed.','Distinguir salidas push-pull, drenaje abierto y triestado y reconocer cu\u00e1ndo se necesita cambio de nivel.'),
+   body:[
+     {p:_L('A microprocessor pin drives or reads a logic level. How it drives that level \u2014 and at what voltage \u2014 determines what you connect to it.','Un pin de microprocesador controla o lee un nivel l\u00f3gico. C\u00f3mo controla ese nivel \u2014 y a qu\u00e9 voltaje \u2014 determina qu\u00e9 le conectas.')},
+     {h:_L('Output types','Tipos de salida')},
+     {ul:[_L('Push-pull \u2014 actively drives both high and low; the default for most signals.','Push-pull \u2014 controla activamente tanto alto como bajo; el predeterminado para la mayor\u00eda de se\u00f1ales.'),
+          _L('Open-drain \u2014 only pulls low; needs an external pull-up resistor to go high (used by I2C).','Drenaje abierto \u2014 solo tira a bajo; necesita una resistencia pull-up externa para subir (lo usa I2C).'),
+          _L('Tri-state \u2014 can be driven high, low, or released to high-impedance so others can share the line.','Triestado \u2014 puede ir alto, bajo o liberarse a alta impedancia para que otros compartan la l\u00ednea.')]},
+     {h:_L('Logic families & voltage','Familias l\u00f3gicas y voltaje')},
+     {ul:[_L('TTL, CMOS, LVCMOS and LVDS each define their own high/low thresholds.','TTL, CMOS, LVCMOS y LVDS definen cada uno sus propios umbrales alto/bajo.'),
+          _L('When two devices use different voltages (e.g. 3.3 V and 5 V), a level shifter translates between them.','Cuando dos dispositivos usan voltajes distintos (p. ej. 3.3 V y 5 V), un cambiador de nivel traduce entre ellos.')]}],
+   tip:_L('Pull-ups and pull-downs set a defined idle state so a floating input does not read random noise.','Los pull-ups y pull-downs fijan un estado de reposo definido para que una entrada flotante no lea ruido aleatorio.'),
+   quiz:[
+     {tag:'check',stem:_L('An I2C bus line needs which output type plus an external resistor to go high?','\u00bfUna l\u00ednea de bus I2C necesita qu\u00e9 tipo de salida m\u00e1s una resistencia externa para subir?'),
+      opts:[_L('Push-pull','Push-pull'),_L('Open-drain','Drenaje abierto'),_L('Tri-state','Triestado'),_L('LVDS','LVDS')],a:1,
+      fb:_L('I2C uses open-drain with pull-up resistors so any device can pull the line low.','I2C usa drenaje abierto con resistencias pull-up para que cualquier dispositivo tire a bajo.')},
+     {tag:'check',stem:_L('A 3.3 V microcontroller must talk to a 5 V sensor. What do you add?','Un microcontrolador de 3.3 V debe comunicarse con un sensor de 5 V. \u00bfQu\u00e9 a\u00f1ades?'),
+      opts:[_L('A level shifter','Un cambiador de nivel'),_L('A bigger crystal','Un cristal m\u00e1s grande'),_L('A heatsink','Un disipador'),_L('A ferrite bead','Una perla de ferrita')],a:0,
+      fb:_L('A level shifter safely translates between the two logic voltages.','Un cambiador de nivel traduce de forma segura entre los dos voltajes l\u00f3gicos.')},
+     {tag:'recall',stem:_L('Which output can release to high-impedance so others share the line?','\u00bfQu\u00e9 salida puede liberarse a alta impedancia para compartir la l\u00ednea?'),
+      opts:[_L('Push-pull','Push-pull'),_L('Tri-state','Triestado'),_L('Open-drain','Drenaje abierto')],a:1,
+      fb:_L('Tri-state outputs can go high-Z to release a shared bus.','Las salidas triestado pueden ir a alta-Z para liberar un bus compartido.')}]},
+  {id:'p1l4',
+   title:_L('Clocking & Timing','Reloj y Temporizaci\u00f3n'),
+   obj:_L('Explain why a processor needs a clock and what jitter, propagation delay and rise/fall time mean.','Explicar por qu\u00e9 un procesador necesita un reloj y qu\u00e9 significan jitter, retardo de propagaci\u00f3n y tiempo de subida/bajada.'),
+   body:[
+     {p:_L('Digital systems step forward on a clock edge. Crystals and oscillators generate that clock; distributing it cleanly keeps every part of the system in step.','Los sistemas digitales avanzan en un flanco de reloj. Cristales y osciladores generan ese reloj; distribuirlo limpiamente mantiene todo el sistema sincronizado.')},
+     {ul:[_L('Crystal vs oscillator \u2014 a crystal is a passive resonator needing on-chip circuitry; an oscillator is a complete clock source.','Cristal vs oscilador \u2014 un cristal es un resonador pasivo que necesita circuiter\u00eda en el chip; un oscilador es una fuente de reloj completa.'),
+          _L('Jitter \u2014 small timing variations between clock edges; too much corrupts fast data.','Jitter \u2014 peque\u00f1as variaciones de tiempo entre flancos de reloj; demasiado corrompe datos r\u00e1pidos.'),
+          _L('Propagation delay \u2014 the time a signal takes to travel; matters when signals must arrive together.','Retardo de propagaci\u00f3n \u2014 el tiempo que tarda una se\u00f1al en viajar; importa cuando las se\u00f1ales deben llegar juntas.'),
+          _L('Rise/fall time \u2014 how quickly a signal transitions; faster edges carry higher-frequency content.','Tiempo de subida/bajada \u2014 qu\u00e9 tan r\u00e1pido cambia una se\u00f1al; flancos m\u00e1s r\u00e1pidos llevan contenido de mayor frecuencia.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Small, random variation in the timing of clock edges is called:','La peque\u00f1a variaci\u00f3n aleatoria en el tiempo de los flancos de reloj se llama:'),
+      opts:[_L('Jitter','Jitter'),_L('Ripple','Rizado'),_L('Crosstalk','Diafon\u00eda'),_L('Drift','Deriva')],a:0,
+      fb:_L('Jitter is edge-to-edge timing variation.','El jitter es la variaci\u00f3n de tiempo flanco a flanco.')},
+     {tag:'check',stem:_L('Which is a complete, self-contained clock source?','\u00bfCu\u00e1l es una fuente de reloj completa y aut\u00f3noma?'),
+      opts:[_L('A bare crystal','Un cristal desnudo'),_L('An oscillator','Un oscilador'),_L('A pull-up resistor','Una resistencia pull-up'),_L('A ferrite bead','Una perla de ferrita')],a:1,
+      fb:_L('An oscillator is a complete clock source; a crystal needs supporting circuitry.','Un oscilador es una fuente completa; un cristal necesita circuiter\u00eda de apoyo.')}]},
+  {id:'p1l5',
+   title:_L('Decoupling & Bypass Strategy','Estrategia de Desacople y Bypass'),
+   obj:_L('Explain why decoupling capacitors are placed close to power pins and what ESR/ESL affect.','Explicar por qu\u00e9 los capacitores de desacople se colocan cerca de los pines de alimentaci\u00f3n y qu\u00e9 afectan ESR/ESL.'),
+   body:[
+     {p:_L('When a chip switches, it demands a sudden gulp of current. A decoupling (bypass) capacitor sits right next to the power pin as a local reservoir so the supply voltage does not dip.','Cuando un chip conmuta, demanda un golpe s\u00fabito de corriente. Un capacitor de desacople (bypass) se ubica junto al pin de alimentaci\u00f3n como reservorio local para que el voltaje no caiga.')},
+     {ul:[_L('Small ceramic bypass caps handle fast, high-frequency demand; bulk caps handle slower, larger swings.','Peque\u00f1os capacitores cer\u00e1micos de bypass manejan demanda r\u00e1pida de alta frecuencia; los de volumen manejan oscilaciones m\u00e1s lentas y grandes.'),
+          _L('ESR (equivalent series resistance) and ESL (equivalent series inductance) limit how fast a cap can respond \u2014 lower is better for decoupling.','ESR (resistencia serie equivalente) y ESL (inductancia serie equivalente) limitan qu\u00e9 tan r\u00e1pido responde un capacitor \u2014 menor es mejor para desacople.'),
+          _L('Place the smallest cap closest to the pin, with the shortest possible trace.','Coloca el capacitor m\u00e1s peque\u00f1o lo m\u00e1s cerca del pin, con la pista m\u00e1s corta posible.')]}],
+   tip:_L('A great decoupling cap with a long, thin trace to the pin is wasted \u2014 the trace inductance undoes the benefit.','Un buen capacitor de desacople con una pista larga y delgada al pin se desperdicia \u2014 la inductancia de la pista anula el beneficio.'),
+   quiz:[
+     {tag:'check',stem:_L('Where should a decoupling capacitor be placed?','\u00bfD\u00f3nde debe colocarse un capacitor de desacople?'),
+      opts:[_L('As close to the power pin as possible','Lo m\u00e1s cerca posible del pin de alimentaci\u00f3n'),_L('At the board edge','En el borde de la placa'),_L('Near the connector','Cerca del conector'),_L('Anywhere on the ground plane','En cualquier parte del plano de tierra')],a:0,
+      fb:_L('Close placement minimizes trace inductance and keeps the supply stable.','La colocaci\u00f3n cercana minimiza la inductancia de pista y mantiene estable la alimentaci\u00f3n.')},
+     {tag:'recall',stem:_L('For decoupling, you want ESR and ESL to be:','Para desacople, quieres que ESR y ESL sean:'),
+      opts:[_L('As high as possible','Lo m\u00e1s altos posible'),_L('As low as possible','Lo m\u00e1s bajos posible'),_L('Exactly equal','Exactamente iguales')],a:1,
+      fb:_L('Low ESR/ESL lets the cap respond quickly to current demand.','ESR/ESL bajos permiten que el capacitor responda r\u00e1pido a la demanda de corriente.')}]},
+  {id:'p1l6',
+   title:_L('Discrete Components','Componentes Discretos'),
+   obj:_L('Match common discrete components to their primary job on a board.','Asociar componentes discretos comunes con su funci\u00f3n principal en una placa.'),
+   body:[
+     {ul:[_L('Resistors \u2014 limit current and set voltage levels (including pull-ups/downs).','Resistencias \u2014 limitan corriente y fijan niveles de voltaje (incluidos pull-up/down).'),
+          _L('Inductors & ferrite beads \u2014 oppose fast current change; ferrite beads suppress high-frequency noise.','Inductores y perlas de ferrita \u2014 se oponen al cambio r\u00e1pido de corriente; las perlas suprimen ruido de alta frecuencia.'),
+          _L('Diodes \u2014 let current flow one way; used for protection and rectification.','Diodos \u2014 dejan pasar corriente en un sentido; usados para protecci\u00f3n y rectificaci\u00f3n.'),
+          _L('MOSFETs & BJTs \u2014 transistors used as switches and amplifiers; gate drive controls a MOSFET.','MOSFET y BJT \u2014 transistores usados como interruptores y amplificadores; el gate drive controla un MOSFET.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which component is commonly used to suppress high-frequency noise on a power line?','\u00bfQu\u00e9 componente se usa com\u00fanmente para suprimir ruido de alta frecuencia en una l\u00ednea de alimentaci\u00f3n?'),
+      opts:[_L('Ferrite bead','Perla de ferrita'),_L('Pull-up resistor','Resistencia pull-up'),_L('Crystal','Cristal'),_L('LED','LED')],a:0,
+      fb:_L('A ferrite bead presents high impedance to high-frequency noise.','Una perla de ferrita presenta alta impedancia al ruido de alta frecuencia.')},
+     {tag:'check',stem:_L('A MOSFET used as a switch is controlled by its:','Un MOSFET usado como interruptor se controla por su:'),
+      opts:[_L('Gate drive','Gate drive'),_L('Anode','\u00c1nodo'),_L('Winding','Bobinado'),_L('Land pattern','Huella')],a:0,
+      fb:_L('Gate drive sets the MOSFET on or off.','El gate drive pone el MOSFET en on u off.')}]},
+  {id:'p1l7',
+   title:_L('Vias, Planes & Routing','V\u00edas, Planos y Enrutamiento'),
+   obj:_L('Explain the role of ground/power planes and why return paths matter.','Explicar el rol de los planos de tierra/potencia y por qu\u00e9 importan los caminos de retorno.'),
+   body:[
+     {p:_L('A via is a plated hole connecting layers. Copper pours and planes provide low-impedance power and ground across the board.','Una v\u00eda es un agujero metalizado que conecta capas. Los vertidos de cobre y planos proveen potencia y tierra de baja impedancia por toda la placa.')},
+     {ul:[_L('Ground and power planes give every signal a nearby, low-impedance return path.','Los planos de tierra y potencia dan a cada se\u00f1al un camino de retorno cercano y de baja impedancia.'),
+          _L('Stitching vias tie planes together and control return current.','Las v\u00edas de cosido unen planos y controlan la corriente de retorno.'),
+          _L('A split in a plane can force a signal return to detour \u2014 a common source of noise.','Una divisi\u00f3n en un plano puede obligar al retorno de una se\u00f1al a desviarse \u2014 una fuente com\u00fan de ruido.')]}],
+   tip:_L('A signal always returns through the path of least impedance \u2014 usually the plane directly beneath the trace. Keep that path intact.','Una se\u00f1al siempre retorna por el camino de menor impedancia \u2014 usualmente el plano justo debajo de la pista. Mant\u00e9n ese camino intacto.'),
+   quiz:[
+     {tag:'check',stem:_L('What primarily provides a signal its low-impedance return path?','\u00bfQu\u00e9 provee principalmente a una se\u00f1al su camino de retorno de baja impedancia?'),
+      opts:[_L('The silkscreen','La serigraf\u00eda'),_L('A nearby ground plane','Un plano de tierra cercano'),_L('The solder mask','La m\u00e1scara de soldadura'),_L('A reference designator','Un designador')],a:1,
+      fb:_L('The adjacent ground plane carries the return current.','El plano de tierra adyacente lleva la corriente de retorno.')},
+     {tag:'recall',stem:_L('A plated hole connecting two copper layers is a:','Un agujero metalizado que conecta dos capas de cobre es una:'),
+      opts:[_L('Pad','Pad'),_L('Via','V\u00eda'),_L('Fillet','Filete')],a:1,
+      fb:_L('A via connects layers vertically.','Una v\u00eda conecta capas verticalmente.')}]},
+  {id:'p1l8',
+   title:_L('Programming & Debug Interfaces','Interfaces de Programaci\u00f3n y Depuraci\u00f3n'),
+   obj:_L('Recognize JTAG and SWD and their role in programming and debugging a processor.','Reconocer JTAG y SWD y su rol en programar y depurar un procesador.'),
+   body:[
+     {p:_L('Before a board does anything useful, you must load firmware and be able to debug it. Two standard interfaces do this.','Antes de que una placa haga algo \u00fatil, debes cargar firmware y poder depurarlo. Dos interfaces est\u00e1ndar hacen esto.')},
+     {ul:[_L('JTAG \u2014 a long-standing multi-pin standard for programming and boundary-scan testing.','JTAG \u2014 un est\u00e1ndar de varios pines de larga data para programaci\u00f3n y prueba boundary-scan.'),
+          _L('SWD (Serial Wire Debug) \u2014 a 2-pin interface common on ARM Cortex parts; saves pins versus JTAG.','SWD (Serial Wire Debug) \u2014 una interfaz de 2 pines com\u00fan en ARM Cortex; ahorra pines frente a JTAG.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which debug interface uses just two pins and is common on ARM Cortex microcontrollers?','\u00bfQu\u00e9 interfaz de depuraci\u00f3n usa solo dos pines y es com\u00fan en microcontroladores ARM Cortex?'),
+      opts:[_L('JTAG','JTAG'),_L('SWD','SWD'),_L('SPI','SPI'),_L('UART','UART')],a:1,
+      fb:_L('SWD is the 2-pin debug interface widely used on ARM Cortex.','SWD es la interfaz de depuraci\u00f3n de 2 pines muy usada en ARM Cortex.')},
+     {tag:'recall',stem:_L('Which interface also supports boundary-scan testing?','\u00bfQu\u00e9 interfaz tambi\u00e9n soporta prueba boundary-scan?'),
+      opts:[_L('JTAG','JTAG'),_L('I2C','I2C'),_L('CAN','CAN')],a:0,
+      fb:_L('JTAG supports boundary-scan in addition to programming.','JTAG soporta boundary-scan adem\u00e1s de programaci\u00f3n.')}]},
+  {id:'p1l9',
+   title:_L('Design Verification','Verificaci\u00f3n del Dise\u00f1o'),
+   obj:_L('Explain DRC, ERC, controlled impedance and length matching as verification steps.','Explicar DRC, ERC, impedancia controlada y emparejamiento de longitud como pasos de verificaci\u00f3n.'),
+   body:[
+     {ul:[_L('ERC (Electrical Rule Check) \u2014 checks the schematic for electrical mistakes like unconnected pins.','ERC (Verificaci\u00f3n de Reglas El\u00e9ctricas) \u2014 revisa el esquema en busca de errores el\u00e9ctricos como pines sin conectar.'),
+          _L('DRC (Design Rule Check) \u2014 checks the layout against manufacturing rules like minimum spacing.','DRC (Verificaci\u00f3n de Reglas de Dise\u00f1o) \u2014 revisa el layout contra reglas de fabricaci\u00f3n como el espaciado m\u00ednimo.'),
+          _L('Controlled impedance \u2014 sizing traces so high-speed signals see a consistent impedance.','Impedancia controlada \u2014 dimensionar pistas para que las se\u00f1ales de alta velocidad vean una impedancia constante.'),
+          _L('Length matching \u2014 making paired/parallel traces equal length so bits arrive together.','Emparejamiento de longitud \u2014 igualar la longitud de pistas pareadas/paralelas para que los bits lleguen juntos.')]}],
+   tip:_L('Run ERC on the schematic and DRC on the layout before generating any manufacturing files \u2014 it is far cheaper to fix on screen than on copper.','Ejecuta ERC en el esquema y DRC en el layout antes de generar archivos de fabricaci\u00f3n \u2014 es mucho m\u00e1s barato corregir en pantalla que en cobre.'),
+   quiz:[
+     {tag:'check',stem:_L('Which check catches an unconnected pin in the schematic?','\u00bfQu\u00e9 verificaci\u00f3n detecta un pin sin conectar en el esquema?'),
+      opts:[_L('DRC','DRC'),_L('ERC','ERC'),_L('Length matching','Emparejamiento de longitud'),_L('Panelization','Paneliaci\u00f3n')],a:1,
+      fb:_L('ERC checks electrical correctness of the schematic.','ERC verifica la correcci\u00f3n el\u00e9ctrica del esquema.')},
+     {tag:'check',stem:_L('Making parallel bus traces equal in length is called:','Hacer que las pistas paralelas de un bus tengan igual longitud se llama:'),
+      opts:[_L('Length matching','Emparejamiento de longitud'),_L('Stitching','Cosido'),_L('Derating','Derrateo'),_L('Reflow','Reflujo')],a:0,
+      fb:_L('Length matching keeps bits of a bus arriving together.','El emparejamiento de longitud mantiene los bits de un bus llegando juntos.')}]},
+  {id:'p1l10',
+   title:_L('Manufacturing & Assembly','Fabricaci\u00f3n y Ensamblaje'),
+   obj:_L('Identify the main manufacturing outputs and the difference between SMT and through-hole.','Identificar las salidas principales de fabricaci\u00f3n y la diferencia entre SMT y orificio pasante.'),
+   body:[
+     {p:_L('To build the board, the fab needs a standard set of files plus clear instructions for placing and soldering parts.','Para construir la placa, el fabricante necesita un conjunto est\u00e1ndar de archivos m\u00e1s instrucciones claras para colocar y soldar piezas.')},
+     {h:_L('Files & layers','Archivos y capas')},
+     {ul:[_L('Gerber, drill, and pick-and-place files describe copper, holes, and part locations.','Los archivos Gerber, de perforaci\u00f3n y pick-and-place describen cobre, agujeros y ubicaciones de piezas.'),
+          _L('Solder mask insulates copper; silkscreen prints labels; the surface finish protects exposed pads.','La m\u00e1scara de soldadura a\u00edsla el cobre; la serigraf\u00eda imprime etiquetas; el acabado superficial protege los pads expuestos.')]},
+     {h:_L('Assembly methods','M\u00e9todos de ensamblaje')},
+     {ul:[_L('SMT (surface-mount) parts solder onto pads and are reflowed in an oven \u2014 dominant for volume.','Las piezas SMT (montaje superficial) se sueldan en pads y se reflujan en un horno \u2014 dominante para volumen.'),
+          _L('Through-hole parts insert into holes and are wave- or hand-soldered \u2014 used for robust or high-power parts.','Las piezas de orificio pasante se insertan en agujeros y se sueldan por ola o a mano \u2014 usadas para piezas robustas o de alta potencia.'),
+          _L('Fiducials and panelization help automated machines align and handle many boards at once.','Los fiduciales y la panelizaci\u00f3n ayudan a las m\u00e1quinas autom\u00e1ticas a alinear y manejar muchas placas a la vez.')]}],
+   tip:_L('DFM/DFT/DFA reviews \u2014 design for manufacturing, test, and assembly \u2014 catch costly problems before the first board is built.','Las revisiones DFM/DFT/DFA \u2014 dise\u00f1o para fabricaci\u00f3n, prueba y ensamblaje \u2014 detectan problemas costosos antes de construir la primera placa.'),
+   quiz:[
+     {tag:'check',stem:_L('Which assembly method solders parts onto surface pads and reflows them in an oven?','\u00bfQu\u00e9 m\u00e9todo de ensamblaje suelda piezas en pads superficiales y las refluja en un horno?'),
+      opts:[_L('Through-hole','Orificio pasante'),_L('Surface-mount (SMT)','Montaje superficial (SMT)'),_L('Wave only','Solo ola'),_L('Hand-wiring','Cableado a mano')],a:1,
+      fb:_L('SMT parts sit on pads and are reflowed \u2014 the volume-production standard.','Las piezas SMT van en pads y se reflujan \u2014 el est\u00e1ndar de producci\u00f3n en volumen.')},
+     {tag:'check',stem:_L('Which set of files describes the copper, holes, and part placement for the fab?','\u00bfQu\u00e9 conjunto de archivos describe el cobre, los agujeros y la colocaci\u00f3n de piezas para el fabricante?'),
+      opts:[_L('Gerber, drill, pick-and-place','Gerber, perforaci\u00f3n, pick-and-place'),_L('BOM only','Solo BOM'),_L('Netlist only','Solo netlist'),_L('Datasheet','Hoja de datos')],a:0,
+      fb:_L('Gerber + drill + pick-and-place are the core manufacturing outputs.','Gerber + perforaci\u00f3n + pick-and-place son las salidas principales de fabricaci\u00f3n.')},
+     {tag:'recall',stem:_L('What does the solder mask do?','\u00bfQu\u00e9 hace la m\u00e1scara de soldadura?'),
+      opts:[_L('Prints part labels','Imprime etiquetas de piezas'),_L('Insulates copper between pads','A\u00edsla el cobre entre pads'),_L('Connects layers','Conecta capas')],a:1,
+      fb:_L('Solder mask insulates copper; silkscreen does the printed labels.','La m\u00e1scara a\u00edsla el cobre; la serigraf\u00eda hace las etiquetas impresas.')}]}
+ ]
+};
+
+/* ---------- Module 2: Power & Signal Processing ---------- */
+var P2 = {
+ id:'p2',
+ title:_L('Power & Signal Processing','Procesamiento de Potencia y Se\u00f1al'),
+ sub:_L('10 lessons \u00b7 Level 2','10 lecciones \u00b7 Nivel 2'),
+ lessons:[
+  {id:'p2l1',
+   title:_L('Voltage Rails & Operating Voltage','Rieles de Voltaje y Voltaje de Operaci\u00f3n'),
+   obj:_L('Explain what a voltage rail is and why a board often has several.','Explicar qu\u00e9 es un riel de voltaje y por qu\u00e9 una placa suele tener varios.'),
+   body:[
+     {p:_L('Each chip has an operating voltage it is designed for. A voltage rail is a regulated supply at one of those voltages; a board often runs several rails (e.g. 5 V, 3.3 V, 1.8 V) from one input.','Cada chip tiene un voltaje de operaci\u00f3n para el que est\u00e1 dise\u00f1ado. Un riel de voltaje es una alimentaci\u00f3n regulada a uno de esos voltajes; una placa suele tener varios rieles (p. ej. 5 V, 3.3 V, 1.8 V) desde una entrada.')}],
+   quiz:[
+     {tag:'check',stem:_L('Why might one board have multiple voltage rails?','\u00bfPor qu\u00e9 una placa puede tener m\u00faltiples rieles de voltaje?'),
+      opts:[_L('Different chips need different operating voltages','Distintos chips necesitan distintos voltajes de operaci\u00f3n'),_L('It looks more professional','Se ve m\u00e1s profesional'),_L('To use more copper','Para usar m\u00e1s cobre'),_L('Rails are required by Gerbers','Los rieles los exigen los Gerbers')],a:0,
+      fb:_L('Different parts run at different voltages, so the board provides several rails.','Distintas piezas funcionan a distintos voltajes, por eso la placa provee varios rieles.')}]},
+  {id:'p2l2',
+   title:_L('Linear & LDO Regulators','Reguladores Lineales y LDO'),
+   obj:_L('Describe how a linear/LDO regulator works and its main trade-off.','Describir c\u00f3mo funciona un regulador lineal/LDO y su principal compensaci\u00f3n.'),
+   body:[
+     {p:_L('A linear regulator drops excess voltage as heat to produce a clean, steady output. An LDO (low-dropout) works with only a small difference between input and output.','Un regulador lineal disipa el voltaje sobrante como calor para producir una salida limpia y estable. Un LDO (baja ca\u00edda) funciona con solo una peque\u00f1a diferencia entre entrada y salida.')},
+     {ul:[_L('Pro: very low noise, simple, cheap.','Ventaja: muy bajo ruido, simple, barato.'),
+          _L('Con: inefficient when the voltage drop is large \u2014 the difference becomes heat.','Desventaja: ineficiente cuando la ca\u00edda de voltaje es grande \u2014 la diferencia se vuelve calor.')]}],
+   quiz:[
+     {tag:'check',stem:_L('A linear regulator turns the excess input-output voltage difference into:','Un regulador lineal convierte la diferencia de voltaje entrada-salida sobrante en:'),
+      opts:[_L('Heat','Calor'),_L('More current','M\u00e1s corriente'),_L('Higher frequency','Mayor frecuencia'),_L('Stored charge','Carga almacenada')],a:0,
+      fb:_L('Linear regulators dissipate the excess as heat \u2014 hence the efficiency trade-off.','Los reguladores lineales disipan el exceso como calor \u2014 de ah\u00ed la compensaci\u00f3n de eficiencia.')}]},
+  {id:'p2l3',
+   title:_L('Switching Regulators & DC-DC Converters','Reguladores Conmutados y Convertidores DC-DC'),
+   obj:_L('Distinguish buck, boost and buck-boost converters and why switching is efficient.','Distinguir convertidores buck, boost y buck-boost y por qu\u00e9 la conmutaci\u00f3n es eficiente.'),
+   body:[
+     {p:_L('A switching regulator rapidly switches a transistor on and off and stores energy in an inductor, achieving high efficiency instead of burning excess as heat.','Un regulador conmutado enciende y apaga r\u00e1pidamente un transistor y almacena energ\u00eda en un inductor, logrando alta eficiencia en lugar de quemar el exceso como calor.')},
+     {ul:[_L('Buck \u2014 steps voltage down.','Buck \u2014 reduce el voltaje.'),
+          _L('Boost \u2014 steps voltage up.','Boost \u2014 eleva el voltaje.'),
+          _L('Buck-boost \u2014 can do either, useful when input may be above or below output.','Buck-boost \u2014 puede hacer ambos, \u00fatil cuando la entrada puede estar por encima o por debajo de la salida.'),
+          _L('Switching frequency sets the size of the inductor and capacitors and affects noise.','La frecuencia de conmutaci\u00f3n fija el tama\u00f1o del inductor y capacitores y afecta el ruido.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which converter steps a voltage UP?','\u00bfQu\u00e9 convertidor ELEVA un voltaje?'),
+      opts:[_L('Buck','Buck'),_L('Boost','Boost'),_L('LDO','LDO'),_L('Linear','Lineal')],a:1,
+      fb:_L('A boost converter increases voltage.','Un convertidor boost aumenta el voltaje.')},
+     {tag:'check',stem:_L('The main advantage of a switching regulator over a linear one is:','La principal ventaja de un regulador conmutado sobre uno lineal es:'),
+      opts:[_L('Higher efficiency','Mayor eficiencia'),_L('Lower cost always','Siempre menor costo'),_L('No inductor needed','No necesita inductor'),_L('Zero noise','Cero ruido')],a:0,
+      fb:_L('Switching is far more efficient, especially across a large voltage drop.','La conmutaci\u00f3n es mucho m\u00e1s eficiente, sobre todo con una gran ca\u00edda de voltaje.')}]},
+  {id:'p2l4',
+   title:_L('Power Integrity','Integridad de Potencia'),
+   obj:_L('Define ripple and transient response and why power integrity matters.','Definir rizado y respuesta transitoria y por qu\u00e9 importa la integridad de potencia.'),
+   body:[
+     {ul:[_L('Ripple \u2014 the small repeating voltage variation left on a rail, especially from switching regulators.','Rizado \u2014 la peque\u00f1a variaci\u00f3n de voltaje repetitiva que queda en un riel, sobre todo de reguladores conmutados.'),
+          _L('Transient response \u2014 how well the supply holds steady when load current suddenly changes.','Respuesta transitoria \u2014 qu\u00e9 tan bien la fuente se mantiene estable cuando la corriente de carga cambia de golpe.'),
+          _L('Power integrity (PI) \u2014 the overall discipline of keeping rails clean and stable.','Integridad de potencia (PI) \u2014 la disciplina general de mantener los rieles limpios y estables.')]}],
+   quiz:[
+     {tag:'check',stem:_L('The small repeating voltage variation on a power rail is called:','La peque\u00f1a variaci\u00f3n de voltaje repetitiva en un riel se llama:'),
+      opts:[_L('Ripple','Rizado'),_L('Jitter','Jitter'),_L('Drift','Deriva'),_L('Crosstalk','Diafon\u00eda')],a:0,
+      fb:_L('Ripple is residual variation on the rail.','El rizado es la variaci\u00f3n residual en el riel.')}]},
+  {id:'p2l5',
+   title:_L('Signal Integrity','Integridad de Se\u00f1al'),
+   obj:_L('Explain crosstalk, characteristic impedance and the purpose of differential pairs.','Explicar diafon\u00eda, impedancia caracter\u00edstica y el prop\u00f3sito de los pares diferenciales.'),
+   body:[
+     {ul:[_L('Crosstalk \u2014 unwanted coupling of a signal onto a neighboring trace.','Diafon\u00eda \u2014 acoplamiento no deseado de una se\u00f1al en una pista vecina.'),
+          _L('Characteristic / controlled impedance \u2014 sizing a trace so a fast signal sees a steady impedance and does not reflect.','Impedancia caracter\u00edstica / controlada \u2014 dimensionar una pista para que una se\u00f1al r\u00e1pida vea una impedancia estable y no se refleje.'),
+          _L('Differential pairs \u2014 two traces carrying opposite signals; noise hits both equally and cancels at the receiver.','Pares diferenciales \u2014 dos pistas que llevan se\u00f1ales opuestas; el ruido afecta a ambas por igual y se cancela en el receptor.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Why are differential pairs good at rejecting noise?','\u00bfPor qu\u00e9 los pares diferenciales rechazan bien el ruido?'),
+      opts:[_L('Noise hits both lines equally and cancels','El ruido afecta ambas l\u00edneas por igual y se cancela'),_L('They use thicker copper','Usan cobre m\u00e1s grueso'),_L('They need no return path','No necesitan camino de retorno'),_L('They run at lower voltage','Funcionan a menor voltaje')],a:0,
+      fb:_L('Common-mode noise cancels because the receiver reads the difference.','El ruido en modo com\u00fan se cancela porque el receptor lee la diferencia.')}]},
+  {id:'p2l6',
+   title:_L('Analog vs Digital & Mixed-Signal','Anal\u00f3gico vs Digital y Se\u00f1al Mixta'),
+   obj:_L('Contrast analog and digital signals and the challenge of mixed-signal boards.','Contrastar se\u00f1ales anal\u00f3gicas y digitales y el desaf\u00edo de las placas de se\u00f1al mixta.'),
+   body:[
+     {p:_L('Analog signals vary continuously; digital signals are discrete highs and lows. A mixed-signal board has both, and the fast digital switching can inject noise into sensitive analog circuits unless they are carefully separated.','Las se\u00f1ales anal\u00f3gicas var\u00edan de forma continua; las digitales son altos y bajos discretos. Una placa de se\u00f1al mixta tiene ambas, y la conmutaci\u00f3n digital r\u00e1pida puede inyectar ruido en circuitos anal\u00f3gicos sensibles si no se separan con cuidado.')}],
+   quiz:[
+     {tag:'check',stem:_L('A board with both sensitive analog and fast digital circuits is called:','Una placa con circuitos anal\u00f3gicos sensibles y digitales r\u00e1pidos se llama:'),
+      opts:[_L('Mixed-signal','Se\u00f1al mixta'),_L('Single-rail','Riel \u00fanico'),_L('Through-hole','Orificio pasante'),_L('Open-drain','Drenaje abierto')],a:0,
+      fb:_L('Mixed-signal designs combine analog and digital, requiring careful layout.','Los dise\u00f1os de se\u00f1al mixta combinan anal\u00f3gico y digital, exigiendo un layout cuidadoso.')}]},
+  {id:'p2l7',
+   title:_L('Data Conversion (ADC/DAC)','Conversi\u00f3n de Datos (ADC/DAC)'),
+   obj:_L('Explain ADC vs DAC and what sampling rate, resolution and SNR describe.','Explicar ADC vs DAC y qu\u00e9 describen la tasa de muestreo, la resoluci\u00f3n y la SNR.'),
+   body:[
+     {ul:[_L('ADC \u2014 turns a continuous analog signal into digital numbers; DAC does the reverse.','ADC \u2014 convierte una se\u00f1al anal\u00f3gica continua en n\u00fameros digitales; el DAC hace lo inverso.'),
+          _L('Sampling rate \u2014 how many times per second the ADC measures the signal.','Tasa de muestreo \u2014 cu\u00e1ntas veces por segundo el ADC mide la se\u00f1al.'),
+          _L('Resolution \u2014 how many bits represent each sample; more bits means finer steps.','Resoluci\u00f3n \u2014 cu\u00e1ntos bits representan cada muestra; m\u00e1s bits significan pasos m\u00e1s finos.'),
+          _L('Noise floor & SNR \u2014 the noise floor is the lowest detectable level; SNR is signal-to-noise ratio.','Piso de ruido y SNR \u2014 el piso de ruido es el nivel m\u00e1s bajo detectable; la SNR es la relaci\u00f3n se\u00f1al-ruido.')]}],
+   quiz:[
+     {tag:'check',stem:_L('An ADC with more bits of resolution gives you:','Un ADC con m\u00e1s bits de resoluci\u00f3n te da:'),
+      opts:[_L('Finer measurement steps','Pasos de medici\u00f3n m\u00e1s finos'),_L('A higher voltage','Un voltaje m\u00e1s alto'),_L('Less heat','Menos calor'),_L('Fewer pins','Menos pines')],a:0,
+      fb:_L('More bits = finer quantization steps = more precise measurement.','M\u00e1s bits = pasos de cuantizaci\u00f3n m\u00e1s finos = medici\u00f3n m\u00e1s precisa.')},
+     {tag:'recall',stem:_L('Which device converts analog to digital?','\u00bfQu\u00e9 dispositivo convierte de anal\u00f3gico a digital?'),
+      opts:[_L('DAC','DAC'),_L('ADC','ADC'),_L('LDO','LDO')],a:1,
+      fb:_L('ADC = analog-to-digital converter.','ADC = convertidor anal\u00f3gico a digital.')}]},
+  {id:'p2l8',
+   title:_L('Grounding Strategies','Estrategias de Tierra'),
+   obj:_L('Explain why analog and digital grounds are often separated and what a star ground is.','Explicar por qu\u00e9 las tierras anal\u00f3gica y digital suelen separarse y qu\u00e9 es una tierra en estrella.'),
+   body:[
+     {p:_L('Sharing one messy ground lets digital switching noise ride into analog circuits. Designers often keep analog and digital ground regions distinct and join them at a single point (a star ground) to control where return current flows.','Compartir una tierra ruidosa deja que el ruido de conmutaci\u00f3n digital entre en los circuitos anal\u00f3gicos. Los dise\u00f1adores suelen mantener distintas las regiones de tierra anal\u00f3gica y digital y unirlas en un solo punto (tierra en estrella) para controlar por d\u00f3nde fluye la corriente de retorno.')}],
+   quiz:[
+     {tag:'check',stem:_L('Joining analog and digital grounds at a single point is called a:','Unir las tierras anal\u00f3gica y digital en un solo punto se llama:'),
+      opts:[_L('Star ground','Tierra en estrella'),_L('Split rail','Riel dividido'),_L('Ferrite ground','Tierra de ferrita'),_L('Floating ground','Tierra flotante')],a:0,
+      fb:_L('A star ground meets at one point to control return currents.','Una tierra en estrella se une en un punto para controlar las corrientes de retorno.')}]},
+  {id:'p2l9',
+   title:_L('Protection & Derating','Protecci\u00f3n y Derrateo'),
+   obj:_L('Match protection devices to their job and explain derating.','Asociar dispositivos de protecci\u00f3n con su funci\u00f3n y explicar el derrateo.'),
+   body:[
+     {ul:[_L('TVS diode \u2014 clamps voltage spikes (e.g. ESD) to protect downstream parts.','Diodo TVS \u2014 recorta picos de voltaje (p. ej. ESD) para proteger piezas posteriores.'),
+          _L('Schottky diode \u2014 fast, low forward drop; used for reverse-polarity and rectification.','Diodo Schottky \u2014 r\u00e1pido, baja ca\u00edda directa; usado para polaridad inversa y rectificaci\u00f3n.'),
+          _L('Zener diode \u2014 holds a fixed voltage; used for references and clamping.','Diodo Zener \u2014 mantiene un voltaje fijo; usado para referencias y recorte.'),
+          _L('Fuses \u2014 open the circuit on overcurrent.','Fusibles \u2014 abren el circuito ante sobrecorriente.'),
+          _L('Derating \u2014 running a part below its maximum rating for reliability and margin.','Derrateo \u2014 operar una pieza por debajo de su valor m\u00e1ximo para fiabilidad y margen.')]}],
+   tip:_L('Place ESD/TVS protection right at the connector \u2014 where the spike enters \u2014 not deep inside the board.','Coloca la protecci\u00f3n ESD/TVS justo en el conector \u2014 donde entra el pico \u2014 no en lo profundo de la placa.'),
+   quiz:[
+     {tag:'check',stem:_L('Which device clamps an ESD voltage spike at a connector?','\u00bfQu\u00e9 dispositivo recorta un pico de voltaje ESD en un conector?'),
+      opts:[_L('TVS diode','Diodo TVS'),_L('Pull-up resistor','Resistencia pull-up'),_L('Crystal','Cristal'),_L('Ferrite bead','Perla de ferrita')],a:0,
+      fb:_L('A TVS diode clamps transient overvoltage like ESD.','Un diodo TVS recorta sobretensiones transitorias como ESD.')},
+     {tag:'recall',stem:_L('Running a component safely below its maximum rating is called:','Operar un componente con seguridad por debajo de su valor m\u00e1ximo se llama:'),
+      opts:[_L('Derating','Derrateo'),_L('Reflow','Reflujo'),_L('Stitching','Cosido')],a:0,
+      fb:_L('Derating builds in reliability margin.','El derrateo crea margen de fiabilidad.')}]},
+  {id:'p2l10',
+   title:_L('Thermal Management','Gesti\u00f3n T\u00e9rmica'),
+   obj:_L('Explain how thermal vias and heatsinks move heat away from parts.','Explicar c\u00f3mo las v\u00edas t\u00e9rmicas y los disipadores alejan el calor de las piezas.'),
+   body:[
+     {p:_L('Parts that dissipate power get hot, and heat shortens life. Thermal vias carry heat from a hot pad into copper planes, and heatsinks increase surface area so heat escapes to the air.','Las piezas que disipan potencia se calientan, y el calor acorta la vida \u00fatil. Las v\u00edas t\u00e9rmicas llevan el calor de un pad caliente a los planos de cobre, y los disipadores aumentan el \u00e1rea para que el calor escape al aire.')}],
+   quiz:[
+     {tag:'check',stem:_L('What is the job of a thermal via?','\u00bfCu\u00e1l es la funci\u00f3n de una v\u00eda t\u00e9rmica?'),
+      opts:[_L('Carry heat from a hot pad into copper planes','Llevar calor de un pad caliente a los planos de cobre'),_L('Carry data faster','Llevar datos m\u00e1s r\u00e1pido'),_L('Insulate the board','Aislar la placa'),_L('Add silkscreen','A\u00f1adir serigraf\u00eda')],a:0,
+      fb:_L('Thermal vias conduct heat into the planes to spread and dissipate it.','Las v\u00edas t\u00e9rmicas conducen el calor a los planos para esparcirlo y disiparlo.')}]}
+ ]
+};
+
+/* ---------- Module 3: Communications ---------- */
+var P3 = {
+ id:'p3',
+ title:_L('Communications','Comunicaciones'),
+ sub:_L('10 lessons \u00b7 Level 3','10 lecciones \u00b7 Nivel 3'),
+ lessons:[
+  {id:'p3l1',
+   title:_L('SPI & UART','SPI y UART'),
+   obj:_L('Contrast SPI and UART and recognize when each is used.','Contrastar SPI y UART y reconocer cu\u00e1ndo se usa cada uno.'),
+   body:[
+     {ul:[_L('SPI \u2014 fast, synchronous, uses a shared clock and separate lines per device; great for sensors and displays.','SPI \u2014 r\u00e1pido, s\u00edncrono, usa un reloj compartido y l\u00edneas separadas por dispositivo; ideal para sensores y pantallas.'),
+          _L('UART \u2014 asynchronous serial with no shared clock; two wires (TX/RX); common for simple device-to-device links.','UART \u2014 serie asincr\u00f3nico sin reloj compartido; dos cables (TX/RX); com\u00fan para enlaces simples dispositivo a dispositivo.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which interface is asynchronous and uses just TX and RX lines?','\u00bfQu\u00e9 interfaz es asincr\u00f3nica y usa solo l\u00edneas TX y RX?'),
+      opts:[_L('SPI','SPI'),_L('UART','UART'),_L('CAN','CAN'),_L('Ethernet','Ethernet')],a:1,
+      fb:_L('UART is asynchronous with no shared clock \u2014 just TX/RX.','UART es asincr\u00f3nico sin reloj compartido \u2014 solo TX/RX.')}]},
+  {id:'p3l2',
+   title:_L('I2C & I3C','I2C e I3C'),
+   obj:_L('Explain the I2C bus and what I3C improves.','Explicar el bus I2C y qu\u00e9 mejora I3C.'),
+   body:[
+     {p:_L('I2C uses two wires (clock and data) shared by many devices, each with an address, using open-drain lines and pull-ups. I3C is a newer, faster, more power-efficient evolution that stays largely backward compatible.','I2C usa dos cables (reloj y datos) compartidos por muchos dispositivos, cada uno con una direcci\u00f3n, usando l\u00edneas de drenaje abierto y pull-ups. I3C es una evoluci\u00f3n m\u00e1s nueva, r\u00e1pida y eficiente que se mantiene en gran parte compatible.')}],
+   quiz:[
+     {tag:'check',stem:_L('How many signal wires does a basic I2C bus use?','\u00bfCu\u00e1ntos cables de se\u00f1al usa un bus I2C b\u00e1sico?'),
+      opts:[_L('One','Uno'),_L('Two','Dos'),_L('Four','Cuatro'),_L('Eight','Ocho')],a:1,
+      fb:_L('I2C uses two: a clock line and a data line.','I2C usa dos: una l\u00ednea de reloj y una de datos.')}]},
+  {id:'p3l3',
+   title:_L('CAN Bus','Bus CAN'),
+   obj:_L('Describe CAN bus and why it suits noisy industrial and automotive environments.','Describir el bus CAN y por qu\u00e9 conviene en entornos ruidosos industriales y automotrices.'),
+   body:[
+     {p:_L('CAN is a robust differential, multi-device bus built for noisy environments like vehicles and factory machines. Its differential signaling and built-in error handling make it very reliable over long, electrically noisy runs.','CAN es un bus diferencial robusto y multi-dispositivo creado para entornos ruidosos como veh\u00edculos y m\u00e1quinas de f\u00e1brica. Su se\u00f1alizaci\u00f3n diferencial y manejo de errores integrado lo hacen muy fiable en tramos largos y el\u00e9ctricamente ruidosos.')}],
+   quiz:[
+     {tag:'check',stem:_L('CAN bus is especially common in which environment?','\u00bfEl bus CAN es especialmente com\u00fan en qu\u00e9 entorno?'),
+      opts:[_L('Automotive and industrial','Automotriz e industrial'),_L('Home audio only','Solo audio dom\u00e9stico'),_L('Deep space only','Solo espacio profundo'),_L('Battery chargers only','Solo cargadores')],a:0,
+      fb:_L('CAN was built for noisy automotive and industrial networks.','CAN fue creado para redes automotrices e industriales ruidosas.')}]},
+  {id:'p3l4',
+   title:_L('RS-232 & RS-485','RS-232 y RS-485'),
+   obj:_L('Contrast RS-232 and RS-485 for distance and multi-device use.','Contrastar RS-232 y RS-485 por distancia y uso multi-dispositivo.'),
+   body:[
+     {ul:[_L('RS-232 \u2014 older point-to-point serial, short distances, single device per port.','RS-232 \u2014 serie punto a punto antiguo, distancias cortas, un dispositivo por puerto.'),
+          _L('RS-485 \u2014 differential, long distance, many devices on one bus; common in industrial networks.','RS-485 \u2014 diferencial, larga distancia, muchos dispositivos en un bus; com\u00fan en redes industriales.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which standard is differential and supports long distances with many devices?','\u00bfQu\u00e9 est\u00e1ndar es diferencial y soporta largas distancias con muchos dispositivos?'),
+      opts:[_L('RS-232','RS-232'),_L('RS-485','RS-485'),_L('UART','UART'),_L('SPI','SPI')],a:1,
+      fb:_L('RS-485 is differential and multi-drop over long runs.','RS-485 es diferencial y multipunto en tramos largos.')}]},
+  {id:'p3l5',
+   title:_L('USB','USB'),
+   obj:_L('Describe USB at a high level and its role for power and data.','Describir USB a alto nivel y su rol para potencia y datos.'),
+   body:[
+     {p:_L('USB is a widely used differential serial standard carrying both data and power. It is host-controlled and comes in several speeds and connector types, making it the default for connecting peripherals and powering small devices.','USB es un est\u00e1ndar serie diferencial muy usado que lleva datos y potencia. Es controlado por un host y viene en varias velocidades y tipos de conector, lo que lo hace el predeterminado para conectar perif\u00e9ricos y alimentar dispositivos peque\u00f1os.')}],
+   quiz:[
+     {tag:'check',stem:_L('Besides data, what else does USB commonly carry?','Adem\u00e1s de datos, \u00bfqu\u00e9 m\u00e1s suele llevar USB?'),
+      opts:[_L('Power','Potencia'),_L('Coolant','Refrigerante'),_L('Light','Luz'),_L('Nothing','Nada')],a:0,
+      fb:_L('USB carries both data and power.','USB lleva tanto datos como potencia.')}]},
+  {id:'p3l6',
+   title:_L('Ethernet (RGMII/MII)','Ethernet (RGMII/MII)'),
+   obj:_L('Explain Ethernet at a board level and the role of the MII/RGMII interface.','Explicar Ethernet a nivel de placa y el rol de la interfaz MII/RGMII.'),
+   body:[
+     {p:_L('Ethernet provides fast, networked communication. On a board, the processor (MAC) connects to a physical-layer chip (PHY) through a standard interface such as MII or the reduced RGMII, which then drives the network connector.','Ethernet provee comunicaci\u00f3n en red r\u00e1pida. En una placa, el procesador (MAC) se conecta a un chip de capa f\u00edsica (PHY) por una interfaz est\u00e1ndar como MII o el reducido RGMII, que luego maneja el conector de red.')}],
+   quiz:[
+     {tag:'check',stem:_L('On an Ethernet board, the MII/RGMII interface connects the MAC to the:','En una placa Ethernet, la interfaz MII/RGMII conecta el MAC con el:'),
+      opts:[_L('PHY','PHY'),_L('Crystal','Cristal'),_L('LDO','LDO'),_L('Fuse','Fusible')],a:0,
+      fb:_L('MII/RGMII links the MAC to the PHY (physical layer).','MII/RGMII enlaza el MAC con el PHY (capa f\u00edsica).')}]},
+  {id:'p3l7',
+   title:_L('Parallel Buses','Buses Paralelos'),
+   obj:_L('Explain a parallel bus and its trade-off versus serial.','Explicar un bus paralelo y su compensaci\u00f3n frente al serie.'),
+   body:[
+     {p:_L('A parallel bus moves many bits at once over many lines, which can be fast but uses lots of pins and demands length matching so all bits arrive together. Serial links have largely replaced wide parallel buses for long runs.','Un bus paralelo mueve muchos bits a la vez por muchas l\u00edneas, lo que puede ser r\u00e1pido pero usa muchos pines y exige emparejamiento de longitud para que todos los bits lleguen juntos. Los enlaces serie han reemplazado en gran parte a los buses paralelos anchos en tramos largos.')}],
+   quiz:[
+     {tag:'check',stem:_L('A drawback of a wide parallel bus is:','Una desventaja de un bus paralelo ancho es:'),
+      opts:[_L('It uses many pins and needs length matching','Usa muchos pines y necesita emparejamiento de longitud'),_L('It cannot carry data','No puede llevar datos'),_L('It needs no traces','No necesita pistas'),_L('It only works wirelessly','Solo funciona inal\u00e1mbrico')],a:0,
+      fb:_L('Parallel buses cost pins and require careful length matching.','Los buses paralelos cuestan pines y requieren emparejamiento de longitud cuidadoso.')}]},
+  {id:'p3l8',
+   title:_L('Wireless Protocols','Protocolos Inal\u00e1mbricos'),
+   obj:_L('Match common wireless protocols to their typical use.','Asociar protocolos inal\u00e1mbricos comunes con su uso t\u00edpico.'),
+   body:[
+     {ul:[_L('Wi-Fi \u2014 high-bandwidth local networking.','Wi-Fi \u2014 red local de alto ancho de banda.'),
+          _L('Bluetooth / BLE \u2014 short-range; BLE is low-energy for sensors and wearables.','Bluetooth / BLE \u2014 corto alcance; BLE es de bajo consumo para sensores y wearables.'),
+          _L('Zigbee \u2014 low-power mesh for home/building automation.','Zigbee \u2014 malla de bajo consumo para automatizaci\u00f3n de hogar/edificio.'),
+          _L('LoRa / sub-GHz \u2014 long-range, low-data-rate for remote sensors.','LoRa / sub-GHz \u2014 largo alcance, baja tasa de datos para sensores remotos.'),
+          _L('NFC \u2014 very short range for tap interactions.','NFC \u2014 alcance muy corto para interacciones por contacto.'),
+          _L('Cellular / LTE \u2014 wide-area connectivity anywhere with coverage.','Celular / LTE \u2014 conectividad de amplia cobertura donde haya se\u00f1al.')]}],
+   quiz:[
+     {tag:'check',stem:_L('Which protocol is best for a long-range, low-data-rate remote sensor?','\u00bfQu\u00e9 protocolo conviene para un sensor remoto de largo alcance y baja tasa de datos?'),
+      opts:[_L('Wi-Fi','Wi-Fi'),_L('LoRa / sub-GHz','LoRa / sub-GHz'),_L('NFC','NFC'),_L('USB','USB')],a:1,
+      fb:_L('LoRa/sub-GHz trades data rate for long range and low power.','LoRa/sub-GHz cambia tasa de datos por largo alcance y bajo consumo.')},
+     {tag:'recall',stem:_L('Which is designed for very short-range tap interactions?','\u00bfCu\u00e1l est\u00e1 dise\u00f1ado para interacciones por contacto de muy corto alcance?'),
+      opts:[_L('NFC','NFC'),_L('LTE','LTE'),_L('Zigbee','Zigbee')],a:0,
+      fb:_L('NFC works only at very short range.','NFC funciona solo a muy corto alcance.')}]},
+  {id:'p3l9',
+   title:_L('RF Design','Dise\u00f1o de RF'),
+   obj:_L('Explain antenna matching and why microstrip/stripline geometry matters at RF.','Explicar el acoplamiento de antena y por qu\u00e9 importa la geometr\u00eda microstrip/stripline en RF.'),
+   body:[
+     {ul:[_L('Antenna / impedance matching \u2014 a matching network transfers maximum power to the antenna and minimizes reflections.','Acoplamiento de antena / impedancia \u2014 una red de acoplamiento transfiere la m\u00e1xima potencia a la antena y minimiza reflexiones.'),
+          _L('Microstrip and stripline \u2014 controlled-impedance trace structures used to route RF signals predictably.','Microstrip y stripline \u2014 estructuras de pista de impedancia controlada usadas para enrutar se\u00f1ales de RF de forma predecible.')]}],
+   tip:_L('At RF, the trace IS a component \u2014 its width, spacing and the layer beneath it set its impedance.','En RF, la pista ES un componente \u2014 su ancho, espaciado y la capa debajo fijan su impedancia.'),
+   quiz:[
+     {tag:'check',stem:_L('A matching network at an antenna mainly does what?','\u00bfUna red de acoplamiento en una antena hace principalmente qu\u00e9?'),
+      opts:[_L('Transfers maximum power and reduces reflections','Transfiere m\u00e1xima potencia y reduce reflexiones'),_L('Cools the antenna','Enfr\u00eda la antena'),_L('Stores data','Almacena datos'),_L('Adds silkscreen','A\u00f1ade serigraf\u00eda')],a:0,
+      fb:_L('Matching maximizes power transfer and minimizes reflected signal.','El acoplamiento maximiza la transferencia de potencia y minimiza la se\u00f1al reflejada.')}]},
+  {id:'p3l10',
+   title:_L('EMI/EMC & Signal Quality','EMI/EMC y Calidad de Se\u00f1al'),
+   obj:_L('Explain EMI/EMC and the layout habits that improve signal quality and compliance.','Explicar EMI/EMC y los h\u00e1bitos de layout que mejoran la calidad de se\u00f1al y el cumplimiento.'),
+   body:[
+     {p:_L('EMI is unwanted electromagnetic noise a board emits or receives; EMC is the goal of coexisting cleanly with other equipment. Good return paths, decoupling, ESD protection and controlled impedance all reduce EMI and help a product pass compliance testing.','EMI es ruido electromagn\u00e9tico no deseado que una placa emite o recibe; EMC es el objetivo de coexistir limpiamente con otros equipos. Buenos caminos de retorno, desacople, protecci\u00f3n ESD e impedancia controlada reducen EMI y ayudan a que un producto pase las pruebas de cumplimiento.')}],
+   quiz:[
+     {tag:'check',stem:_L('Which of these helps reduce EMI?','\u00bfCu\u00e1l de estos ayuda a reducir EMI?'),
+      opts:[_L('Clean return paths and decoupling','Caminos de retorno limpios y desacople'),_L('Longer thinner power traces','Pistas de alimentaci\u00f3n m\u00e1s largas y delgadas'),_L('Removing the ground plane','Quitar el plano de tierra'),_L('Floating every input','Dejar flotante cada entrada')],a:0,
+      fb:_L('Good return paths and decoupling are core EMI-reduction habits.','Buenos caminos de retorno y desacople son h\u00e1bitos clave para reducir EMI.')},
+     {tag:'recall',stem:_L('EMC is best described as:','EMC se describe mejor como:'),
+      opts:[_L('Coexisting cleanly with other equipment','Coexistir limpiamente con otros equipos'),_L('Maximum clock speed','Velocidad m\u00e1xima de reloj'),_L('A connector type','Un tipo de conector')],a:0,
+      fb:_L('EMC is electromagnetic compatibility \u2014 not interfering and not being interfered with.','EMC es compatibilidad electromagn\u00e9tica \u2014 no interferir ni ser interferido.')}]}
+ ]
+};
+
+var COURSE_PCB = {
+  id:'pcb',
+  title:_L('Printed Circuit Board Design & Mfg','Dise\u00f1o y Fabricaci\u00f3n de PCB'),
+  modules:[ P1, P2, P3 ]
+};
+
+if (typeof ANEW !== 'undefined' && ANEW.registerTrade) {
+  ANEW.registerTrade('pcb', COURSE_PCB);
+}
+})();
+</script>
+
+<!-- Bootstrap: register-in-hub OR launch-standalone. -->
+<script>
+(function(){
+  var TID = 'pcb';
+  function runContent(){
+    var s = document.getElementById('trade-content');
+    if (!s) return false;
+    try { (0, eval)(s.textContent); return true; } catch(e) { return false; }
+  }
+  // Mode 1: loaded inside the hub (ANEW already exists) -> just register.
+  if (window.ANEW && window.ANEW.registerTrade) { runContent(); return; }
+  // Mode 2: opened directly -> go to the hub focused on this trade.
+  var target = 'index.html#trade=' + encodeURIComponent(TID);
+  var msg = document.getElementById('msg'), manual = document.getElementById('manual');
+  try { window.location.replace(target); } catch(e) {}
+  // Fallback if the redirect is blocked (rare on file://): show a button.
+  setTimeout(function(){
+    if (msg) msg.textContent = 'If the simulator did not open automatically:';
+    if (manual) manual.style.display = 'inline-block';
+  }, 1200);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Netlify deploy config for the ANEW Boot Camp demonstrator.
+# Publishes this folder as-is, with index.html as the home page.
+[build]
+  publish = "."

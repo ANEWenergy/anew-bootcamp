@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANEW Boot Camp — Advanced Mold Making</title>
+<style>
+  html,body{margin:0;height:100%;background:#1b1b1f;color:#f3f3f5;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{height:100%;display:grid;place-items:center;text-align:center;padding:24px}
+  .card{max-width:420px}
+  h1{font-size:20px;margin:0 0 6px} p{opacity:.8;line-height:1.6;font-size:14px}
+  a.btn{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:12px;
+    background:linear-gradient(140deg,#ffb347,#f39019);color:#241500;
+    font-weight:700;text-decoration:none}
+  .spin{width:30px;height:30px;margin:18px auto;border:3px solid #3a3a40;
+    border-top-color:#f39019;border-radius:50%;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TRADE: Advanced Mold Making  (id: mold)
+     This file works two ways:
+       1) The index.html hub loads it on demand and runs the content
+          script below to register this trade's lessons.
+       2) Opened on its own, it launches the full simulator focused
+          on this trade.
+     To update this trade, edit the content script below and drop the
+     file back into the package next to index.html.
+     ============================================================ -->
+<div class="wrap"><div class="card">
+  <h1>ANEW Boot Camp — Advanced Mold Making</h1>
+  <div class="spin"></div>
+  <p id="msg">Opening the Boot Camp simulator…</p>
+  <a class="btn" id="manual" href="index.html#trade=mold" style="display:none">Open the simulator →</a>
+</div></div>
+
+<!-- The trade's lesson/quiz content. The hub reads THIS script by id. -->
+<script id="trade-content" type="text/anew-trade">
+/* trades/mold.js  —  Advanced Mold Making content module
+   Loaded on demand by the index.html hub. Relies on the global
+   helper L(en,es) defined in the hub. Registers itself via
+   ANEW.registerTrade('mold', COURSE). */
+(function(){
+'use strict';
+
+/* ----- Module 1: Material Science Foundations ----- */
+const M1 = {"id": "m1", "title": {"en": "Material Science Foundations", "es": "Fundamentos de Ciencia de Materiales"}, "sub": {"en": "10 lessons · Level 1", "es": "10 lecciones · Nivel 1"}, "lessons": [{"id": "m1l1", "video": "tKt1NumnLqs", "title": {"en": "Molding Processes Overview", "es": "Panorama de Procesos de Moldeo"}, "obj": {"en": "Name the major plastic molding processes and match each to the kind of part it makes best.", "es": "Nombrar los principales procesos de moldeo de plástico y asociar cada uno con el tipo de pieza que mejor produce."}, "body": [{"h": {"en": "What plastic molding is", "es": "Qué es el moldeo de plástico"}}, {"p": {"en": "Plastic molding shapes plastic material into a desired form using a mold. Each process has unique benefits that only that process can achieve.", "es": "El moldeo de plástico da forma al material plástico mediante un molde. Cada proceso tiene beneficios únicos que solo él puede lograr."}}, {"h": {"en": "The main processes", "es": "Los procesos principales"}}, {"ul": [{"en": "Injection molding — molten plastic injected into a cavity under high pressure; complex shapes, tight tolerances, high volume.", "es": "Moldeo por inyección — plástico fundido inyectado en una cavidad a alta presión; formas complejas, tolerancias ajustadas, alto volumen."}, {"en": "Blow molding — air inflates a molten tube (parison) into a hollow part like a bottle.", "es": "Moldeo por soplado — el aire infla un tubo fundido (paríson) para formar una pieza hueca como una botella."}, {"en": "Thermoforming / pressure forming — a heated plastic sheet is formed over a mold; pressure forming adds air pressure for finer detail.", "es": "Termoformado / formado a presión — una lámina plástica caliente se forma sobre un molde; el formado a presión añade presión de aire para más detalle."}, {"en": "Rotational molding — a mold rotates while heated to make large hollow parts with uniform walls (tanks, kayaks).", "es": "Moldeo rotacional — el molde gira mientras se calienta para hacer piezas huecas grandes de pared uniforme (tanques, kayaks)."}, {"en": "Extrusion — plastic is pushed through a die to make a continuous profile (pipe, sheet, film).", "es": "Extrusión — el plástico se empuja a través de un dado para hacer un perfil continuo (tubo, lámina, película)."}, {"en": "Gas assist — gas injected into the melt reduces weight and material in thick sections.", "es": "Asistido por gas — el gas inyectado en la masa fundida reduce peso y material en secciones gruesas."}, {"en": "Compression molding — preheated material pressed in a cavity; used for large, strong parts, often thermosets.", "es": "Moldeo por compresión — material precalentado prensado en una cavidad; para piezas grandes y resistentes, a menudo termoestables."}]}], "tip": {"en": "The best engineering support comes from suppliers that build the equipment or supply the raw materials.", "es": "El mejor soporte de ingeniería viene de los proveedores que fabrican el equipo o suministran la materia prima."}, "quiz": [{"tag": "check", "stem": {"en": "Which process inflates a molten tube of plastic to form a hollow part such as a bottle?", "es": "¿Qué proceso infla un tubo de plástico fundido para formar una pieza hueca como una botella?"}, "opts": [{"en": "Injection molding", "es": "Moldeo por inyección"}, {"en": "Blow molding", "es": "Moldeo por soplado"}, {"en": "Extrusion", "es": "Extrusión"}, {"en": "Compression molding", "es": "Moldeo por compresión"}], "a": 1, "fb": {"en": "Blow molding inflates a parison like a balloon into a hollow shape.", "es": "El moldeo por soplado infla un paríson como un globo para formar una forma hueca."}}, {"tag": "check", "stem": {"en": "You need a large, hollow tank with uniform wall thickness. Which process fits best?", "es": "Necesitas un tanque grande y hueco con espesor de pared uniforme. ¿Qué proceso encaja mejor?"}, "opts": [{"en": "Rotational molding", "es": "Moldeo rotacional"}, {"en": "Injection molding", "es": "Moldeo por inyección"}, {"en": "Thermoforming", "es": "Termoformado"}, {"en": "Gas assist", "es": "Asistido por gas"}], "a": 0, "fb": {"en": "Rotational molding makes large hollow parts with uniform walls, like tanks and kayaks.", "es": "El moldeo rotacional hace piezas huecas grandes con paredes uniformes, como tanques y kayaks."}}, {"tag": "check", "stem": {"en": "Which process pushes plastic through a die to create a continuous profile like pipe?", "es": "¿Qué proceso empuja el plástico a través de un dado para crear un perfil continuo como un tubo?"}, "opts": [{"en": "Blow molding", "es": "Moldeo por soplado"}, {"en": "Extrusion", "es": "Extrusión"}, {"en": "Rotational molding", "es": "Moldeo rotacional"}, {"en": "Injection molding", "es": "Moldeo por inyección"}], "a": 1, "fb": {"en": "Extrusion forces plastic through a die for continuous shapes: pipe, sheet, film.", "es": "La extrusión fuerza el plástico por un dado para formas continuas: tubo, lámina, película."}}]}, {"id": "m1l2", "video": "T_YAZYqQBU4", "title": {"en": "Thermoplastic vs. Thermoset", "es": "Termoplástico vs. Termoestable"}, "obj": {"en": "Explain the core difference between thermoplastics and thermosets and the consequences for recycling and reshaping.", "es": "Explicar la diferencia central entre termoplásticos y termoestables y sus consecuencias para el reciclaje y el reformado."}, "body": [{"p": {"en": "Thermoplastics can be melted and reshaped repeatedly without changing their chemical structure — they have shape memory.", "es": "Los termoplásticos pueden fundirse y reformarse repetidamente sin cambiar su estructura química — tienen memoria de forma."}}, {"p": {"en": "Thermosets are mixed with a curing agent and harden irreversibly when heated. Once cured they cannot be melted or reshaped.", "es": "Los termoestables se mezclan con un agente de curado y endurecen de forma irreversible al calentarse. Una vez curados no pueden fundirse ni reformarse."}}, {"h": {"en": "Trade-offs", "es": "Compensaciones"}}, {"ul": [{"en": "Strength: thermosets typically higher; thermoplastics typically lower.", "es": "Resistencia: los termoestables suelen ser más altos; los termoplásticos más bajos."}, {"en": "Cost: thermosets cost more (need a curing agent); thermoplastics are cheaper to process.", "es": "Costo: los termoestables cuestan más (necesitan agente de curado); los termoplásticos son más baratos de procesar."}, {"en": "Recycling: thermosets generally cannot be recycled once cured; thermoplastics can be recycled multiple times.", "es": "Reciclaje: los termoestables generalmente no se reciclan una vez curados; los termoplásticos se reciclan varias veces."}]}], "quiz": [{"tag": "check", "stem": {"en": "Once cured, can a thermoset part be melted and reshaped?", "es": "Una vez curada, ¿se puede fundir y reformar una pieza termoestable?"}, "opts": [{"en": "Yes, like any plastic", "es": "Sí, como cualquier plástico"}, {"en": "No — it hardens irreversibly", "es": "No — endurece de forma irreversible"}], "a": 1, "fb": {"en": "Thermosets have no shape memory. Only thermoplastics can be remelted.", "es": "Los termoestables no tienen memoria de forma. Solo los termoplásticos pueden refundirse."}}, {"tag": "check", "stem": {"en": "Which material type can generally be recycled multiple times?", "es": "¿Qué tipo de material generalmente se puede reciclar varias veces?"}, "opts": [{"en": "Thermoset", "es": "Termoestable"}, {"en": "Thermoplastic", "es": "Termoplástico"}], "a": 1, "fb": {"en": "Thermoplastics can be remelted and recycled; cured thermosets generally cannot.", "es": "Los termoplásticos pueden refundirse y reciclarse; los termoestables curados generalmente no."}}, {"tag": "check", "stem": {"en": "Why do thermosets often cost more to manufacture?", "es": "¿Por qué los termoestables suelen costar más de fabricar?"}, "opts": [{"en": "They need a curing agent or catalyst", "es": "Necesitan un agente de curado o catalizador"}, {"en": "They are always imported", "es": "Siempre se importan"}, {"en": "They require gold tooling", "es": "Requieren herramental de oro"}, {"en": "They cannot be colored", "es": "No se pueden colorear"}], "a": 0, "fb": {"en": "The curing agent and the irreversible cure step add cost versus simple remelting.", "es": "El agente de curado y el paso de curado irreversible añaden costo frente a la simple refundición."}}]}, {"id": "m1l3", "title": {"en": "Thermoset Moldable Materials", "es": "Materiales Termoestables Moldeables"}, "obj": {"en": "Recognize common thermoset materials and the property each is chosen for.", "es": "Reconocer materiales termoestables comunes y la propiedad por la que se elige cada uno."}, "body": [{"p": {"en": "Thermoset molding mixes the resin with a hardener, molds under heat and pressure, cures, cools, and ejects.", "es": "El moldeo termoestable mezcla la resina con un endurecedor, moldea con calor y presión, cura, enfría y expulsa."}}, {"ul": [{"en": "Epoxy — high strength, good chemical and heat resistance, strong adhesion.", "es": "Epoxi — alta resistencia, buena resistencia química y al calor, fuerte adhesión."}, {"en": "Polyurethane — strong and durable, good abrasion and impact resistance.", "es": "Poliuretano — fuerte y duradero, buena resistencia a la abrasión y al impacto."}, {"en": "Silicone — high-temperature resistance, good electrical insulation, flexible at low temperatures.", "es": "Silicona — resistencia a alta temperatura, buena aislación eléctrica, flexible a bajas temperaturas."}, {"en": "Phenolic — high strength, good heat resistance, good resistance to wear.", "es": "Fenólico — alta resistencia, buena resistencia al calor y al desgaste."}]}], "quiz": [{"tag": "check", "stem": {"en": "Which thermoset is chosen for high-temperature resistance and electrical insulation, and stays flexible at low temperatures?", "es": "¿Qué termoestable se elige por su resistencia a alta temperatura y aislación eléctrica, y permanece flexible a bajas temperaturas?"}, "opts": [{"en": "Epoxy", "es": "Epoxi"}, {"en": "Silicone", "es": "Silicona"}, {"en": "Phenolic", "es": "Fenólico"}, {"en": "Polyurethane", "es": "Poliuretano"}], "a": 1, "fb": {"en": "Silicone is the high-temp, good-insulation thermoset that stays flexible when cold.", "es": "La silicona es el termoestable de alta temperatura y buena aislación que sigue flexible en frío."}}, {"tag": "recall", "stem": {"en": "Thermoset parts harden how?", "es": "¿Cómo endurecen las piezas termoestables?"}, "opts": [{"en": "Reversibly — can remelt", "es": "Reversiblemente — pueden refundirse"}, {"en": "Irreversibly — cannot remelt", "es": "Irreversiblemente — no pueden refundirse"}], "a": 1, "fb": {"en": "Recall: thermosets cure irreversibly.", "es": "Repaso: los termoestables curan de forma irreversible."}}]}, {"id": "m1l4", "title": {"en": "Olefins vs. Crystallines", "es": "Olefinas vs. Cristalinos"}, "obj": {"en": "Compare olefins and crystalline thermoplastics and select the right family for a given requirement.", "es": "Comparar olefinas y termoplásticos cristalinos y seleccionar la familia correcta para un requisito dado."}, "body": [{"p": {"en": "Olefins (PP, PE) and crystallines are the two general thermoplastic types. They trade off almost oppositely.", "es": "Las olefinas (PP, PE) y los cristalinos son los dos tipos generales de termoplástico. Se compensan de forma casi opuesta."}}, {"h": {"en": "Olefins", "es": "Olefinas"}}, {"ul": [{"en": "Low price, good chemical resistance, good impact resistance, good dimensional stability, easy to color, good processability.", "es": "Bajo precio, buena resistencia química, buena resistencia al impacto, buena estabilidad dimensional, fácil de colorear, buena procesabilidad."}, {"en": "Poor clarity, poor heat resistance, poor UV resistance, lower strength.", "es": "Poca claridad, poca resistencia al calor, poca resistencia UV, menor resistencia."}]}, {"h": {"en": "Crystallines", "es": "Cristalinos"}}, {"ul": [{"en": "High strength, good clarity, good heat and UV resistance.", "es": "Alta resistencia, buena claridad, buena resistencia al calor y UV."}, {"en": "Poor chemical resistance, poor impact resistance, poor dimensional stability, harder to color.", "es": "Poca resistencia química, poca resistencia al impacto, poca estabilidad dimensional, más difícil de colorear."}]}], "quiz": [{"tag": "check", "stem": {"en": "A customer needs a low-cost, easily colored packaging part where strength is not critical. Best starting family?", "es": "Un cliente necesita una pieza de empaque de bajo costo, fácil de colorear, donde la resistencia no es crítica. ¿Mejor familia inicial?"}, "opts": [{"en": "Crystallines", "es": "Cristalinos"}, {"en": "Olefins (PP/PE)", "es": "Olefinas (PP/PE)"}, {"en": "Thermosets", "es": "Termoestables"}, {"en": "Ceramics", "es": "Cerámicos"}], "a": 1, "fb": {"en": "Olefins are low cost, easy to color, with good impact — ideal when strength is not critical.", "es": "Las olefinas son de bajo costo, fáciles de colorear, con buen impacto — ideales cuando la resistencia no es crítica."}}, {"tag": "check", "stem": {"en": "Which property are crystallines rated POOR on?", "es": "¿En qué propiedad los cristalinos se califican como POBRES?"}, "opts": [{"en": "Heat resistance", "es": "Resistencia al calor"}, {"en": "Clarity", "es": "Claridad"}, {"en": "Chemical resistance", "es": "Resistencia química"}, {"en": "UV resistance", "es": "Resistencia UV"}], "a": 2, "fb": {"en": "Crystallines have good clarity/heat/UV but poor chemical and impact resistance.", "es": "Los cristalinos tienen buena claridad/calor/UV pero poca resistencia química y al impacto."}}, {"tag": "check", "stem": {"en": "Which family generally has better clarity and heat resistance?", "es": "¿Qué familia generalmente tiene mejor claridad y resistencia al calor?"}, "opts": [{"en": "Olefins", "es": "Olefinas"}, {"en": "Crystallines", "es": "Cristalinos"}], "a": 1, "fb": {"en": "Crystallines win on clarity, heat, and UV resistance.", "es": "Los cristalinos ganan en claridad, calor y resistencia UV."}}]}, {"id": "m1l5", "title": {"en": "Common Materials & Their Uses", "es": "Materiales Comunes y Sus Usos"}, "obj": {"en": "Match common named plastics (PE, PP, PC, PS, Acetal, Nylon) to their headline property.", "es": "Asociar plásticos comunes con nombre (PE, PP, PC, PS, Acetal, Nylon) con su propiedad principal."}, "body": [{"h": {"en": "Olefin examples", "es": "Ejemplos de olefinas"}}, {"ul": [{"en": "Polyethylene (PE) & Polypropylene (PP): low cost, good chemical and impact resistance, easy to color.", "es": "Polietileno (PE) y Polipropileno (PP): bajo costo, buena resistencia química y al impacto, fáciles de colorear."}]}, {"h": {"en": "Crystalline examples", "es": "Ejemplos cristalinos"}}, {"ul": [{"en": "Polycarbonate (PC) & Polystyrene (PS): high strength and clarity, good heat/UV, but poor chemical/impact resistance.", "es": "Policarbonato (PC) y Poliestireno (PS): alta resistencia y claridad, buen calor/UV, pero poca resistencia química/impacto."}, {"en": "Acetal: strong and stiff, used in bearings and gears.", "es": "Acetal: fuerte y rígido, usado en cojinetes y engranajes."}, {"en": "Nylon 6/6: good tensile strength (roughly 45–90 MPa).", "es": "Nylon 6/6: buena resistencia a la tracción (aprox. 45–90 MPa)."}]}], "quiz": [{"tag": "check", "stem": {"en": "Which material is commonly chosen for bearings and gears due to strength and stiffness?", "es": "¿Qué material se elige comúnmente para cojinetes y engranajes por su resistencia y rigidez?"}, "opts": [{"en": "Polyethylene", "es": "Polietileno"}, {"en": "Acetal", "es": "Acetal"}, {"en": "Polystyrene", "es": "Poliestireno"}, {"en": "TPU", "es": "TPU"}], "a": 1, "fb": {"en": "Acetal is strong and stiff — a go-to for bearings and gears.", "es": "El acetal es fuerte y rígido — una opción habitual para cojinetes y engranajes."}}, {"tag": "recall", "stem": {"en": "PE and PP belong to which family?", "es": "¿A qué familia pertenecen PE y PP?"}, "opts": [{"en": "Crystallines", "es": "Cristalinos"}, {"en": "Olefins", "es": "Olefinas"}, {"en": "Thermosets", "es": "Termoestables"}], "a": 1, "fb": {"en": "Recall: PE and PP are olefins — low cost, easy to color.", "es": "Repaso: PE y PP son olefinas — bajo costo, fáciles de colorear."}}]}, {"id": "m1l6", "title": {"en": "Flexible Materials & Shore Hardness", "es": "Materiales Flexibles y Dureza Shore"}, "obj": {"en": "Describe TPU/TPE and read the Shore A and Shore B hardness scales correctly.", "es": "Describir TPU/TPE y leer correctamente las escalas de dureza Shore A y Shore B."}, "body": [{"p": {"en": "TPU and TPE are thermoplastics with rubber-like flexibility, durability, and wear resistance. Both can be remelted and reshaped.", "es": "El TPU y el TPE son termoplásticos con flexibilidad tipo caucho, durabilidad y resistencia al desgaste. Ambos pueden refundirse y reformarse."}}, {"h": {"en": "Shore scales", "es": "Escalas Shore"}}, {"ul": [{"en": "Shore A measures softer, flexible materials (rubber, TPU/TPE), from 0 (softest) to 100 (hardest). 70+ is considered hard.", "es": "Shore A mide materiales más blandos y flexibles (caucho, TPU/TPE), de 0 (más blando) a 100 (más duro). 70+ se considera duro."}, {"en": "Shore B (often Shore D in practice) measures more rigid materials, roughly 40 to 95.", "es": "Shore B (a menudo Shore D en la práctica) mide materiales más rígidos, aprox. de 40 a 95."}]}], "tip": {"en": "Most material suppliers will send a free sample kit so you can feel the soft-vs-hard flexibility before deciding.", "es": "La mayoría de los proveedores envían un kit de muestras gratis para que sientas la flexibilidad blando-vs-duro antes de decidir."}, "quiz": [{"tag": "check", "stem": {"en": "On the Shore A scale, a material reading 85 is considered:", "es": "En la escala Shore A, un material que marca 85 se considera:"}, "opts": [{"en": "Soft", "es": "Blando"}, {"en": "Hard", "es": "Duro"}], "a": 1, "fb": {"en": "On Shore A, 70 or higher is considered hard.", "es": "En Shore A, 70 o más se considera duro."}}, {"tag": "check", "stem": {"en": "Which scale is used for soft, flexible materials like rubber and TPU?", "es": "¿Qué escala se usa para materiales blandos y flexibles como caucho y TPU?"}, "opts": [{"en": "Shore A", "es": "Shore A"}, {"en": "Shore B", "es": "Shore B"}], "a": 0, "fb": {"en": "Shore A is for soft/flexible; Shore B is for more rigid materials.", "es": "Shore A es para blando/flexible; Shore B es para materiales más rígidos."}}, {"tag": "recall", "stem": {"en": "Can TPU and TPE be melted and reshaped multiple times?", "es": "¿Se pueden fundir y reformar el TPU y el TPE varias veces?"}, "opts": [{"en": "Yes — they are thermoplastics", "es": "Sí — son termoplásticos"}, {"en": "No — they are thermosets", "es": "No — son termoestables"}], "a": 0, "fb": {"en": "Recall: TPU/TPE are thermoplastics, so they remelt.", "es": "Repaso: TPU/TPE son termoplásticos, así que se refunden."}}]}, {"id": "m1l7", "title": {"en": "Material Shrinkage & Cavity Scaling", "es": "Contracción del Material y Escalado de Cavidad"}, "obj": {"en": "Apply the shrinkage-averaging method to compute the scale factor entered in Fusion360 before splitting a cavity.", "es": "Aplicar el método de promediado de contracción para calcular el factor de escala en Fusion360 antes de dividir una cavidad."}, "body": [{"p": {"en": "Heating expands the molecules; cooling brings them back together, so the part shrinks. You must scale the 3D design up before splitting cavities so the cooled part lands on size.", "es": "El calentamiento expande las moléculas; el enfriamiento las une de nuevo, por lo que la pieza se contrae. Debes escalar el diseño 3D hacia arriba antes de dividir cavidades para que la pieza enfriada quede a medida."}}, {"h": {"en": "The averaging method", "es": "El método de promediado"}}, {"p": {"en": "When a supplier gives a shrinkage range, add the high and low and divide by two. Example: Polyethylene (1.2 + 2.0) / 2 = 1.6%, so you type 1.016 in Fusion360 to scale up.", "es": "Cuando un proveedor da un rango de contracción, suma el alto y el bajo y divide entre dos. Ejemplo: Polietileno (1.2 + 2.0) / 2 = 1.6%, así que escribes 1.016 en Fusion360 para ampliar."}}], "tip": {"en": "The most accurate shrinkage comes from the material supplier; the second best source is the Fusion360 Design module.", "es": "La contracción más precisa viene del proveedor del material; la segunda mejor fuente es el módulo de Diseño de Fusion360."}, "quiz": [{"tag": "check", "stem": {"en": "A part has a published shrinkage range of 1.2–2.0%. What scale factor do you enter in Fusion360?", "es": "Una pieza tiene un rango de contracción publicado de 1.2–2.0%. ¿Qué factor de escala ingresas en Fusion360?"}, "opts": [{"en": "1.020", "es": "1.020"}, {"en": "1.016", "es": "1.016"}, {"en": "1.012", "es": "1.012"}, {"en": "1.032", "es": "1.032"}], "a": 1, "fb": {"en": "Average = (1.2 + 2.0)/2 = 1.6% → 1.016.", "es": "Promedio = (1.2 + 2.0)/2 = 1.6% → 1.016."}}, {"tag": "check", "stem": {"en": "A material's range is 0.6–1.4%. What is the scale factor?", "es": "El rango de un material es 0.6–1.4%. ¿Cuál es el factor de escala?"}, "opts": [{"en": "1.010", "es": "1.010"}, {"en": "1.006", "es": "1.006"}, {"en": "1.014", "es": "1.014"}, {"en": "1.020", "es": "1.020"}], "a": 0, "fb": {"en": "Average = (0.6 + 1.4)/2 = 1.0% → 1.010.", "es": "Promedio = (0.6 + 1.4)/2 = 1.0% → 1.010."}}, {"tag": "check", "stem": {"en": "When must you scale the 3D part for shrinkage?", "es": "¿Cuándo debes escalar la pieza 3D por contracción?"}, "opts": [{"en": "After the mold is built", "es": "Después de construir el molde"}, {"en": "Before cavities are split", "es": "Antes de dividir las cavidades"}, {"en": "During final inspection", "es": "Durante la inspección final"}, {"en": "Never — plastic does not shrink", "es": "Nunca — el plástico no se contrae"}], "a": 1, "fb": {"en": "Scale before splitting cavities so the shrinkage carries through every downstream step.", "es": "Escala antes de dividir cavidades para que la contracción se propague por cada paso posterior."}}]}, {"id": "m1l8", "title": {"en": "Calculating Part Cost", "es": "Cálculo del Costo de la Pieza"}, "obj": {"en": "Identify the inputs to part cost and compute material cost per part from price, weight, and grams-per-pound.", "es": "Identificar las entradas del costo de la pieza y calcular el costo de material por pieza a partir del precio, peso y gramos por libra."}, "body": [{"p": {"en": "Total part cost = material cost + power cost. Material cost per part = (material price per pound) × (part weight in grams ÷ grams per pound). Power cost adds the machine's hourly power over the molding hours.", "es": "Costo total = costo de material + costo de energía. Costo de material por pieza = (precio del material por libra) × (peso de la pieza en gramos ÷ gramos por libra). El costo de energía añade la energía por hora de la máquina durante las horas de moldeo."}}, {"p": {"en": "Worked example from the course: at $0.76/lb and 36 g per part with 453 g per pound, material is about $0.06 per part; power adds roughly $0.0024 per part.", "es": "Ejemplo del curso: a $0.76/lb y 36 g por pieza con 453 g por libra, el material es de unos $0.06 por pieza; la energía añade aprox. $0.0024 por pieza."}}], "quiz": [{"tag": "check", "stem": {"en": "Part cost in this course is made of which two components?", "es": "¿De qué dos componentes se compone el costo de la pieza en este curso?"}, "opts": [{"en": "Material cost + power cost", "es": "Costo de material + costo de energía"}, {"en": "Shipping + tax", "es": "Envío + impuestos"}, {"en": "Labor + marketing", "es": "Mano de obra + marketing"}, {"en": "Tooling + storage", "es": "Herramental + almacenamiento"}], "a": 0, "fb": {"en": "Total = material cost + power cost.", "es": "Total = costo de material + costo de energía."}}, {"tag": "check", "stem": {"en": "Material is $1.00/lb, the part weighs 45 g, and there are 450 g per pound. Material cost per part is about:", "es": "El material cuesta $1.00/lb, la pieza pesa 45 g y hay 450 g por libra. El costo de material por pieza es aprox.:"}, "opts": [{"en": "$0.05", "es": "$0.05"}, {"en": "$0.10", "es": "$0.10"}, {"en": "$0.45", "es": "$0.45"}, {"en": "$1.00", "es": "$1.00"}], "a": 1, "fb": {"en": "45/450 = 0.1 lb × $1.00 = $0.10 per part.", "es": "45/450 = 0.1 lb × $1.00 = $0.10 por pieza."}}]}, {"id": "m1l9", "title": {"en": "Plastic Additives", "es": "Aditivos Plásticos"}, "obj": {"en": "Match common additives to the property they improve.", "es": "Asociar aditivos comunes con la propiedad que mejoran."}, "body": [{"p": {"en": "Additives are blended into a base resin (often at a pelletizer) to improve performance.", "es": "Los aditivos se mezclan en una resina base (a menudo en un peletizador) para mejorar el rendimiento."}}, {"ul": [{"en": "Glass or carbon fibers — add strength, reduce shrinkage, improve dimensional stability.", "es": "Fibras de vidrio o carbono — añaden resistencia, reducen contracción, mejoran estabilidad dimensional."}, {"en": "Talc, mica, clay, calcium carbonate — improve stiffness, reduce shrinkage, improve surface finish.", "es": "Talco, mica, arcilla, carbonato de calcio — mejoran rigidez, reducen contracción, mejoran acabado."}, {"en": "Flame retardants — improve flame resistance and safety.", "es": "Retardantes de llama — mejoran resistencia al fuego y seguridad."}, {"en": "Slip agents / lubricants — improve mold release and surface finish.", "es": "Agentes deslizantes / lubricantes — mejoran la liberación del molde y el acabado."}, {"en": "UV stabilizers / titanium dioxide — improve UV stability and outdoor performance.", "es": "Estabilizadores UV / dióxido de titanio — mejoran la estabilidad UV y el rendimiento exterior."}]}], "quiz": [{"tag": "check", "stem": {"en": "Which additive adds strength AND reduces shrinkage?", "es": "¿Qué aditivo añade resistencia Y reduce la contracción?"}, "opts": [{"en": "Colorants", "es": "Colorantes"}, {"en": "Glass fibers", "es": "Fibras de vidrio"}, {"en": "Slip agents", "es": "Agentes deslizantes"}, {"en": "Antimicrobials", "es": "Antimicrobianos"}], "a": 1, "fb": {"en": "Glass (and carbon) fibers reinforce strength and reduce shrinkage.", "es": "Las fibras de vidrio (y de carbono) refuerzan la resistencia y reducen la contracción."}}, {"tag": "check", "stem": {"en": "To help a part release cleanly from the mold, which additive helps?", "es": "Para ayudar a que una pieza salga limpiamente del molde, ¿qué aditivo ayuda?"}, "opts": [{"en": "Flame retardant", "es": "Retardante de llama"}, {"en": "Slip agent / lubricant", "es": "Agente deslizante / lubricante"}, {"en": "Glass fiber", "es": "Fibra de vidrio"}, {"en": "Antioxidant", "es": "Antioxidante"}], "a": 1, "fb": {"en": "Slip agents and lubricants improve mold release and finish.", "es": "Los agentes deslizantes y lubricantes mejoran la liberación y el acabado."}}]}, {"id": "m1l10", "title": {"en": "Quality Standards & Drying", "es": "Normas de Calidad y Secado"}, "obj": {"en": "Identify the key plastic quality standards and recognize which materials must be dried before molding.", "es": "Identificar las normas clave de calidad del plástico y reconocer qué materiales deben secarse antes de moldear."}, "body": [{"h": {"en": "Quality standards", "es": "Normas de calidad"}}, {"ul": [{"en": "ISO 9001 — general quality management system (QMS) standard.", "es": "ISO 9001 — norma general del sistema de gestión de calidad (SGC)."}, {"en": "ISO/TS 16949 — applies ISO 9001 to the automotive industry.", "es": "ISO/TS 16949 — aplica ISO 9001 a la industria automotriz."}, {"en": "ASTM D638 (tensile), D732 (shear), D790 (flexural) — standard mechanical tests.", "es": "ASTM D638 (tracción), D732 (cortante), D790 (flexión) — pruebas mecánicas estándar."}]}, {"h": {"en": "Hygroscopic materials", "es": "Materiales higroscópicos"}}, {"p": {"en": "Hygroscopic materials absorb water from humid air and must be dried before molding, or the part shows splay or streaks. Common ones include ABS, Nylon, PET, PC, POM, PP, and PS.", "es": "Los materiales higroscópicos absorben agua del aire húmedo y deben secarse antes de moldear, o la pieza muestra ráfagas o estrías. Comunes: ABS, Nylon, PET, PC, POM, PP y PS."}}], "tip": {"en": "Most ASTM tensile/flex tests use equipment by Instron, who can advise on the full test setup.", "es": "La mayoría de las pruebas ASTM de tracción/flexión usan equipos de Instron, que puede asesorar sobre toda la configuración."}, "quiz": [{"tag": "check", "stem": {"en": "Which standard is the general quality management system standard?", "es": "¿Qué norma es la norma general del sistema de gestión de calidad?"}, "opts": [{"en": "ASTM D638", "es": "ASTM D638"}, {"en": "ISO 9001", "es": "ISO 9001"}, {"en": "ISO/TS 16949", "es": "ISO/TS 16949"}, {"en": "ASTM D790", "es": "ASTM D790"}], "a": 1, "fb": {"en": "ISO 9001 is the general QMS standard; ISO/TS 16949 extends it for automotive.", "es": "ISO 9001 es la norma general de SGC; ISO/TS 16949 la extiende para automoción."}}, {"tag": "check", "stem": {"en": "A molded part shows splay/streaks. The most likely material-handling cause is:", "es": "Una pieza moldeada muestra ráfagas/estrías. La causa más probable en el manejo del material es:"}, "opts": [{"en": "It was colored", "es": "Fue coloreada"}, {"en": "It was not dried (hygroscopic)", "es": "No se secó (higroscópico)"}, {"en": "It cooled too slowly", "es": "Se enfrió muy lento"}, {"en": "It used too little additive", "es": "Usó muy poco aditivo"}], "a": 1, "fb": {"en": "Hygroscopic materials hold water; undried material causes splay/streaks.", "es": "Los materiales higroscópicos retienen agua; el material sin secar causa ráfagas/estrías."}}, {"tag": "recall", "stem": {"en": "Which test method measures tensile properties of plastics?", "es": "¿Qué método de prueba mide las propiedades de tracción de los plásticos?"}, "opts": [{"en": "ASTM D790", "es": "ASTM D790"}, {"en": "ASTM D638", "es": "ASTM D638"}, {"en": "ISO 9001", "es": "ISO 9001"}], "a": 1, "fb": {"en": "ASTM D638 is the tensile test; D790 is flexural.", "es": "ASTM D638 es la prueba de tracción; D790 es de flexión."}}]}]};
+
+/* ----- Modules 5,2,3,4 + COURSE assembly ----- */
+const M5 = {
+ id:'m5',
+ title:L('Equipment & Supplier Sourcing','Abastecimiento de Equipos y Proveedores'),
+ sub:L('5 lessons \u00B7 from Directory #5','5 lecciones \u00B7 del Directorio #5'),
+ lessons:[
+  {id:'m5l1',
+   title:L('Why Sourcing Is a Skill','Por qu\u00E9 el Abastecimiento es una Habilidad'),
+   obj:L('Use the ANEW supplier directory to find the right vendor category for a need.','Usar el directorio de proveedores ANEW para encontrar la categor\u00EDa de proveedor correcta.'),
+   body:[
+     {p:L('A mold maker who knows where to source components, steel, cutters, coatings, hot runners, chillers, robotics, and material handling can build faster and cheaper.','Un fabricante de moldes que sabe d\u00F3nde abastecer componentes, acero, cortadores, recubrimientos, canales calientes, enfriadores, rob\u00F3tica y manejo de material puede construir m\u00E1s r\u00E1pido y barato.')},
+     {h:L('Main categories','Categor\u00EDas principales')},
+     {ul:[L('Mold components & hot runners (DME, Hasco, Mold-Masters, INCOE).','Componentes de molde y canales calientes (DME, Hasco, Mold-Masters, INCOE).'),
+          L('Aluminum & steel (Alcoa, Nucor, ArcelorMittal).','Aluminio y acero (Alcoa, Nucor, ArcelorMittal).'),
+          L('Injection machines (Arburg, Engel, Husky, Milacron).','M\u00E1quinas de inyecci\u00F3n (Arburg, Engel, Husky, Milacron).'),
+          L('Automation & sprue pickers (ABB, Fanuc, Yushin, Sepro).','Automatizaci\u00F3n y extractores (ABB, Fanuc, Yushin, Sepro).')]},
+   ],
+   suppliers:[{n:'DME',d:L('Mold components & hot runners','Componentes y canales calientes'),w:'dme.net'},
+              {n:'Husky',d:L('Injection machines & hot runners','M\u00E1quinas e inyecci\u00F3n'),w:'husky.ca'}],
+   quiz:[
+     {tag:'check',stem:L('Which supplier provides robotic part removal at the press?','\u00BFQu\u00E9 proveedor ofrece extracci\u00F3n rob\u00F3tica de piezas en la prensa?'),
+      opts:[L('ArcelorMittal','ArcelorMittal'),L('Yushin America','Yushin America'),L('PlastiColor','PlastiColor'),L('CoorsTek','CoorsTek')],a:1,
+      fb:L('Yushin provides robotic part-removal solutions.','Yushin ofrece soluciones de extracci\u00F3n rob\u00F3tica.')},
+     {tag:'check',stem:L('For aluminum or steel mold stock, which is an approved supplier?','Para acero o aluminio de molde, \u00BFcu\u00E1l es un proveedor aprobado?'),
+      opts:[L('Yushin','Yushin'),L('Nucor','Nucor'),L('Mold-Tech','Mold-Tech'),L('Conair','Conair')],a:1,
+      fb:L('Nucor supplies steel; Alcoa supplies aluminum.','Nucor suministra acero; Alcoa suministra aluminio.')},
+   ]},
+  {id:'m5l2',
+   title:L('The Vetting Rule','La Regla de Verificaci\u00F3n'),
+   obj:L('Apply the reference-check rule before committing to any supplier.','Aplicar la regla de verificaci\u00F3n de referencias antes de comprometerse con un proveedor.'),
+   body:[
+     {p:L('Before committing, ask: "Can you provide a few customers that use your equipment or raw materials?" An eager supplier shares references. Always do your own production background check.','Antes de comprometerte, pregunta: "\u00BFPuede darme algunos clientes que usen su equipo o materia prima?" Un proveedor interesado comparte referencias. Siempre haz tu propia verificaci\u00F3n de producci\u00F3n.')},
+   ],
+   quiz:[
+     {tag:'check',stem:L('What is the recommended vetting question for a new supplier?','\u00BFCu\u00E1l es la pregunta de verificaci\u00F3n recomendada para un nuevo proveedor?'),
+      opts:[L('"What is your lowest price?"','"\u00BFCu\u00E1l es su precio m\u00E1s bajo?"'),
+            L('"Can you provide a few customer references?"','"\u00BFPuede darme algunas referencias de clientes?"'),
+            L('"Do you ship overnight?"','"\u00BF Env\u00EDa de un d\u00EDa para otro?"'),
+            L('"Are you the biggest vendor?"','"\u00BFEs el proveedor m\u00E1s grande?"')],a:1,
+      fb:L('Asking for references is the directory\u2019s core vetting rule.','Pedir referencias es la regla central de verificaci\u00F3n del directorio.')},
+   ]},
+  {id:'m5l3',
+   title:L('Material Handling & Drying','Manejo y Secado de Material'),
+   obj:L('Recognize when material must be dried and which equipment handles bulk delivery.','Reconocer cu\u00E1ndo secar el material y qu\u00E9 equipo maneja la entrega a granel.'),
+   body:[
+     {p:L('Many materials are hygroscopic \u2014 they hold water and must be dried before processing or the part shows splay/streaks. Dryers and chillers come from suppliers like Novatec, Conair, and Thermal Care.','Muchos materiales son higrosc\u00F3picos \u2014 retienen agua y deben secarse antes de procesar o la pieza muestra r\u00E1fagas/estr\u00EDas. Secadores y enfriadores vienen de Novatec, Conair y Thermal Care.')},
+   ],
+   tip:L('Confirm drying specs with the material supplier for every hygroscopic resin.','Confirma las especificaciones de secado con el proveedor para cada resina higrosc\u00F3pica.'),
+   quiz:[
+     {tag:'recall',stem:L('Hygroscopic materials must be ___ before processing.','Los materiales higrosc\u00F3picos deben ___ antes de procesar.'),
+      opts:[L('cooled','enfriarse'),L('dried','secarse'),L('colored','colorearse'),L('reground','molerse')],a:1,
+      fb:L('Recall from Material Science \u2014 hygroscopic materials hold water and must be dried.','Repaso de Ciencia de Materiales \u2014 los higrosc\u00F3picos retienen agua y deben secarse.')},
+   ]},
+  {id:'m5l4',
+   title:L('Cutters & Coatings Sourcing','Abastecimiento de Cortadores y Recubrimientos'),
+   obj:L('Source cutters and cavity coatings from approved vendors.','Abastecer cortadores y recubrimientos de cavidad de proveedores aprobados.'),
+   body:[
+     {p:L('End mills, drills, reamers, and taps come from suppliers like MMT Productivity and Harvey Tool. Diamond/Teflon/nickel coatings come from DLC Coating and Surface Solutions Group.','Fresas, brocas, escariadores y machos vienen de MMT Productivity y Harvey Tool. Recubrimientos de diamante/Tefl\u00F3n/n\u00EDquel vienen de DLC Coating y Surface Solutions Group.')},
+   ],
+   suppliers:[{n:'MMT Productivity',d:L('End mills, drills, reamers, taps','Fresas, brocas, escariadores'),w:'mmtproductivity.com'},
+              {n:'DLC Coating, Inc.',d:L('Diamond-like carbon coatings','Recubrimientos DLC'),w:'dlccoating.com'}],
+   quiz:[
+     {tag:'check',stem:L('Which supplier provides diamond-like carbon (DLC) coatings?','\u00BFQu\u00E9 proveedor ofrece recubrimientos de carbono tipo diamante (DLC)?'),
+      opts:[L('Nucor','Nucor'),L('DLC Coating, Inc.','DLC Coating, Inc.'),L('Arburg','Arburg'),L('Conair','Conair')],a:1,
+      fb:L('DLC Coating, Inc. provides DLC coatings for cavities and dies.','DLC Coating, Inc. ofrece recubrimientos DLC para cavidades y dados.')},
+   ]},
+  {id:'m5l5',
+   title:L('Putting It Together','Integraci\u00F3n Final'),
+   obj:L('Plan a full sourcing list for a small mold program.','Planear una lista de abastecimiento completa para un programa de molde peque\u00F1o.'),
+   body:[
+     {p:L('A complete program touches several categories at once: components, steel, cutters, coatings, a machine, drying, and automation. Knowing the directory turns a build into a checklist.','Un programa completo toca varias categor\u00EDas a la vez: componentes, acero, cortadores, recubrimientos, una m\u00E1quina, secado y automatizaci\u00F3n. Conocer el directorio convierte una construcci\u00F3n en una lista de verificaci\u00F3n.')},
+   ],
+   quiz:[
+     {tag:'recall',stem:L('A slide or lifter exists primarily to do what?','\u00BFPara qu\u00E9 existe principalmente una corredera o elevador?'),
+      opts:[L('Cool the mold','Enfriar el molde'),L('Release an undercut','Liberar un socavado'),L('Add tonnage','A\u00F1adir tonelaje'),L('Color the part','Colorear la pieza')],a:1,
+      fb:L('Carried forward from Mold Design.','Heredado del m\u00F3dulo de Dise\u00F1o de Molde.')},
+     {tag:'check',stem:L('Which category would you source a chiller from?','\u00BFDe qu\u00E9 categor\u00EDa abastecer\u00EDas un enfriador?'),
+      opts:[L('Cutters','Cortadores'),L('Material handling & cooling','Manejo de material y enfriamiento'),L('Coatings','Recubrimientos'),L('Steel','Acero')],a:1,
+      fb:L('Chillers fall under material handling/cooling (Thermal Care, Conair).','Los enfriadores caen bajo manejo/enfriamiento (Thermal Care, Conair).')},
+   ]},
+ ]
+};
+
+/* ---------- module 2: Mold Design (from "#2 Mold Design" course doc) ---------- */
+const M2 = {
+ id:'m2',
+ title:L('Injection Mold Design','Dise\u00F1o de Moldes de Inyecci\u00F3n'),
+ sub:L('12 lessons \u00B7 Level 2','12 lecciones \u00B7 Nivel 2'),
+ lessons:[
+  {id:'m2l1',
+   title:L('The Mold Design Workflow','El Flujo de Trabajo del Dise\u00F1o de Molde'),
+   obj:L('Put the injection-mold workflow in the right order, from part design through documented production.','Ordenar correctamente el flujo de trabajo del molde de inyecci\u00F3n, desde el dise\u00F1o de la pieza hasta la producci\u00F3n documentada.'),
+   body:[
+     {p:L('Most mold knowledge is workflow-triggered: you do not memorize it, you follow the sequence and solve the engineering challenge at each step.','Gran parte del conocimiento de moldes se activa por el flujo de trabajo: no se memoriza, se sigue la secuencia y se resuelve el reto de ingenier\u00EDa en cada paso.')},
+     {h:L('The sequence','La secuencia')},
+     {ul:[L('Identify the physical environment the part will live in, then select a material that meets the outcome.','Identifica el entorno f\u00EDsico donde vivir\u00E1 la pieza, luego selecciona un material que cumpla el objetivo.'),
+          L('Design the 3D part per supplier recommendations, including how it ejects from the mold.','Dise\u00F1a la pieza 3D seg\u00FAn las recomendaciones del proveedor, incluyendo c\u00F3mo se expulsa del molde.'),
+          L('Locate where plastic can be injected, then simulate part strength and mold flow.','Ubica d\u00F3nde se puede inyectar el pl\u00E1stico, luego simula la resistencia de la pieza y el flujo del molde.'),
+          L('Scale the part for material shrinkage, split the cavities, and finish the mold design.','Escala la pieza por contracci\u00F3n del material, divide las cavidades y termina el dise\u00F1o del molde.'),
+          L('Generate cutter paths, cut the mold, then polish, texture, and hard-coat the cavity surfaces.','Genera trayectorias de corte, mecaniza el molde, luego pule, textura y recubre las superficies de la cavidad.')]},
+     {p:L('Once the first parts come off the mold, quality control measures the dimensions. If the part is dimensionally, cosmetically, and structurally correct, the molding process is documented for future runs.','Cuando salen las primeras piezas, control de calidad mide las dimensiones. Si la pieza es correcta dimensional, cosm\u00E9tica y estructuralmente, el proceso de moldeo se documenta para futuras corridas.')}
+   ],
+   tip:L('Design out slides and lifters whenever you can \u2014 the workflow is cheaper and faster every time you avoid a moving component.','Evita correderas y elevadores cuando puedas \u2014 el flujo es m\u00E1s barato y r\u00E1pido cada vez que evitas un componente m\u00F3vil.'),
+   quiz:[
+     {tag:'check',stem:L('Which step comes FIRST in the mold design workflow?','\u00BFQu\u00E9 paso va PRIMERO en el flujo de trabajo del dise\u00F1o de molde?'),
+      opts:[L('Generate cutter paths','Generar trayectorias de corte'),L('Identify the part\u2019s physical environment and select a material','Identificar el entorno f\u00EDsico de la pieza y seleccionar un material'),L('Split the cavities','Dividir las cavidades'),L('Polish the cavity','Pulir la cavidad')],a:1,
+      fb:L('Everything starts from the environment and the material choice that meets the outcome.','Todo comienza con el entorno y la elecci\u00F3n del material que cumple el objetivo.')},
+     {tag:'check',stem:L('When is the part scaled for shrinkage relative to splitting cavities?','\u00BFCu\u00E1ndo se escala la pieza por contracci\u00F3n respecto a la divisi\u00F3n de cavidades?'),
+      opts:[L('After the cavities are split','Despu\u00E9s de dividir las cavidades'),L('Before the cavities are split','Antes de dividir las cavidades'),L('After the mold is cut','Despu\u00E9s de mecanizar el molde'),L('It is never scaled','Nunca se escala')],a:1,
+      fb:L('Scale for shrinkage BEFORE splitting cavities so it carries through every later step.','Escala por contracci\u00F3n ANTES de dividir cavidades para que se propague a cada paso posterior.')},
+     {tag:'recall',stem:L('After the first good parts are produced, what is done for future runs?','Despu\u00E9s de producir las primeras piezas buenas, \u00BFqu\u00E9 se hace para futuras corridas?'),
+      opts:[L('The mold is scrapped','Se desecha el molde'),L('The molding process is documented','Se documenta el proceso de moldeo'),L('Shrinkage is re-applied','Se reaplica la contracci\u00F3n'),L('The gate is removed','Se elimina la compuerta')],a:1,
+      fb:L('A correct part means the process gets documented so it repeats reliably.','Una pieza correcta significa documentar el proceso para repetirlo de forma confiable.')}
+   ]},
+
+  {id:'m2l2',
+   title:L('Plastic Molding Processes','Procesos de Moldeo de Pl\u00E1stico'),
+   obj:L('Name the major molding processes and match each to the kind of part it makes best.','Nombrar los principales procesos de moldeo y asociar cada uno con el tipo de pieza que mejor produce.'),
+   body:[
+     {p:L('Injection molding is the focus of this course, but a designer should know the alternatives and their limits at mass scale.','El moldeo por inyecci\u00F3n es el foco de este curso, pero un dise\u00F1ador debe conocer las alternativas y sus l\u00EDmites a gran escala.')},
+     {ul:[L('Injection molding \u2014 molten plastic injected into a cavity under high pressure; complex shapes, high volume.','Moldeo por inyecci\u00F3n \u2014 pl\u00E1stico fundido inyectado en una cavidad a alta presi\u00F3n; formas complejas, alto volumen.'),
+          L('Blow molding \u2014 air blown into a molten tube to form a hollow part like a bottle.','Moldeo por soplado \u2014 aire soplado en un tubo fundido para formar una pieza hueca como una botella.'),
+          L('Thermoforming / pressure forming \u2014 a heated sheet is shaped over a mold or between male/female dies.','Termoformado / formado a presi\u00F3n \u2014 una l\u00E1mina caliente se forma sobre un molde o entre dados macho/hembra.'),
+          L('Extrusion \u2014 plastic pushed through a die to make a continuous sheet or profile.','Extrusi\u00F3n \u2014 pl\u00E1stico empujado por un dado para hacer una l\u00E1mina o perfil continuo.'),
+          L('Rotational molding \u2014 a mold rotates while heated to form a hollow part.','Moldeo rotacional \u2014 el molde gira mientras se calienta para formar una pieza hueca.'),
+          L('Gas assist \u2014 gas injected into the cavity shapes the plastic and reduces material used.','Asistido por gas \u2014 gas inyectado en la cavidad da forma al pl\u00E1stico y reduce el material usado.')]},
+     {p:L('This document is about mold-able materials only \u2014 it does NOT cover thin-wall metal stamping or progressive dies.','Este documento trata solo de materiales moldeables \u2014 NO cubre el estampado de metal de pared delgada ni los dados progresivos.')}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which process injects gas into the cavity to reduce material in thick sections?','\u00BFQu\u00E9 proceso inyecta gas en la cavidad para reducir material en secciones gruesas?'),
+      opts:[L('Blow molding','Moldeo por soplado'),L('Gas assist','Asistido por gas'),L('Extrusion','Extrusi\u00F3n'),L('Rotational molding','Moldeo rotacional')],a:1,
+      fb:L('Gas assist uses injected gas to shape the plastic and cut material use.','El asistido por gas usa gas inyectado para dar forma y reducir el material.')},
+     {tag:'check',stem:L('Which process makes a continuous profile such as pipe or sheet?','\u00BFQu\u00E9 proceso hace un perfil continuo como tubo o l\u00E1mina?'),
+      opts:[L('Injection molding','Moldeo por inyecci\u00F3n'),L('Extrusion','Extrusi\u00F3n'),L('Gas assist','Asistido por gas'),L('Blow molding','Moldeo por soplado')],a:1,
+      fb:L('Extrusion forces plastic through a die for continuous shapes.','La extrusi\u00F3n fuerza el pl\u00E1stico por un dado para formas continuas.')},
+     {tag:'recall',stem:L('Does this course cover progressive metal stamping dies?','\u00BFCubre este curso los dados progresivos de estampado de metal?'),
+      opts:[L('Yes','S\u00ED'),L('No \u2014 only mold-able materials','No \u2014 solo materiales moldeables')],a:1,
+      fb:L('The scope is mold-able materials, not stamping or progressive dies.','El alcance son materiales moldeables, no estampado ni dados progresivos.')}
+   ]},
+
+  {id:'m2l3',
+   title:L('Core Mold Features & Functions','Caracter\u00EDsticas y Funciones del Molde'),
+   obj:L('Identify the main injection-mold components and state what each one does.','Identificar los componentes principales del molde de inyecci\u00F3n y decir qu\u00E9 hace cada uno.'),
+   body:[
+     {h:L('Filling the cavity','Llenado de la cavidad')},
+     {ul:[L('Gate \u2014 the point where molten plastic enters the cavity. Styles include sprue, edge, tunnel, and valve gates, chosen by part size, material, and appearance.','Compuerta \u2014 el punto donde entra el pl\u00E1stico fundido. Los estilos incluyen colada, lateral, t\u00FAnel y de v\u00E1lvula, elegidos por tama\u00F1o, material y apariencia.'),
+          L('Venting \u2014 small channels that let trapped air and gas escape, placed at corners, undercuts, and thick sections.','Venteo \u2014 peque\u00F1os canales que dejan escapar aire y gases atrapados, ubicados en esquinas, socavados y secciones gruesas.'),
+          L('Cooling \u2014 drilled water lines pull heat from the mold; gas-charged thermal pins reach spots water cannot.','Enfriamiento \u2014 l\u00EDneas de agua perforadas extraen el calor; pasadores t\u00E9rmicos con gas llegan donde el agua no puede.')]},
+     {h:L('Aligning and supporting the mold','Alinear y soportar el molde')},
+     {ul:[L('Leader pins & bushings \u2014 hardened ground pins ride in graphite-bearing bushings; the pin is slightly under-size and the bushing slightly over-size so they do not seize when hot.','Pasadores gu\u00EDa y bujes \u2014 pasadores rectificados endurecidos corren en bujes con grafito; el pasador es algo menor y el buje algo mayor para no agarrotarse en caliente.'),
+          L('Parting-line taper locks \u2014 hardened ground blocks that align A and B sides beyond the leader pins; machined at assembly for optimal alignment.','Cierres c\u00F3nicos de l\u00EDnea de partici\u00F3n \u2014 bloques rectificados endurecidos que alinean los lados A y B m\u00E1s all\u00E1 de los pasadores gu\u00EDa; mecanizados en ensamble.'),
+          L('Support pillars \u2014 carry the injection load so the B-side does not bend; screwed into the back of the B-side.','Pilares de soporte \u2014 soportan la carga de inyecci\u00F3n para que el lado B no se doble; atornillados al respaldo del lado B.'),
+          L('Thermal (insulator) plates \u2014 thin phenolic plates that keep the platen from pulling heat out of the hot side.','Placas t\u00E9rmicas (aislantes) \u2014 placas finas de fen\u00F3lico que evitan que la platina extraiga el calor del lado caliente.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What is the function of venting in a mold?','\u00BFCu\u00E1l es la funci\u00F3n del venteo en un molde?'),
+      opts:[L('To cool the plastic','Enfriar el pl\u00E1stico'),L('To let trapped air and gas escape','Dejar escapar aire y gases atrapados'),L('To eject the part','Expulsar la pieza'),L('To align the mold halves','Alinear las mitades del molde')],a:1,
+      fb:L('Vents prevent air entrapment and improve flow, especially at corners and thick sections.','Los venteos evitan el atrapamiento de aire y mejoran el flujo, sobre todo en esquinas y secciones gruesas.')},
+     {tag:'check',stem:L('Why are leader pins made slightly smaller and bushings slightly bigger?','\u00BFPor qu\u00E9 los pasadores gu\u00EDa se hacen algo menores y los bujes algo mayores?'),
+      opts:[L('To save steel','Para ahorrar acero'),L('To prevent seizing when the tool gets hot','Para evitar agarrotamiento cuando la herramienta se calienta'),L('To add tonnage','Para a\u00F1adir tonelaje'),L('To improve gloss','Para mejorar el brillo')],a:1,
+      fb:L('The tolerance stack-up keeps them from seizing as heat expands the parts.','El apilamiento de tolerancias evita el agarrotamiento cuando el calor expande las piezas.')},
+     {tag:'check',stem:L('What do support pillars prevent?','\u00BF Qu\u00E9 evitan los pilares de soporte?'),
+      opts:[L('Short shots','Disparos cortos'),L('The B-side bending under injection pressure','Que el lado B se doble bajo la presi\u00F3n de inyecci\u00F3n'),L('Flash','Rebaba'),L('Warping of the part','Alabeo de la pieza')],a:1,
+      fb:L('Support pillars carry the injection load so the B-side plate will not bend.','Los pilares soportan la carga de inyecci\u00F3n para que el lado B no se doble.')}
+   ]},
+
+  {id:'m2l4',
+   title:L('Ejection Systems','Sistemas de Expulsi\u00F3n'),
+   obj:L('Explain how the ejector train removes a part and returns to home position.','Explicar c\u00F3mo el tren expulsor retira una pieza y vuelve a la posici\u00F3n inicial.'),
+   body:[
+     {p:L('Ejection removes the molded part after the mold opens. Methods include ejector pins, ejector sleeves, return pins, and ejector blades, chosen by part size, material, and mold complexity.','La expulsi\u00F3n retira la pieza moldeada tras abrir el molde. Los m\u00E9todos incluyen pasadores, camisas, pasadores de retorno y cuchillas expulsoras, elegidos por tama\u00F1o, material y complejidad.')},
+     {ul:[L('Ejector pins & sleeves \u2014 pins push the part out; a sleeve slips over a core pin to strip a part off at ejection.','Pasadores y camisas \u2014 los pasadores empujan la pieza; una camisa se desliza sobre un n\u00FAcleo para desprender la pieza.'),
+          L('Return pins & springs \u2014 push the ejector plates back home; springs are pre-loaded ~5 mm and the return pin sits level with the parting line.','Pasadores y resortes de retorno \u2014 empujan las placas expulsoras a su lugar; los resortes se precargan ~5 mm y el pasador queda a nivel de la l\u00EDnea de partici\u00F3n.'),
+          L('Hard stops \u2014 screwed to the back of the B-side; they stop ejector travel before the springs fully compress.','Topes duros \u2014 atornillados al respaldo del lado B; detienen el recorrido antes de comprimir del todo los resortes.'),
+          L('Knockout bars \u2014 connect to the machine ejector box; when the mold opens the machine strikes them forward to push the ejector plates until the hard stop is hit.','Barras de expulsi\u00F3n \u2014 conectan a la caja expulsora de la m\u00E1quina; al abrir el molde, la m\u00E1quina las empuja para mover las placas hasta el tope duro.')]}
+   ],
+   tip:L('Drill the ejector-pin hole about 0.0005" larger on each surface than the pin so it does not seize when the mold heats up.','Perfora el agujero del pasador expulsor unos 0.0005" m\u00E1s grande por cara que el pasador para que no se agarrote al calentarse el molde.'),
+   quiz:[
+     {tag:'check',stem:L('What is the job of return pins and springs?','\u00BFCu\u00E1l es la funci\u00F3n de los pasadores y resortes de retorno?'),
+      opts:[L('Inject plastic','Inyectar pl\u00E1stico'),L('Push the ejector plates back to home position','Empujar las placas expulsoras a su posici\u00F3n inicial'),L('Cool the cavity','Enfriar la cavidad'),L('Lock the parting line','Bloquear la l\u00EDnea de partici\u00F3n')],a:1,
+      fb:L('Return pins and pre-loaded springs return the ejector plates when the mold closes.','Los pasadores de retorno y los resortes precargados regresan las placas al cerrar el molde.')},
+     {tag:'check',stem:L('What strikes the ejector plates forward, and what stops them?','\u00BFQu\u00E9 empuja las placas expulsoras y qu\u00E9 las detiene?'),
+      opts:[L('Knockout bars push; hard stops stop them','Las barras empujan; los topes duros las detienen'),L('Leader pins push; springs stop them','Los pasadores gu\u00EDa empujan; los resortes las detienen'),L('The gate pushes; the vent stops it','La compuerta empuja; el venteo la detiene'),L('Coolant pushes; the platen stops it','El refrigerante empuja; la platina la detiene')],a:0,
+      fb:L('Machine knockout bars push the plates; hard stops limit the travel.','Las barras de la m\u00E1quina empujan las placas; los topes duros limitan el recorrido.')},
+     {tag:'check',stem:L('An ejector sleeve is used to:','Una camisa expulsora se usa para:'),
+      opts:[L('Vent gas','Ventear gas'),L('Strip a part off a core pin','Desprender una pieza de un n\u00FAcleo'),L('Align the mold','Alinear el molde'),L('Add cooling','A\u00F1adir enfriamiento')],a:1,
+      fb:L('A sleeve slips over the core pin and strips the part at ejection.','La camisa se desliza sobre el n\u00FAcleo y desprende la pieza al expulsar.')}
+   ]},
+
+  {id:'m2l5',
+   title:L('Cavity & Core Splitting in Fusion360','Divisi\u00F3n de Cavidad y N\u00FAcleo en Fusion360'),
+   obj:L('Follow the Fusion360 boundary-fill workflow to split a cavity and core from a block.','Seguir el flujo de relleno de l\u00EDmites de Fusion360 para dividir cavidad y n\u00FAcleo de un bloque.'),
+   body:[
+     {p:L('Splitting cavities and cores from a block is one of the hardest CAD tasks. Doing it outside the mold base keeps it simple, then you combine the result into the A and B plates.','Dividir cavidades y n\u00FAcleos de un bloque es una de las tareas CAD m\u00E1s dif\u00EDciles. Hacerlo fuera de la base del molde lo simplifica; luego combinas el resultado en las placas A y B.')},
+     {h:L('The steps','Los pasos')},
+     {ul:[L('Add shrinkage to the part, then design the cavities and runners and use Combine.','A\u00F1ade contracci\u00F3n a la pieza, dise\u00F1a cavidades y canales y usa Combinar.'),
+          L('Cap off every hole that defines where the mold breaks apart.','Tapa cada agujero que define d\u00F3nde se separa el molde.'),
+          L('Extend a rectangular block around the part(s), then subtract the parts from the block with Combine.','Extiende un bloque rectangular alrededor de la(s) pieza(s) y resta las piezas del bloque con Combinar.'),
+          L('Build a parting line that extends past the block.','Construye una l\u00EDnea de partici\u00F3n que se extienda m\u00E1s all\u00E1 del bloque.'),
+          L('Use Boundary Fill on the block and surfaces to select one body, then repeat on the other side.','Usa Relleno de L\u00EDmites en el bloque y las superficies para seleccionar un cuerpo, luego repite en el otro lado.')]},
+     {p:L('A family mold gangs up multiple cavities of similar parts in the counts needed for an assembly or sub-assembly.','Un molde familiar agrupa varias cavidades de piezas similares en las cantidades necesarias para un ensamble o subensamble.')}
+   ],
+   tip:L('Make cavities and cores outside the mold base; then cut a pocket in the A & B plates and use Combine to make them one piece.','Haz cavidades y n\u00FAcleos fuera de la base del molde; luego corta una cajera en las placas A y B y usa Combinar para unirlos.'),
+   quiz:[
+     {tag:'check',stem:L('Which Fusion360 command finally creates the cavity/core solid from the block and surfaces?','\u00BFQu\u00E9 comando de Fusion360 crea finalmente el s\u00F3lido de cavidad/n\u00FAcleo a partir del bloque y las superficies?'),
+      opts:[L('Extrude','Extruir'),L('Boundary Fill','Relleno de L\u00EDmites'),L('Revolve','Revolucionar'),L('Sweep','Barrer')],a:1,
+      fb:L('Boundary Fill selects the block and surfaces to build each half.','Relleno de L\u00EDmites selecciona el bloque y las superficies para construir cada mitad.')},
+     {tag:'check',stem:L('Before subtracting the part from the block, what must you do to the holes?','Antes de restar la pieza del bloque, \u00BFqu\u00E9 debes hacer con los agujeros?'),
+      opts:[L('Enlarge them','Agrandarlos'),L('Cap off the holes that define the split','Tapar los agujeros que definen la divisi\u00F3n'),L('Thread them','Roscarlos'),L('Ignore them','Ignorarlos')],a:1,
+      fb:L('Cap the holes that define where the mold breaks apart so the split is clean.','Tapa los agujeros que definen la separaci\u00F3n para una divisi\u00F3n limpia.')},
+     {tag:'recall',stem:L('A family mold is used to:','Un molde familiar se usa para:'),
+      opts:[L('Mold one giant part','Moldear una pieza gigante'),L('Gang up similar parts in assembly counts','Agrupar piezas similares en cantidades de ensamble'),L('Avoid shrinkage','Evitar la contracci\u00F3n'),L('Replace the runner','Reemplazar el canal')],a:1,
+      fb:L('Family molds combine similar parts in the quantities an assembly needs.','Los moldes familiares combinan piezas similares en las cantidades que requiere un ensamble.')}
+   ]},
+
+  {id:'m2l6',
+   title:L('Undercuts: Slides & Lifters','Socavados: Correderas y Elevadores'),
+   obj:L('Describe how slides and lifters release undercuts and why they add cost.','Describir c\u00F3mo las correderas y elevadores liberan socavados y por qu\u00E9 a\u00F1aden costo.'),
+   body:[
+     {p:L('An undercut is a feature that prevents the part from ejecting straight out. Slides and lifters create a path so the undercut can clear as the part ejects.','Un socavado es una caracter\u00EDstica que impide expulsar la pieza en l\u00EDnea recta. Las correderas y elevadores crean un camino para que el socavado libere al expulsar.')},
+     {ul:[L('Slides/lifters sit on the moving side and travel in and out as needed; gibs trap the slide so it moves in a controlled direction away from the undercut.','Las correderas/elevadores van en el lado m\u00F3vil y entran y salen seg\u00FAn se necesite; las gu\u00EDas (gibs) atrapan la corredera para que se mueva controladamente lejos del socavado.'),
+          L('Cam pins extend out to pull the slide away from the part as the mold opens.','Los pasadores leva se extienden para alejar la corredera de la pieza al abrir el molde.'),
+          L('Slides need cooling too, and may be driven by hydraulic or pneumatic cylinders tied to the machine\u2019s process logic.','Las correderas tambi\u00E9n necesitan enfriamiento y pueden moverse con cilindros hidr\u00E1ulicos o neum\u00E1ticos ligados a la l\u00F3gica de la m\u00E1quina.')]}
+   ],
+   tip:L('It is always better to design parts WITHOUT slides or lifters \u2014 they add significant mold cost, build time, and ongoing maintenance because they are moving parts.','Siempre es mejor dise\u00F1ar piezas SIN correderas ni elevadores \u2014 a\u00F1aden costo, tiempo de construcci\u00F3n y mantenimiento por ser partes m\u00F3viles.'),
+   quiz:[
+     {tag:'check',stem:L('What is the primary purpose of a slide or lifter?','\u00BFCu\u00E1l es el prop\u00F3sito principal de una corredera o elevador?'),
+      opts:[L('Cool the mold','Enfriar el molde'),L('Release an undercut','Liberar un socavado'),L('Add tonnage','A\u00F1adir tonelaje'),L('Vent gas','Ventear gas')],a:1,
+      fb:L('Slides and lifters create the path that lets an undercut clear during ejection.','Las correderas y elevadores crean el camino que deja liberar un socavado al expulsar.')},
+     {tag:'check',stem:L('What pulls the slide away from the part as the mold opens?','\u00BFQu\u00E9 aleja la corredera de la pieza al abrir el molde?'),
+      opts:[L('Return pins','Pasadores de retorno'),L('Cam pins','Pasadores leva'),L('Support pillars','Pilares de soporte'),L('Knockout bars','Barras de expulsi\u00F3n')],a:1,
+      fb:L('Cam pins extend to drive the slide outward as the mold opens.','Los pasadores leva se extienden para mover la corredera hacia afuera al abrir.')},
+     {tag:'check',stem:L('Why avoid slides and lifters when possible?','\u00BFPor qu\u00E9 evitar correderas y elevadores cuando sea posible?'),
+      opts:[L('They make parts heavier','Hacen las piezas m\u00E1s pesadas'),L('They add cost, build time, and maintenance','A\u00F1aden costo, tiempo y mantenimiento'),L('They block cooling','Bloquean el enfriamiento'),L('They reduce strength','Reducen la resistencia')],a:1,
+      fb:L('As moving parts they raise mold cost, lengthen the build, and need maintenance.','Como partes m\u00F3viles elevan el costo, alargan la construcci\u00F3n y requieren mantenimiento.')}
+   ]},
+
+  {id:'m2l7',
+   title:L('Unscrewing Mechanisms','Mecanismos de Desenrosque'),
+   obj:L('Explain how an unscrewing mechanism releases a threaded (undercut) feature.','Explicar c\u00F3mo un mecanismo de desenrosque libera una caracter\u00EDstica roscada (socavado).'),
+   body:[
+     {p:L('Threads are an undercut. An unscrewing mechanism rotates and moves a hardened screw axially during the molding cycle to release a threaded part from the mold.','Las roscas son un socavado. Un mecanismo de desenrosque gira y mueve axialmente un tornillo endurecido durante el ciclo para liberar una pieza roscada del molde.')},
+     {p:L('It is built into the mold design and is common on plastic parts with threads, such as electrical connectors, caps, and automotive parts.','Se integra en el dise\u00F1o del molde y es com\u00FAn en piezas pl\u00E1sticas con roscas, como conectores el\u00E9ctricos, tapas y piezas automotrices.')}
+   ],
+   quiz:[
+     {tag:'check',stem:L('A molded internal thread is an example of what?','Una rosca interna moldeada es un ejemplo de qu\u00E9?'),
+      opts:[L('A vent','Un venteo'),L('An undercut','Un socavado'),L('A gate','Una compuerta'),L('A parting line','Una l\u00EDnea de partici\u00F3n')],a:1,
+      fb:L('Threads are undercuts, which is why an unscrewing mechanism is needed.','Las roscas son socavados, por eso se necesita un mecanismo de desenrosque.')},
+     {tag:'check',stem:L('How does an unscrewing mechanism release a threaded part?','\u00BFC\u00F3mo libera un mecanismo de desenrosque una pieza roscada?'),
+      opts:[L('It melts the threads','Funde las roscas'),L('It rotates and moves the screw axially','Gira y mueve el tornillo axialmente'),L('It blows air into the cavity','Sopla aire en la cavidad'),L('It cools the gate','Enfr\u00EDa la compuerta')],a:1,
+      fb:L('Rotation plus axial motion backs the thread out of the molded part.','La rotaci\u00F3n m\u00E1s el movimiento axial saca la rosca de la pieza moldeada.')}
+   ]},
+
+  {id:'m2l8',
+   title:L('Hot Runners & Valve Gates','Canales Calientes y Compuertas de V\u00E1lvula'),
+   obj:L('Compare hot-tip and valve-gate hot runners and weigh their cost and lead-time impact.','Comparar canales calientes de punta y de v\u00E1lvula y sopesar su impacto en costo y plazo.'),
+   body:[
+     {p:L('Hot runners push material from the center out on complex shapes and can feed multiple cavities. They come in two styles.','Los canales calientes empujan material del centro hacia afuera en formas complejas y pueden alimentar varias cavidades. Vienen en dos estilos.')},
+     {ul:[L('Hot tip \u2014 delivers through a small hole; leaves a small dimple but is dependable, lower cost, and lower maintenance.','Punta caliente \u2014 entrega por un agujero peque\u00F1o; deja un peque\u00F1o hoyuelo pero es confiable, m\u00E1s barata y de bajo mantenimiento.'),
+          L('Valve gate \u2014 delivers through a plunger-and-bushing that can be textured; needs more controls, is finicky to run, and costs about double a hot tip.','Compuerta de v\u00E1lvula \u2014 entrega por \u00E9mbolo y buje texturizable; requiere m\u00E1s controles, es delicada y cuesta cerca del doble que una punta.')]},
+     {p:L('Each drop must change temperature, monitored at the machine controller in a feedback loop. Expect a hot-runner system to roughly TRIPLE both the mold cost and the lead time.','Cada boquilla debe cambiar de temperatura, monitoreada en el controlador en un lazo de realimentaci\u00F3n. Un sistema de canal caliente suele TRIPLICAR el costo del molde y el plazo.')}
+   ],
+   tip:L('If the part is small enough, buy off-the-shelf hot tips and valve gates in stock sizes \u2014 you still need a thermal controller to monitor and throttle heat at each drop.','Si la pieza es peque\u00F1a, compra puntas y compuertas est\u00E1ndar \u2014 a\u00FAn necesitas un controlador t\u00E9rmico para monitorear y regular el calor en cada boquilla.'),
+   quiz:[
+     {tag:'check',stem:L('Which hot-runner style is cheaper and lower-maintenance but leaves a small dimple?','\u00BFQu\u00E9 estilo de canal caliente es m\u00E1s barato y de bajo mantenimiento pero deja un hoyuelo?'),
+      opts:[L('Valve gate','Compuerta de v\u00E1lvula'),L('Hot tip','Punta caliente'),L('Tunnel gate','Compuerta de t\u00FAnel'),L('Edge gate','Compuerta lateral')],a:1,
+      fb:L('Hot tip is dependable and low cost but leaves a small dimple.','La punta caliente es confiable y barata pero deja un peque\u00F1o hoyuelo.')},
+     {tag:'check',stem:L('Roughly how much can a hot-runner system change mold cost and lead time?','\u00BFAprox. cu\u00E1nto puede cambiar un sistema de canal caliente el costo y el plazo del molde?'),
+      opts:[L('No change','Sin cambio'),L('About double','Aprox. el doble'),L('About triple','Aprox. el triple'),L('Cuts both in half','Reduce ambos a la mitad')],a:2,
+      fb:L('Plan for roughly 3\u00D7 the mold cost and lead time with a hot-runner system.','Planifica aprox. 3\u00D7 el costo y el plazo del molde con un sistema de canal caliente.')},
+     {tag:'check',stem:L('What does every hot-runner drop need to control?','\u00BFQu\u00E9 debe controlar cada boquilla de canal caliente?'),
+      opts:[L('Its color','Su color'),L('Its temperature','Su temperatura'),L('Its tonnage','Su tonelaje'),L('Its shrinkage','Su contracci\u00F3n')],a:1,
+      fb:L('Each drop changes temperature, monitored at the controller in a feedback loop.','Cada boquilla cambia de temperatura, monitoreada en el controlador en un lazo.')}
+   ]},
+
+  {id:'m2l9',
+   title:L('Surface Finish & Texture (SPI)','Acabado y Textura de Superficie (SPI)'),
+   obj:L('Read SPI finish grades and identify which surfaces must stay untextured (masked).','Leer los grados de acabado SPI e identificar qu\u00E9 superficies deben quedar sin textura (enmascaradas).'),
+   body:[
+     {p:L('The Society of the Plastics Industry (SPI) defines standard mold finishes. A-grades are polished (A-1 highest gloss, 85%+ reflectivity); B-grades are mechanical/chemical finishes; gloss drops from 1 to 3 within each grade.','La Society of the Plastics Industry (SPI) define acabados est\u00E1ndar. Los grados A son pulidos (A-1 el m\u00E1s brillante, 85%+ de reflectividad); los grados B son mec\u00E1nicos/qu\u00EDmicos; el brillo baja de 1 a 3 dentro de cada grado.')},
+     {h:L('Texturing methods','M\u00E9todos de texturizado')},
+     {ul:[L('Etching, laser texturing, electrolytic texturing, electroplating, chemical milling, and stamping all add a controlled surface texture.','Grabado, texturizado l\u00E1ser, texturizado electrol\u00EDtico, electrodeposici\u00F3n, fresado qu\u00EDmico y estampado a\u00F1aden una textura controlada.')]},
+     {p:L('Texturing requires masking \u2014 a film that keeps working surfaces (ejector-pin holes, leader/return pins, parting-line faces) from being textured. Mark those surfaces on a 3D model and send it as a .STEP so the colors survive import to the vendor\u2019s CAD.','El texturizado requiere enmascarado \u2014 una pel\u00EDcula que evita texturar superficies de trabajo (agujeros de pasadores, gu\u00EDa/retorno, caras de l\u00EDnea de partici\u00F3n). Marca esas superficies en un modelo 3D y env\u00EDalo como .STEP para que los colores sobrevivan al importar.')}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which SPI grade is the highest-gloss polished finish?','\u00BFQu\u00E9 grado SPI es el acabado pulido de mayor brillo?'),
+      opts:[L('SPI A-1','SPI A-1'),L('SPI A-3','SPI A-3'),L('SPI B-3','SPI B-3'),L('SPI B-1','SPI B-1')],a:0,
+      fb:L('A-1 is the highest gloss, with 85%+ reflectivity.','A-1 es el de mayor brillo, con 85%+ de reflectividad.')},
+     {tag:'check',stem:L('Why is masking used before texturing?','\u00BFPor qu\u00E9 se usa el enmascarado antes de texturizar?'),
+      opts:[L('To add gloss','Para a\u00F1adir brillo'),L('To keep working surfaces free of texture','Para mantener las superficies de trabajo sin textura'),L('To cool the mold','Para enfriar el molde'),L('To speed cutting','Para acelerar el corte')],a:1,
+      fb:L('Masking protects working surfaces \u2014 pin holes, leader/return pins, parting lines.','El enmascarado protege superficies de trabajo \u2014 agujeros, pasadores gu\u00EDa/retorno, l\u00EDneas de partici\u00F3n.')},
+     {tag:'check',stem:L('Which file format keeps your color-marked surfaces when sent to a texture vendor?','\u00BFQu\u00E9 formato conserva tus superficies marcadas con color al enviarlas a un proveedor de textura?'),
+      opts:[L('.PDF','.PDF'),L('.STEP','.STEP'),L('.JPG','.JPG'),L('.TXT','.TXT')],a:1,
+      fb:L('Send a .STEP file so the marked colors survive the import to their CAD.','Env\u00EDa un archivo .STEP para que los colores marcados sobrevivan al importar a su CAD.')}
+   ]},
+
+  {id:'m2l10',
+   title:L('Cavity Materials: Aluminum vs. P20','Materiales de Cavidad: Aluminio vs. P20'),
+   obj:L('Trade off aircraft aluminum and P20 steel for cavities using thermal conductivity and durability.','Comparar aluminio aeron\u00E1utico y acero P20 para cavidades usando conductividad t\u00E9rmica y durabilidad.'),
+   body:[
+     {p:L('Thermal conductivity (W/m\u00B7K) measures how well a material moves heat. Higher conductivity means faster cooling and faster cycle times.','La conductividad t\u00E9rmica (W/m\u00B7K) mide qu\u00E9 tan bien un material conduce el calor. Mayor conductividad significa enfriamiento y ciclos m\u00E1s r\u00E1pidos.')},
+     {ul:[L('7071 aircraft aluminum (~169 W/m\u00B7K) \u2014 about 3.5\u00D7 more conductive than steel, faster cycles, soft and easy to cut; but cavities wear out faster.','Aluminio aeron\u00E1utico 7071 (~169 W/m\u00B7K) \u2014 unas 3.5\u00D7 m\u00E1s conductivo que el acero, ciclos m\u00E1s r\u00E1pidos, blando y f\u00E1cil de cortar; pero las cavidades se desgastan antes.'),
+          L('P20 mold steel (~45 W/m\u00B7K) \u2014 hard, holds up under high volumes; but longer cycles, longer to cut, and may need EDM to burn features that cannot be cut.','Acero de molde P20 (~45 W/m\u00B7K) \u2014 duro, resiste altos vol\u00FAmenes; pero ciclos m\u00E1s largos, m\u00E1s tiempo de corte y puede requerir EDM para quemar caracter\u00EDsticas no cortables.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Why does aluminum give faster cycle times than P20 steel?','\u00BFPor qu\u00E9 el aluminio da ciclos m\u00E1s r\u00E1pidos que el acero P20?'),
+      opts:[L('It is harder','Es m\u00E1s duro'),L('It has much higher thermal conductivity','Tiene mucha mayor conductividad t\u00E9rmica'),L('It is heavier','Es m\u00E1s pesado'),L('It needs EDM','Necesita EDM')],a:1,
+      fb:L('Aluminum is ~3.5\u00D7 more thermally conductive, so it cools the part faster.','El aluminio es ~3.5\u00D7 m\u00E1s conductivo, as\u00ED que enfr\u00EDa la pieza m\u00E1s r\u00E1pido.')},
+     {tag:'check',stem:L('What is the main downside of an aluminum cavity?','\u00BFCu\u00E1l es la principal desventaja de una cavidad de aluminio?'),
+      opts:[L('It cannot be cut','No se puede cortar'),L('It wears out faster than steel','Se desgasta m\u00E1s r\u00E1pido que el acero'),L('It cools too slowly','Se enfr\u00EDa muy lento'),L('It cannot be polished','No se puede pulir')],a:1,
+      fb:L('Aluminum is soft, so cavities wear out over a shorter life than steel.','El aluminio es blando, as\u00ED que las cavidades duran menos que las de acero.')},
+     {tag:'recall',stem:L('Which material may require EDM to burn features that cannot be cut?','\u00BFQu\u00E9 material puede requerir EDM para quemar caracter\u00EDsticas no cortables?'),
+      opts:[L('Aluminum','Aluminio'),L('P20 steel','Acero P20')],a:1,
+      fb:L('Hard P20 steel often needs EDM for features that cannot be milled.','El acero P20 duro suele requerir EDM para caracter\u00EDsticas que no se pueden fresar.')}
+   ]},
+
+  {id:'m2l11',
+   title:L('Tonnage & Venting','Tonelaje y Venteo'),
+   obj:L('Estimate required press tonnage from parting-line area and explain why venting matters.','Estimar el tonelaje de prensa requerido a partir del \u00E1rea de l\u00EDnea de partici\u00F3n y explicar la importancia del venteo.'),
+   body:[
+     {p:L('Press tonnage is the clamping force that keeps the mold closed against injection pressure. Estimate it from the total projected area at the parting line times a material factor.','El tonelaje de prensa es la fuerza de cierre que mantiene el molde cerrado contra la presi\u00F3n de inyecci\u00F3n. Se estima del \u00E1rea proyectada total en la l\u00EDnea de partici\u00F3n por un factor del material.')},
+     {ul:[L('Easy-to-flow materials need about 2\u00D7 the parting-line area.','Los materiales f\u00E1ciles de fluir necesitan unas 2\u00D7 el \u00E1rea de la l\u00EDnea de partici\u00F3n.'),
+          L('Hard-to-process materials like Nylon call for about 3\u201340\u00D7 \u2014 use 3\u20134\u00D7 for tough resins.','Los materiales dif\u00EDciles como el Nylon piden ~3\u20134\u00D7 \u2014 usa 3\u20134\u00D7 para resinas duras.')]},
+     {p:L('The mold halves are held closed by the press hydraulic clamp; the injection force pushing material in needs a vent to release the air it displaces, or you get short shots and burns.','Las mitades del molde se cierran con la pinza hidr\u00E1ulica; la fuerza de inyecci\u00F3n necesita un venteo para liberar el aire que desplaza, o aparecen disparos cortos y quemaduras.')}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Tonnage is estimated from which area, times a material factor?','El tonelaje se estima de qu\u00E9 \u00E1rea, por un factor del material?'),
+      opts:[L('The gate area','El \u00E1rea de la compuerta'),L('The total projected area at the parting line','El \u00E1rea proyectada total en la l\u00EDnea de partici\u00F3n'),L('The runner volume','El volumen del canal'),L('The ejector-pin area','El \u00E1rea de los pasadores')],a:1,
+      fb:L('Use the projected parting-line area times the material factor (2\u20134\u00D7).','Usa el \u00E1rea proyectada de la l\u00EDnea de partici\u00F3n por el factor del material (2\u20134\u00D7).')},
+     {tag:'check',stem:L('Which needs the higher tonnage factor?','\u00BFCu\u00E1l necesita el factor de tonelaje m\u00E1s alto?'),
+      opts:[L('An easy-flow material (~2\u00D7)','Un material de flujo f\u00E1cil (~2\u00D7)'),L('A hard-to-process material like Nylon (3\u20134\u00D7)','Un material dif\u00EDcil como el Nylon (3\u20134\u00D7)')],a:1,
+      fb:L('Hard-to-process resins like Nylon need roughly 3\u20134\u00D7 the parting-line area.','Las resinas dif\u00EDciles como el Nylon necesitan ~3\u20134\u00D7 el \u00E1rea de la l\u00EDnea de partici\u00F3n.')},
+     {tag:'check',stem:L('What happens without adequate venting?','\u00BFQu\u00E9 pasa sin un venteo adecuado?'),
+      opts:[L('Faster cooling','Enfriamiento m\u00E1s r\u00E1pido'),L('Trapped air causes short shots and burns','El aire atrapado causa disparos cortos y quemaduras'),L('Lower tonnage needed','Se requiere menos tonelaje'),L('Better gloss','Mejor brillo')],a:1,
+      fb:L('Displaced air must escape; without vents you get short shots and burn marks.','El aire desplazado debe escapar; sin venteos hay disparos cortos y quemaduras.')}
+   ]},
+
+  {id:'m2l12',
+   title:L('Tolerances & Fusion360 Mold Tools','Tolerancias y Herramientas de Molde de Fusion360'),
+   obj:L('State the working tolerance targets and identify the Fusion360 tools used in mold design.','Indicar los objetivos de tolerancia de trabajo e identificar las herramientas de molde de Fusion360.'),
+   body:[
+     {p:L('Cavity and parting-line tolerances are generally about \u00B10.0002" (0.005 mm). Leave ~0.1 mm of stock and slow the finish cut to hit shut-off features; step the final pass over at ~0.001" (0.025 mm) for a faster hand polish.','Las tolerancias de cavidad y l\u00EDnea de partici\u00F3n son ~\u00B10.0002" (0.005 mm). Deja ~0.1 mm de material y reduce el corte de acabado para lograr cierres; avanza el paso final ~0.001" (0.025 mm) para un pulido manual m\u00E1s r\u00E1pido.')},
+     {p:L('Working pins (ejector pins and sleeves) get a high/low tolerance so they do not seize when heat expands the mold. Drill the hole about 0.0005" larger per surface than the pin.','Los pasadores de trabajo (expulsores y camisas) llevan una tolerancia alta/baja para no agarrotarse cuando el calor expande el molde. Perfora el agujero ~0.0005" m\u00E1s grande por cara que el pasador.')},
+     {h:L('Fusion360 mold tools','Herramientas de molde de Fusion360')},
+     {ul:[L('Parting Lines, Draft Analysis, and Core & Cavity Split for separating the halves.','L\u00EDneas de Partici\u00F3n, An\u00E1lisis de Desmoldeo y Divisi\u00F3n de N\u00FAcleo y Cavidad para separar las mitades.'),
+          L('Shutoffs & Gates, Ejector Pins, Slides & Lifters, and Cooling Channels for mold detail.','Cierres y Compuertas, Pasadores Expulsores, Correderas y Elevadores, y Canales de Enfriamiento para el detalle.'),
+          L('Simulation (mold fill, draft) to verify the part ejects and to optimize cycle time before cutting steel.','Simulaci\u00F3n (llenado, desmoldeo) para verificar la expulsi\u00F3n y optimizar el ciclo antes de cortar acero.')]}
+   ],
+   tip:L('Slow the final finish pass (lower feed, higher tool speed). It can run for days on a complex cavity, but it is what holds the tolerance and cuts hand-polishing time.','Reduce el pase de acabado final (menor avance, mayor velocidad de herramienta). Puede tardar d\u00EDas en una cavidad compleja, pero es lo que mantiene la tolerancia y reduce el pulido manual.'),
+   quiz:[
+     {tag:'check',stem:L('What is the general cavity / parting-line tolerance target?','\u00BFCu\u00E1l es el objetivo general de tolerancia de cavidad / l\u00EDnea de partici\u00F3n?'),
+      opts:[L('\u00B10.010" (0.25 mm)','\u00B10.010" (0.25 mm)'),L('\u00B10.0002" (0.005 mm)','\u00B10.0002" (0.005 mm)'),L('\u00B10.05" (1.27 mm)','\u00B10.05" (1.27 mm)'),L('\u00B10.002" (0.05 mm)','\u00B10.002" (0.05 mm)')],a:1,
+      fb:L('Aim for about \u00B10.0002" (0.005 mm) on cavities and parting lines.','Apunta a ~\u00B10.0002" (0.005 mm) en cavidades y l\u00EDneas de partici\u00F3n.')},
+     {tag:'check',stem:L('How much larger should an ejector-pin hole be than the pin, per surface?','\u00BFCu\u00E1nto m\u00E1s grande debe ser el agujero del pasador que el pasador, por cara?'),
+      opts:[L('About 0.0005"','Aprox. 0.0005"'),L('About 0.05"','Aprox. 0.05"'),L('Exactly equal','Exactamente igual'),L('About 0.010"','Aprox. 0.010"')],a:0,
+      fb:L('~0.0005" per surface keeps the pin from seizing as the mold heats.','~0.0005" por cara evita que el pasador se agarrote al calentarse el molde.')},
+     {tag:'check',stem:L('Which Fusion360 tool checks whether a part can eject from the cavity?','\u00BFQu\u00E9 herramienta de Fusion360 verifica si una pieza puede expulsarse de la cavidad?'),
+      opts:[L('Draft Analysis','An\u00E1lisis de Desmoldeo'),L('Sketch','Croquis'),L('Loft','Solevar'),L('Tapping','Roscado')],a:0,
+      fb:L('Draft Analysis confirms enough draft so the part releases from the cavity.','El An\u00E1lisis de Desmoldeo confirma suficiente \u00E1ngulo para que la pieza libere.')}
+   ]}
+ ]
+};
+
+/* ---------- module 3: Mold Making & CAM Programs (from "#3 Mold Making & CAM Programs" course doc) ---------- */
+const M3 = {
+ id:'m3',
+ title:L('Mold Making & CAM Programs','Fabricaci\u00F3n de Moldes y Programas CAM'),
+ sub:L('11 lessons \u00B7 Level 3','11 lecciones \u00B7 Nivel 3'),
+ lessons:[
+  {id:'m3l1', video:'7OBS_ttYJbo',
+   title:L('CNC Manufacturing Processes','Procesos de Manufactura CNC'),
+   obj:L('Match each CNC process to the kind of work it does best.','Asociar cada proceso CNC con el tipo de trabajo que mejor realiza.'),
+   body:[
+     {p:L('Once a mold is designed, the machining process begins. Several CNC processes each suit a different job; a mold maker picks the right one for the feature.','Una vez dise\u00F1ado el molde, comienza el mecanizado. Varios procesos CNC sirven cada uno para un trabajo distinto; el fabricante elige el correcto para cada caracter\u00EDstica.')},
+     {ul:[L('Milling \u2014 a rotary cutter removes material to make flat or curved surfaces, holes, grooves, and features; the core process for cutting mold cavities.','Fresado \u2014 un cortador giratorio remueve material para superficies planas o curvas, agujeros, ranuras y caracter\u00EDsticas; el proceso central para cortar cavidades.'),
+          L('Lathe \u2014 a rotating workpiece and a stationary tool make precise, repeatable round parts.','Torno \u2014 una pieza giratoria y una herramienta fija hacen piezas redondas precisas y repetibles.'),
+          L('EDM \u2014 burns cavities and shapes into hard materials; wire EDM cuts thin, delicate, precise straight features.','EDM \u2014 quema cavidades y formas en materiales duros; el EDM de hilo corta caracter\u00EDsticas finas, delicadas y rectas con precisi\u00F3n.'),
+          L('Swiss screw machine \u2014 a CNC lathe type for small, complex high-precision parts (medical, aerospace).','Torno suizo \u2014 un tipo de torno CNC para piezas peque\u00F1as, complejas y de alta precisi\u00F3n (m\u00E9dico, aeroespacial).'),
+          L('Laser and water-jet cutters \u2014 cut or engrave intricate shapes; water jet cuts materials hard to machine otherwise.','Cortadoras l\u00E1ser y de chorro de agua \u2014 cortan o graban formas intrincadas; el chorro de agua corta materiales dif\u00EDciles de mecanizar.'),
+          L('Sheet metal brake \u2014 a CNC-controlled machine that bends sheet metal to precise, repeatable angles.','Plegadora de chapa \u2014 una m\u00E1quina CNC que dobla chapa met\u00E1lica a \u00E1ngulos precisos y repetibles.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which process is used to burn cavities and features into HARD materials that cannot be cut?','\u00BFQu\u00E9 proceso quema cavidades y caracter\u00EDsticas en materiales DUROS que no se pueden cortar?'),
+      opts:[L('Milling','Fresado'),L('EDM','EDM'),L('Laser cutting','Corte l\u00E1ser'),L('Sheet metal brake','Plegadora de chapa')],a:1,
+      fb:L('EDM burns features into hard material; wire EDM handles thin, delicate cuts.','El EDM quema caracter\u00EDsticas en material duro; el EDM de hilo hace cortes finos y delicados.')},
+     {tag:'check',stem:L('Which process is the core method for cutting a mold cavity?','\u00BFQu\u00E9 proceso es el m\u00E9todo central para cortar una cavidad de molde?'),
+      opts:[L('Lathe','Torno'),L('Milling','Fresado'),L('Water jet','Chorro de agua'),L('Sheet metal brake','Plegadora')],a:1,
+      fb:L('Milling uses a rotary cutter to remove material and form cavity surfaces and features.','El fresado usa un cortador giratorio para remover material y formar superficies y caracter\u00EDsticas.')},
+     {tag:'check',stem:L('A small, complex, high-precision part for medical/aerospace is best made on a:','Una pieza peque\u00F1a, compleja y de alta precisi\u00F3n para m\u00E9dico/aeroespacial se hace mejor en un:'),
+      opts:[L('Swiss screw machine','Torno suizo'),L('Sheet metal brake','Plegadora'),L('Laser cutter','Cortadora l\u00E1ser'),L('Manual mill','Fresadora manual')],a:0,
+      fb:L('Swiss screw machines specialize in small, complex, high-precision parts.','Los tornos suizos se especializan en piezas peque\u00F1as, complejas y de alta precisi\u00F3n.')}
+   ]},
+
+  {id:'m3l2',
+   title:L('How a CNC Mill Works','C\u00F3mo Funciona una Fresadora CNC'),
+   obj:L('Put the CNC milling cycle in order: program, set up, cut, and quality-control.','Ordenar el ciclo de fresado CNC: programar, preparar, cortar y control de calidad.'),
+   body:[
+     {p:L('A CNC mill uses a computer to move the cutting tool along precise paths to produce intricate parts in metal, plastic, or wood.','Una fresadora CNC usa una computadora para mover la herramienta por trayectorias precisas y producir piezas intrincadas en metal, pl\u00E1stico o madera.')},
+     {h:L('The four-step cycle','El ciclo de cuatro pasos')},
+     {ul:[L('Program \u2014 CAD/CAM software specifies the exact dimensions and features of the part.','Programar \u2014 el software CAD/CAM especifica las dimensiones y caracter\u00EDsticas exactas de la pieza.'),
+          L('Set up \u2014 install the right cutting tool and secure the workpiece.','Preparar \u2014 instalar la herramienta correcta y fijar la pieza.'),
+          L('Cut \u2014 motors move the tool and workpiece along programmed paths and speeds to remove material.','Cortar \u2014 los motores mueven la herramienta y la pieza por las trayectorias y velocidades programadas para remover material.'),
+          L('Quality control \u2014 measure the finished part (micrometer or other precision instrument) against spec.','Control de calidad \u2014 medir la pieza terminada (micr\u00F3metro u otro instrumento) contra la especificaci\u00F3n.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What is the FIRST step in the CNC milling cycle?','\u00BFCu\u00E1l es el PRIMER paso del ciclo de fresado CNC?'),
+      opts:[L('Cutting','Cortar'),L('Programming with CAD/CAM','Programar con CAD/CAM'),L('Quality control','Control de calidad'),L('Deburring','Desbarbar')],a:1,
+      fb:L('It starts with programming the dimensions and features in CAD/CAM.','Comienza programando las dimensiones y caracter\u00EDsticas en CAD/CAM.')},
+     {tag:'check',stem:L('During setup, what two things does the operator do?','Durante la preparaci\u00F3n, \u00BFqu\u00E9 dos cosas hace el operador?'),
+      opts:[L('Install the tool and secure the workpiece','Instalar la herramienta y fijar la pieza'),L('Write G-code and ship the part','Escribir G-code y enviar la pieza'),L('Polish and texture','Pulir y texturizar'),L('Measure and invoice','Medir y facturar')],a:0,
+      fb:L('Setup means installing the correct cutter and securing the workpiece.','Preparar significa instalar el cortador correcto y fijar la pieza.')},
+     {tag:'recall',stem:L('Which instrument is named for checking a finished part to spec?','\u00BFQu\u00E9 instrumento se menciona para verificar una pieza terminada contra la especificaci\u00F3n?'),
+      opts:[L('A micrometer','Un micr\u00F3metro'),L('A multimeter','Un mult\u00EDmetro'),L('A tachometer','Un tac\u00F3metro'),L('A barometer','Un bar\u00F3metro')],a:0,
+      fb:L('A micrometer (or other precision instrument) verifies the part meets spec.','Un micr\u00F3metro (u otro instrumento de precisi\u00F3n) verifica que la pieza cumple la especificaci\u00F3n.')}
+   ]},
+
+  {id:'m3l3',
+   title:L('CNC Machine Components','Componentes de la M\u00E1quina CNC'),
+   obj:L('Identify the main CNC mill components and state what each does.','Identificar los componentes principales de la fresadora CNC y decir qu\u00E9 hace cada uno.'),
+   body:[
+     {ul:[L('Controller \u2014 the brain; interprets the machining program and controls the machine\u2019s movements.','Controlador \u2014 el cerebro; interpreta el programa y controla los movimientos de la m\u00E1quina.'),
+          L('Bed \u2014 the cast-iron or steel base that gives a stable platform, often with slides/ways for precise motion.','Bancada \u2014 la base de hierro fundido o acero que da una plataforma estable, a menudo con gu\u00EDas para movimiento preciso.'),
+          L('Vice \u2014 a clamping device that holds the workpiece securely during machining.','Prensa \u2014 un dispositivo de sujeci\u00F3n que mantiene la pieza firme durante el mecanizado.'),
+          L('Coolant \u2014 water or oil that cools and lubricates the tool, extends tool life, and improves finish.','Refrigerante \u2014 agua o aceite que enfr\u00EDa y lubrica la herramienta, alarga su vida y mejora el acabado.'),
+          L('Tool changer & tool holder \u2014 automatically swaps cutters; the holder grips the tool in the spindle.','Cambiador y portaherramientas \u2014 intercambia cortadores autom\u00E1ticamente; el portaherramientas sujeta la herramienta en el husillo.'),
+          L('Tool offsets \u2014 distances between the tool and the reference point that compensate for tool/workpiece variation.','Compensaciones de herramienta \u2014 distancias entre la herramienta y el punto de referencia que compensan la variaci\u00F3n.'),
+          L('Chip removal \u2014 manual or a chip conveyor that clears the chips produced during machining.','Remoci\u00F3n de viruta \u2014 manual o un transportador que retira la viruta producida al mecanizar.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which component is the "brain" that interprets the program?','\u00BFQu\u00E9 componente es el "cerebro" que interpreta el programa?'),
+      opts:[L('The bed','La bancada'),L('The controller','El controlador'),L('The vice','La prensa'),L('The coolant','El refrigerante')],a:1,
+      fb:L('The controller interprets the machining program and controls the movements.','El controlador interpreta el programa y controla los movimientos.')},
+     {tag:'check',stem:L('What is the purpose of coolant during machining?','\u00BFCu\u00E1l es el prop\u00F3sito del refrigerante al mecanizar?'),
+      opts:[L('To add tonnage','A\u00F1adir tonelaje'),L('To cool and lubricate the tool and improve finish','Enfriar y lubricar la herramienta y mejorar el acabado'),L('To hold the workpiece','Sujetar la pieza'),L('To change tools','Cambiar herramientas')],a:1,
+      fb:L('Coolant cools and lubricates the cutter, prolonging tool life and improving finish.','El refrigerante enfr\u00EDa y lubrica el cortador, alarga su vida y mejora el acabado.')},
+     {tag:'check',stem:L('Tool offsets are used to:','Las compensaciones de herramienta sirven para:'),
+      opts:[L('Compensate for tool/workpiece variation','Compensar la variaci\u00F3n de herramienta/pieza'),L('Cool the spindle','Enfriar el husillo'),L('Remove chips','Retirar viruta'),L('Bend sheet metal','Doblar chapa')],a:0,
+      fb:L('Offsets are the tool-to-reference distances that keep parts to spec despite variation.','Las compensaciones son las distancias herramienta-referencia que mantienen la pieza a medida.')}
+   ]},
+
+  {id:'m3l4',
+   title:L('CNC Mill Cutters','Cortadores de Fresadora CNC'),
+   obj:L('Select the right cutter for a given mold-machining task.','Seleccionar el cortador correcto para una tarea de mecanizado de molde.'),
+   body:[
+     {ul:[L('Flat end mill \u2014 flat tip; cuts flat surfaces and slots.','Fresa de punta plana \u2014 punta plana; corta superficies planas y ranuras.'),
+          L('Ball end mill \u2014 rounded tip; cuts curved surfaces and contours (key for sculpted cavities).','Fresa de punta esf\u00E9rica \u2014 punta redondeada; corta superficies curvas y contornos (clave para cavidades esculpidas).'),
+          L('Shell mill \u2014 large multi-tooth cutter that removes a lot of material fast for roughing big parts.','Fresa de planear \u2014 cortador grande multidiente que remueve mucho material r\u00E1pido para desbastar piezas grandes.'),
+          L('Keyway cutter \u2014 cuts keyways/slots for a precise fit between mating parts (shaft and hub).','Cortador de chavetero \u2014 corta chaveteros/ranuras para un ajuste preciso entre piezas (eje y cubo).'),
+          L('Reamer \u2014 enlarges/finishes a hole to a precise size and surface finish.','Escariador \u2014 agranda/termina un agujero a un tama\u00F1o y acabado precisos.'),
+          L('Tapping tool \u2014 cuts internal threads in a hole.','Macho de roscar \u2014 corta roscas internas en un agujero.'),
+          L('Center drill \u2014 short, pointed; starts a hole so a larger drill goes straight and does not wander.','Broca de centrar \u2014 corta y puntiaguda; inicia un agujero para que la broca grande entre recta sin desviarse.'),
+          L('Chamfer & radius tools \u2014 bevel or round an edge to deburr or prepare for assembly.','Herramientas de chafl\u00E1n y radio \u2014 biselan o redondean un borde para desbarbar o preparar el ensamble.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which cutter is used to machine CURVED surfaces and contours in a cavity?','\u00BFQu\u00E9 cortador mecaniza superficies CURVAS y contornos en una cavidad?'),
+      opts:[L('Flat end mill','Fresa de punta plana'),L('Ball end mill','Fresa de punta esf\u00E9rica'),L('Keyway cutter','Cortador de chavetero'),L('Center drill','Broca de centrar')],a:1,
+      fb:L('Ball end mills have a rounded tip for curved surfaces and contours.','Las fresas de punta esf\u00E9rica tienen punta redondeada para superficies curvas y contornos.')},
+     {tag:'check',stem:L('Which tool finishes a hole to a precise size and finish?','\u00BFQu\u00E9 herramienta termina un agujero a un tama\u00F1o y acabado precisos?'),
+      opts:[L('Tapping tool','Macho de roscar'),L('Reamer','Escariador'),L('Shell mill','Fresa de planear'),L('Chamfer tool','Herramienta de chafl\u00E1n')],a:1,
+      fb:L('A reamer enlarges and finishes a hole to a precise size.','El escariador agranda y termina un agujero a un tama\u00F1o preciso.')},
+     {tag:'check',stem:L('Why use a center drill before a larger drill bit?','\u00BFPor qu\u00E9 usar una broca de centrar antes de una broca grande?'),
+      opts:[L('To cut threads','Para cortar roscas'),L('To keep the larger drill centered so it does not wander','Para mantener la broca grande centrada y que no se desv\u00EDe'),L('To deburr the part','Para desbarbar la pieza'),L('To cool the hole','Para enfriar el agujero')],a:1,
+      fb:L('The center drill starts a true hole so the larger bit goes straight.','La broca de centrar inicia un agujero verdadero para que la broca grande entre recta.')}
+   ]},
+
+  {id:'m3l5',
+   title:L('Cutter Feeds & Speeds','Avances y Velocidades de Corte'),
+   obj:L('Explain how cutter size relates to surface speed and feed, and let CAM set them from the material.','Explicar c\u00F3mo el tama\u00F1o del cortador se relaciona con la velocidad y el avance, y dejar que CAM los ajuste seg\u00FAn el material.'),
+   body:[
+     {p:L('Fusion360 CAM only needs the material you are cutting; it then sets cutter feeds and speeds. In general, smaller cutters run faster (higher surface speed) than larger cutters.','Fusion360 CAM solo necesita el material que cortas; luego ajusta los avances y velocidades. En general, los cortadores peque\u00F1os giran m\u00E1s r\u00E1pido (mayor velocidad superficial) que los grandes.')},
+     {h:L('General aluminum example','Ejemplo general en aluminio')},
+     {ul:[L('1 mm cutter: ~500\u2013700 m/min surface speed, ~0.05\u20130.07 mm/rev feed.','Cortador de 1 mm: ~500\u2013700 m/min de velocidad superficial, ~0.05\u20130.07 mm/rev de avance.'),
+          L('10 mm cutter: ~200\u2013400 m/min, ~0.15\u20130.25 mm/rev.','Cortador de 10 mm: ~200\u2013400 m/min, ~0.15\u20130.25 mm/rev.'),
+          L('25 mm cutter: ~75\u2013150 m/min, ~0.60\u20130.90 mm/rev.','Cortador de 25 mm: ~75\u2013150 m/min, ~0.60\u20130.90 mm/rev.'),
+          L('50 mm cutter: ~40\u201380 m/min, ~1.50\u20133.00 mm/rev.','Cortador de 50 mm: ~40\u201380 m/min, ~1.50\u20133.00 mm/rev.')]}
+   ],
+   tip:L('Let CAM pick the starting numbers from the material, then fine-tune by ear and chip color. Smaller cutter \u2192 higher surface speed, smaller feed per rev.','Deja que CAM elija los n\u00FAmeros iniciales seg\u00FAn el material, luego aj\u00FAstalos por o\u00EDdo y color de viruta. Cortador m\u00E1s peque\u00F1o \u2192 mayor velocidad, menor avance por vuelta.'),
+   quiz:[
+     {tag:'check',stem:L('In general, how do smaller cutters run compared with larger cutters?','En general, \u00BFc\u00F3mo giran los cortadores peque\u00F1os frente a los grandes?'),
+      opts:[L('Slower','M\u00E1s lento'),L('Faster (higher surface speed)','M\u00E1s r\u00E1pido (mayor velocidad superficial)'),L('At the same speed','A la misma velocidad'),L('They cannot cut aluminum','No pueden cortar aluminio')],a:1,
+      fb:L('Smaller cutters run faster; larger cutters run slower with a bigger feed per rev.','Los cortadores peque\u00F1os giran m\u00E1s r\u00E1pido; los grandes m\u00E1s lento con mayor avance por vuelta.')},
+     {tag:'check',stem:L('What single input does Fusion360 CAM most need to set feeds and speeds?','\u00BFQu\u00E9 dato principal necesita Fusion360 CAM para ajustar avances y velocidades?'),
+      opts:[L('The material being cut','El material que se corta'),L('The shop\u2019s zip code','El c\u00F3digo postal del taller'),L('The operator\u2019s name','El nombre del operador'),L('The part color','El color de la pieza')],a:0,
+      fb:L('Give CAM the material and it sets the cutter feeds and speeds.','Dale a CAM el material y ajustar\u00E1 los avances y velocidades.')}
+   ]},
+
+  {id:'m3l6',
+   title:L('Navigating Fusion360 Hubs & Projects','Navegar Hubs y Proyectos de Fusion360'),
+   obj:L('Join a Team Hub project and locate the CAM module in Fusion360.','Unirse a un proyecto de Team Hub y ubicar el m\u00F3dulo CAM en Fusion360.'),
+   body:[
+     {p:L('Fusion360 includes CAM for creating and editing CNC toolpaths and a data-exchange module to import/export with other platforms. The workflow assumes Fusion360 is installed and running.','Fusion360 incluye CAM para crear y editar trayectorias CNC y un m\u00F3dulo de intercambio de datos para importar/exportar con otras plataformas. El flujo asume que Fusion360 est\u00E1 instalado y funcionando.')},
+     {h:L('Joining a team project','Unirse a un proyecto de equipo')},
+     {ul:[L('Ask the project owner to invite you into the project.','Pide al due\u00F1o del proyecto que te invite.'),
+          L('Go to the upper-left corner in Fusion360 and switch the Hub to the Team Hub you were invited into.','Ve a la esquina superior izquierda en Fusion360 y cambia el Hub al Team Hub al que te invitaron.'),
+          L('Navigate to the specific Project you were invited into.','Navega al Proyecto espec\u00EDfico al que te invitaron.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What is the first step to access a shared Team Hub project?','\u00BFCu\u00E1l es el primer paso para acceder a un proyecto compartido en Team Hub?'),
+      opts:[L('Buy a new license','Comprar una licencia nueva'),L('Ask the project owner to invite you','Pedir al due\u00F1o que te invite'),L('Reinstall Fusion360','Reinstalar Fusion360'),L('Export to STEP','Exportar a STEP')],a:1,
+      fb:L('You must be invited by the project owner, then switch to that Team Hub.','Debes ser invitado por el due\u00F1o, luego cambiar a ese Team Hub.')},
+     {tag:'recall',stem:L('Which Fusion360 module creates and edits CNC toolpaths?','\u00BFQu\u00E9 m\u00F3dulo de Fusion360 crea y edita trayectorias CNC?'),
+      opts:[L('Rendering','Renderizado'),L('CAM (Machining)','CAM (Mecanizado)'),L('Sheet Metal','Chapa Met\u00E1lica'),L('Drawing','Dibujo')],a:1,
+      fb:L('The CAM / Machining module builds and edits the CNC toolpaths.','El m\u00F3dulo CAM / Mecanizado construye y edita las trayectorias CNC.')}
+   ]},
+
+  {id:'m3l7',
+   title:L('CAM Cutter Path Types','Tipos de Trayectoria CAM'),
+   obj:L('Match Fusion360 milling toolpaths to the feature each machines.','Asociar las trayectorias de fresado de Fusion360 con la caracter\u00EDstica que mecaniza cada una.'),
+   body:[
+     {ul:[L('Profile milling \u2014 machines outer contours or profiles.','Fresado de perfil \u2014 mecaniza contornos o perfiles exteriores.'),
+          L('Pocket milling \u2014 machines pockets or cavities.','Fresado de cajera \u2014 mecaniza cajeras o cavidades.'),
+          L('Contour milling \u2014 machines contoured surfaces or features.','Fresado de contorno \u2014 mecaniza superficies o caracter\u00EDsticas contorneadas.'),
+          L('Face milling \u2014 machines flat surfaces or faces.','Fresado de planeado \u2014 mecaniza superficies o caras planas.'),
+          L('Spiral milling \u2014 machines spiral or helical shapes.','Fresado en espiral \u2014 mecaniza formas espirales o helicoidales.'),
+          L('Rest milling \u2014 machines the leftover stock after earlier operations.','Fresado residual \u2014 mecaniza el material sobrante tras operaciones previas.'),
+          L('3D contouring \u2014 machines complex 3D shapes and surfaces (cavity sculpting).','Contorneado 3D \u2014 mecaniza formas y superficies 3D complejas (escultura de cavidad).')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Which toolpath machines the leftover material after earlier operations?','\u00BFQu\u00E9 trayectoria mecaniza el material sobrante tras operaciones previas?'),
+      opts:[L('Face milling','Fresado de planeado'),L('Rest milling','Fresado residual'),L('Profile milling','Fresado de perfil'),L('Spiral milling','Fresado en espiral')],a:1,
+      fb:L('Rest milling clears the remaining stock left by previous toolpaths.','El fresado residual limpia el material que dejaron las trayectorias anteriores.')},
+     {tag:'check',stem:L('To machine a pocket or cavity, which toolpath fits?','Para mecanizar una cajera o cavidad, \u00BFqu\u00E9 trayectoria encaja?'),
+      opts:[L('Pocket milling','Fresado de cajera'),L('Face milling','Fresado de planeado'),L('Profile milling','Fresado de perfil'),L('Spiral milling','Fresado en espiral')],a:0,
+      fb:L('Pocket milling is built for machining pockets and cavities.','El fresado de cajera est\u00E1 hecho para mecanizar cajeras y cavidades.')},
+     {tag:'check',stem:L('Which toolpath is used to machine complex 3D cavity surfaces?','\u00BFQu\u00E9 trayectoria mecaniza superficies 3D complejas de cavidad?'),
+      opts:[L('Face milling','Fresado de planeado'),L('3D contouring','Contorneado 3D'),L('Profile milling','Fresado de perfil'),L('Facing','Planeado')],a:1,
+      fb:L('3D contouring machines complex 3D shapes and surfaces.','El contorneado 3D mecaniza formas y superficies 3D complejas.')}
+   ]},
+
+  {id:'m3l8',
+   title:L('Stock Setup & Roughing','Configuraci\u00F3n de Material y Desbaste'),
+   obj:L('Set up the workpiece stock and G54 origin, then generate and simulate a roughing path.','Configurar el material de la pieza y el origen G54, luego generar y simular una trayectoria de desbaste.'),
+   body:[
+     {p:L('CAM programming starts by defining the workpiece stock and the part origin, then generating the first roughing cutter path and simulating it before cutting steel or aluminum.','La programaci\u00F3n CAM comienza definiendo el material de la pieza y el origen, luego genera la primera trayectoria de desbaste y la simula antes de cortar.')},
+     {ul:[L('Define the stock (the raw block the cutter starts from).','Define el material (el bloque en bruto del que parte el cortador).'),
+          L('Set the work origin (G54) so the machine and the program agree on zero.','Fija el origen de trabajo (G54) para que la m\u00E1quina y el programa coincidan en el cero.'),
+          L('Generate the roughing path, then simulate it to verify before machining.','Genera la trayectoria de desbaste, luego simula para verificar antes de mecanizar.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What does the G54 setting define in a CAM program?','\u00BFQu\u00E9 define la configuraci\u00F3n G54 en un programa CAM?'),
+      opts:[L('The coolant flow','El flujo de refrigerante'),L('The work origin (zero) the machine and program share','El origen de trabajo (cero) que comparten m\u00E1quina y programa'),L('The spindle color','El color del husillo'),L('The part material','El material de la pieza')],a:1,
+      fb:L('G54 sets the work origin so machine and program agree on zero.','G54 fija el origen de trabajo para que m\u00E1quina y programa coincidan en el cero.')},
+     {tag:'check',stem:L('What should you do with a roughing path before cutting metal?','\u00BFQu\u00E9 debes hacer con una trayectoria de desbaste antes de cortar metal?'),
+      opts:[L('Email it to the client','Enviarla por correo al cliente'),L('Simulate it to verify','Simularla para verificar'),L('Texture it','Texturizarla'),L('Anodize it','Anodizarla')],a:1,
+      fb:L('Generate, then simulate the roughing path to verify before machining.','Genera y luego simula la trayectoria de desbaste para verificar antes de mecanizar.')},
+     {tag:'recall',stem:L('"Stock" in CAM refers to:','El "material" (stock) en CAM se refiere a:'),
+      opts:[L('The finished part','La pieza terminada'),L('The raw block the cutter starts from','El bloque en bruto del que parte el cortador'),L('The toolpath file','El archivo de trayectoria'),L('The coolant tank','El tanque de refrigerante')],a:1,
+      fb:L('Stock is the raw block of material the cutter begins removing from.','El material es el bloque en bruto del que el cortador empieza a remover.')}
+   ]},
+
+  {id:'m3l9',
+   title:L('Cavity & Core Sculpting (Micro Cutters)','Escultura de Cavidad y N\u00FAcleo (Microcortadores)'),
+   obj:L('Apply the finishing-pass rule that protects small cutters and gives the best finish.','Aplicar la regla del pase de acabado que protege los cortadores peque\u00F1os y da el mejor acabado.'),
+   body:[
+     {p:L('High-precision, high-resolution cutter paths come AFTER the roughing passes. Small cutters break easily on large step-downs and step-overs, so the finishing strategy matters.','Las trayectorias de alta precisi\u00F3n y resoluci\u00F3n van DESPU\u00C9S del desbaste. Los cortadores peque\u00F1os se rompen f\u00E1cil con grandes pasos hacia abajo y de lado, as\u00ED que la estrategia de acabado importa.')},
+     {ul:[L('Crank up the spindle speed and slow down the feed for the best finish.','Aumenta la velocidad del husillo y reduce el avance para el mejor acabado.'),
+          L('Leave about 0.05 mm for the final finishing pass.','Deja unos 0.05 mm para el pase de acabado final.'),
+          L('That small leftover stock keeps the micro cutter from breaking and gives the best finish regardless of cutter size.','Ese peque\u00F1o sobrante evita que el microcortador se rompa y da el mejor acabado sin importar el tama\u00F1o.')]}
+   ],
+   tip:L('Roughing first, finishing last: high speed + low feed + ~0.05 mm finish stock is the recipe that protects micro cutters and produces a clean cavity surface.','Primero desbaste, al final acabado: alta velocidad + bajo avance + ~0.05 mm de sobrante es la receta que protege microcortadores y da una cavidad limpia.'),
+   quiz:[
+     {tag:'check',stem:L('How much stock should you leave for the final finishing pass on a cavity?','\u00BFCu\u00E1nto material debes dejar para el pase de acabado final en una cavidad?'),
+      opts:[L('About 0.05 mm','Aprox. 0.05 mm'),L('About 1 mm','Aprox. 1 mm'),L('About 5 mm','Aprox. 5 mm'),L('Zero','Cero')],a:0,
+      fb:L('Leave ~0.05 mm so the micro cutter does not break and the finish is best.','Deja ~0.05 mm para que el microcortador no se rompa y el acabado sea \u00F3ptimo.')},
+     {tag:'check',stem:L('For the best finish on a fine cavity pass, you should:','Para el mejor acabado en un pase fino de cavidad, debes:'),
+      opts:[L('Crank up speed and slow down feed','Aumentar la velocidad y reducir el avance'),L('Slow speed and increase feed','Reducir la velocidad y aumentar el avance'),L('Take a large step-down','Tomar un gran paso hacia abajo'),L('Skip roughing','Saltar el desbaste')],a:0,
+      fb:L('High spindle speed with a slow feed gives the cleanest finish.','Alta velocidad de husillo con avance lento da el acabado m\u00E1s limpio.')},
+     {tag:'check',stem:L('When do high-precision finishing paths run relative to roughing?','\u00BFCu\u00E1ndo corren los pases de acabado de alta precisi\u00F3n respecto al desbaste?'),
+      opts:[L('Before roughing','Antes del desbaste'),L('After roughing is complete','Despu\u00E9s de completar el desbaste'),L('Instead of roughing','En lugar del desbaste'),L('During setup','Durante la preparaci\u00F3n')],a:1,
+      fb:L('Finishing paths come after the roughing passes are done.','Los pases de acabado van despu\u00E9s de terminar el desbaste.')}
+   ]},
+
+  {id:'m3l10',
+   title:L('Hole Making: Drills, Reamers & Threads','Hacer Agujeros: Brocas, Escariadores y Roscas'),
+   obj:L('Order the hole-making routine from center drill through chamfer.','Ordenar la rutina de hacer agujeros, desde la broca de centrar hasta el chafl\u00E1n.'),
+   body:[
+     {p:L('Fusion360 has pre-defined hole routines: center drill, deep-hole drilling, reamer, tapping, and chamfer. Run them in the right order for straight, strong, clean holes.','Fusion360 tiene rutinas predefinidas: broca de centrar, taladrado profundo, escariado, roscado y chafl\u00E1n. Ejecútalas en el orden correcto para agujeros rectos, fuertes y limpios.')},
+     {h:L('The routine','La rutina')},
+     {ul:[L('Pre-drill with a center drill so the drill goes straight.','Pretaladra con una broca de centrar para que la broca entre recta.'),
+          L('Use an undersize drill for holes that will be reamed or tapped.','Usa una broca de menor tama\u00F1o para agujeros que se escariar\u00E1n o roscar\u00E1n.'),
+          L('Deep holes use a full-retract (peck) routine to clear chips from the hole.','Los agujeros profundos usan una rutina de retracci\u00F3n completa (picoteo) para sacar la viruta.'),
+          L('Drill through, then slow down the reamers for size and finish.','Taladra a trav\u00E9s, luego reduce la velocidad de los escariadores para tama\u00F1o y acabado.'),
+          L('Tap holes to a depth about 2\u00D7 the thread diameter for full strength.','Rosca a una profundidad de aprox. 2\u00D7 el di\u00E1metro de la rosca para resistencia total.'),
+          L('Chamfer the hole edge so screws start easily.','Achaflana el borde del agujero para que los tornillos entren f\u00E1cil.')]}
+   ],
+   tip:L('Tap depth \u2248 2\u00D7 the thread diameter gives full thread strength; a center drill first keeps every following hole on center.','Profundidad de rosca \u2248 2\u00D7 el di\u00E1metro da resistencia total; la broca de centrar primero mantiene cada agujero centrado.'),
+   quiz:[
+     {tag:'check',stem:L('To achieve full thread strength, tap to a depth of about:','Para lograr resistencia total de rosca, rosca a una profundidad de aprox.:'),
+      opts:[L('0.5\u00D7 the thread diameter','0.5\u00D7 el di\u00E1metro de la rosca'),L('2\u00D7 the thread diameter','2\u00D7 el di\u00E1metro de la rosca'),L('5\u00D7 the thread diameter','5\u00D7 el di\u00E1metro de la rosca'),L('10\u00D7 the thread diameter','10\u00D7 el di\u00E1metro de la rosca')],a:1,
+      fb:L('Tap about 2\u00D7 the thread diameter deep for full strength.','Rosca aprox. 2\u00D7 el di\u00E1metro de profundidad para resistencia total.')},
+     {tag:'check',stem:L('Why pre-drill with a center drill?','\u00BFPor qu\u00E9 pretaladrar con una broca de centrar?'),
+      opts:[L('To chamfer the edge','Para achaflanar el borde'),L('To make the following drill go straight','Para que la broca siguiente entre recta'),L('To tap the thread','Para roscar'),L('To cool the hole','Para enfriar el agujero')],a:1,
+      fb:L('The center drill starts the hole true so the next drill does not wander.','La broca de centrar inicia el agujero recto para que la siguiente no se desv\u00EDe.')},
+     {tag:'check',stem:L('How do deep-hole routines clear chips?','\u00BFC\u00F3mo sacan la viruta las rutinas de agujero profundo?'),
+      opts:[L('With a full-retract (peck) cycle','Con un ciclo de retracci\u00F3n completa (picoteo)'),L('By tapping','Roscando'),L('By chamfering','Achaflanando'),L('By reaming only','Solo escariando')],a:0,
+      fb:L('Deep drilling uses a full-retract peck cycle to pull chips out of the hole.','El taladrado profundo usa un ciclo de retracci\u00F3n completa para sacar la viruta.')}
+   ]},
+
+  {id:'m3l11',
+   title:L('Surface Treatments & Coatings','Tratamientos y Recubrimientos de Superficie'),
+   obj:L('Match mold surface treatments to the performance they add, and account for added thickness.','Asociar tratamientos de superficie con el rendimiento que a\u00F1aden y considerar el espesor agregado.'),
+   body:[
+     {p:L('After finish and texture, a surface treatment coats the whole cavity and core to improve wear and release. Note these add about 0.01\u20130.1 mm of thickness, so identify which surfaces get treated.','Tras el acabado y la textura, un tratamiento recubre toda la cavidad y el n\u00FAcleo para mejorar desgaste y liberaci\u00F3n. Estos a\u00F1aden ~0.01\u20130.1 mm de espesor, as\u00ED que identifica qu\u00E9 superficies se tratan.')},
+     {ul:[L('Diamond carbon coating \u2014 hard and wear-resistant; improves finish and release.','Recubrimiento de carbono diamante \u2014 duro y resistente al desgaste; mejora acabado y liberaci\u00F3n.'),
+          L('Nickel-Teflon coating \u2014 slippery and wear-resistant; great release for high-speed molding.','Recubrimiento n\u00EDquel-Tefl\u00F3n \u2014 resbaladizo y resistente; excelente liberaci\u00F3n para moldeo de alta velocidad.'),
+          L('Hard anodizing \u2014 electrolytic hard oxide layer; improves wear resistance (used on engineering plastics).','Anodizado duro \u2014 capa de \u00F3xido dura por electr\u00F3lisis; mejora la resistencia al desgaste (pl\u00E1sticos de ingenier\u00EDa).'),
+          L('Electroless plating & thermal spraying \u2014 deposit a metal/material layer to improve finish and wear.','Recubrimiento electrol\u00EDtico sin corriente y rociado t\u00E9rmico \u2014 depositan una capa para mejorar acabado y desgaste.')]}
+   ],
+   tip:L('Coatings add 0.01\u20130.1 mm \u2014 account for that thickness on working surfaces so pins and shut-offs still fit after treatment.','Los recubrimientos a\u00F1aden 0.01\u20130.1 mm \u2014 considera ese espesor en superficies de trabajo para que pasadores y cierres a\u00FAn ajusten.'),
+   quiz:[
+     {tag:'check',stem:L('Which treatment is slippery and prized for mold release in high-speed molding?','\u00BFQu\u00E9 tratamiento es resbaladizo y valorado para la liberaci\u00F3n en moldeo de alta velocidad?'),
+      opts:[L('Hard anodizing','Anodizado duro'),L('Nickel-Teflon coating','Recubrimiento n\u00EDquel-Tefl\u00F3n'),L('Thermal spraying','Rociado t\u00E9rmico'),L('Etching','Grabado')],a:1,
+      fb:L('Nickel-Teflon is slippery and wear-resistant, improving release.','El n\u00EDquel-Tefl\u00F3n es resbaladizo y resistente, mejora la liberaci\u00F3n.')},
+     {tag:'check',stem:L('About how much thickness can a surface treatment add?','\u00BF Aprox. cu\u00E1nto espesor puede a\u00F1adir un tratamiento de superficie?'),
+      opts:[L('0.01\u20130.1 mm','0.01\u20130.1 mm'),L('1\u20132 mm','1\u20132 mm'),L('5\u201310 mm','5\u201310 mm'),L('None','Ninguno')],a:0,
+      fb:L('Treatments add roughly 0.01\u20130.1 mm \u2014 plan for it on working surfaces.','Los tratamientos a\u00F1aden ~0.01\u20130.1 mm \u2014 cons\u00EDderalo en superficies de trabajo.')},
+     {tag:'recall',stem:L('Before texturing, working surfaces are protected with what film process?','Antes de texturizar, las superficies de trabajo se protegen con qu\u00E9 proceso de pel\u00EDcula?'),
+      opts:[L('Masking','Enmascarado'),L('Anodizing','Anodizado'),L('Tapping','Roscado'),L('Facing','Planeado')],a:0,
+      fb:L('Carried forward from Mold Design \u2014 masking keeps texture off working surfaces.','Heredado del Dise\u00F1o de Molde \u2014 el enmascarado evita texturar superficies de trabajo.')}
+   ]}
+ ]
+};
+
+/* ---------- module 4: Mold Processing (from "#4 Mold Processing Module" course outline) ----------
+   NOTE: The source PDF for this module is a table of contents only (24 section titles, no body text).
+   Lesson bodies and quizzes below use standard, widely-accepted injection-molding process
+   fundamentals mapped to those 24 titles. Specific course numbers/specs were NOT in the source and
+   are intentionally omitted; conceptual lessons should be reconciled against the full #4 text when
+   it becomes available. */
+const M4 = {
+ id:'m4',
+ title:L('Mold Processing','Procesamiento de Moldes'),
+ sub:L('12 lessons \u00B7 Level 4','12 lecciones \u00B7 Nivel 4'),
+ lessons:[
+  {id:'m4l1',
+   title:L('Safety First','La Seguridad Primero'),
+   obj:L('State the core safety rules for working around an injection molding machine.','Indicar las reglas de seguridad b\u00E1sicas para trabajar alrededor de una m\u00E1quina de inyecci\u00F3n.'),
+   body:[
+     {p:L('An injection molding machine combines high heat, high pressure, and heavy moving plates. Safety comes before any process work \u2014 every other lesson assumes these rules are already followed.','Una m\u00E1quina de inyecci\u00F3n combina alto calor, alta presi\u00F3n y placas pesadas en movimiento. La seguridad va antes que cualquier trabajo de proceso \u2014 todas las dem\u00E1s lecciones asumen que ya se cumplen estas reglas.')},
+     {h:L('Core rules','Reglas b\u00E1sicas')},
+     {ul:[L('Lockout/tagout (LOTO) the machine before reaching into the clamp area or working on the mold.','Bloqueo/etiquetado (LOTO) de la m\u00E1quina antes de meter las manos en el \u00E1rea de cierre o trabajar en el molde.'),
+          L('Treat the barrel, nozzle, and melt as burn hazards \u2014 molten plastic and hot steel cause severe burns.','Trata el barril, la boquilla y el material fundido como peligro de quemadura \u2014 el pl\u00E1stico fundido y el acero caliente causan quemaduras graves.'),
+          L('Keep safety gates and interlocks working; never bypass them to run faster.','Mant\u00E9n las puertas de seguridad y los enclavamientos funcionando; nunca los anules para correr m\u00E1s r\u00E1pido.'),
+          L('Wear PPE: eye protection, heat-resistant gloves when purging, and no loose clothing near moving parts.','Usa EPP: protecci\u00F3n ocular, guantes resistentes al calor al purgar y nada de ropa suelta cerca de partes m\u00F3viles.'),
+          L('Stand clear of the purge stream \u2014 hot purge can spit and string.','Mant\u00E9nte fuera del chorro de purga \u2014 la purga caliente puede salpicar y formar hilos.')]}
+   ],
+   tip:L('If a guard or interlock is defeated, the machine is unsafe to run \u2014 stop and fix it before processing.','Si un resguardo o enclavamiento est\u00E1 anulado, la m\u00E1quina no es segura \u2014 det\u00E9nte y arr\u00E9glalo antes de procesar.'),
+   quiz:[
+     {tag:'check',stem:L('Before reaching into the clamp area to work on the mold, you should:','Antes de meter las manos en el \u00E1rea de cierre para trabajar en el molde, debes:'),
+      opts:[L('Run one more cycle first','Correr un ciclo m\u00E1s primero'),L('Lockout/tagout the machine','Aplicar bloqueo/etiquetado (LOTO)'),L('Raise the barrel temperature','Subir la temperatura del barril'),L('Remove your gloves','Quitarte los guantes')],a:1,
+      fb:L('Lockout/tagout removes stored energy so the clamp and injection cannot move.','El bloqueo/etiquetado elimina la energ\u00EDa almacenada para que el cierre y la inyecci\u00F3n no se muevan.')},
+     {tag:'check',stem:L('Why must safety gates and interlocks never be bypassed?','\u00BFPor qu\u00E9 nunca deben anularse las puertas e enclavamientos de seguridad?'),
+      opts:[L('They slow the screw','Frenan el husillo'),L('They prevent the clamp/injection from moving while someone is exposed','Evitan que el cierre/inyecci\u00F3n se muevan mientras alguien est\u00E1 expuesto'),L('They save electricity','Ahorran electricidad'),L('They improve gloss','Mejoran el brillo')],a:1,
+      fb:L('Interlocks stop dangerous motion when a guard is open \u2014 bypassing them risks crush and burn injuries.','Los enclavamientos detienen el movimiento peligroso con un resguardo abierto \u2014 anularlos arriesga aplastamiento y quemaduras.')},
+     {tag:'recall',stem:L('Molten plastic and a hot barrel are primarily what kind of hazard?','El pl\u00E1stico fundido y el barril caliente son principalmente qu\u00E9 tipo de peligro?'),
+      opts:[L('Burn hazard','Peligro de quemadura'),L('Trip hazard','Peligro de tropiezo'),L('Noise hazard','Peligro de ruido'),L('No hazard','Sin peligro')],a:0,
+      fb:L('They are burn hazards \u2014 use heat-resistant PPE and stand clear of the purge.','Son peligro de quemadura \u2014 usa EPP resistente al calor y mant\u00E9nte fuera de la purga.')}
+   ]},
+
+  {id:'m4l2',
+   title:L('The Injection Molding Cycle','El Ciclo de Moldeo por Inyecci\u00F3n'),
+   obj:L('Put the phases of one molding cycle in order, from clamp to ejection.','Ordenar las fases de un ciclo de moldeo, desde el cierre hasta la expulsi\u00F3n.'),
+   body:[
+     {p:L('Mold processing means running a repeatable cycle. Knowing the phases in order is the foundation for tuning later.','Procesar un molde significa correr un ciclo repetible. Conocer las fases en orden es la base para ajustar despu\u00E9s.')},
+     {h:L('The cycle in order','El ciclo en orden')},
+     {ul:[L('Clamp \u2014 the press closes and locks the mold halves under clamp tonnage.','Cierre \u2014 la prensa cierra y bloquea las mitades del molde bajo el tonelaje de cierre.'),
+          L('Inject (fill) \u2014 the screw pushes melt through the nozzle to fill the cavity.','Inyecci\u00F3n (llenado) \u2014 el husillo empuja el material por la boquilla para llenar la cavidad.'),
+          L('Pack & hold \u2014 pressure is held to pack out the part and feed shrinkage as it cools.','Compactaci\u00F3n y sostenimiento \u2014 se mantiene presi\u00F3n para compactar la pieza y compensar la contracci\u00F3n al enfriar.'),
+          L('Cool \u2014 the part solidifies while the screw recovers (plasticizes) the next shot.','Enfriamiento \u2014 la pieza solidifica mientras el husillo recupera (plastifica) el siguiente disparo.'),
+          L('Open & eject \u2014 the clamp opens and the ejector system pushes the part out.','Apertura y expulsi\u00F3n \u2014 el cierre abre y el sistema expulsor saca la pieza.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What happens immediately AFTER the cavity is filled?','\u00BFQu\u00E9 ocurre inmediatamente DESPU\u00C9S de llenar la cavidad?'),
+      opts:[L('The mold opens','El molde abre'),L('Pack & hold pressure feeds shrinkage','La presi\u00F3n de compactaci\u00F3n/sostenimiento compensa la contracci\u00F3n'),L('The mold is mounted','Se monta el molde'),L('LOTO is applied','Se aplica LOTO')],a:1,
+      fb:L('After fill comes pack & hold to pack out the part and feed shrinkage as it cools.','Tras el llenado viene compactaci\u00F3n y sostenimiento para compactar y compensar la contracci\u00F3n.')},
+     {tag:'check',stem:L('During the cooling phase, what is the screw doing?','Durante el enfriamiento, \u00BFqu\u00E9 hace el husillo?'),
+      opts:[L('Recovering (plasticizing) the next shot','Recuperando (plastificando) el siguiente disparo'),L('Ejecting the part','Expulsando la pieza'),L('Opening the clamp','Abriendo el cierre'),L('Nothing','Nada')],a:0,
+      fb:L('While the part cools, the screw recovers the next shot of melt.','Mientras la pieza enfr\u00EDa, el husillo recupera el siguiente disparo de material.')},
+     {tag:'check',stem:L('Which phase comes FIRST in the cycle?','\u00BFQu\u00E9 fase va PRIMERO en el ciclo?'),
+      opts:[L('Eject','Expulsi\u00F3n'),L('Clamp','Cierre'),L('Cool','Enfriamiento'),L('Pack','Compactaci\u00F3n')],a:1,
+      fb:L('The clamp closes and locks the mold before any plastic is injected.','El cierre cierra y bloquea el molde antes de inyectar pl\u00E1stico.')}
+   ]},
+
+  {id:'m4l3',
+   title:L('Know Your Machine & Startup/Shutdown','Conoce tu M\u00E1quina y Arranque/Apagado'),
+   obj:L('Identify the main machine systems and follow a safe startup and shutdown sequence.','Identificar los sistemas principales de la m\u00E1quina y seguir una secuencia segura de arranque y apagado.'),
+   body:[
+     {p:L('A molding machine has three big systems: the injection unit (barrel, screw, nozzle), the clamp unit (platens, tie bars), and the controls/hydraulics. Startup and shutdown follow a set order to protect the machine and the operator.','Una m\u00E1quina de inyecci\u00F3n tiene tres grandes sistemas: la unidad de inyecci\u00F3n (barril, husillo, boquilla), la unidad de cierre (platinas, columnas) y los controles/hidr\u00E1ulica. El arranque y apagado siguen un orden fijo para proteger la m\u00E1quina y al operador.')},
+     {ul:[L('Startup: power and hydraulics on, bring barrel zones to temperature, and SOAK before moving the screw \u2014 turning a cold screw can break it.','Arranque: energ\u00EDa e hidr\u00E1ulica encendidas, lleva las zonas del barril a temperatura y DEJA REPOSAR antes de mover el husillo \u2014 girar un husillo fr\u00EDo puede romperlo.'),
+          L('Shutdown: stop feed, purge the barrel of the running material, then power down heats and hydraulics.','Apagado: corta la alimentaci\u00F3n, purga el barril del material en uso, luego apaga calefacciones e hidr\u00E1ulica.')]}
+   ],
+   tip:L('Always let the barrel reach temperature and heat-soak before rotating the screw. Moving a cold screw is the fastest way to damage the injection unit.','Siempre deja que el barril llegue a temperatura y repose antes de girar el husillo. Mover un husillo fr\u00EDo es la forma m\u00E1s r\u00E1pida de da\u00F1ar la unidad de inyecci\u00F3n.'),
+   quiz:[
+     {tag:'check',stem:L('Why must the barrel heat-soak before you rotate the screw at startup?','\u00BFPor qu\u00E9 debe reposar el barril antes de girar el husillo al arrancar?'),
+      opts:[L('To save energy','Para ahorrar energ\u00EDa'),L('Turning a cold screw can break it','Girar un husillo fr\u00EDo puede romperlo'),L('To color the material','Para colorear el material'),L('To open the clamp','Para abrir el cierre')],a:1,
+      fb:L('Cold material has not melted; rotating the screw against it can break the screw.','El material fr\u00EDo no se ha fundido; girar el husillo contra \u00E9l puede romperlo.')},
+     {tag:'check',stem:L('Which three systems make up the molding machine?','\u00BFQu\u00E9 tres sistemas componen la m\u00E1quina de inyecci\u00F3n?'),
+      opts:[L('Injection unit, clamp unit, controls/hydraulics','Unidad de inyecci\u00F3n, unidad de cierre, controles/hidr\u00E1ulica'),L('Barrel, paint, conveyor','Barril, pintura, transportador'),L('Mold, label, box','Molde, etiqueta, caja'),L('Dryer, chiller, robot only','Solo secador, enfriador, robot')],a:0,
+      fb:L('Injection unit, clamp unit, and the controls/hydraulics are the three big systems.','Unidad de inyecci\u00F3n, unidad de cierre y controles/hidr\u00E1ulica son los tres grandes sistemas.')},
+     {tag:'check',stem:L('A safe shutdown includes which step before powering down heats?','Un apagado seguro incluye qu\u00E9 paso antes de apagar las calefacciones?'),
+      opts:[L('Purge the running material out of the barrel','Purgar el material en uso fuera del barril'),L('Remove the tie bars','Quitar las columnas'),L('Raise clamp tonnage','Subir el tonelaje de cierre'),L('Inject faster','Inyectar m\u00E1s r\u00E1pido')],a:0,
+      fb:L('Stop feed and purge the barrel, then power down heats and hydraulics.','Corta la alimentaci\u00F3n y purga el barril, luego apaga calefacciones e hidr\u00E1ulica.')}
+   ]},
+
+  {id:'m4l4',
+   title:L('Baseline: Simulation to Process Setup','L\u00EDnea Base: De la Simulaci\u00F3n al Proceso'),
+   obj:L('Use mold-flow simulation outputs as the starting baseline for machine setpoints.','Usar los resultados de la simulaci\u00F3n de flujo como l\u00EDnea base inicial para los par\u00E1metros de la m\u00E1quina.'),
+   body:[
+     {p:L('The mold-flow simulation from the design stage predicts fill pattern, pressure, and temperatures. Those predictions become the FIRST setpoints on the machine \u2014 a documented baseline you then refine with real parts.','La simulaci\u00F3n de flujo de la etapa de dise\u00F1o predice patr\u00F3n de llenado, presi\u00F3n y temperaturas. Esas predicciones se vuelven los PRIMEROS par\u00E1metros en la m\u00E1quina \u2014 una l\u00EDnea base documentada que luego refinas con piezas reales.')},
+     {ul:[L('Start from the simulated melt and mold temperatures, fill time, and pressure.','Parte de las temperaturas simuladas de material y molde, el tiempo de llenado y la presi\u00F3n.'),
+          L('Record the baseline before changing anything, so you can always return to a known state.','Registra la l\u00EDnea base antes de cambiar nada, para poder volver siempre a un estado conocido.'),
+          L('Tune one variable at a time off the baseline; never chase several changes at once.','Ajusta una variable a la vez desde la l\u00EDnea base; nunca persigas varios cambios a la vez.')]}
+   ],
+   tip:L('Write the baseline down first. Tuning without a recorded starting point means you cannot get back when a change makes things worse.','Anota primero la l\u00EDnea base. Ajustar sin un punto de partida registrado significa que no podr\u00E1s volver cuando un cambio empeore las cosas.'),
+   quiz:[
+     {tag:'check',stem:L('What is the main use of the mold-flow simulation at process setup?','\u00BF Cu\u00E1l es el uso principal de la simulaci\u00F3n de flujo en la puesta a punto?'),
+      opts:[L('To pick the part color','Para elegir el color'),L('To provide the first baseline setpoints','Para dar los primeros par\u00E1metros base'),L('To replace quality control','Para reemplazar el control de calidad'),L('To mount the mold','Para montar el molde')],a:1,
+      fb:L('Simulation predicts fill, pressure, and temps that become the documented baseline.','La simulaci\u00F3n predice llenado, presi\u00F3n y temperaturas que se vuelven la l\u00EDnea base documentada.')},
+     {tag:'check',stem:L('Best practice when tuning off a baseline is to change:','La buena pr\u00E1ctica al ajustar desde una l\u00EDnea base es cambiar:'),
+      opts:[L('Everything at once','Todo a la vez'),L('One variable at a time','Una variable a la vez'),L('Only the color','Solo el color'),L('Nothing, ever','Nada, nunca')],a:1,
+      fb:L('Change one variable at a time so you know what caused each result.','Cambia una variable a la vez para saber qu\u00E9 caus\u00F3 cada resultado.')},
+     {tag:'recall',stem:L('Why record the baseline before making changes?','\u00BFPor qu\u00E9 registrar la l\u00EDnea base antes de hacer cambios?'),
+      opts:[L('So you can return to a known state','Para poder volver a un estado conocido'),L('To slow the cycle','Para frenar el ciclo'),L('To skip simulation','Para saltar la simulaci\u00F3n'),L('It is not needed','No es necesario')],a:0,
+      fb:L('A recorded baseline lets you revert when a change makes parts worse.','Una l\u00EDnea base registrada te deja revertir cuando un cambio empeora las piezas.')}
+   ]},
+
+  {id:'m4l5',
+   title:L('Material Delivery & Purging','Entrega de Material y Purga'),
+   obj:L('Describe how material reaches the barrel and when the barrel must be purged.','Describir c\u00F3mo llega el material al barril y cu\u00E1ndo debe purgarse el barril.'),
+   body:[
+     {p:L('Material is delivered from a hopper or central system, often through a dryer for hygroscopic resins, then fed to the barrel. Purging clears the barrel of old material so the next run is clean.','El material se entrega desde una tolva o un sistema central, a menudo a trav\u00E9s de un secador para resinas higrosc\u00F3picas, y luego se alimenta al barril. La purga limpia el barril del material viejo para que la siguiente corrida sea limpia.')},
+     {ul:[L('Purge when changing material or color, or when a resin has degraded from sitting hot in the barrel.','Purga al cambiar de material o color, o cuando una resina se ha degradado por estar caliente en el barril.'),
+          L('Purge until the stream runs clean and the previous color/material is gone.','Purga hasta que el chorro salga limpio y el color/material anterior haya desaparecido.'),
+          L('A purging compound can speed a difficult material or color change.','Un compuesto de purga puede acelerar un cambio dif\u00EDcil de material o color.')]}
+   ],
+   tip:L('Recall from Material Science: hygroscopic resins must be dried before they reach the barrel, or parts show splay/streaks.','Repaso de Ciencia de Materiales: las resinas higrosc\u00F3picas deben secarse antes de llegar al barril, o las piezas muestran r\u00E1fagas/estr\u00EDas.'),
+   quiz:[
+     {tag:'check',stem:L('When should you purge the barrel?','\u00BF Cu\u00E1ndo debes purgar el barril?'),
+      opts:[L('Only at the end of the year','Solo al final del a\u00F1o'),L('When changing material/color or when resin has degraded','Al cambiar material/color o cuando la resina se ha degradado'),L('Never','Nunca'),L('Only when the mold is cold','Solo cuando el molde est\u00E1 fr\u00EDo')],a:1,
+      fb:L('Purge on material/color changes and when material degrades from sitting hot.','Purga al cambiar material/color y cuando el material se degrada por estar caliente.')},
+     {tag:'check',stem:L('How do you know purging is complete?','\u00BF C\u00F3mo sabes que la purga termin\u00F3?'),
+      opts:[L('The stream runs clean with no old color/material','El chorro sale limpio sin color/material anterior'),L('The clamp opens','El cierre abre'),L('The dryer turns off','El secador se apaga'),L('The robot starts','El robot arranca')],a:0,
+      fb:L('Purge until the previous color/material is fully gone from the stream.','Purga hasta que el color/material anterior haya salido por completo del chorro.')},
+     {tag:'recall',stem:L('Hygroscopic resins must be ___ before reaching the barrel.','Las resinas higrosc\u00F3picas deben ___ antes de llegar al barril.'),
+      opts:[L('dried','secarse'),L('frozen','congelarse'),L('painted','pintarse'),L('ground','molerse')],a:0,
+      fb:L('Dried \u2014 undried hygroscopic material causes splay/streaks.','Secarse \u2014 el material higrosc\u00F3pico sin secar causa r\u00E1fagas/estr\u00EDas.')}
+   ]},
+
+  {id:'m4l6',
+   title:L('Barrel & Screw Swap-Out','Cambio de Barril y Husillo'),
+   obj:L('Explain why and how the barrel/screw is changed and the care it requires.','Explicar por qu\u00E9 y c\u00F3mo se cambia el barril/husillo y el cuidado que requiere.'),
+   body:[
+     {p:L('The barrel and screw are swapped for maintenance, wear, or to suit a different material (for example an abrasive glass-filled resin that wears standard steel). It is heavy, hot-adjacent work that follows a strict procedure.','El barril y el husillo se cambian por mantenimiento, desgaste o para adaptarse a otro material (por ejemplo una resina abrasiva con fibra de vidrio que desgasta el acero est\u00E1ndar). Es un trabajo pesado y cercano al calor que sigue un procedimiento estricto.')},
+     {ul:[L('Lockout/tagout first; the injection unit holds stored energy and heat.','Bloqueo/etiquetado primero; la unidad de inyecci\u00F3n guarda energ\u00EDa y calor.'),
+          L('Match the screw design to the material \u2014 abrasive or corrosive resins need hardened or coated screws.','Empareja el dise\u00F1o del husillo con el material \u2014 las resinas abrasivas o corrosivas necesitan husillos endurecidos o recubiertos.'),
+          L('Inspect for wear on the screw flights and check screw than barrel clearance before reassembly.','Inspecciona el desgaste en los filetes del husillo y revisa el huelgo husillo-barril antes de reensamblar.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('A glass-filled, abrasive resin is being run. The screw should be:','Se est\u00E1 corriendo una resina abrasiva con fibra de vidrio. El husillo debe ser:'),
+      opts:[L('Hardened or coated for wear','Endurecido o recubierto contra el desgaste'),L('Made of aluminum','De aluminio'),L('As soft as possible','Lo m\u00E1s blando posible'),L('Removed entirely','Retirado por completo')],a:0,
+      fb:L('Abrasive/corrosive resins call for hardened or coated screws to resist wear.','Las resinas abrasivas/corrosivas requieren husillos endurecidos o recubiertos.')},
+     {tag:'check',stem:L('What is the first step before a barrel/screw swap?','\u00BF Cu\u00E1l es el primer paso antes de cambiar barril/husillo?'),
+      opts:[L('Lockout/tagout the machine','Aplicar bloqueo/etiquetado'),L('Increase injection speed','Aumentar la velocidad de inyecci\u00F3n'),L('Start a production run','Iniciar una corrida de producci\u00F3n'),L('Change the part color','Cambiar el color')],a:0,
+      fb:L('LOTO first \u2014 the injection unit holds stored energy and heat.','LOTO primero \u2014 la unidad de inyecci\u00F3n guarda energ\u00EDa y calor.')}
+   ]},
+
+  {id:'m4l7',
+   title:L('Mounting the Mold & Daylight','Montaje del Molde y Apertura (Daylight)'),
+   obj:L('Explain tie bars, platens, mold mounting, and daylight clearance when fitting a mold.','Explicar columnas, platinas, montaje del molde y la apertura (daylight) al instalar un molde.'),
+   body:[
+     {p:L('The mold mounts between two platens; the fixed platen is the hot/injection side, the moving platen carries ejection. Tie bars guide and constrain the moving platen.','El molde se monta entre dos platinas; la platina fija es el lado caliente/inyecci\u00F3n y la m\u00F3vil lleva la expulsi\u00F3n. Las columnas gu\u00EDan y restringen la platina m\u00F3vil.')},
+     {ul:[L('Tie-bar spacing sets the largest mold that can drop between the bars into the press.','El espacio entre columnas define el molde m\u00E1s grande que cabe entre ellas en la prensa.'),
+          L('Daylight is the maximum platen opening \u2014 it must exceed the part height plus the room needed to eject and remove it.','El daylight es la apertura m\u00E1xima de la platina \u2014 debe superar la altura de la pieza m\u00E1s el espacio para expulsarla y retirarla.'),
+          L('A locator ring centers the mold to the machine; check the machine spec for the correct ring.','Un anillo localizador centra el molde a la m\u00E1quina; revisa la especificaci\u00F3n para el anillo correcto.')]}
+   ],
+   tip:L('Check two fits before mounting: the mold must pass between the tie bars, and daylight must open far enough to eject and remove the part.','Verifica dos ajustes antes de montar: el molde debe pasar entre las columnas y el daylight debe abrir lo suficiente para expulsar y retirar la pieza.'),
+   quiz:[
+     {tag:'check',stem:L('"Daylight" on a molding machine refers to:','El "daylight" en una m\u00E1quina de inyecci\u00F3n se refiere a:'),
+      opts:[L('The maximum platen opening','La apertura m\u00E1xima de la platina'),L('The barrel temperature','La temperatura del barril'),L('The screw speed','La velocidad del husillo'),L('The part color','El color de la pieza')],a:0,
+      fb:L('Daylight is the max platen opening; it must clear the part for ejection/removal.','El daylight es la apertura m\u00E1xima; debe librar la pieza para expulsarla y retirarla.')},
+     {tag:'check',stem:L('What does tie-bar spacing limit?','\u00BF Qu\u00E9 limita el espacio entre columnas?'),
+      opts:[L('The largest mold that fits between the bars','El molde m\u00E1s grande que cabe entre las columnas'),L('The melt temperature','La temperatura del material'),L('The part color','El color de la pieza'),L('The hold time','El tiempo de sostenimiento')],a:0,
+      fb:L('The mold must physically pass between the tie bars to drop into the press.','El molde debe pasar f\u00EDsicamente entre las columnas para entrar a la prensa.')},
+     {tag:'recall',stem:L('Which platen is the hot / injection side?','\u00BF Cu\u00E1l platina es el lado caliente / de inyecci\u00F3n?'),
+      opts:[L('The fixed platen','La platina fija'),L('The moving platen','La platina m\u00F3vil')],a:0,
+      fb:L('The fixed platen is the hot/injection side; the moving platen carries ejection.','La platina fija es el lado caliente/inyecci\u00F3n; la m\u00F3vil lleva la expulsi\u00F3n.')}
+   ]},
+
+  {id:'m4l8',
+   title:L('Ejection & Knockout Bars','Expulsi\u00F3n y Barras de Expulsi\u00F3n'),
+   obj:L('Connect the machine ejector/knockout bars to the mold ejector system at the press.','Conectar las barras expulsoras de la m\u00E1quina con el sistema expulsor del molde en la prensa.'),
+   body:[
+     {p:L('When the mold opens, the machine drives knockout bars forward against the mold\u2019s ejector plates, which push the ejector pins to release the part. Travel is limited by hard stops in the mold.','Cuando el molde abre, la m\u00E1quina empuja las barras de expulsi\u00F3n contra las placas expulsoras del molde, que mueven los pasadores para liberar la pieza. El recorrido lo limitan los topes duros del molde.')},
+     {ul:[L('Set ejector stroke and speed so the part comes free without bending or stress-marking it.','Ajusta la carrera y velocidad de expulsi\u00F3n para que la pieza salga sin doblarse ni marcarse.'),
+          L('Too little stroke leaves the part hung on the cores; too much can damage the part or ejector train.','Muy poca carrera deja la pieza colgada en los n\u00FAcleos; demasiada puede da\u00F1ar la pieza o el tren expulsor.'),
+          L('Return pins/springs bring the ejector plates home before the mold closes again.','Los pasadores/resortes de retorno regresan las placas expulsoras antes de que el molde cierre de nuevo.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('What do the machine knockout bars act on?','\u00BF Sobre qu\u00E9 act\u00FAan las barras de expulsi\u00F3n de la m\u00E1quina?'),
+      opts:[L('The mold\u2019s ejector plates','Las placas expulsoras del molde'),L('The hopper','La tolva'),L('The locator ring','El anillo localizador'),L('The dryer','El secador')],a:0,
+      fb:L('Knockout bars push the ejector plates, which drive the ejector pins.','Las barras empujan las placas expulsoras, que mueven los pasadores.')},
+     {tag:'check',stem:L('A part stays hung on the cores after ejection. A likely cause is:','Una pieza queda colgada en los n\u00FAcleos tras expulsar. Una causa probable es:'),
+      opts:[L('Too little ejector stroke','Muy poca carrera de expulsi\u00F3n'),L('Too much daylight','Demasiado daylight'),L('Barrel too hot','Barril muy caliente'),L('Wrong part color','Color equivocado')],a:0,
+      fb:L('Insufficient ejector stroke leaves the part on the cores; increase stroke carefully.','Una carrera insuficiente deja la pieza en los n\u00FAcleos; aumenta la carrera con cuidado.')},
+     {tag:'recall',stem:L('What returns the ejector plates home before the mold closes?','\u00BF Qu\u00E9 regresa las placas expulsoras antes de que el molde cierre?'),
+      opts:[L('Return pins and springs','Pasadores y resortes de retorno'),L('The nozzle','La boquilla'),L('The tie bars','Las columnas'),L('The chiller','El enfriador')],a:0,
+      fb:L('Carried from Mold Design \u2014 return pins and springs reset the ejector plates.','Heredado del Dise\u00F1o de Molde \u2014 los pasadores y resortes de retorno reinician las placas.')}
+   ]},
+
+  {id:'m4l9',
+   title:L('Clamp, Injection Speed & Hold','Cierre, Velocidad de Inyecci\u00F3n y Sostenimiento'),
+   obj:L('Explain what clamp tonnage, injection speed, and hold time each control.','Explicar qu\u00E9 controla cada uno: tonelaje de cierre, velocidad de inyecci\u00F3n y tiempo de sostenimiento.'),
+   body:[
+     {ul:[L('Clamp tonnage keeps the mold closed against injection pressure; too little lets the mold open and flash.','El tonelaje de cierre mantiene el molde cerrado contra la presi\u00F3n; muy poco deja que el molde abra y rebabe.'),
+          L('Injection speed sets how fast the cavity fills \u2014 it drives the fill pattern, shear, and surface finish.','La velocidad de inyecci\u00F3n define qu\u00E9 tan r\u00E1pido se llena la cavidad \u2014 controla el patr\u00F3n de llenado, el cizallamiento y el acabado.'),
+          L('Hold (pack) pressure and time feed material in as the part cools to fight sink and short shots.','La presi\u00F3n y el tiempo de sostenimiento (compactaci\u00F3n) alimentan material mientras la pieza enfr\u00EDa para combatir el hundimiento y los disparos cortos.'),
+          L('Hold ends at the gate-freeze point \u2014 holding longer than the gate stays open adds no material.','El sostenimiento termina en el punto de congelaci\u00F3n de la compuerta \u2014 sostener m\u00E1s tiempo del que la compuerta sigue abierta no a\u00F1ade material.')]}
+   ],
+   tip:L('Sink marks usually mean not enough pack/hold; flash usually means too little clamp or too much pressure. Diagnose which before you turn a dial.','Las marcas de hundimiento suelen ser falta de compactaci\u00F3n; la rebaba suele ser poco cierre o demasiada presi\u00F3n. Diagnostica cu\u00E1l antes de mover una perilla.'),
+   quiz:[
+     {tag:'check',stem:L('A part shows sink marks in thick sections. The most likely fix is:','Una pieza muestra hundimiento en secciones gruesas. El arreglo m\u00E1s probable es:'),
+      opts:[L('More pack/hold pressure or time','M\u00E1s presi\u00F3n o tiempo de compactaci\u00F3n'),L('Less clamp tonnage','Menos tonelaje de cierre'),L('Open the safety gate','Abrir la puerta de seguridad'),L('Change the locator ring','Cambiar el anillo localizador')],a:0,
+      fb:L('Sink is under-packing; add pack/hold to feed the thick section as it cools.','El hundimiento es falta de compactaci\u00F3n; a\u00F1ade compactaci\u00F3n para alimentar la secci\u00F3n gruesa.')},
+     {tag:'check',stem:L('What does clamp tonnage primarily prevent?','\u00BF Qu\u00E9 evita principalmente el tonelaje de cierre?'),
+      opts:[L('The mold opening and flashing under pressure','Que el molde abra y rebabe bajo presi\u00F3n'),L('The dryer overheating','Que el secador se sobrecaliente'),L('The robot stalling','Que el robot se detenga'),L('Color streaks','Las estr\u00EDas de color')],a:0,
+      fb:L('Enough clamp keeps the mold shut so it does not open and flash.','Suficiente cierre mantiene el molde cerrado para que no abra y rebabe.')},
+     {tag:'check',stem:L('Holding pressure LONGER than the gate-freeze point will:','Sostener presi\u00F3n M\u00C1S TIEMPO del punto de congelaci\u00F3n de la compuerta:'),
+      opts:[L('Add no more material to the part','No a\u00F1ade m\u00E1s material a la pieza'),L('Always remove flash','Siempre elimina la rebaba'),L('Cool the barrel','Enfr\u00EDa el barril'),L('Increase clamp tonnage','Aumenta el tonelaje')],a:0,
+      fb:L('Once the gate freezes, extra hold time adds nothing \u2014 it only lengthens the cycle.','Una vez congelada la compuerta, m\u00E1s sostenimiento no a\u00F1ade nada \u2014 solo alarga el ciclo.')}
+   ]},
+
+  {id:'m4l10',
+   title:L('Temperature, Cooling & Heating','Temperatura, Enfriamiento y Calentamiento'),
+   obj:L('Explain how auxiliary temperature control and mold cooling/heating affect parts and cycle.','Explicar c\u00F3mo el control de temperatura auxiliar y el enfriamiento/calentamiento del molde afectan piezas y ciclo.'),
+   body:[
+     {p:L('Auxiliary units circulate water or oil through the mold to hold it at a target temperature. Mold temperature affects finish, dimensions, warpage, and how fast the part can be ejected.','Las unidades auxiliares circulan agua o aceite por el molde para mantenerlo a una temperatura objetivo. La temperatura del molde afecta el acabado, las dimensiones, el alabeo y qu\u00E9 tan r\u00E1pido se puede expulsar la pieza.')},
+     {ul:[L('A chiller/temperature controller removes heat the melt brings in each shot.','Un enfriador/controlador de temperatura retira el calor que el material trae en cada disparo.'),
+          L('Too cold a mold can hurt finish and fill; too hot lengthens cooling and the cycle.','Un molde muy fr\u00EDo puede da\u00F1ar el acabado y el llenado; muy caliente alarga el enfriamiento y el ciclo.'),
+          L('Uneven cooling between the two mold halves is a common cause of warpage.','El enfriamiento desigual entre las dos mitades del molde es una causa com\u00FAn de alabeo.')]}
+   ],
+   quiz:[
+     {tag:'check',stem:L('Uneven cooling between mold halves most commonly causes:','El enfriamiento desigual entre mitades del molde causa com\u00FAnmente:'),
+      opts:[L('Warpage','Alabeo'),L('Better gloss','Mejor brillo'),L('Lower clamp force','Menor fuerza de cierre'),L('Color change','Cambio de color')],a:0,
+      fb:L('Differential cooling warps the part; balance the two halves\u2019 temperatures.','El enfriamiento diferencial alabea la pieza; equilibra las temperaturas de ambas mitades.')},
+     {tag:'check',stem:L('What does raising mold temperature too high do to the cycle?','\u00BF Qu\u00E9 le hace al ciclo subir demasiado la temperatura del molde?'),
+      opts:[L('Lengthens cooling and the cycle','Alarga el enfriamiento y el ciclo'),L('Shortens the cycle for free','Acorta el ciclo sin costo'),L('Removes flash','Elimina la rebaba'),L('Dries the resin','Seca la resina')],a:0,
+      fb:L('A hotter mold takes longer to cool the part, lengthening the cycle.','Un molde m\u00E1s caliente tarda m\u00E1s en enfriar la pieza, alargando el ciclo.')},
+     {tag:'recall',stem:L('What circulates through the mold to control its temperature?','\u00BF Qu\u00E9 circula por el molde para controlar su temperatura?'),
+      opts:[L('Water or oil from an auxiliary unit','Agua o aceite de una unidad auxiliar'),L('Compressed air only','Solo aire comprimido'),L('Molten plastic','Pl\u00E1stico fundido'),L('Nothing','Nada')],a:0,
+      fb:L('Auxiliary temperature controllers circulate water or oil through the mold.','Los controladores auxiliares circulan agua o aceite por el molde.')}
+   ]},
+
+  {id:'m4l11',
+   title:L('Flash Then Pull Back; Troubleshooting','Rebabear y Reducir; Soluci\u00F3n de Problemas'),
+   obj:L('Apply the flash-then-pull-back method and diagnose common molding defects.','Aplicar el m\u00E9todo de rebabear-y-reducir y diagnosticar defectos comunes de moldeo.'),
+   body:[
+     {p:L('A common process-finding method: deliberately push pressure until the mold just flashes, confirming the cavity is full, then pull pressure back until the flash just disappears. That edge is a good full-fill starting point.','Un m\u00E9todo com\u00FAn: empuja la presi\u00F3n hasta que el molde apenas rebabe, confirmando que la cavidad est\u00E1 llena, luego reduce la presi\u00F3n hasta que la rebaba apenas desaparezca. Ese borde es un buen punto de partida de llenado completo.')},
+     {h:L('Common defects and first checks','Defectos comunes y primeras verificaciones')},
+     {ul:[L('Short shot \u2014 not enough material/pressure or poor venting; increase fill or improve venting.','Disparo corto \u2014 falta material/presi\u00F3n o mal venteo; aumenta el llenado o mejora el venteo.'),
+          L('Flash \u2014 too much pressure or too little clamp; pull back pressure or add tonnage.','Rebaba \u2014 demasiada presi\u00F3n o poco cierre; reduce la presi\u00F3n o a\u00F1ade tonelaje.'),
+          L('Sink \u2014 under-packing thick sections; add pack/hold.','Hundimiento \u2014 falta de compactaci\u00F3n en secciones gruesas; a\u00F1ade compactaci\u00F3n.'),
+          L('Splay/streaks \u2014 wet (undried) hygroscopic material; dry it properly.','R\u00E1fagas/estr\u00EDas \u2014 material higrosc\u00F3pico h\u00FAmedo (sin secar); s\u00E9calo bien.'),
+          L('Burn marks \u2014 trapped air with nowhere to vent; improve venting or slow fill.','Quemaduras \u2014 aire atrapado sin v\u00EDa de escape; mejora el venteo o baja la velocidad.')]}
+   ],
+   tip:L('Flash then pull back until no flash gives a repeatable full-fill point. Change one setting at a time and watch a single defect.','Rebabear y luego reducir hasta que no haya rebaba da un punto repetible de llenado completo. Cambia un ajuste a la vez y observa un solo defecto.'),
+   quiz:[
+     {tag:'check',stem:L('In the flash-then-pull-back method, after the mold just flashes you:','En el m\u00E9todo de rebabear-y-reducir, despu\u00E9s de que el molde apenas rebabe t\u00FA:'),
+      opts:[L('Pull pressure back until the flash just disappears','Reduces la presi\u00F3n hasta que la rebaba apenas desaparezca'),L('Push pressure even higher','Subes la presi\u00F3n a\u00FAn m\u00E1s'),L('Shut the machine down','Apagas la m\u00E1quina'),L('Change the resin','Cambias la resina')],a:0,
+      fb:L('Flash confirms a full cavity; pulling back to no-flash gives a good fill point.','La rebaba confirma cavidad llena; reducir hasta sin-rebaba da un buen punto de llenado.')},
+     {tag:'check',stem:L('Burn marks on a part most often point to:','Las quemaduras en una pieza apuntan con m\u00E1s frecuencia a:'),
+      opts:[L('Trapped air / poor venting','Aire atrapado / mal venteo'),L('Too much clamp tonnage','Demasiado tonelaje'),L('A cold dryer','Un secador fr\u00EDo'),L('Wrong locator ring','Anillo localizador equivocado')],a:0,
+      fb:L('Trapped air with no vent compresses and burns; improve venting or slow the fill.','El aire atrapado sin venteo se comprime y quema; mejora el venteo o baja la velocidad.')},
+     {tag:'check',stem:L('A short shot is best first addressed by:','Un disparo corto se atiende primero mejor con:'),
+      opts:[L('More fill/pressure or better venting','M\u00E1s llenado/presi\u00F3n o mejor venteo'),L('Lowering melt temperature','Bajar la temperatura del material'),L('Removing the ejector pins','Quitar los pasadores'),L('Adding part color','A\u00F1adir color')],a:0,
+      fb:L('Short shots need more material/pressure or a vent for trapped air.','Los disparos cortos necesitan m\u00E1s material/presi\u00F3n o un venteo para el aire atrapado.')}
+   ]},
+
+  {id:'m4l12',
+   title:L('Tuning, Color Changes, Robotics & Inspection','Ajuste, Cambios de Color, Rob\u00F3tica e Inspecci\u00F3n'),
+   obj:L('Describe tuning priorities, color changes, robotic part handling, inline inspection, and insert molding.','Describir prioridades de ajuste, cambios de color, manejo rob\u00F3tico, inspecci\u00F3n en l\u00EDnea y moldeo con insertos.'),
+   body:[
+     {p:L('Once parts run, you pull the mold to tune the tool, then tune the PROCESS in a priority order: cosmetics, then dimensional stability, then cycle time \u2014 quality first, speed last.','Una vez que corren piezas, retiras el molde para ajustar la herramienta, luego ajustas el PROCESO en orden de prioridad: cosm\u00E9tica, luego estabilidad dimensional, luego tiempo de ciclo \u2014 calidad primero, velocidad al final.')},
+     {ul:[L('Color change: purge the barrel fully until the old color is gone before running the new one.','Cambio de color: purga el barril por completo hasta que el color viejo desaparezca antes de correr el nuevo.'),
+          L('Robotics assist degating and part handling \u2014 a robot or sprue picker removes parts/runners consistently and safely.','La rob\u00F3tica asiste el desgatado y manejo \u2014 un robot o extractor de colada retira piezas/canales de forma consistente y segura.'),
+          L('Inline inspection checks parts during the run (vision or gauging) so defects are caught early, not after a full batch.','La inspecci\u00F3n en l\u00EDnea revisa piezas durante la corrida (visi\u00F3n o calibrado) para detectar defectos temprano, no tras un lote completo.'),
+          L('Insert molding places a metal or plastic insert in the cavity (manual or automated) so plastic molds around it.','El moldeo con insertos coloca un inserto met\u00E1lico o pl\u00E1stico en la cavidad (manual o automatizado) para que el pl\u00E1stico se moldee a su alrededor.')]}
+   ],
+   tip:L('Tune in order: get it looking right, then dimensionally stable, then fast. Chasing cycle time before cosmetics and dimensions are locked usually undoes both.','Ajusta en orden: que se vea bien, luego dimensionalmente estable, luego r\u00E1pido. Perseguir el tiempo de ciclo antes de fijar cosm\u00E9tica y dimensiones suele arruinar ambas.'),
+   quiz:[
+     {tag:'check',stem:L('What is the correct priority order for tuning the process?','\u00BF Cu\u00E1l es el orden de prioridad correcto para ajustar el proceso?'),
+      opts:[L('Cosmetics, then dimensional stability, then cycle time','Cosm\u00E9tica, luego estabilidad dimensional, luego tiempo de ciclo'),L('Cycle time first, always','Tiempo de ciclo primero, siempre'),L('Color, then packaging','Color, luego empaque'),L('Random order','Orden aleatorio')],a:0,
+      fb:L('Quality first: cosmetics, then dimensions, then speed.','Calidad primero: cosm\u00E9tica, luego dimensiones, luego velocidad.')},
+     {tag:'check',stem:L('What is insert molding?','\u00BF Qu\u00E9 es el moldeo con insertos?'),
+      opts:[L('Placing an insert in the cavity so plastic molds around it','Colocar un inserto en la cavidad para que el pl\u00E1stico se moldee alrededor'),L('Removing flash by hand','Quitar rebaba a mano'),L('Drying the resin','Secar la resina'),L('Polishing the mold','Pulir el molde')],a:0,
+      fb:L('A metal/plastic insert is set in the cavity (manual or automated) and over-molded.','Un inserto met\u00E1lico/pl\u00E1stico se coloca en la cavidad (manual o automatizado) y se sobremoldea.')},
+     {tag:'recall',stem:L('Before running a new color, you must first:','Antes de correr un color nuevo, primero debes:'),
+      opts:[L('Purge the barrel of the old color','Purgar el barril del color viejo'),L('Lower the clamp tonnage','Bajar el tonelaje de cierre'),L('Remove the robot','Quitar el robot'),L('Skip inspection','Saltar la inspecci\u00F3n')],a:0,
+      fb:L('Purge fully so the previous color is gone before the new color runs.','Purga por completo para que el color anterior desaparezca antes del nuevo.')}
+   ]}
+ ]
+};
+
+/* The LIVE course = Advanced Mold Making: M1 materials + M2 mold design + M3 mold making & CAM + M4 mold processing + M5 suppliers */
+const COURSE = {
+  id:'mold',
+  title:L('Advanced Mold Making','Fabricaci\u00F3n Avanzada de Moldes'),
+  modules:[ M1, M2, M3, M4, M5 ]
+};
+
+/* ----- register with the hub ----- */
+if (typeof ANEW !== 'undefined' && ANEW.registerTrade) {
+  ANEW.registerTrade('mold', COURSE);
+}
+})();
+</script>
+
+<!-- Bootstrap: register-in-hub OR launch-standalone. -->
+<script>
+(function(){
+  var TID = 'mold';
+  function runContent(){
+    var s = document.getElementById('trade-content');
+    if (!s) return false;
+    try { (0, eval)(s.textContent); return true; } catch(e) { return false; }
+  }
+  // Mode 1: loaded inside the hub (ANEW already exists) -> just register.
+  if (window.ANEW && window.ANEW.registerTrade) { runContent(); return; }
+  // Mode 2: opened directly -> go to the hub focused on this trade.
+  var target = 'index.html#trade=' + encodeURIComponent(TID);
+  var msg = document.getElementById('msg'), manual = document.getElementById('manual');
+  try { window.location.replace(target); } catch(e) {}
+  // Fallback if the redirect is blocked (rare on file://): show a button.
+  setTimeout(function(){
+    if (msg) msg.textContent = 'If the simulator did not open automatically:';
+    if (manual) manual.style.display = 'inline-block';
+  }, 1200);
+})();
+</script>
+</body>
+</html>

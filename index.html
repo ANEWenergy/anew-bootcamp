@@ -86,6 +86,9 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .introname{font-family:'Sora';font-weight:700;font-size:14px;color:var(--text)}
 .introskip{background:none;border:none;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;padding:6px 8px}
 .introtopr{display:flex;align-items:center;gap:4px}
+.introlisten{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(120deg,rgba(75,168,75,.18),rgba(75,168,75,.08));border:1px solid rgba(75,168,75,.45);color:#cfeccf;font-family:'Sora';font-weight:700;font-size:12px;cursor:pointer;padding:6px 10px;border-radius:20px;white-space:nowrap}
+.introlisten.on{background:linear-gradient(120deg,var(--orange),var(--yellow));border-color:var(--orange);color:#241500}
+.introlisten:active{transform:scale(.97)}
 .mutebtn{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer;display:grid;place-items:center;padding:0;line-height:1}
 .mutebtn:hover{border-color:var(--orange)}
 .langtopbar{position:absolute;top:14px;right:14px;z-index:5}
@@ -578,7 +581,8 @@ const UI = {
     home:'Learn',progress:'Progress',certs:'Certs',profile:'Profile',locked:'Complete the previous lesson to unlock',
     selectlang:'Select your language',langtag:'Manufacturing learning, in your language',
     nextlesson:'Next lesson',finishmod:'Finish module',question:'Question',of:'of',
-    skip:'Skip',introNext:'Next',introStart:'Get started',replay:'Replay intro',skipToHub:'Skip to my trades \u2192',
+    skip:'Skip',introNext:'Next',introStart:'Get started',replay:'Replay intro',skipToHub:'Skip to my trades \u2192',introListen:'Listen',introListenStop:'Stop',
+    introSSt:'Start with Shop Ready',introSSb:'Every learner begins with \u201cShop Ready: How to Win at Work\u201d \u2014 the habits employers value most: respect, reliability, professional conduct, and listening. It\u2019s short, easy, and required to be accepted into the program.',
     introT1:'Designed for grades 6\u201312',introB1:'This knowledge package builds real manufacturing skills through short lessons and quick knowledge checks \u2014 one step at a time, at your pace.',
     introT2:'Any device, anywhere',introB2:'Use it on your phone on the shop floor, a tablet at home, or a desktop \u2014 your progress follows you on every screen.',
     introT3:'We keep you moving',introB3:'Add your details and we can text a friendly reminder to come back, with a link straight to your next lesson.',
@@ -593,7 +597,7 @@ const UI = {
     famT4:'Electrical & Controls',famB4:'Bring machines to life. Wire the power, program the chips and robots, and design the circuit boards and battery systems that run modern factories.',
     famL4:'Robotics & PLC \u00B7 Embedded Programming \u00B7 PCB Design \u00B7 Wire Schematics \u00B7 Power Systems \u00B7 Battery Fundamentals',
     famT5:'Design & CAD',famB5:'Decide how a product looks, feels, and fits together. Sketch ideas, model them in 3D, and turn them into the drawings the whole factory builds from.',
-    famL5:'Industrial Design \u00B7 Product Styling \u00B7 2D & 3D Drawings \u00B7 Complex Assembly Design',
+    famL5:'Industrial Design \u00B7 Product Styling \u00B7 2D & 3D Drawings \u00B7 Complex Assembly Design \u00B7 Factory Design + Digital Twin',
     famT6:'Quality & Operations',famB6:'Keep the whole operation running right \u2014 plan the factory, schedule the work, control quality with data, manage cost, and keep everyone safe.',
     famL6:'Quality & Statistics \u00B7 Project Management \u00B7 Purchasing & Costing \u00B7 Maintenance \u00B7 Facility Design \u00B7 Safety & Compliance \u00B7 P&ID \u00B7 System Logic \u00B7 Nesting',
     suTitle:'Let\u2019s set up your Boot Camp',suSub:'So we can save your progress, send your certificates, and text you a reminder with a link back to your lessons.',
@@ -650,7 +654,8 @@ const UI = {
     home:'Aprender',progress:'Progreso',certs:'Certif.',profile:'Perfil',locked:'Completa la lecci\u00F3n anterior para desbloquear',
     selectlang:'Selecciona tu idioma',langtag:'Aprendizaje de manufactura, en tu idioma',
     nextlesson:'Siguiente lecci\u00F3n',finishmod:'Terminar m\u00F3dulo',question:'Pregunta',of:'de',
-    skip:'Saltar',introNext:'Siguiente',introStart:'Comenzar',replay:'Ver intro de nuevo',skipToHub:'Ir a mis oficios \u2192',
+    skip:'Saltar',introNext:'Siguiente',introStart:'Comenzar',replay:'Ver intro de nuevo',skipToHub:'Ir a mis oficios \u2192',introListen:'Escuchar',introListenStop:'Detener',
+    introSSt:'Empieza con Listo para el Taller',introSSb:'Cada aprendiz comienza con \u201cListo para el Taller: C\u00f3mo Triunfar en el Trabajo\u201d \u2014 los h\u00e1bitos que m\u00e1s valoran los empleadores: respeto, confiabilidad, conducta profesional y saber escuchar. Es corto, f\u00e1cil y obligatorio para ser aceptado en el programa.',
     introT1:'Dise\u00F1ado para los grados 6\u201312',introB1:'Este paquete de conocimientos desarrolla habilidades reales de manufactura mediante lecciones cortas y evaluaciones r\u00E1pidas \u2014 paso a paso, a tu ritmo.',
     introT2:'Cualquier dispositivo, donde sea',introB2:'\u00DAsalo en tu tel\u00E9fono en la planta, una tableta en casa o una computadora \u2014 tu progreso te sigue en cada pantalla.',
     introT3:'Te mantenemos avanzando',introB3:'Agrega tus datos y podemos enviarte un recordatorio por texto para volver, con un enlace directo a tu siguiente lecci\u00F3n.',
@@ -665,7 +670,7 @@ const UI = {
     famT4:'Electricidad y Control',famB4:'Da vida a las m\u00E1quinas. Cablea la potencia, programa los chips y robots, y dise\u00F1a las placas y sistemas de bater\u00EDa que mueven las f\u00E1bricas modernas.',
     famL4:'Rob\u00F3tica y PLC \u00B7 Programaci\u00F3n Embebida \u00B7 Dise\u00F1o de PCB \u00B7 Esquemas El\u00E9ctricos \u00B7 Sistemas de Potencia \u00B7 Bater\u00EDas',
     famT5:'Dise\u00F1o y CAD',famB5:'Decide c\u00F3mo se ve, se siente y encaja un producto. Bosqueja ideas, mod\u00E9lalas en 3D y convi\u00E9rtelas en los planos con que construye toda la f\u00E1brica.',
-    famL5:'Dise\u00F1o Industrial \u00B7 Estilizado de Producto \u00B7 Dibujos 2D y 3D \u00B7 Ensambles Complejos',
+    famL5:'Dise\u00F1o Industrial \u00B7 Estilizado de Producto \u00B7 Dibujos 2D y 3D \u00B7 Ensambles Complejos \u00B7 Dise\u00F1o de F\u00e1brica + Gemelo Digital',
     famT6:'Calidad y Operaciones',famB6:'Mant\u00E9n toda la operaci\u00F3n funcionando bien \u2014 planea la f\u00E1brica, programa el trabajo, controla la calidad con datos, gestiona el costo y mant\u00E9n a todos seguros.',
     famL6:'Calidad y Estad\u00EDstica \u00B7 Gesti\u00F3n de Proyectos \u00B7 Compras y Costeo \u00B7 Mantenimiento \u00B7 Dise\u00F1o de Instalaciones \u00B7 Seguridad \u00B7 P&ID \u00B7 L\u00F3gica \u00B7 Nesting',
     suTitle:'Configuremos tu Boot Camp',suSub:'Para guardar tu progreso, enviar tus certificados y mandarte un recordatorio con un enlace de regreso a tus lecciones.',
@@ -1835,6 +1840,38 @@ function stopReading(){
   if(ttsSupported()){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   state.reading=false;
   const btn=document.getElementById('readaloud'); if(btn) updateReadBtn(btn);
+  const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+}
+/* Generic narrator: speak an array of sentence strings with the high-quality
+   voice, sentence-by-sentence. Shared by lessons and the intro journey.
+   onDone fires when the whole queue finishes (and wasn't superseded). */
+function speakText(parts, onDone){
+  if(!ttsSupported() || !parts || !parts.length){ if(onDone) onDone(); return; }
+  const locale=TTS_LOCALE[state.lang]||'en-US';
+  const v=pickVoice(locale);
+  state.readQueue = parts.slice();
+  state.readToken = (state.readToken||0)+1;
+  const myToken = state.readToken;
+  function speakNext(){
+    if(myToken!==state.readToken) return;
+    if(!state.readQueue.length){
+      state.reading=false;
+      const b=document.getElementById('readaloud'); if(b) updateReadBtn(b);
+      const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+      if(onDone) onDone();
+      return;
+    }
+    const text=state.readQueue.shift();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang=locale;
+    if(v){ try{ u.voice=v; }catch(e){} }
+    u.rate=0.92; u.pitch=1.0; u.volume=1.0;
+    u.onend=()=>{ if(myToken===state.readToken){ setTimeout(speakNext,180); } };
+    u.onerror=()=>{ if(myToken===state.readToken){ setTimeout(speakNext,120); } };
+    try{ window.speechSynthesis.speak(u); }catch(e){}
+  }
+  try{ window.speechSynthesis.cancel(); state.reading=true; speakNext(); }
+  catch(e){ state.reading=false; }
 }
 function updateReadBtn(btn){
   const on=state.reading;
@@ -2452,6 +2489,7 @@ const INTRO_SLIDES = [
   {kind:'how', icon:'M5 4h11a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 3V6a2 2 0 0 1 2-2z|M9 9h6M9 12h4', tk:'introT3', bk:'introB3'},
   {kind:'how', icon:'circle:12,9,5|M9 13.5L7.5 21l4.5-2.5L16.5 21 15 13.5', tk:'introT4', bk:'introB4'},
   {kind:'bc', icon:'M7 21h10M9 21V9a3 3 0 0 1 6 0v12M5 9h2v3a5 5 0 0 0 10 0V9h2|circle:12,5,2', tk:'introBCt', bk:'introBCb'},
+  {kind:'how', icon:'M12 2l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 19l-5.3 2.8 1-5.8L3.5 8.2l5.9-.9z', tk:'introSSt', bk:'introSSb'},
   {kind:'fam', cat:'Molding & Plastics',     ic:IC.mold,    tk:'famT1', bk:'famB1', lk:'famL1'},
   {kind:'fam', cat:'Machining & CAM',         ic:IC.cnc,     tk:'famT2', bk:'famB2', lk:'famL2'},
   {kind:'fam', cat:'Welding & Fabrication',   ic:IC.weld,    tk:'famT3', bk:'famB3', lk:'famL3'},
@@ -2512,7 +2550,7 @@ function renderIntro(){
   app.innerHTML=`<div class="introwrap">
     <div class="introtop">
       <div class="introname">${nm?`${t('hello')}, ${nm}`:'ANEW Boot Camp'}</div>
-      <div class="introtopr">${muteBtnHTML()}<button class="introskip" onclick="introSkip()">${t('skip')}</button></div>
+      <div class="introtopr"><button class="introlisten" id="introlisten" onclick="introListen()" aria-label="${t('raPlay')}">\uD83D\uDD0A ${t('introListen')}</button>${muteBtnHTML()}<button class="introskip" onclick="introSkip()">${t('skip')}</button></div>
     </div>
     <div class="introprog"><span id="introprogbar"></span></div>
     <div class="introstage fade" key="${i}">${artHtml}</div>
@@ -2556,7 +2594,7 @@ function startIntroTimeline(){
       const target=Math.min(total-1, Math.floor(ct/perSlide));
       if(bar){ bar.style.width=Math.min(100,(ct/SONG_DURATION)*100)+'%'; }
       if(el.ended || ct>=SONG_DURATION-0.5){ clearIntroTimers(); endIntro(); return; }
-      if(target>state.intro){ state.intro=target; renderIntro(); introSlideSound(); }
+      if(target>state.intro){ stopReading(); state.intro=target; renderIntro(); introSlideSound(); }
     }, 250);
   } else {
     // no song (muted/blocked/fallback): use a comfortable fixed pace with a progress bar
@@ -2570,27 +2608,53 @@ function startIntroTimeline(){
     introTimer=setTimeout(()=>{ if(state.screen==='intro'){ introNext(); } }, dur);
   }
 }
-function endIntro(){ sfx('success'); state.screen='signup'; render(); musicResume(); }
+function endIntro(){ stopReading(); sfx('success'); state.screen='signup'; render(); musicResume(); }
 function introSlideSound(){
   const s=INTRO_SLIDES[state.intro];
   if(s && s.kind==='fam') sfx('section'); else sfx('tap');
 }
+/* Listen button for the intro journey: narrates the current slide's title and
+   text with the same high-quality voice used for lessons, so slower readers can
+   listen instead of read. */
+function introSlideText(){
+  const s=INTRO_SLIDES[state.intro]; if(!s) return [];
+  function sent(x){ x=(x||'').trim(); if(!x) return ''; if(!/[.!?:;]$/.test(x)) x+='.'; return x; }
+  let parts=[];
+  if(s.tk) parts.push(sent(t(s.tk)));
+  if(s.bk) parts.push(sent(t(s.bk)));
+  if(s.kind==='fam' && s.lk){ parts.push(sent(t(s.lk))); }
+  return parts.filter(Boolean);
+}
+function updateIntroListenBtn(btn){
+  if(!btn) return;
+  const on=state.reading;
+  btn.className='introlisten'+(on?' on':'');
+  btn.setAttribute('aria-label', on? t('raStop') : t('raPlay'));
+  btn.innerHTML = on ? '\u23F8\uFE0F '+t('introListenStop') : '\uD83D\uDD0A '+t('introListen');
+}
+function introListen(){
+  if(!ttsSupported()){ toast(t('introListen')+' \u2014 \u2715'); return; }
+  if(state.reading){ stopReading(); return; }
+  const parts=introSlideText();
+  speakText(parts);
+  const ib=document.getElementById('introlisten'); if(ib) updateIntroListenBtn(ib);
+}
 function introNext(){
-  clearIntroTimers();
+  clearIntroTimers(); stopReading();
   if(state.intro<INTRO_SLIDES.length-1){state.intro++;renderIntro();introSlideSound();}
   else { endIntro(); }
 }
 function introPrev(){
-  clearIntroTimers();
+  clearIntroTimers(); stopReading();
   if(state.intro>0){state.intro--;renderIntro();introSlideSound();}
   else { renderIntro(); }
 }
 function introGo(k){
-  clearIntroTimers();
+  clearIntroTimers(); stopReading();
   state.intro=k; renderIntro(); introSlideSound();
 }
 function introSkip(){
-  clearIntroTimers();
+  clearIntroTimers(); stopReading();
   sfx('tap');
   state.screen='signup'; render();
   /* keep the music playing into the learner area instead of stopping it */

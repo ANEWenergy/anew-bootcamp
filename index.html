@@ -2703,14 +2703,14 @@ function renderHub(){
       <h2>${t('hub')}</h2><p>${t('hubExplain')}</p></div>
     ${bootcampBanner()}
     ${finderBanner}
+    <div style="padding:4px 16px 12px">
+      <button class="btn" style="width:100%;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
+    </div>
     <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
       <input id="q" placeholder="${t('searchph')}" value="${state.query}" oninput="onSearch(this.value)"></div>
     <div class="catrow">${chips}</div>
     ${cards||`<div class="hubcount">\u2014</div>`}
     <div class="hubcount">${TRADES.length} trades \u00B7 1 ready to explore, more in development</div>
-    <div style="padding:4px 16px 0">
-      <button class="btn" style="width:100%;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
-    </div>
     <div style="height:14px"></div>`;
 }
 function setCat(c){state.cat=c;render();}

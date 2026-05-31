@@ -708,7 +708,7 @@ Object.defineProperty(window, 'COURSE', {
 const CATS = ['all','Molding & Plastics','Machining & CAM','Welding & Fabrication','Electrical & Controls','Design & CAD','Quality & Operations'];
 const TOOLS = {
   'kicad':{name:'KiCad', url:'https://www.kicad.org/download/', vid:'0WCi1rhueH4', blurb:L('Free, open-source PCB design suite used worldwide.','Suite de dise\u00f1o de PCB gratuita y de c\u00f3digo abierto usada en todo el mundo.')},
-  'fusion':{name:'Autodesk Fusion (360)', url:'https://www.autodesk.com/products/fusion-360/education', vid:'Izh99EnGLGw', blurb:L('Free 1-year student license. Full CAD, CAM and simulation.','Licencia de estudiante gratis por 1 a\u00f1o. CAD, CAM y simulaci\u00f3n completos.')},
+  'fusion':{name:'Autodesk Fusion (360)', url:'https://www.autodesk.com/education/edu-software/fusion', vid:'Izh99EnGLGw', blurb:L('Free 1-year student license. Full CAD, CAM and simulation.','Licencia de estudiante gratis por 1 a\u00f1o. CAD, CAM y simulaci\u00f3n completos.')},
   'arduino':{name:'Arduino IDE', url:'https://www.arduino.cc/en/software', vid:'zJ-LqeX_fLU', blurb:L('Free, open-source tool for programming microcontrollers.','Herramienta gratuita y de c\u00f3digo abierto para programar microcontroladores.')},
   'freecad':{name:'FreeCAD', url:'https://www.freecad.org/downloads.php', vid:'8VPYTTnqmfs', blurb:L('Free, open-source parametric 3D CAD with FEM and CAM.','CAD 3D param\u00e9trico gratuito y de c\u00f3digo abierto con FEM y CAM.')},
   'librecad':{name:'LibreCAD', url:'https://librecad.org/', vid:'Vv2-6Q_8gQw', blurb:L('Free, open-source 2D CAD for technical drawings.','CAD 2D gratuito y de c\u00f3digo abierto para dibujos t\u00e9cnicos.')},
@@ -752,6 +752,30 @@ const TRADE_TOOL = {
   'cost':'projectlibre',
   'quality':'projectlibre',
   'safety':'projectlibre',
+};
+
+const TRADE_TOOL_OVER = {
+  'mold':{cap:L('Mold Tooling & Design','Herramientas y Dise\u00f1o de Moldes'), vid:'_hgmwhde1So'},
+  'plasticpart':{cap:L('Plastic Part Design (CAD)','Dise\u00f1o de Piezas Pl\u00e1sticas (CAD)'), vid:'_hgmwhde1So'},
+  'moldflow':{cap:L('Simulation: Injection Molding','Simulaci\u00f3n: Moldeo por Inyecci\u00f3n'), vid:'Vonmw7gKUJY'},
+  'molddesign':{cap:L('Mold Tooling & Design','Herramientas y Dise\u00f1o de Moldes'), vid:'_hgmwhde1So'},
+  'cnc':{cap:L('Manufacture (CAM / CNC)','Manufactura (CAM / CNC)'), vid:'VPMvnzmuTOw'},
+  'multiaxis':{cap:L('Manufacture (Multi-Axis CAM)','Manufactura (CAM Multieje)'), vid:'VPMvnzmuTOw'},
+  'cycle':{cap:L('Manufacture (CAM)','Manufactura (CAM)'), vid:'VPMvnzmuTOw'},
+  'cadcam':{cap:L('CAD / CAM / CAE','CAD / CAM / CAE'), vid:'VPMvnzmuTOw'},
+  'weld':{cap:L('Sheet Metal & Weldments','Chapa Met\u00e1lica y Soldaduras'), vid:'NXu8vVYvjrg'},
+  'seal':{cap:L('Assemblies & Joints','Ensamblajes y Uniones'), vid:'Izh99EnGLGw'},
+  'sheet':{cap:L('Sheet Metal','Chapa Met\u00e1lica'), vid:'NXu8vVYvjrg'},
+  'diestamp':{cap:L('Sheet Metal & Forming','Chapa Met\u00e1lica y Formado'), vid:'NXu8vVYvjrg'},
+  'fixture':{cap:L('Assemblies & Joints','Ensamblajes y Uniones'), vid:'Izh99EnGLGw'},
+  'wire':{cap:L('Electronics: Schematics','Electr\u00f3nica: Esquemas'), vid:'-Xwl6lk3xDI'},
+  'pcb':{cap:L('Electronics: PCB Design','Electr\u00f3nica: Dise\u00f1o de PCB'), vid:'-Xwl6lk3xDI'},
+  'pcbmfg':{cap:L('Electronics: PCB & Manufacture','Electr\u00f3nica: PCB y Manufactura'), vid:'-Xwl6lk3xDI'},
+  'drawing':{cap:L('Drawings (2D from 3D)','Dibujos (2D desde 3D)'), vid:'oQvcJ7p83Xo'},
+  'facility':{cap:L('Design & Layout','Dise\u00f1o y Distribuci\u00f3n'), vid:'Izh99EnGLGw'},
+  'nesting':{cap:L('Manufacture & Nesting','Manufactura y Anidamiento'), vid:'VPMvnzmuTOw'},
+  'pid':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
+  'logic':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
 };
 
 const TRADES = [
@@ -2804,19 +2828,26 @@ function toolPanel(tradeId){
   if(!key) return '';
   const tool = TOOLS[key];
   if(!tool) return '';
+  /* Optional per-trade override: a subject-specific capability label and a
+     subject-specific intro video (used for the Fusion trades so each shows the
+     relevant capability, e.g. "Simulation: Injection Molding"). Install link
+     stays the tool's. */
+  const over = (typeof TRADE_TOOL_OVER!=='undefined') ? TRADE_TOOL_OVER[tradeId] : null;
+  const displayName = over ? (tool.name + ' \u2014 ' + tr(over.cap)) : tool.name;
+  const vid = (over && over.vid) ? over.vid : tool.vid;
   const heading = tr2('Software for this trade','Software para este oficio');
   const instr = tr2(
     'Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
     'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.');
   return `<div class="toolpanel">
-    <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${tool.name}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
+    <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${displayName}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
     <p class="toolinstr">${instr}</p>
-    <div class="video embed" onclick="playVideo('${tool.vid}')">
-      <img class="vthumb" src="https://i.ytimg.com/vi/${tool.vid}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="video embed" onclick="playVideo('${vid}')">
+      <img class="vthumb" src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
       <div class="pl"></div><div class="vt">${tr2('Watch intro','Ver introducci\u00f3n')}</div></div>
     <div class="toolbtns">
       <a class="toolinstall" href="${tool.url}" target="_blank" rel="noopener noreferrer">\u2913 ${tr2('Install','Instalar')} ${tool.name}</a>
-      <a class="toolyt" href="https://www.youtube.com/watch?v=${tool.vid}" target="_blank" rel="noopener noreferrer">${tr2('Open on YouTube','Abrir en YouTube')} \u2197</a>
+      <a class="toolyt" href="https://www.youtube.com/watch?v=${vid}" target="_blank" rel="noopener noreferrer">${tr2('Open on YouTube','Abrir en YouTube')} \u2197</a>
     </div>
   </div>`;
 }

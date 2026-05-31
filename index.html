@@ -263,6 +263,27 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .toolpanel .toolbtns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .toolpanel .toolinstall{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:'Sora';font-weight:700;font-size:14.5px;border-radius:14px;padding:13px;color:#1a1003;background:linear-gradient(120deg,var(--orange),var(--yellow));box-shadow:0 8px 22px -10px rgba(243,144,25,.6)}
 .toolpanel .toolyt{text-align:center;text-decoration:none;font-size:13px;color:var(--orange);padding:4px}
+.toolprice{font-size:13px;margin:2px 0 4px;padding:8px 11px;border-radius:11px}
+.toolprice.free{color:#9be29b;background:rgba(75,168,75,.12);border:1px solid rgba(75,168,75,.3)}
+.toolprice.paid{color:#ffe;background:rgba(243,144,25,.12);border:1px solid rgba(243,144,25,.4)}
+.toolprice.paid .pricelbl{color:var(--muted)}
+.toolprice.paid b{color:var(--yellow);font-family:'Sora'}
+.toolsponsor{display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(243,144,25,.6);background:rgba(243,144,25,.10);color:var(--orange);font-family:'Sora';font-weight:700;font-size:14px;border-radius:14px;padding:12px;cursor:pointer}
+.toolsponsor:hover{background:rgba(243,144,25,.18)}
+.sponsoroverlay{position:absolute;inset:0;background:rgba(8,14,11,.72);backdrop-filter:blur(3px);z-index:120;display:flex;align-items:center;justify-content:center;padding:18px}
+.sponsorcard{position:relative;width:100%;max-width:340px;max-height:88%;overflow-y:auto;background:var(--card2);border:1px solid var(--line);border-radius:18px;padding:20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.sponsorx{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--muted);font-size:17px;cursor:pointer;padding:4px;line-height:1}
+.sponsortitle{font-family:'Sora';font-weight:800;font-size:18px;color:#fff}
+.sponsorsub{font-size:12.5px;color:var(--muted);margin:3px 0 12px}
+.sponsorfacts{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:13px}
+.sponsorfacts div{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:3px 0}
+.sponsorfacts span{color:var(--muted)}
+.sponsorfacts b{color:#fff;text-align:right;font-family:'Sora';font-weight:700}
+.sponsorlbl{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);margin-bottom:9px}
+.sponsorlbl input,.sponsorlbl textarea{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text);font-size:14px;font-family:inherit;width:100%;box-sizing:border-box}
+.sponsorlbl input:focus,.sponsorlbl textarea:focus{outline:none;border-color:var(--orange)}
+.sponsorsubmit{width:100%;border:none;border-radius:13px;padding:13px;font-family:'Sora';font-weight:800;font-size:15px;color:#1a1003;background:linear-gradient(120deg,var(--orange),var(--yellow));cursor:pointer;margin-top:4px}
+.sponsornote{font-size:11px;color:var(--muted);text-align:center;margin-top:9px;line-height:1.4}
 .suprow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line)}
 .suprow:last-child{border:none}
 .suprow a{color:#8fd3ff;text-decoration:none}
@@ -707,29 +728,33 @@ Object.defineProperty(window, 'COURSE', {
 
 /* ---------- trade catalog ---------- */
 const CATS = ['all','Molding & Plastics','Machining & CAM','Welding & Fabrication','Electrical & Controls','Design & CAD','Quality & Operations'];
+/* Each tool: free:true  -> shows "Free for students", no sponsorship button.
+              free:false -> shows the price line + "Request Sponsorship" button.
+   price is an editable display string (one-line edit when the real figure arrives). */
 const TOOLS = {
-  'kicad':{name:'KiCad', url:'https://www.kicad.org/download/', vid:'0WCi1rhueH4', blurb:L('Free, open-source PCB design suite used worldwide.','Suite de dise\u00f1o de PCB gratuita y de c\u00f3digo abierto usada en todo el mundo.')},
-  'fusion':{name:'Autodesk Fusion (360)', url:'https://www.autodesk.com/education/edu-software/fusion', vid:'Izh99EnGLGw', blurb:L('Free 1-year student license. Full CAD, CAM and simulation.','Licencia de estudiante gratis por 1 a\u00f1o. CAD, CAM y simulaci\u00f3n completos.')},
-  'arduino':{name:'Arduino IDE', url:'https://www.arduino.cc/en/software', vid:'zJ-LqeX_fLU', blurb:L('Free, open-source tool for programming microcontrollers.','Herramienta gratuita y de c\u00f3digo abierto para programar microcontroladores.')},
-  'freecad':{name:'FreeCAD', url:'https://www.freecad.org/downloads.php', vid:'8VPYTTnqmfs', blurb:L('Free, open-source parametric 3D CAD with FEM and CAM.','CAD 3D param\u00e9trico gratuito y de c\u00f3digo abierto con FEM y CAM.')},
-  'librecad':{name:'LibreCAD', url:'https://librecad.org/', vid:'Vv2-6Q_8gQw', blurb:L('Free, open-source 2D CAD for technical drawings.','CAD 2D gratuito y de c\u00f3digo abierto para dibujos t\u00e9cnicos.')},
-  'openplc':{name:'OpenPLC', url:'https://openplcproject.com/', vid:'1_nd0FLh4n0', blurb:L('Free, open-source PLC editor (all 5 IEC 61131-3 languages).','Editor de PLC gratuito y de c\u00f3digo abierto (los 5 lenguajes IEC 61131-3).')},
-  'blender':{name:'Blender', url:'https://www.blender.org/download/', vid:'z-Xl9tGqH14', blurb:L('Free, open-source 3D modeling, rendering and design.','Modelado 3D, renderizado y dise\u00f1o gratuitos y de c\u00f3digo abierto.')},
-  'projectlibre':{name:'ProjectLibre', url:'https://www.projectlibre.com/', vid:'9xwR4JCBaIU', blurb:L('Free, open-source project management (Gantt, WBS, critical path).','Gesti\u00f3n de proyectos gratuita y de c\u00f3digo abierto (Gantt, WBS, ruta cr\u00edtica).')},
-  'tinkercad':{name:'Tinkercad', url:'https://www.tinkercad.com/', vid:'60xfIu-lqAs', blurb:L('Free Autodesk browser tool for 3D, electronics and code.','Herramienta gratuita de Autodesk en el navegador para 3D, electr\u00f3nica y c\u00f3digo.')},
+  'kicad':{name:'KiCad', url:'https://www.kicad.org/download/', vid:'0WCi1rhueH4', free:true, blurb:L('Free, open-source PCB design suite used worldwide.','Suite de dise\u00f1o de PCB gratuita y de c\u00f3digo abierto usada en todo el mundo.')},
+  'fusion':{name:'Autodesk Fusion (360)', url:'https://www.autodesk.com/education/edu-software/fusion', vid:'Izh99EnGLGw', free:true, blurb:L('Free 1-year student license. Full CAD, CAM and simulation.','Licencia de estudiante gratis por 1 a\u00f1o. CAD, CAM y simulaci\u00f3n completos.')},
+  'arduino':{name:'Arduino IDE', url:'https://www.arduino.cc/en/software', vid:'zJ-LqeX_fLU', free:true, blurb:L('Free, open-source tool for programming microcontrollers.','Herramienta gratuita y de c\u00f3digo abierto para programar microcontroladores.')},
+  'freecad':{name:'FreeCAD', url:'https://www.freecad.org/downloads.php', vid:'8VPYTTnqmfs', free:true, blurb:L('Free, open-source parametric 3D CAD with FEM and CAM.','CAD 3D param\u00e9trico gratuito y de c\u00f3digo abierto con FEM y CAM.')},
+  'librecad':{name:'LibreCAD', url:'https://librecad.org/', vid:'Vv2-6Q_8gQw', free:true, blurb:L('Free, open-source 2D CAD for technical drawings.','CAD 2D gratuito y de c\u00f3digo abierto para dibujos t\u00e9cnicos.')},
+  'openplc':{name:'OpenPLC', url:'https://openplcproject.com/', vid:'1_nd0FLh4n0', free:true, blurb:L('Free, open-source PLC editor (all 5 IEC 61131-3 languages).','Editor de PLC gratuito y de c\u00f3digo abierto (los 5 lenguajes IEC 61131-3).')},
+  'blender':{name:'Blender', url:'https://www.blender.org/download/', vid:'z-Xl9tGqH14', free:true, blurb:L('Free, open-source 3D modeling, rendering and design.','Modelado 3D, renderizado y dise\u00f1o gratuitos y de c\u00f3digo abierto.')},
+  'projectlibre':{name:'ProjectLibre', url:'https://www.projectlibre.com/', vid:'9xwR4JCBaIU', free:true, blurb:L('Free, open-source project management (Gantt, WBS, critical path).','Gesti\u00f3n de proyectos gratuita y de c\u00f3digo abierto (Gantt, WBS, ruta cr\u00edtica).')},
+  'tinkercad':{name:'Tinkercad', url:'https://www.tinkercad.com/', vid:'60xfIu-lqAs', free:true, blurb:L('Free Autodesk browser tool for 3D, electronics and code.','Herramienta gratuita de Autodesk en el navegador para 3D, electr\u00f3nica y c\u00f3digo.')},
+  'visualcomp':{name:'Visual Components / KUKA.Sim', url:'https://www.visualcomponents.com/companies/academia/', vid:'3wUFy8Dovyo', free:false, price:'$ \u2014 (request academic quote)', blurb:L('Professional robot simulation & offline programming (KUKA.Sim add-on). Academic licenses are request-based.','Simulaci\u00f3n de robots y programaci\u00f3n fuera de l\u00ednea de nivel profesional (complemento KUKA.Sim). Las licencias acad\u00e9micas se solicitan.')},
 };
 const TRADE_TOOL = {
   'mold':'fusion',
   'plasticpart':'fusion',
   'moldflow':'fusion',
   'molddesign':'fusion',
-  'material':'tinkercad',
+  'material':'fusion',
   'cnc':'fusion',
   'multiaxis':'fusion',
   'cycle':'fusion',
   'cadcam':'fusion',
-  'weld':'fusion',
-  'seal':'fusion',
+  'weld':'visualcomp',
+  'seal':'visualcomp',
   'sheet':'fusion',
   'diestamp':'fusion',
   'fixture':'fusion',
@@ -764,8 +789,8 @@ const TRADE_TOOL_OVER = {
   'multiaxis':{cap:L('Manufacture (Multi-Axis CAM)','Manufactura (CAM Multieje)'), vid:'VPMvnzmuTOw'},
   'cycle':{cap:L('Manufacture (CAM)','Manufactura (CAM)'), vid:'VPMvnzmuTOw'},
   'cadcam':{cap:L('CAD / CAM / CAE','CAD / CAM / CAE'), vid:'VPMvnzmuTOw'},
-  'weld':{cap:L('Sheet Metal & Weldments','Chapa Met\u00e1lica y Soldaduras'), vid:'NXu8vVYvjrg'},
-  'seal':{cap:L('Assemblies & Joints','Ensamblajes y Uniones'), vid:'Izh99EnGLGw'},
+  'weld':{cap:L('Robotic Welding Simulation','Simulaci\u00f3n de Soldadura Rob\u00f3tica'), vid:'3wUFy8Dovyo'},
+  'seal':{cap:L('Robotic Seal Dispensing','Dispensado de Sellador Rob\u00f3tico'), vid:'3wUFy8Dovyo'},
   'sheet':{cap:L('Sheet Metal','Chapa Met\u00e1lica'), vid:'NXu8vVYvjrg'},
   'diestamp':{cap:L('Sheet Metal & Forming','Chapa Met\u00e1lica y Formado'), vid:'NXu8vVYvjrg'},
   'fixture':{cap:L('Assemblies & Joints','Ensamblajes y Uniones'), vid:'Izh99EnGLGw'},
@@ -777,6 +802,7 @@ const TRADE_TOOL_OVER = {
   'nesting':{cap:L('Manufacture & Nesting','Manufactura y Anidamiento'), vid:'VPMvnzmuTOw'},
   'pid':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
   'logic':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
+  'material':{cap:L('Materials & Material Selection','Materiales y Selecci\u00f3n de Materiales'), vid:'580l8i9iISI'},
 };
 
 const TRADES = [
@@ -2839,18 +2865,33 @@ function toolPanel(tradeId){
   const displayName = over ? (tool.name + ' \u2014 ' + tr(over.cap)) : tool.name;
   const vid = (over && over.vid) ? over.vid : tool.vid;
   const heading = tr2('Software for this trade','Software para este oficio');
-  const instr = tr2(
-    'Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
-    'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.');
+  const isFree = (tool.free !== false); /* default to free unless explicitly marked paid */
+  const instr = isFree
+    ? tr2('Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
+          'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.')
+    : tr2('This trade uses '+tool.name+'. It is a professional, paid tool \u2014 request access below, or ask a sponsor to fund a student license.',
+          'Este oficio usa '+tool.name+'. Es una herramienta profesional de pago: solicita acceso abajo o pide a un patrocinador que financie una licencia para estudiantes.');
+  /* Price / cost line: free tools show a simple label; paid tools show the price. */
+  const priceLine = isFree
+    ? `<div class="toolprice free">\u2713 ${tr2('Free for students','Gratis para estudiantes')}</div>`
+    : `<div class="toolprice paid"><span class="pricelbl">${tr2('Student license','Licencia de estudiante')}:</span> <b>${tool.price||'\u2014'}</b></div>`;
+  /* Request Sponsorship button only for paid tools. */
+  const sponsorBtn = isFree ? '' :
+    `<button class="toolsponsor" onclick="openSponsor('${tradeId}')">\u2764 ${tr2('Request Sponsorship','Solicitar Patrocinio')}</button>`;
+  const installLabel = isFree
+    ? (tr2('Install','Instalar')+' '+tool.name)
+    : (tr2('Get access','Obtener acceso')+' \u2014 '+tool.name);
   return `<div class="toolpanel">
     <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${displayName}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
+    ${priceLine}
     <p class="toolinstr">${instr}</p>
     <div class="video embed" onclick="playVideo('${vid}', this)">
       <img class="vthumb" src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
       <div class="pl"></div><div class="vt">${tr2('Watch intro','Ver introducci\u00f3n')}</div></div>
     <div class="toolbtns">
-      <a class="toolinstall" href="${tool.url}" target="_blank" rel="noopener noreferrer">\u2913 ${tr2('Install','Instalar')} ${tool.name}</a>
+      <a class="toolinstall" href="${tool.url}" target="_blank" rel="noopener noreferrer">\u2913 ${installLabel}</a>
       <a class="toolyt" href="https://www.youtube.com/watch?v=${vid}" target="_blank" rel="noopener noreferrer">${tr2('Open on YouTube','Abrir en YouTube')} \u2197</a>
+      ${sponsorBtn}
     </div>
   </div>`;
 }
@@ -3141,6 +3182,76 @@ function playVideo(id, el){
     +'allowfullscreen></iframe>'
     +'<button class="vidfallback" onclick="event.stopPropagation();window.open(\'https://www.youtube.com/watch?v='+id+'\',\'_blank\',\'noopener\')">'
     + (window.__t?window.__t('cantplay'):'Video won\u2019t play here? Open on YouTube \u2197') +'</button>';
+}
+
+/* ---------- Sponsorship requests (paid tools) ---------- */
+/* Requests are recorded inside the app. We persist them with the artifact
+   storage API when available, and always keep an in-memory copy for this
+   session so the confirmation + count work even if storage is unavailable. */
+window.__sponsorReqs = window.__sponsorReqs || [];
+function sponsorStorageKey(){ return 'sponsor_requests'; }
+async function loadSponsorReqs(){
+  try{
+    if(window.storage && window.storage.get){
+      const r = await window.storage.get(sponsorStorageKey());
+      if(r && r.value){ window.__sponsorReqs = JSON.parse(r.value); }
+    }
+  }catch(e){ /* no stored requests yet, or storage unavailable */ }
+  return window.__sponsorReqs;
+}
+async function saveSponsorReqs(){
+  try{
+    if(window.storage && window.storage.set){
+      await window.storage.set(sponsorStorageKey(), JSON.stringify(window.__sponsorReqs));
+    }
+  }catch(e){ /* storage unavailable — in-memory copy still holds for this session */ }
+}
+function openSponsor(tradeId){
+  const key = TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
+  const cat = (typeof TRADES!=='undefined') ? (TRADES.find(x=>x.id===tradeId)||{}) : {};
+  const tradeName = cat.title || tradeId;
+  const price = tool.price || '\u2014';
+  const wrap = document.createElement('div');
+  wrap.className = 'sponsoroverlay';
+  wrap.innerHTML = `
+    <div class="sponsorcard" role="dialog" aria-modal="true">
+      <button class="sponsorx" onclick="closeSponsor()" aria-label="Close">\u2715</button>
+      <div class="sponsortitle">${tr2('Request Sponsorship','Solicitar Patrocinio')}</div>
+      <div class="sponsorsub">${tr2('Help fund a student license for this trade.','Ayuda a financiar una licencia de estudiante para este oficio.')}</div>
+      <div class="sponsorfacts">
+        <div><span>${tr2('Trade','Oficio')}</span><b>${tradeName}</b></div>
+        <div><span>${tr2('Software','Software')}</span><b>${tool.name||''}</b></div>
+        <div><span>${tr2('Cost','Costo')}</span><b>${price}</b></div>
+      </div>
+      <label class="sponsorlbl">${tr2('Your name','Tu nombre')}<input id="sp_name" type="text" autocomplete="name"></label>
+      <label class="sponsorlbl">${tr2('Your email','Tu correo')}<input id="sp_email" type="email" autocomplete="email"></label>
+      <label class="sponsorlbl">${tr2('Organization (optional)','Organizaci\u00f3n (opcional)')}<input id="sp_org" type="text"></label>
+      <label class="sponsorlbl">${tr2('Message (optional)','Mensaje (opcional)')}<textarea id="sp_msg" rows="2"></textarea></label>
+      <button class="sponsorsubmit" onclick="submitSponsor('${tradeId}')">${tr2('Submit request','Enviar solicitud')}</button>
+      <div class="sponsornote">${tr2('Your request is recorded for the ANEW team to follow up.','Tu solicitud queda registrada para que el equipo de ANEW d\u00e9 seguimiento.')}</div>
+    </div>`;
+  wrap.addEventListener('click', (e)=>{ if(e.target===wrap) closeSponsor(); });
+  const host = document.querySelector('.phone') || document.body;
+  host.appendChild(wrap);
+  try{ musicStop(); }catch(e){}
+}
+function closeSponsor(){ const o=document.querySelector('.sponsoroverlay'); if(o) o.remove(); }
+async function submitSponsor(tradeId){
+  const key = TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
+  const cat = (typeof TRADES!=='undefined') ? (TRADES.find(x=>x.id===tradeId)||{}) : {};
+  const g = (id)=>{ const el=document.getElementById(id); return el?el.value.trim():''; };
+  const name = g('sp_name'); const email = g('sp_email');
+  if(!name || !email){ toast(tr2('Please add your name and email.','Agrega tu nombre y correo.')); return; }
+  const rec = {
+    ts: new Date().toISOString(),
+    trade: cat.title||tradeId, tradeId: tradeId,
+    tool: tool.name||'', price: tool.price||'',
+    name: name, email: email, org: g('sp_org'), message: g('sp_msg')
+  };
+  window.__sponsorReqs.push(rec);
+  await saveSponsorReqs();
+  closeSponsor();
+  toast(tr2('Thank you \u2014 your sponsorship request was recorded.','Gracias: tu solicitud de patrocinio fue registrada.'));
 }
 function gotoNextLesson(id){stopReading();state.activeLesson=id;state.inQuiz=false;render();app.scrollTop=0;}
 function startQuiz(){stopReading();state.inQuiz=true;state.qi=0;state.qscore=0;state.answered=false;state.picked=null;render();app.scrollTop=0;}

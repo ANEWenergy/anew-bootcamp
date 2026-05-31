@@ -284,6 +284,33 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .sponsorlbl input:focus,.sponsorlbl textarea:focus{outline:none;border-color:var(--orange)}
 .sponsorsubmit{width:100%;border:none;border-radius:13px;padding:13px;font-family:'Sora';font-weight:800;font-size:15px;color:#1a1003;background:linear-gradient(120deg,var(--orange),var(--yellow));cursor:pointer;margin-top:4px}
 .sponsornote{font-size:11px;color:var(--muted);text-align:center;margin-top:9px;line-height:1.4}
+.demobadge{display:inline-block;font-family:'Sora';font-weight:700;font-size:10px;letter-spacing:.6px;color:#1a1003;background:linear-gradient(120deg,var(--yellow),var(--orange));padding:5px 10px;border-radius:20px;margin:2px 0 12px}
+.checkrow{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.4;margin:4px 0 12px;cursor:pointer}
+.checkrow input{margin-top:2px;width:18px;height:18px;flex-shrink:0;accent-color:var(--orange)}
+.safeitem{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+.safeitem:first-of-type{border-top:none}
+.safeitem>span{font-size:18px;flex-shrink:0}
+.safeitem b{font-family:'Sora';font-size:13px}
+.pill{font-family:'Sora';font-weight:700;font-size:11px;padding:4px 10px;border-radius:20px}
+.pill-ok{color:#9be29b;background:rgba(75,168,75,.16);border:1px solid rgba(75,168,75,.4)}
+.pill-care{color:var(--yellow);background:rgba(243,144,25,.16);border:1px solid rgba(243,144,25,.45)}
+.qa{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:11px;margin-bottom:9px}
+.qa-care{border-color:rgba(243,144,25,.5);background:rgba(243,144,25,.08)}
+.qa-q,.qa-a{font-size:13px;line-height:1.45;margin:3px 0}
+.qa-a{color:var(--muted)}
+.qa-tag{display:inline-block;font-family:'Sora';font-weight:700;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--orange);background:rgba(243,144,25,.14);padding:2px 6px;border-radius:6px;margin-right:7px;vertical-align:middle}
+.qa-tag.ai{color:#8fd0ff;background:rgba(80,160,220,.16)}
+.qa-note{font-size:11.5px;color:var(--yellow);margin-top:6px;line-height:1.4}
+.emailcard{background:#fbfaf7;color:#241a0d;border:1px solid #e7e0d2}
+.emailcard .muted{color:#7a7163}
+.emailhdr{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #ece5d6;margin-bottom:10px}
+.digestlist{list-style:none;padding:0;margin:6px 0;font-size:13.5px;line-height:1.9}
+.digestsafe{background:#fff5e6;border:1px solid #f3d39a;border-radius:10px;padding:9px 11px;font-size:12.5px;color:#6b4e1e;margin:8px 0}
+.emailcard .qa{background:#f3efe6;border-color:#e7e0d2}
+.emailcard .qa-q{color:#241a0d}
+.emailcard .qa-a{color:#5c5347}
+.emailcard .qa-tag{color:#b9701a;background:#f6e6cf}
+.emailcard .qa-tag.ai{color:#2f6f9e;background:#dcebf5}
 .suprow{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:7px 0;border-bottom:1px solid var(--line)}
 .suprow:last-child{border:none}
 .suprow a{color:#8fd3ff;text-decoration:none}
@@ -2131,6 +2158,9 @@ function render(){
   if(state.screen==='tradesoon'){renderTradeSoon();tabbarEl.innerHTML='';return;}
   if(state.screen==='loadingTrade'){renderLoadingTrade();tabbarEl.innerHTML='';return;}
   if(state.screen==='loadError'){renderLoadError();tabbarEl.innerHTML='';return;}
+  if(state.screen==='parentgate'){renderParentGate();tabbarEl.innerHTML='';return;}
+  if(state.screen==='parent'){renderParent();tabbarEl.innerHTML='';return;}
+  if(state.screen==='parentdigest'){renderParentDigest();tabbarEl.innerHTML='';return;}
   if(state.inQuiz){renderQuiz();}
   else if(state.activeLesson){renderLesson();}
   else if(state.activeModule){renderModule();}
@@ -3148,7 +3178,145 @@ function renderProfile(){
      <div style="height:8px"></div>
      <button class="btn ghost" onclick="state.screen='lang';render()">${tr2('Change language','Cambiar idioma')}</button>
      <div style="height:8px"></div>
+     <button class="btn" style="background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
+     <div style="height:8px"></div>
      <button class="btn ghost" onclick="audioInit();musicStart();state.intro=0;state.screen='intro';render()">${t('replay')}</button></div>`;
+}
+
+/* ============== PARENT & GUARDIAN PORTAL (demonstration) ==============
+   This is a DEMO of the parent experience, populated with sample data so
+   funders and families can see how it works. A production version would use
+   real accounts, real progress data, and real notifications via a backend. */
+
+function parentChildName(){ return firstName() || tr2('your learner','tu aprendiz'); }
+
+/* Sample AI tutor Q&A transcript shown to parents (illustrative). */
+const SAMPLE_QA = [
+  {q:L('What is a parting line on a mold?','\u00bfQu\u00e9 es la l\u00ednea de partici\u00f3n en un molde?'),
+   a:L('The parting line is where the two halves of a mold meet. It\u2019s chosen so the finished part can be removed cleanly.','La l\u00ednea de partici\u00f3n es donde se unen las dos mitades de un molde. Se elige para que la pieza terminada se pueda retirar limpiamente.'),
+   flag:'ok'},
+  {q:L('Why does steel need to cool slowly sometimes?','\u00bfPor qu\u00e9 a veces el acero debe enfriarse lentamente?'),
+   a:L('Cooling slowly (annealing) relieves internal stress and makes steel less brittle, so it\u2019s easier to machine.','El enfriamiento lento (recocido) alivia la tensi\u00f3n interna y hace el acero menos fr\u00e1gil, por lo que es m\u00e1s f\u00e1cil de mecanizar.'),
+   flag:'ok'},
+  {q:L('Is this job dangerous? I feel nervous about the machines.','\u00bfEs peligroso este trabajo? Me pongo nervioso con las m\u00e1quinas.'),
+   a:L('It\u2019s normal to feel nervous. Safety training comes first, and you always work with supervision. If you ever feel unsafe, tell a trusted adult.','Es normal sentir nervios. La capacitaci\u00f3n en seguridad va primero y siempre trabajas con supervisi\u00f3n. Si te sientes inseguro, dile a un adulto de confianza.'),
+   flag:'care'}
+];
+
+function renderParentGate(){
+  const child = parentChildName();
+  const consented = !!(state.profile && state.profile.parentConsent);
+  app.innerHTML=`${topbar()}<div class="pad fade">
+    <button class="back" onclick="sfx('tap');state.tab='profile';state.screen='';render();app.scrollTop=0">\u2039 ${tr2('Back','Atr\u00e1s')}</button>
+    <div class="demobadge">${tr2('DEMONSTRATION \u2014 sample content','DEMOSTRACI\u00d3N \u2014 contenido de ejemplo')}</div>
+    <div class="card">
+      <h3 style="margin:0 0 6px;font-family:'Sora'">${tr2('Welcome, Parents & Guardians','Bienvenidos, Padres y Tutores')}</h3>
+      <p style="font-size:13.5px;line-height:1.5;color:var(--text)">${tr2(
+        'The Manufacturing Boot Camp teaches young people real, in-demand trade skills \u2014 from mold making to robotics \u2014 opening doors to good careers, especially for families who haven\u2019t had easy access to this kind of training.',
+        'El Manufacturing Boot Camp ense\u00f1a a los j\u00f3venes habilidades reales y demandadas \u2014 desde la fabricaci\u00f3n de moldes hasta la rob\u00f3tica \u2014 abriendo puertas a buenas carreras, especialmente para familias que no han tenido f\u00e1cil acceso a este tipo de formaci\u00f3n.')}</p>
+      <div class="safeitem"><span>\uD83D\uDEE1\uFE0F</span><div><b>${tr2('Kid-safe by design','Seguro para ni\u00f1os por dise\u00f1o')}</b><br><span class="muted">${tr2('Lessons and the AI tutor are filtered for age-appropriate content.','Las lecciones y el tutor con IA se filtran para contenido apropiado para su edad.')}</span></div></div>
+      <div class="safeitem"><span>\uD83D\uDC41\uFE0F</span><div><b>${tr2('Monitored learning','Aprendizaje supervisado')}</b><br><span class="muted">${tr2('You can review the questions your learner asks and the answers they receive.','Puedes revisar las preguntas que hace tu aprendiz y las respuestas que recibe.')}</span></div></div>
+      <div class="safeitem"><span>\uD83D\uDD14</span><div><b>${tr2('You\u2019ll be notified','Te notificaremos')}</b><br><span class="muted">${tr2('If our safeguards flag a concern, we alert you. (No system is perfect, so we focus on prompt, honest notification.)','Si nuestras protecciones detectan una preocupaci\u00f3n, te avisamos. (Ning\u00fan sistema es perfecto, por eso priorizamos una notificaci\u00f3n pronta y honesta.)')}</span></div></div>
+      <div class="safeitem"><span>\uD83D\uDD12</span><div><b>${tr2('Your data, respected','Tus datos, respetados')}</b><br><span class="muted">${tr2('We collect only what\u2019s needed to run the program and never sell personal data.','Recopilamos solo lo necesario para operar el programa y nunca vendemos datos personales.')}</span></div></div>
+    </div>
+    <div class="card">
+      <b style="font-family:'Sora';font-size:14px">${tr2('Consent','Consentimiento')}</b>
+      <p style="font-size:12.5px;color:var(--muted);margin:6px 0 10px">${tr2(
+        'By signing below, you confirm you are the parent or legal guardian of '+child+' and you allow them to take part in the Manufacturing Boot Camp under the safeguards described above. You may withdraw at any time.',
+        'Al firmar abajo, confirmas que eres el padre, madre o tutor legal de '+child+' y permites su participaci\u00f3n en el Manufacturing Boot Camp bajo las protecciones descritas arriba. Puedes retirar el consentimiento en cualquier momento.')}</p>
+      <label class="sponsorlbl">${tr2('Parent / guardian full name','Nombre completo del padre/tutor')}<input id="pc_name" type="text" value="${(state.profile&&state.profile.parentName)?state.profile.parentName.replace(/"/g,'&quot;'):''}"></label>
+      <label class="sponsorlbl">${tr2('Email for weekly updates','Correo para actualizaciones semanales')}<input id="pc_email" type="email" value="${(state.profile&&state.profile.parentEmail)?state.profile.parentEmail.replace(/"/g,'&quot;'):''}"></label>
+      <label class="checkrow"><input type="checkbox" id="pc_agree" ${consented?'checked':''}><span>${tr2('I have read and agree to the above.','He le\u00eddo y acepto lo anterior.')}</span></label>
+      <button class="sponsorsubmit" onclick="saveParentConsent()">${consented?tr2('Update consent','Actualizar consentimiento'):tr2('Give consent & continue','Dar consentimiento y continuar')}</button>
+      ${consented?`<button class="btn ghost" style="margin-top:10px" onclick="sfx('tap');state.screen='parent';render();app.scrollTop=0">${tr2('Open the Parent Portal','Abrir el Portal de Padres')} \u203A</button>`:''}
+    </div>
+  </div>`;
+}
+
+function saveParentConsent(){
+  const name=(document.getElementById('pc_name')||{}).value||'';
+  const email=(document.getElementById('pc_email')||{}).value||'';
+  const agree=(document.getElementById('pc_agree')||{}).checked;
+  if(!name.trim()||!email.trim()){ toast(tr2('Please add your name and email.','Agrega tu nombre y correo.')); return; }
+  if(!agree){ toast(tr2('Please check the consent box.','Marca la casilla de consentimiento.')); return; }
+  state.profile=state.profile||{};
+  state.profile.parentName=name.trim(); state.profile.parentEmail=email.trim();
+  state.profile.parentConsent=true; state.profile.parentConsentDate=new Date().toISOString();
+  try{ saveProfile(); }catch(e){}
+  toast(tr2('Consent saved. Thank you!','Consentimiento guardado. \u00a1Gracias!'));
+  state.screen='parent'; render(); app.scrollTop=0;
+}
+
+function renderParent(){
+  const child = parentChildName();
+  const done=lessonsCompleted(), total=lessonsTotal(), pct=coursePct();
+  const flagged = SAMPLE_QA.some(x=>x.flag==='care');
+  app.innerHTML=`${topbar()}<div class="pad fade">
+    <button class="back" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\u2039 ${tr2('Back','Atr\u00e1s')}</button>
+    <div class="demobadge">${tr2('DEMONSTRATION \u2014 sample data','DEMOSTRACI\u00d3N \u2014 datos de ejemplo')}</div>
+    <div class="card">
+      <h3 style="margin:0;font-family:'Sora'">${tr2('Parent Portal','Portal de Padres')}</h3>
+      <p class="muted" style="margin:4px 0 0;font-size:13px">${tr2('Learner','Aprendiz')}: <b style="color:var(--text)">${child}</b> \u00B7 ${tr(COURSE.title)}</p>
+    </div>
+    <div class="card">
+      <b style="font-family:'Sora';font-size:14px">${tr2('Progress','Progreso')}</b>
+      <div class="svbar" style="margin:10px 0"><span style="width:${pct}%"></span></div>
+      <div class="suprow"><span>${tr2('Lessons completed','Lecciones completadas')}</span><b>${done}/${total}</b></div>
+      <div class="suprow"><span>${tr2('Course progress','Progreso del curso')}</span><b>${pct}%</b></div>
+      <div class="suprow"><span>${tr2('Time this week (sample)','Tiempo esta semana (ejemplo)')}</span><b>3h 25m</b></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <b style="font-family:'Sora';font-size:14px">${tr2('Safety status','Estado de seguridad')}</b>
+        <span class="pill ${flagged?'pill-care':'pill-ok'}">${flagged?tr2('1 item to review','1 elemento por revisar'):tr2('All clear','Todo en orden')}</span>
+      </div>
+      <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('We monitor lessons and AI tutor chats for age-appropriateness and signs of distress. Flagged items appear here and trigger an email to you.','Supervisamos las lecciones y los chats con el tutor de IA para verificar que sean apropiados y detectar se\u00f1ales de angustia. Los elementos marcados aparecen aqu\u00ed y te env\u00edan un correo.')}</p>
+    </div>
+    <div class="card">
+      <b style="font-family:'Sora';font-size:14px">${tr2('AI tutor \u2014 questions & answers','Tutor de IA \u2014 preguntas y respuestas')}</b>
+      <p class="muted" style="font-size:12px;margin:4px 0 10px">${tr2('A full transcript of what your learner asked and what the AI answered.','Una transcripci\u00f3n completa de lo que tu aprendiz pregunt\u00f3 y lo que respondi\u00f3 la IA.')}</p>
+      ${SAMPLE_QA.map(x=>`<div class="qa ${x.flag==='care'?'qa-care':''}">
+        <div class="qa-q"><span class="qa-tag">${tr2('Asked','Pregunt\u00f3')}</span>${tr(x.q)}</div>
+        <div class="qa-a"><span class="qa-tag ai">${tr2('AI','IA')}</span>${tr(x.a)}</div>
+        ${x.flag==='care'?`<div class="qa-note">\u26A0\uFE0F ${tr2('Flagged for your awareness \u2014 a gentle, supportive reply was given and you were notified.','Marcado para tu conocimiento \u2014 se dio una respuesta amable y de apoyo y se te notific\u00f3.')}</div>`:''}
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <b style="font-family:'Sora';font-size:14px">${tr2('Controls','Controles')}</b>
+      <div class="suprow"><span>${tr2('Weekly email digest','Resumen semanal por correo')}</span><b style="color:#9be29b">${tr2('On','Activado')}</b></div>
+      <div class="suprow"><span>${tr2('Safety alerts','Alertas de seguridad')}</span><b style="color:#9be29b">${tr2('On','Activado')}</b></div>
+      <div class="suprow"><span>${tr2('Daily time limit (sample)','L\u00edmite de tiempo diario (ejemplo)')}</span><b>90 min</b></div>
+      <button class="btn ghost" style="margin-top:12px" onclick="sfx('tap');state.screen='parentdigest';render();app.scrollTop=0">${tr2('Preview the weekly digest','Ver el resumen semanal')} \u203A</button>
+    </div>
+    <p class="muted" style="font-size:11px;text-align:center;line-height:1.5">${tr2('This portal is a demonstration. In the live program, controls and notifications are fully active.','Este portal es una demostraci\u00f3n. En el programa real, los controles y las notificaciones est\u00e1n totalmente activos.')}</p>
+  </div>`;
+}
+
+function renderParentDigest(){
+  const child = parentChildName();
+  const parent = (state.profile&&state.profile.parentName)?state.profile.parentName:tr2('Parent/Guardian','Padre/Tutor');
+  const done=lessonsCompleted();
+  app.innerHTML=`${topbar()}<div class="pad fade">
+    <button class="back" onclick="sfx('tap');state.screen='parent';render();app.scrollTop=0">\u2039 ${tr2('Back','Atr\u00e1s')}</button>
+    <div class="demobadge">${tr2('SAMPLE EMAIL \u2014 weekly digest','CORREO DE EJEMPLO \u2014 resumen semanal')}</div>
+    <div class="card emailcard">
+      <div class="emailhdr"><img src="${ANEW_LOGO}" style="width:34px;height:34px"><div><b style="font-family:'Sora'">Manufacturing Boot Camp</b><br><span class="muted" style="font-size:11px">${tr2('Weekly update','Actualizaci\u00f3n semanal')}</span></div></div>
+      <p style="font-size:13.5px;line-height:1.5">${tr2('Hi','Hola')} ${parent},</p>
+      <p style="font-size:13.5px;line-height:1.5">${tr2('Here\u2019s how '+child+' did this week in the Boot Camp:','As\u00ed le fue a '+child+' esta semana en el Boot Camp:')}</p>
+      <ul class="digestlist">
+        <li>\u2705 ${tr2(done+' lessons completed','Lecciones completadas: '+done)}</li>
+        <li>\u23F1\uFE0F ${tr2('3h 25m of learning time','3h 25m de tiempo de aprendizaje')}</li>
+        <li>\uD83C\uDFC5 ${tr2('Earned the \u201cSafety First\u201d badge','Obtuvo la insignia \u201cSeguridad Primero\u201d')}</li>
+        <li>\uD83D\uDCAC ${tr2(SAMPLE_QA.length+' questions asked to the AI tutor (transcript below)','Preguntas al tutor de IA: '+SAMPLE_QA.length+' (transcripci\u00f3n abajo)')}</li>
+      </ul>
+      <div class="digestsafe">\uD83D\uDEE1\uFE0F ${tr2('Safety: one question was flagged for your awareness and handled supportively. See the portal for details.','Seguridad: una pregunta fue marcada para tu conocimiento y se atendi\u00f3 con apoyo. Consulta el portal para m\u00e1s detalles.')}</div>
+      <b style="font-family:'Sora';font-size:13px;display:block;margin:14px 0 8px">${tr2('This week\u2019s AI questions & answers','Preguntas y respuestas de IA de esta semana')}</b>
+      ${SAMPLE_QA.map(x=>`<div class="qa ${x.flag==='care'?'qa-care':''}">
+        <div class="qa-q"><span class="qa-tag">${tr2('Q','P')}</span>${tr(x.q)}</div>
+        <div class="qa-a"><span class="qa-tag ai">${tr2('A','R')}</span>${tr(x.a)}</div></div>`).join('')}
+      <p style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5">${tr2('You can adjust controls or pause access any time in your Parent Portal. Reply to this email to reach the ANEW team.','Puedes ajustar los controles o pausar el acceso cuando quieras en tu Portal de Padres. Responde a este correo para contactar al equipo de ANEW.')}</p>
+    </div>
+  </div>`;
 }
 
 function renderTabs(){

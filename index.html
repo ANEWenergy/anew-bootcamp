@@ -349,6 +349,9 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .sharebtn.text{background:rgba(80,160,220,.14);border-color:rgba(80,160,220,.4);color:#8fd0ff}
 .sharebtn.email{background:rgba(243,144,25,.14);border-color:rgba(243,144,25,.45);color:var(--orange)}
 .sharebtn:hover{filter:brightness(1.12)}
+.deliverybox{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.deliverytitle{font-size:12px;color:var(--muted);margin-bottom:6px}
+.deliverybox .checkrow{margin:6px 0;font-size:13.5px}
 .privacycard{border-color:rgba(75,168,75,.4);background:linear-gradient(160deg,rgba(75,168,75,.08),var(--card2))}
 .privacylist{list-style:none;padding:0;margin:8px 0 0}
 .privacylist li{position:relative;padding:5px 0 5px 24px;font-size:13px;line-height:1.45;color:var(--text)}
@@ -3275,7 +3278,13 @@ function renderParentGate(){
         'By signing below, you confirm you are the parent or legal guardian of '+child+' and you allow them to take part in the Manufacturing Boot Camp under the safeguards described above. You may withdraw at any time.',
         'Al firmar abajo, confirmas que eres el padre, madre o tutor legal de '+child+' y permites su participaci\u00f3n en el Manufacturing Boot Camp bajo las protecciones descritas arriba. Puedes retirar el consentimiento en cualquier momento.')}</p>
       <label class="sponsorlbl">${tr2('Parent / guardian full name','Nombre completo del padre/tutor')}<input id="pc_name" type="text" value="${(state.profile&&state.profile.parentName)?state.profile.parentName.replace(/"/g,'&quot;'):''}"></label>
-      <label class="sponsorlbl">${tr2('Email for weekly updates','Correo para actualizaciones semanales')}<input id="pc_email" type="email" value="${(state.profile&&state.profile.parentEmail)?state.profile.parentEmail.replace(/"/g,'&quot;'):''}"></label>
+      <label class="sponsorlbl">${tr2('Email for progress updates','Correo para actualizaciones')}<input id="pc_email" type="email" value="${(state.profile&&state.profile.parentEmail)?state.profile.parentEmail.replace(/"/g,'&quot;'):''}"></label>
+      <label class="sponsorlbl">${tr2('Mobile number for text updates','N\u00famero m\u00f3vil para textos')}<input id="pc_phone" type="tel" inputmode="tel" placeholder="${tr2('e.g. +1 555 123 4567','ej. +506 8888 8888')}" value="${(state.profile&&state.profile.parentPhone)?state.profile.parentPhone.replace(/"/g,'&quot;'):''}"></label>
+      <div class="deliverybox">
+        <div class="deliverytitle">${tr2('How should we send progress updates?','\u00bfC\u00f3mo enviamos las actualizaciones?')}</div>
+        <label class="checkrow"><input type="checkbox" id="pc_via_email" ${(!state.profile||state.profile.parentVia==null||state.profile.parentVia==='email'||state.profile.parentVia==='both')?'checked':''}><span>\u2709\uFE0F ${tr2('Email','Correo')}</span></label>
+        <label class="checkrow"><input type="checkbox" id="pc_via_text" ${(state.profile&&(state.profile.parentVia==='text'||state.profile.parentVia==='both'))?'checked':''}><span>\uD83D\uDCAC ${tr2('Text message','Mensaje de texto')}</span></label>
+      </div>
       <label class="checkrow"><input type="checkbox" id="pc_agree" ${consented?'checked':''}><span>${tr2('I have read and agree to the above.','He le\u00eddo y acepto lo anterior.')}</span></label>
       <button class="sponsorsubmit" onclick="saveParentConsent()">${consented?tr2('Update consent','Actualizar consentimiento'):tr2('Give consent & continue','Dar consentimiento y continuar')}</button>
       ${consented?`<button class="btn ghost" style="margin-top:10px" onclick="sfx('tap');state.screen='parent';render();app.scrollTop=0">${tr2('Open the Parent Portal','Abrir el Portal de Padres')} \u203A</button>`:''}
@@ -3286,11 +3295,20 @@ function renderParentGate(){
 function saveParentConsent(){
   const name=(document.getElementById('pc_name')||{}).value||'';
   const email=(document.getElementById('pc_email')||{}).value||'';
+  const phone=(document.getElementById('pc_phone')||{}).value||'';
+  const viaEmail=!!(document.getElementById('pc_via_email')||{}).checked;
+  const viaText=!!(document.getElementById('pc_via_text')||{}).checked;
   const agree=(document.getElementById('pc_agree')||{}).checked;
-  if(!name.trim()||!email.trim()){ toast(tr2('Please add your name and email.','Agrega tu nombre y correo.')); return; }
+  if(!name.trim()){ toast(tr2('Please add your name.','Agrega tu nombre.')); return; }
+  if(!viaEmail && !viaText){ toast(tr2('Please choose at least one delivery method.','Elige al menos un m\u00e9todo de env\u00edo.')); return; }
+  if(viaEmail && !email.trim()){ toast(tr2('Please add your email for email updates.','Agrega tu correo para recibir por correo.')); return; }
+  if(viaText && !phone.trim()){ toast(tr2('Please add your mobile number for text updates.','Agrega tu n\u00famero m\u00f3vil para recibir textos.')); return; }
   if(!agree){ toast(tr2('Please check the consent box.','Marca la casilla de consentimiento.')); return; }
   state.profile=state.profile||{};
-  state.profile.parentName=name.trim(); state.profile.parentEmail=email.trim();
+  state.profile.parentName=name.trim();
+  state.profile.parentEmail=email.trim();
+  state.profile.parentPhone=phone.trim();
+  state.profile.parentVia = (viaEmail&&viaText)?'both':(viaText?'text':'email');
   state.profile.parentConsent=true; state.profile.parentConsentDate=new Date().toISOString();
   try{ saveProfile(); }catch(e){}
   toast(tr2('Consent saved. Thank you!','Consentimiento guardado. \u00a1Gracias!'));
@@ -3401,13 +3419,23 @@ function renderParent(){
       <button class="btn ghost" style="margin-top:12px" onclick="sfx('tap');state.screen='parentdigest';render();app.scrollTop=0">${tr2('Preview the weekly digest','Ver el resumen semanal')} \u203A</button>
     </div>
     <div class="card">
-      <b style="font-family:'Sora';font-size:14px">\uD83D\uDCF1 ${tr2('Text message updates','Actualizaciones por mensaje de texto')}</b>
-      <p class="muted" style="font-size:12.5px;margin:4px 0 10px">${tr2('Get a periodic text with your child\u2019s progress and a secure link back to this portal.','Recibe un mensaje peri\u00f3dico con el progreso de tu hijo/a y un enlace seguro a este portal.')}</p>
+      <b style="font-family:'Sora';font-size:14px">\uD83D\uDCEC ${tr2('Progress updates','Actualizaciones de progreso')}</b>
+      <p class="muted" style="font-size:12.5px;margin:4px 0 10px">${tr2('Get a periodic update with your child\u2019s progress and a secure link back to this portal.','Recibe una actualizaci\u00f3n peri\u00f3dica con el progreso de tu hijo/a y un enlace seguro a este portal.')}</p>
+      ${(function(){
+        var via=(state.profile&&state.profile.parentVia)||'email';
+        var em=(state.profile&&state.profile.parentEmail)||'';
+        var ph=(state.profile&&state.profile.parentPhone)||'';
+        var label = via==='both' ? tr2('Email & Text','Correo y Texto') : (via==='text'?tr2('Text message','Mensaje de texto'):tr2('Email','Correo'));
+        var dest = via==='both' ? ((em?em:'')+(em&&ph?' \u00b7 ':'')+(ph?ph:'')) : (via==='text'?ph:em);
+        return `<div class="suprow"><span>${tr2('Delivery method','M\u00e9todo de env\u00edo')}</span><b style="color:#9be29b">${label}</b></div>
+        <div class="suprow"><span>${tr2('Sending to','Enviando a')}</span><b style="text-align:right">${dest?dest.replace(/</g,''):tr2('\u2014 set on consent page','\u2014 definir en consentimiento')}</b></div>
+        <button class="btn ghost" style="margin:8px 0 12px" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">${tr2('Change delivery method','Cambiar m\u00e9todo de env\u00edo')}</button>`;
+      })()}
       <div class="smsbubble">
         <div class="smsfrom">ANEW Boot Camp</div>
         ${tr2('Hi! '+child+' completed 2 lessons today and is doing great in Mold Design \uD83D\uDEE0\uFE0F. View progress: ','\u00a1Hola! '+child+' complet\u00f3 2 lecciones hoy y va muy bien en Dise\u00f1o de Moldes \uD83D\uDEE0\uFE0F. Ver progreso: ')}<span class="smslink">learnmfg.io/p/\u2022\u2022\u2022\u2022</span>
       </div>
-      <div class="suprow"><span>${tr2('Send updates','Enviar actualizaciones')}</span><b style="color:#9be29b">${tr2('Daily','Diario')}</b></div>
+      <div class="suprow"><span>${tr2('Frequency','Frecuencia')}</span><b style="color:#9be29b">${tr2('Daily','Diario')}</b></div>
       <div class="freqrow">
         <button class="freqbtn on">${tr2('Daily','Diario')}</button>
         <button class="freqbtn">${tr2('Every few days','Cada pocos d\u00edas')}</button>

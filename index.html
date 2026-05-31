@@ -352,6 +352,26 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .deliverybox{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
 .deliverytitle{font-size:12px;color:var(--muted);margin-bottom:6px}
 .deliverybox .checkrow{margin:6px 0;font-size:13.5px}
+.ssbanner{font-family:'Sora';font-weight:800;font-size:19px;color:#fff;background:linear-gradient(120deg,var(--orange),var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent;margin:2px 0 10px}
+.ssbanner.small{font-size:15px;margin-bottom:8px}
+.ssrefresh{background:rgba(243,144,25,.12);border:1px solid rgba(243,144,25,.4);border-radius:11px;padding:9px 12px;font-size:12.5px;color:var(--yellow);margin-bottom:10px}
+.ssintro{font-size:13.5px;line-height:1.55;color:var(--text);margin:0 0 14px}
+.sslesson{display:flex;gap:12px;align-items:flex-start;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin-bottom:9px}
+.ssic{font-size:24px;flex-shrink:0;line-height:1.1}
+.sslesson b{font-family:'Sora';font-size:14.5px;color:#fff}
+.sslesson p{font-size:12.5px;line-height:1.45;color:var(--muted);margin:3px 0 0}
+.svopt.correct{border-color:var(--green)!important;background:rgba(75,168,75,.18)!important;color:#9be29b!important}
+.svopt.wrong{border-color:#c4632e!important;background:rgba(196,99,46,.16)!important}
+.ssfeedback{border-radius:11px;padding:10px 12px;font-size:13px;margin:10px 0;line-height:1.45}
+.ssfeedback.good{background:rgba(75,168,75,.14);border:1px solid rgba(75,168,75,.4);color:#9be29b}
+.ssfeedback.soft{background:rgba(243,144,25,.12);border:1px solid rgba(243,144,25,.4);color:var(--yellow)}
+.ssresultic{font-size:64px;margin:14px 0 0}
+.ssgate{border-radius:14px;padding:13px 15px;cursor:pointer;display:flex;flex-direction:column;gap:3px}
+.ssgate.todo{background:linear-gradient(135deg,rgba(243,144,25,.18),rgba(245,197,24,.10));border:1px solid rgba(243,144,25,.5)}
+.ssgate.todo b{font-family:'Sora';font-size:15px;color:#fff}
+.ssgate.todo span{font-size:12.5px;color:var(--muted)}
+.ssgate .ssgatego{font-family:'Sora';font-weight:700;font-size:12.5px;color:var(--orange);margin-top:2px}
+.ssgate.done{background:rgba(75,168,75,.12);border:1px solid rgba(75,168,75,.4);color:#9be29b;font-family:'Sora';font-weight:700;font-size:13px;flex-direction:row;align-items:center;gap:6px}
 .privacycard{border-color:rgba(75,168,75,.4);background:linear-gradient(160deg,rgba(75,168,75,.08),var(--card2))}
 .privacylist{list-style:none;padding:0;margin:8px 0 0}
 .privacylist li{position:relative;padding:5px 0 5px 24px;font-size:13px;line-height:1.45;color:var(--text)}
@@ -2181,6 +2201,65 @@ function moduleProgress(mod){
 }
 function lessonUnlocked(mod,idx){ if(idx===0)return true; return lessonPassed(mod.id,mod.lessons[idx-1].id); }
 function moduleUnlocked(i){ if(i===0)return true; const prev=COURSE.modules[i-1]; return moduleProgress(prev).pct===100; }
+
+/* ============== SOFT SKILLS FOUNDATION (required before any trade lesson) ==============
+   A short, self-contained course every learner must pass before starting any
+   trade lesson. It refreshes every 3 months so the habits stick. Content is
+   baked in here (not a fetched trade file). */
+const SOFT_SKILLS_DAYS = 90; /* refresher interval */
+const SOFT_SKILLS = {
+  title: L('Shop Ready: How to Win at Work','Listo para el Taller: C\u00f3mo Triunfar en el Trabajo'),
+  intro: L('Welcome to Shop Ready \u2014 your on-ramp to a real career. Before any trade, every learner finishes this short class. These are the habits employers value most, and they are how you get hired, kept, and promoted. It\u2019s required to be accepted into the program \u2014 and it\u2019s easy to pass.',
+           'Bienvenido a Listo para el Taller \u2014 tu entrada a una carrera real. Antes de cualquier oficio, cada aprendiz termina esta clase corta. Estos son los h\u00e1bitos que m\u00e1s valoran los empleadores, y son la forma de ser contratado, conservado y ascendido. Es obligatorio para ser aceptado en el programa \u2014 y es f\u00e1cil de aprobar.'),
+  lessons: [
+    {ic:'\uD83E\uDD1D', t:L('Respect','Respeto'),
+     p:L('Treat everyone \u2014 teachers, teammates, and yourself \u2014 with respect. Listen when others speak, use polite words, and never put others down.',
+         'Trata a todos \u2014 maestros, compa\u00f1eros y a ti mismo \u2014 con respeto. Escucha cuando otros hablan, usa palabras corteses y nunca menosprecies a los dem\u00e1s.')},
+    {ic:'\u23F0', t:L('Reliability','Confiabilidad'),
+     p:L('Show up on time and ready. Do what you say you will do. Employers trust people they can count on, every single day.',
+         'Llega a tiempo y preparado. Haz lo que dices que har\u00e1s. Los empleadores conf\u00edan en las personas con las que pueden contar, todos los d\u00edas.')},
+    {ic:'\uD83D\uDDE3\uFE0F', t:L('Language & Conduct','Lenguaje y Conducta'),
+     p:L('No foul language on the job. Keep a calm, professional tone even when things get hard. Your words show your character.',
+         'Nada de groser\u00edas en el trabajo. Mant\u00e9n un tono calmado y profesional incluso cuando las cosas se ponen dif\u00edciles. Tus palabras muestran tu car\u00e1cter.')},
+    {ic:'\uD83D\uDC55', t:L('Proper Clothing','Vestimenta Adecuada'),
+     p:L('Dress for the job: clean clothes, closed-toe shoes, and any required safety gear. Looking the part shows you take the work seriously.',
+         'V\u00edstete para el trabajo: ropa limpia, zapatos cerrados y el equipo de seguridad requerido. Verte profesional muestra que tomas el trabajo en serio.')},
+    {ic:'\uD83E\uDDFC', t:L('Cleanliness','Limpieza'),
+     p:L('Good hygiene and a clean workspace keep you safe and show respect for others. Clean tools and tidy areas prevent accidents.',
+         'La buena higiene y un espacio limpio te mantienen seguro y muestran respeto por los dem\u00e1s. Las herramientas limpias y las \u00e1reas ordenadas previenen accidentes.')},
+    {ic:'\uD83D\uDC42', t:L('Listening Skills','Saber Escuchar'),
+     p:L('Listen carefully to instructions before acting. Ask questions if unsure. Good listening prevents mistakes and keeps everyone safe.',
+         'Escucha con atenci\u00f3n las instrucciones antes de actuar. Pregunta si tienes dudas. Saber escuchar previene errores y mantiene a todos seguros.')}
+  ],
+  test: [
+    {q:L('A teammate disagrees with you. What is the respectful thing to do?','Un compa\u00f1ero no est\u00e1 de acuerdo contigo. \u00bfQu\u00e9 es lo respetuoso?'),
+     opts:[L('Listen to their view calmly','Escuchar su punto de vista con calma'),L('Raise your voice','Levantar la voz'),L('Ignore them','Ignorarlo')], a:0},
+    {q:L('You will be late to class. The reliable thing to do is:','Vas a llegar tarde a clase. Lo confiable es:'),
+     opts:[L('Say nothing','No decir nada'),L('Let your teacher know in advance','Avisar a tu maestro con anticipaci\u00f3n'),L('Just skip it','Simplemente faltar')], a:1},
+    {q:L('On the job, foul language is:','En el trabajo, las groser\u00edas son:'),
+     opts:[L('Fine if you are upset','Aceptables si est\u00e1s molesto'),L('Never appropriate','Nunca apropiadas'),L('Okay with friends','Aceptables con amigos')], a:1},
+    {q:L('Proper clothing for shop work includes:','La vestimenta adecuada para el taller incluye:'),
+     opts:[L('Open sandals','Sandalias abiertas'),L('Closed-toe shoes & safety gear','Zapatos cerrados y equipo de seguridad'),L('Whatever is comfy','Lo que sea c\u00f3modo')], a:1},
+    {q:L('Before starting a task you are unsure about, you should:','Antes de empezar una tarea de la que no est\u00e1s seguro, debes:'),
+     opts:[L('Guess and start','Adivinar y empezar'),L('Ask a question','Hacer una pregunta'),L('Do something else','Hacer otra cosa')], a:1}
+  ]
+};
+function softSkillsRec(){ return (state.profile && state.profile.softSkills) || null; }
+function softSkillsPassed(){
+  const r=softSkillsRec();
+  if(!r || !r.date) return false;
+  const days=(Date.now() - new Date(r.date).getTime())/86400000;
+  return days < SOFT_SKILLS_DAYS; /* expires -> needs refresher */
+}
+function softSkillsExpired(){
+  const r=softSkillsRec();
+  return !!(r && r.date && !softSkillsPassed());
+}
+function softSkillsDaysLeft(){
+  const r=softSkillsRec(); if(!r||!r.date) return 0;
+  const days=(Date.now() - new Date(r.date).getTime())/86400000;
+  return Math.max(0, Math.ceil(SOFT_SKILLS_DAYS - days));
+}
 function coursePct(){
   let d=0,tot=0; COURSE.modules.forEach(m=>{const p=moduleProgress(m);d+=p.done;tot+=p.total;});
   return tot>0 ? Math.round(d/tot*100) : 0;
@@ -2208,6 +2287,7 @@ function render(){
   if(state.screen==='parentgate'){renderParentGate();tabbarEl.innerHTML='';return;}
   if(state.screen==='parent'){renderParent();tabbarEl.innerHTML='';return;}
   if(state.screen==='parentdigest'){renderParentDigest();tabbarEl.innerHTML='';return;}
+  if(state.screen==='softskills'){renderSoftSkills();tabbarEl.innerHTML='';return;}
   if(state.inQuiz){renderQuiz();}
   else if(state.activeLesson){renderLesson();}
   else if(state.activeModule){renderModule();}
@@ -2728,6 +2808,11 @@ function renderHub(){
       <h2>${t('hub')}</h2><p>${t('hubExplain')}</p></div>
     ${bootcampBanner()}
     ${finderBanner}
+    ${(function(){
+      var passed=softSkillsPassed(), expired=softSkillsExpired();
+      if(passed) return `<div style="padding:0 16px 6px"><div class="ssgate done" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">\u2705 ${tr2('Shop Ready \u2014 complete','Listo para el Taller \u2014 completo')} \u00b7 <span class="muted" style="font-size:11px">${tr2('refresher in','repaso en')} ${softSkillsDaysLeft()} ${tr2('days','d\u00edas')}</span></div></div>`;
+      return `<div style="padding:0 16px 6px"><div class="ssgate todo" onclick="sfx('tap');state.screen='softskills';state.ssStep='intro';render();app.scrollTop=0">\uD83C\uDFC6 <b>${tr2('Start here: Shop Ready','Empieza aqu\u00ed: Listo para el Taller')}</b><span>${expired?tr2('Quick 3-month refresher needed to keep going.','Necesitas un repaso r\u00e1pido de 3 meses para continuar.'):tr2('Required before any trade lesson \u2014 it\u2019s short and easy.','Requerido antes de cualquier lecci\u00f3n \u2014 es corto y f\u00e1cil.')}</span><span class="ssgatego">${tr2('Begin','Empezar')} \u2192</span></div></div>`;
+    })()}
     <div style="padding:4px 16px 12px">
       <button class="btn" style="width:100%;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
     </div>
@@ -3402,6 +3487,10 @@ function renderParent(){
       </div>
       <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('We monitor lessons and AI tutor chats for age-appropriateness and signs of distress. Flagged items appear here and trigger an email to you.','Supervisamos las lecciones y los chats con el tutor de IA para verificar que sean apropiados y detectar se\u00f1ales de angustia. Los elementos marcados aparecen aqu\u00ed y te env\u00edan un correo.')}</p>
     </div>
+    <div class="card" style="border-color:rgba(243,144,25,.4)">
+      <b style="font-family:'Sora';font-size:14px">\uD83C\uDFC6 ${tr2('Shop Ready \u2014 required foundation','Listo para el Taller \u2014 base obligatoria')}</b>
+      <p class="muted" style="font-size:12.5px;margin:8px 0 0">${tr2('Every learner must complete \u201cShop Ready: How to Win at Work\u201d before starting any trade \u2014 covering respect, reliability, professional conduct and language, proper clothing, cleanliness, and listening. It is required to be accepted into the program, and we repeat it every 3 months so these workforce habits stick.','Cada aprendiz debe completar \u201cListo para el Taller: C\u00f3mo Triunfar en el Trabajo\u201d antes de empezar cualquier oficio \u2014 cubre respeto, confiabilidad, conducta y lenguaje profesional, vestimenta adecuada, limpieza y saber escuchar. Es obligatorio para ser aceptado en el programa, y lo repetimos cada 3 meses para que estos h\u00e1bitos perduren.')}</p>
+    </div>
     <div class="card">
       <b style="font-family:'Sora';font-size:14px">${tr2('AI tutor \u2014 questions & answers','Tutor de IA \u2014 preguntas y respuestas')}</b>
       <p class="muted" style="font-size:12px;margin:4px 0 10px">${tr2('A full transcript of what your learner asked and what the AI answered.','Una transcripci\u00f3n completa de lo que tu aprendiz pregunt\u00f3 y lo que respondi\u00f3 la IA.')}</p>
@@ -3498,6 +3587,90 @@ function renderParentDigest(){
   </div>`;
 }
 
+function renderSoftSkills(){
+  const ss=SOFT_SKILLS;
+  state.ssStep = state.ssStep || 'intro';
+  /* ---- LESSONS / INTRO ---- */
+  if(state.ssStep==='intro'){
+    const refresher = softSkillsExpired();
+    app.innerHTML=`${topbar()}<div class="pad fade">
+      ${state.parentPreview?parentPreviewBanner():''}
+      <div class="ssbanner">\uD83C\uDFC6 ${tr(ss.title)}</div>
+      ${refresher?`<div class="ssrefresh">\uD83D\uDD01 ${tr2('Time for your 3-month refresher \u2014 a quick review to keep these habits sharp.','Hora de tu repaso de 3 meses \u2014 un repaso r\u00e1pido para mantener estos h\u00e1bitos.')}</div>`:''}
+      <p class="ssintro">${tr(ss.intro)}</p>
+      ${ss.lessons.map(l=>`<div class="sslesson"><div class="ssic">${l.ic}</div><div><b>${tr(l.t)}</b><p>${tr(l.p)}</p></div></div>`).join('')}
+      <button class="sponsorsubmit" style="margin-top:6px" onclick="startSoftTest()">${tr2('I\u2019m ready \u2014 take the quick check','Estoy listo \u2014 hacer la prueba r\u00e1pida')} \u2192</button>
+      <p class="muted" style="font-size:11px;text-align:center;margin-top:10px">${tr2('Just a few easy questions. You can retake it as many times as you like.','Solo unas preguntas f\u00e1ciles. Puedes repetirla cuantas veces quieras.')}</p>
+    </div>`;
+    return;
+  }
+  /* ---- TEST ---- */
+  if(state.ssStep==='test'){
+    const qi=state.ssQi||0; const item=ss.test[qi];
+    const answered=state.ssAnswered; const picked=state.ssPicked;
+    app.innerHTML=`${topbar()}<div class="pad fade">
+      <div class="ssbanner small">\uD83C\uDFC6 ${tr(ss.title)}</div>
+      <div class="svhead"><div class="svbar"><span style="width:${Math.round(qi/ss.test.length*100)}%"></span></div>
+        <div class="svcount">${tr2('Question','Pregunta')} ${qi+1} ${tr2('of','de')} ${ss.test.length}</div></div>
+      <div class="svq">${tr(item.q)}</div>
+      <div class="svopts">
+        ${item.opts.map((o,oi)=>{
+          let cls='svopt';
+          if(answered){ if(oi===item.a) cls+=' correct'; else if(oi===picked) cls+=' wrong'; }
+          return `<button class="${cls}" ${answered?'disabled':''} onclick="pickSoft(${oi})">${tr(o)}</button>`;
+        }).join('')}
+      </div>
+      ${answered?`<div class="ssfeedback ${picked===item.a?'good':'soft'}">${picked===item.a?'\u2705 '+tr2('Correct!','\u00a1Correcto!'):'\uD83D\uDCA1 '+tr2('Good to know \u2014 the best answer is highlighted above.','Bueno saberlo \u2014 la mejor respuesta est\u00e1 resaltada arriba.')}</div>
+        <button class="sponsorsubmit" onclick="nextSoft()">${qi+1<ss.test.length?tr2('Next','Siguiente'):tr2('See result','Ver resultado')} \u2192</button>`:''}
+    </div>`;
+    return;
+  }
+  /* ---- RESULT / PASS ---- */
+  if(state.ssStep==='result'){
+    const score=state.ssScore||0; const total=ss.test.length;
+    const pct=Math.round(score/total*100);
+    const passed = pct>=50;
+    if(passed){
+      // record completion
+      state.profile=state.profile||{};
+      state.profile.softSkills={date:new Date().toISOString(), score:pct};
+      try{ saveProfile(); }catch(e){}
+    }
+    app.innerHTML=`${topbar()}<div class="pad fade" style="text-align:center">
+      <div class="ssresultic">${passed?'\uD83C\uDF89':'\uD83D\uDCAA'}</div>
+      <h2 style="font-family:'Sora';margin:6px 0">${passed?tr2('You\u2019re Shop Ready!','\u00a1Est\u00e1s Listo para el Taller!'):tr2('Almost there!','\u00a1Casi lo logras!')}</h2>
+      <p class="muted" style="font-size:14px">${tr2('You scored','Obtuviste')} ${score}/${total} (${pct}%).</p>
+      <p style="font-size:13.5px;line-height:1.5;max-width:340px;margin:10px auto">${passed
+        ? tr2('Great work \u2014 you\u2019ve unlocked the trades. These habits are what employers look for first. We\u2019ll do a quick refresher every 3 months to keep them sharp.','Buen trabajo \u2014 desbloqueaste los oficios. Estos h\u00e1bitos son lo primero que buscan los empleadores. Haremos un repaso r\u00e1pido cada 3 meses.')
+        : tr2('No worries \u2014 review the tips and try again. Everyone can pass this, and you can retake it as many times as you like.','Sin preocupaciones \u2014 repasa los consejos e int\u00e9ntalo de nuevo. Todos pueden aprobar, y puedes repetirla cuantas veces quieras.')}</p>
+      ${passed
+        ? `<button class="sponsorsubmit" style="max-width:320px;margin:8px auto 0" onclick="finishSoftSkills()">${state.pendingLesson?tr2('Continue to my lesson','Continuar a mi lecci\u00f3n'):tr2('Explore the trades','Explorar los oficios')} \u2192</button>`
+        : `<button class="sponsorsubmit" style="max-width:320px;margin:8px auto 0" onclick="state.ssStep='intro';render();app.scrollTop=0">${tr2('Review & try again','Repasar e intentar de nuevo')}</button>`}
+    </div>`;
+    return;
+  }
+}
+function startSoftTest(){ sfx('tap'); state.ssStep='test'; state.ssQi=0; state.ssScore=0; state.ssAnswered=false; state.ssPicked=null; render(); app.scrollTop=0; }
+function pickSoft(oi){
+  if(state.ssAnswered) return;
+  state.ssPicked=oi; state.ssAnswered=true;
+  if(oi===SOFT_SKILLS.test[state.ssQi].a){ state.ssScore=(state.ssScore||0)+1; sfx('success'); } else { sfx('wrong'); }
+  render();
+}
+function nextSoft(){
+  if(state.ssQi+1<SOFT_SKILLS.test.length){ state.ssQi++; state.ssAnswered=false; state.ssPicked=null; render(); app.scrollTop=0; }
+  else { state.ssStep='result'; render(); app.scrollTop=0; }
+}
+function finishSoftSkills(){
+  sfx('success');
+  const p=state.pendingLesson; state.pendingLesson=null;
+  if(p && p.trade){
+    state.trade=p.trade; state.activeModule=p.module; state.screen='course';
+    if(p.lesson){ openLesson(p.lesson); return; }
+    render(); app.scrollTop=0; return;
+  }
+  state.screen='hub'; render(); app.scrollTop=0;
+}
 function renderTabs(){
   const tabs=[{k:'home',l:t('home'),i:'M4 12 12 4l8 8M6 10v9h12v-9'},
     {k:'progress',l:t('progress'),i:'M4 19V5m6 14V9m6 10V13m4 6V7'},
@@ -3511,7 +3684,16 @@ function renderTabs(){
 function goTab(k){stopReading();state.tab=k;state.activeModule=null;state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();}
 function openModule(id){state.activeModule=id;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0;}
 function closeModule(){stopReading();state.activeModule=null;state.activeLesson=null;state.inQuiz=false;state.tab='home';try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
-function openLesson(id){state.activeLesson=id;state.inQuiz=false;try{ if(songEl){ songEl.pause(); } synthMusicStop(); }catch(e){}render();app.scrollTop=0;}
+function openLesson(id){
+  /* Prerequisite gate: a learner must complete the Soft Skills Foundation
+     before starting any trade lesson (refreshed every 3 months). Parent preview
+     mode bypasses this so guardians can review content freely. */
+  if(!state.parentPreview && !softSkillsPassed()){
+    state.pendingLesson={trade:state.trade, module:state.activeModule, lesson:id};
+    state.screen='softskills'; state.ssStep='intro'; render(); app.scrollTop=0; return;
+  }
+  state.activeLesson=id;state.inQuiz=false;try{ if(songEl){ songEl.pause(); } synthMusicStop(); }catch(e){}render();app.scrollTop=0;
+}
 function closeLesson(){stopReading();state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
 function playVideo(id, el){
   /* Play in-app: works for any video box (lesson OR tool panel). Use the box

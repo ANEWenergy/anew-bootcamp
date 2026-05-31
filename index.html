@@ -2058,9 +2058,10 @@ function toggleMute(){
   if(songEl){ songEl.volume = AUDIO.muted?0:0.9; }
   if(!AUDIO.muted){
     audioResume();
-    // If we're not on a video lesson, (re)start the music so unmuting is audible.
-    var onLesson = (typeof state!=='undefined' && state.screen==='course' && state.activeLesson);
-    if(!onLesson){ try{ if(AUDIO.started){ musicResume(); } else { musicStart(); } }catch(e){} }
+    // Don't (re)start music if a video is currently playing anywhere on screen
+    // (a lesson video OR a trade intro video) — it would play over the video.
+    var videoPlaying = !!document.querySelector('.video.embed.playing');
+    if(!videoPlaying){ try{ if(AUDIO.started){ musicResume(); } else { musicStart(); } }catch(e){} }
   } else {
     // Muting: also stop the synth loop so it doesn't keep scheduling silently.
     synthMusicStop();
@@ -2561,7 +2562,8 @@ function hubtop(){
   const nm=firstName();
   return `<div class="topbar"><img class="logo" src="${ANEW_LOGO}">
     <div class="brand">Manufacturing Boot Camp<small>${nm?t('hello').toUpperCase()+', '+nm.toUpperCase():'ANEW'}</small></div>
-    <button class="flagbtn" onclick="state.screen='lang';render()">${l.fl} ${l.code.toUpperCase()}</button></div>`;
+    <button class="flagbtn" onclick="state.screen='lang';render()">${l.fl} ${l.code.toUpperCase()}</button>
+    ${muteBtnHTML()}</div>`;
 }
 function topbar(){return hubtop();}
 
@@ -3128,6 +3130,8 @@ function playVideo(id, el){
      that was clicked; fall back to #vidbox for older callers. */
   const box = el || (window.event && window.event.currentTarget) || document.getElementById('vidbox');
   if(!box) return;
+  /* Pause the background music so it doesn't play over the video's audio. */
+  try{ musicStop(); }catch(e){}
   box.removeAttribute('onclick');
   box.classList.add('playing');
   // Inject the player on the user click so autoplay is treated as a user gesture.

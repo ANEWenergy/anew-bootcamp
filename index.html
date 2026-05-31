@@ -31,7 +31,7 @@ h1,h2,h3,.disp{font-family:'Sora',sans-serif}
 .topbar{display:flex;align-items:center;gap:12px;padding:16px 18px 10px;position:sticky;top:0;z-index:30;
   background:linear-gradient(180deg, rgba(14,24,19,.96), rgba(14,24,19,.78) 70%, transparent);backdrop-filter:blur(10px)}
 .logo{width:38px;height:38px;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-.brand{font-family:'Sora';font-weight:800;font-size:17px;letter-spacing:.3px;line-height:1}
+.brand{font-family:'Sora';font-weight:800;font-size:14.5px;letter-spacing:.2px;line-height:1.15}
 .brand small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);letter-spacing:1.5px;margin-top:3px}
 .flagbtn{margin-left:auto;background:var(--card2);border:1px solid var(--line);border-radius:30px;padding:7px 12px;
   font-family:'Archivo';color:var(--text);font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:pointer}
@@ -2478,7 +2478,7 @@ function hubtop(){
   const l=LANGS.find(x=>x.code===state.lang)||LANGS[0];
   const nm=firstName();
   return `<div class="topbar"><img class="logo" src="${ANEW_LOGO}">
-    <div class="brand">ANEW<small>${nm?t('hello').toUpperCase()+', '+nm.toUpperCase():'BOOT CAMP'}</small></div>
+    <div class="brand">Manufacturing Boot Camp<small>${nm?t('hello').toUpperCase()+', '+nm.toUpperCase():'ANEW'}</small></div>
     <button class="flagbtn" onclick="state.screen='lang';render()">${l.fl} ${l.code.toUpperCase()}</button></div>`;
 }
 function topbar(){return hubtop();}
@@ -2634,6 +2634,110 @@ function renderTradeSoon(){
 }
 function tr2(en,es){return state.lang==='es'?es:en;}
 
+/* ---------- trade banner art ----------
+   A flat, themed SVG banner shown at the top of each trade's course page.
+   Keyed by category so every trade gets a relevant, consistent image, with a
+   few per-trade motif overrides for flagship trades. Tiny (a few KB), no
+   external images, no licensing concerns. */
+function tradeBanner(tradeId){
+  const trd=TRADES.find(x=>x.id===tradeId)||{};
+  const cat=trd.cat||'';
+  const title=tr(trd.title||COURSE.title||'');
+  // palette per category: [deep bg, mid, accent line, accent2]
+  const P={
+    'Molding & Plastics':   ['#0e2a26','#15413a','#3fb59a','#f39019'],
+    'Machining & CAM':      ['#1c2230','#27304a','#6d8fd6','#f39019'],
+    'Welding & Fabrication':['#2a1c12','#43301c','#e8923a','#ffce54'],
+    'Electrical & Controls':['#0f2a22','#10362b','#43b07c','#f39019'],
+    'Design & CAD':         ['#241a2e','#352645','#a779d6','#f39019'],
+    'Quality & Operations': ['#102530','#173947','#3fa3c4','#f39019'],
+  };
+  const pal=P[cat]||['#16242b','#1d3640','#4aa3b5','#f39019'];
+  const [bg,mid,acc,acc2]=pal;
+  // pick a motif: per-trade override, else category default
+  const motifKey = ({
+    pcb:'pcb', pcbmfg:'pcb', chip:'pcb', embedded:'pcb', robot:'robot',
+    wire:'wire', power:'power', battery:'battery',
+    mold:'mold', part:'mold', moldflow:'wave', molddesign:'mold', material:'flask',
+    cnc:'cnc', multiaxis:'cnc', clock:'clock', cad:'cad',
+    weld:'weld', sheet:'press', diestamp:'press', seal:'wave', fixture:'fixture',
+    design:'pen', drawing:'pen', assembly:'cube', styling:'pen',
+    factory:'factory', wrench:'wrench', nest:'grid', pid:'pipe', logic:'logic',
+    pm:'chart', cost:'chart', quality:'gauge', safety:'shield'
+  })[trd.ic] || ({
+    'Molding & Plastics':'mold','Machining & CAM':'cnc','Welding & Fabrication':'weld',
+    'Electrical & Controls':'pcb','Design & CAD':'pen','Quality & Operations':'gauge'
+  })[cat] || 'grid';
+
+  function motif(k){
+    switch(k){
+      case 'pcb': return `<g stroke="${acc}" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9">
+        <path d="M40 50H120V90H180"/><path d="M40 95H90V140"/><path d="M470 60H540V120H600"/><path d="M470 150H560V100"/></g>
+        <g fill="${acc}"><circle cx="40" cy="50" r="4"/><circle cx="40" cy="95" r="4"/><circle cx="180" cy="90" r="4"/><circle cx="600" cy="120" r="4"/><circle cx="470" cy="150" r="4"/></g>
+        <rect x="300" y="68" width="80" height="80" rx="6" fill="${mid}" stroke="${acc2}" stroke-width="2"/><rect x="318" y="86" width="44" height="44" rx="3" fill="${acc}" opacity="0.35"/>
+        <g stroke="${acc2}" stroke-width="2" stroke-linecap="round"><path d="M312 68V58M328 68V58M344 68V58M360 68V58M312 148V158M328 148V158M344 148V158M360 148V158M300 80H290M300 96H290M300 112H290M300 128H290M380 80H390M380 96H390M380 112H390M380 128H390"/></g>`;
+      case 'robot': return `<g stroke="${acc}" stroke-width="5" fill="none" stroke-linecap="round"><path d="M120 160V120L200 90L280 110"/></g>
+        <circle cx="120" cy="160" r="10" fill="${mid}" stroke="${acc}" stroke-width="3"/><circle cx="200" cy="90" r="9" fill="${mid}" stroke="${acc}" stroke-width="3"/>
+        <rect x="280" y="98" width="40" height="26" rx="4" fill="${acc2}"/>
+        <rect x="470" y="120" width="120" height="40" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/><path d="M480 120V100H580V120" fill="none" stroke="${acc}" stroke-width="2"/>`;
+      case 'wire': return `<g stroke="${acc}" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M40 60H200V120H360"/><path d="M40 110H120V150H300"/><path d="M420 70H560V130H620"/></g>
+        <g fill="${acc2}"><rect x="200" y="52" width="16" height="16" rx="2"/><rect x="352" y="112" width="16" height="16" rx="2"/><rect x="552" y="62" width="16" height="16" rx="2"/></g>`;
+      case 'power': return `<g stroke="${acc}" stroke-width="2.5" fill="none"><path d="M60 100H160M520 100H620"/></g>
+        <path d="M300 50L260 110H300L290 160L350 90H310Z" fill="${acc2}"/>
+        <g stroke="${acc}" stroke-width="2" fill="none"><circle cx="160" cy="100" r="22"/><circle cx="520" cy="100" r="22"/></g>`;
+      case 'battery': return `<g><rect x="240" y="70" width="200" height="70" rx="8" fill="${mid}" stroke="${acc}" stroke-width="2"/><rect x="440" y="92" width="14" height="26" rx="3" fill="${acc}"/>
+        <rect x="256" y="86" width="40" height="38" rx="3" fill="${acc}" opacity="0.5"/><rect x="304" y="86" width="40" height="38" rx="3" fill="${acc}" opacity="0.7"/><rect x="352" y="86" width="40" height="38" rx="3" fill="${acc2}"/></g>
+        <g stroke="${acc}" stroke-width="2.5" fill="none"><path d="M120 105H210M470 105H560"/></g>`;
+      case 'mold': return `<g><rect x="250" y="60" width="180" height="40" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/><rect x="250" y="110" width="180" height="40" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/>
+        <rect x="320" y="92" width="40" height="26" rx="3" fill="${acc2}"/><path d="M340 60V40M340 40H300M340 40H380" stroke="${acc}" stroke-width="2" fill="none"/></g>
+        <g stroke="${acc}" stroke-width="2" fill="none" opacity="0.7"><path d="M120 80V130M150 80V130M540 80V130M570 80V130"/></g>`;
+      case 'wave': return `<g stroke="${acc}" stroke-width="3" fill="none" stroke-linecap="round"><path d="M40 100Q90 60 140 100T240 100T340 100T440 100T540 100T640 100"/><path d="M40 130Q90 95 140 130T240 130T340 130T440 130T540 130T640 130" opacity="0.5"/></g>`;
+      case 'flask': return `<g fill="none" stroke="${acc}" stroke-width="2.5"><path d="M320 50V90L280 150A8 8 0 0 0 288 162H392A8 8 0 0 0 400 150L360 90V50"/><path d="M308 50H372"/></g>
+        <path d="M295 132H385L400 150A8 8 0 0 1 392 162H288A8 8 0 0 1 280 150Z" fill="${acc2}" opacity="0.6"/>`;
+      case 'cnc': return `<g><rect x="220" y="50" width="240" height="22" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/><rect x="320" y="72" width="40" height="40" fill="${mid}" stroke="${acc}" stroke-width="2"/>
+        <path d="M330 112L340 150L350 112Z" fill="${acc2}"/><rect x="240" y="150" width="200" height="14" rx="3" fill="${acc}" opacity="0.4"/></g>
+        <g stroke="${acc}" stroke-width="2" fill="none"><path d="M120 60V160M560 60V160"/></g>`;
+      case 'clock': return `<circle cx="340" cy="100" r="55" fill="${mid}" stroke="${acc}" stroke-width="2.5"/><g stroke="${acc2}" stroke-width="3" stroke-linecap="round"><path d="M340 100V65M340 100L368 112"/></g>
+        <g stroke="${acc}" stroke-width="2"><path d="M340 52V60M340 140V148M392 100H384M296 100H288"/></g>`;
+      case 'cad': return `<g stroke="${acc}" stroke-width="2" fill="none"><path d="M280 140L280 70L350 50L420 70V140L350 160Z"/><path d="M280 70L350 90L420 70M350 90V160"/></g>
+        <g stroke="${acc2}" stroke-width="1.5" fill="none" opacity="0.6"><path d="M60 60H160M60 90H120M520 110H620M540 140H620"/></g>`;
+      case 'weld': return `<g><path d="M120 150L300 90" stroke="${acc}" stroke-width="6" stroke-linecap="round"/><path d="M300 90L330 80" stroke="${acc2}" stroke-width="6" stroke-linecap="round"/>
+        <g fill="${acc2}"><circle cx="338" cy="78" r="6"/><circle cx="352" cy="86" r="4"/><circle cx="330" cy="66" r="3.5"/><circle cx="360" cy="72" r="3"/></g>
+        <path d="M420 150Q480 120 540 150" stroke="${acc}" stroke-width="3" fill="none"/></g>`;
+      case 'press': return `<g><rect x="270" y="40" width="140" height="34" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/><rect x="320" y="74" width="40" height="40" fill="${acc2}"/>
+        <rect x="250" y="130" width="180" height="30" rx="4" fill="${mid}" stroke="${acc}" stroke-width="2"/><path d="M340 114V130" stroke="${acc}" stroke-width="2"/></g>
+        <g stroke="${acc}" stroke-width="2.5" fill="none"><path d="M270 40V160M410 40V160"/></g>`;
+      case 'fixture': return `<g stroke="${acc}" stroke-width="2.5" fill="none"><rect x="280" y="90" width="120" height="50" rx="3"/><path d="M260 140H420M300 90V60H260M380 90V60H420"/></g>
+        <g fill="${acc2}"><rect x="252" y="54" width="16" height="12" rx="2"/><rect x="412" y="54" width="16" height="12" rx="2"/></g>`;
+      case 'pen': return `<g><path d="M260 150L280 90L380 50L400 70L360 170Z" fill="${mid}" stroke="${acc}" stroke-width="2"/><path d="M280 90L360 120" stroke="${acc}" stroke-width="2"/><path d="M380 50L400 70" stroke="${acc2}" stroke-width="3"/></g>
+        <g stroke="${acc}" stroke-width="1.5" fill="none" opacity="0.5"><path d="M60 70H150M60 100H130M510 120H610M530 150H610"/></g>`;
+      case 'cube': return `<g stroke="${acc}" stroke-width="2" fill="none"><path d="M300 60L370 80L370 150L300 130Z"/><path d="M300 60L370 80M370 80L430 60L430 130L370 150M300 130L370 150"/><path d="M300 60L360 42L430 60"/></g>`;
+      case 'factory': return `<g fill="${mid}" stroke="${acc}" stroke-width="2"><path d="M240 150V90L300 120V90L360 120V90L420 120V150Z"/></g>
+        <g stroke="${acc2}" stroke-width="2"><path d="M260 100V70H276V100"/></g><g stroke="${acc}" stroke-width="1.5" fill="none" opacity="0.6"><path d="M240 150H440"/></g>`;
+      case 'wrench': return `<g stroke="${acc}" stroke-width="6" fill="none" stroke-linecap="round"><path d="M260 140L340 90"/></g>
+        <circle cx="250" cy="150" r="18" fill="none" stroke="${acc}" stroke-width="6"/><path d="M350 70A22 22 0 1 0 372 100L356 96L344 84Z" fill="${acc2}"/>`;
+      case 'grid': return `<g stroke="${acc}" stroke-width="1.5" fill="none" opacity="0.8"><path d="M260 50V150M300 50V150M340 50V150M380 50V150M420 50V150M260 50H420M260 75H420M260 100H420M260 125H420M260 150H420"/></g>`;
+      case 'pipe': return `<g stroke="${acc}" stroke-width="6" fill="none" stroke-linecap="round"><path d="M60 90H260V150H460V90H620"/></g>
+        <g fill="${mid}" stroke="${acc2}" stroke-width="2"><circle cx="260" cy="120" r="14"/><rect x="446" y="76" width="28" height="28" rx="3"/></g>`;
+      case 'logic': return `<g stroke="${acc}" stroke-width="2.5" fill="none"><path d="M280 70H320A30 30 0 0 1 320 130H280Z"/><path d="M250 85H280M250 115H280M350 100H390"/></g>
+        <circle cx="396" cy="100" r="6" fill="none" stroke="${acc2}" stroke-width="2.5"/>`;
+      case 'chart': return `<g fill="${acc}"><rect x="270" y="110" width="26" height="40"/><rect x="310" y="86" width="26" height="64"/><rect x="350" y="66" width="26" height="84"/><rect x="390" y="100" width="26" height="50"/></g>
+        <path d="M270 150H430" stroke="${acc}" stroke-width="2"/><path d="M270 96L320 76L360 56L410 80" stroke="${acc2}" stroke-width="2.5" fill="none"/>`;
+      case 'gauge': return `<path d="M280 140A60 60 0 0 1 400 140" fill="none" stroke="${acc}" stroke-width="6"/><path d="M340 140L375 96" stroke="${acc2}" stroke-width="4" stroke-linecap="round"/><circle cx="340" cy="140" r="7" fill="${acc2}"/>
+        <g stroke="${acc}" stroke-width="2"><path d="M286 120L295 124M340 84V94M394 120L385 124"/></g>`;
+      case 'shield': return `<path d="M340 50L400 70V110C400 145 372 160 340 168C308 160 280 145 280 110V70Z" fill="${mid}" stroke="${acc}" stroke-width="2.5"/><path d="M315 105L335 125L370 88" stroke="${acc2}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+      default: return `<g stroke="${acc}" stroke-width="1.5" fill="none" opacity="0.7"><path d="M260 60H420M260 100H420M260 140H420"/></g>`;
+    }
+  }
+  return `<div style="padding:12px 16px 0"><svg viewBox="0 0 680 200" width="100%" style="display:block;border-radius:14px" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${title}">
+    <rect x="0" y="0" width="680" height="200" rx="14" fill="${bg}"/>
+    <rect x="0" y="0" width="680" height="200" rx="14" fill="${mid}" opacity="0.4"/>
+    ${motif(motifKey)}
+    <rect x="0" y="150" width="680" height="50" fill="${bg}" opacity="0.55"/>
+    <text x="28" y="182" font-family="Sora, sans-serif" font-weight="800" font-size="20" fill="#ffffff">${title}</text>
+  </svg></div>`;
+}
+
 function renderHome(){
   const o=coursePct();
   const tradeId=(state.trade)||'mold';
@@ -2685,6 +2789,7 @@ function renderHome(){
   }
   app.innerHTML=`${topbar()}
    <div style="padding:14px 16px 0"><button class="back" onclick="sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0">\u2039 ${t('backhub')}</button></div>
+   ${tradeBanner(tradeId)}
    <div class="hero fade"><div class="greet">${t('welcome')}${firstName()?', '+firstName():''}</div>
      <div class="greetname">${cat.title ? tr(cat.title) : tr(COURSE.title)}</div>
      <div class="tradechip" onclick="state.screen='hub';render()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>${t('changetrade')}</div>
@@ -2694,8 +2799,39 @@ function renderHome(){
    <div class="sect">${t('modules')}</div>${mods}<div style="height:10px"></div>`;
 }
 
+/* Module banner: same trade motif and palette, but tagged with the module
+   number and module title. Shown at the top of each module screen. */
+function moduleBanner(tradeId, modIndex, modTitle){
+  const trd=TRADES.find(x=>x.id===tradeId)||{};
+  const cat=trd.cat||'';
+  const P={
+    'Molding & Plastics':   ['#0e2a26','#15413a','#3fb59a','#f39019'],
+    'Machining & CAM':      ['#1c2230','#27304a','#6d8fd6','#f39019'],
+    'Welding & Fabrication':['#2a1c12','#43301c','#e8923a','#ffce54'],
+    'Electrical & Controls':['#0f2a22','#10362b','#43b07c','#f39019'],
+    'Design & CAD':         ['#241a2e','#352645','#a779d6','#f39019'],
+    'Quality & Operations': ['#102530','#173947','#3fa3c4','#f39019'],
+  };
+  const pal=P[cat]||['#16242b','#1d3640','#4aa3b5','#f39019'];
+  const [bg,mid,acc,acc2]=pal;
+  const title=(typeof modTitle==='string')?modTitle:tr(modTitle);
+  const num=(modIndex!=null)?(modIndex+1):1;
+  return `<div style="padding:12px 16px 4px"><svg viewBox="0 0 680 132" width="100%" style="display:block;border-radius:12px" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${title}">
+    <rect x="0" y="0" width="680" height="132" rx="12" fill="${bg}"/>
+    <rect x="0" y="0" width="680" height="132" rx="12" fill="${mid}" opacity="0.4"/>
+    <g stroke="${acc}" stroke-width="1.5" fill="none" opacity="0.4">
+      <path d="M470 30H540V80H600"/><path d="M500 100H580"/><path d="M620 40V92"/></g>
+    <g fill="${acc}" opacity="0.5"><circle cx="600" cy="80" r="4"/><circle cx="540" cy="30" r="4"/><circle cx="580" cy="100" r="4"/></g>
+    <circle cx="62" cy="66" r="34" fill="${mid}" stroke="${acc2}" stroke-width="2.5"/>
+    <text x="62" y="76" font-family="Sora, sans-serif" font-weight="800" font-size="30" fill="#ffffff" text-anchor="middle">${num}</text>
+    <text x="116" y="58" font-family="Sora, sans-serif" font-weight="700" font-size="12" letter-spacing="2" fill="${acc}">${tr2('MODULE','MÓDULO')} ${num}</text>
+    <text x="116" y="84" font-family="Sora, sans-serif" font-weight="800" font-size="19" fill="#ffffff">${title.length>40?title.slice(0,38)+'\u2026':title}</text>
+  </svg></div>`;
+}
+
 function renderModule(){
   const m=COURSE.modules.find(x=>x.id===state.activeModule);
+  const mIdx=COURSE.modules.findIndex(x=>x.id===state.activeModule);
   const p=moduleProgress(m);
   let rows=m.lessons.map((l,i)=>{
     const unlocked=lessonUnlocked(m,i);const done=lessonPassed(m.id,l.id);
@@ -2705,9 +2841,10 @@ function renderModule(){
       <div class="chev">${unlocked?'\u203A':'\uD83D\uDD12'}</div></div>`;
   }).join('');
   app.innerHTML=`${topbar()}
-   <div class="lessonhead fade"><button class="back" onclick="closeModule()">\u2039 ${t('modules')}</button>
+   <div style="padding:12px 16px 0"><button class="back" onclick="closeModule()">\u2039 ${t('modules')}</button></div>
+   ${moduleBanner(state.trade||'mold', mIdx, m.title)}
+   <div class="lessonhead fade">
      <span class="pill lvl">${tr(m.sub)}</span>
-     <h2 style="margin:10px 0 2px;font-size:21px">${tr(m.title)}</h2>
      <div class="mbar" style="margin:8px 0 0;max-width:100%"><i style="width:${p.pct}%"></i></div>
      <div class="muted" style="font-size:12px;margin-top:6px">${p.done}/${p.total} ${t('lessons').toLowerCase()} \u00B7 ${p.pct}%</div>
    </div>

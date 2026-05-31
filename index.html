@@ -2395,7 +2395,7 @@ function renderSignup(){
   const p=state.profile;
   app.innerHTML=`<div class="suwrap fade">
     <div class="introtop"><button class="back" onclick="sfx('tap');state.intro=INTRO_SLIDES.length-1;state.screen='intro';render()">\u2039 ${t('back')}</button>
-      <div class="introtopr"><button class="introskip" onclick="suSkip()">${t('skip')}</button></div></div>
+      <div class="introtopr">${muteBtnHTML()}<button class="introskip" onclick="suSkip()">${t('skip')}</button></div></div>
     <div class="subox">
       <div class="bigring" style="width:64px;height:64px;margin:2px auto 10px"><img src="${ANEW_LOGO}" style="width:46px;height:46px"></div>
       <h2 class="suh">${t('suTitle')}</h2>
@@ -2537,7 +2537,7 @@ function renderSurvey(){
     app.innerHTML=`<div class="svwrap fade">
       <div class="introtop">
         <div class="introname">${firstName()?`${t('hello')}, ${firstName()}`:t('svTitle')}</div>
-        <button class="introskip" onclick="skipSurvey()">${t('skip')}</button>
+        ${muteBtnHTML()}<button class="introskip" onclick="skipSurvey()">${t('skip')}</button>
       </div>
       <div class="svintro">
         <div class="svintroic">\uD83E\uDDED</div>
@@ -2562,7 +2562,7 @@ function renderSurvey(){
   app.innerHTML=`<div class="svwrap fade">
     <div class="introtop">
       <div class="introname">${firstName()?`${t('hello')}, ${firstName()}`:t('svTitle')}</div>
-      <button class="introskip" onclick="skipSurvey()">${t('skip')}</button>
+      ${muteBtnHTML()}<button class="introskip" onclick="skipSurvey()">${t('skip')}</button>
     </div>
     <div class="svhead">
       <div class="svbar"><span style="width:${pct}%"></span></div>
@@ -2595,7 +2595,7 @@ function renderMatches(){
     </div>`;
   }).join('');
   app.innerHTML=`<div class="matchwrap fade">
-    <div class="introtop"><div class="introname">${firstName()?`${t('hello')}, ${firstName()}`:''}</div><span></span></div>
+    <div class="introtop"><div class="introname">${firstName()?`${t('hello')}, ${firstName()}`:''}</div>${muteBtnHTML()}</div>
     <div class="matchhero">
       <div class="matchspark">\u2728</div>
       <h2 class="suh">${t('svResultT')}</h2>
@@ -2708,6 +2708,9 @@ function renderHub(){
     <div class="catrow">${chips}</div>
     ${cards||`<div class="hubcount">\u2014</div>`}
     <div class="hubcount">${TRADES.length} trades \u00B7 1 ready to explore, more in development</div>
+    <div style="padding:4px 16px 0">
+      <button class="btn" style="width:100%;background:linear-gradient(120deg,#2f6d3f,#4BA84B);color:#fff" onclick="sfx('tap');state.screen='parentgate';render();app.scrollTop=0">\uD83D\uDEE1\uFE0F ${tr2('Parent & Guardian Portal','Portal para Padres y Tutores')}</button>
+    </div>
     <div style="height:14px"></div>`;
 }
 function setCat(c){state.cat=c;render();}

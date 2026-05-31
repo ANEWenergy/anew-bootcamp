@@ -1752,7 +1752,7 @@ const state = {
   lessonDone:{}, streak:7,
   intro:0, profile:{name:'', lastName:'', dial:'+44', phone:'', email:'', guardDial:'+44', guardPhone:'', guardConsent:false, consent:false, saved:false, matches:[], survey:{}, scores:{}, bestScores:{}, firstScores:{}, activeDays:[], chat:[]},
   surveyQ:0,
-  chatOpen:false, chatBusy:false, lbTab:'trade', reading:false, readQueue:[], readToken:0,
+  chatOpen:false, chatBusy:false, lbTab:'trade', reading:false, readQueue:[], readToken:0, voiceCache:{},
 };
 // Restore a saved learner profile if the browser allows it (best-effort; harmless if blocked)
 try{ const p=JSON.parse(localStorage.getItem('anew_profile')||'null'); if(p&&typeof p==='object'){state.profile=Object.assign(state.profile,p);} }catch(e){}
@@ -1772,11 +1772,12 @@ function voiceQuality(v){
   const lng=((v && v.lang)||'').toLowerCase();
   let s=0;
   // Strongly preferred high-quality engines / labels
-  if(n.includes('natural')) s+=60;            // Microsoft "... Natural" neural voices
-  if(n.includes('neural')) s+=60;
-  if(n.includes('google')) s+=45;             // Google voices sound markedly better
-  if(n.includes('premium')||n.includes('enhanced')) s+=40;
-  if(n.includes('siri')) s+=40;               // Apple Siri voices
+  if(n.includes('natural')) s+=90;            // Microsoft "... Natural" neural voices
+  if(n.includes('neural')) s+=90;
+  if(n.includes('online')) s+=70;             // cloud-served voices are the high-fidelity tier
+  if(n.includes('google')) s+=60;             // Google voices sound markedly better
+  if(n.includes('premium')||n.includes('enhanced')) s+=55;
+  if(n.includes('siri')) s+=50;               // Apple Siri voices
   // Apple's named higher-quality voices
   if(/(samantha|ava|allison|serena|zoe|nora|isha|moira|tessa|karen|daniel|arthur|aaron|nicky|paloma|mónica|monica|jorge|juan)/.test(n)) s+=30;
   // --- British accent preference ---
@@ -1787,10 +1788,10 @@ function voiceQuality(v){
   if(/(daniel|kate|serena|arthur|oliver|libby|sonia|ryan|hazel|george|susan|maisie|thomas|stephanie|british|united kingdom|\(uk\)|english \(great britain\))/.test(n)) s+=35;
   if(n.includes('google') && (n.includes('uk') || lng==='en-gb')) s+=20; // "Google UK English"
   // Penalise the classic robotic / compact / eSpeak-style defaults
-  if(n.includes('espeak')) s-=40;
-  if(n.includes('compact')) s-=15;
-  if(/(microsoft (david|zira|mark|james)\b)/.test(n)) s-=10; // older US non-neural MS voices
-  if(n.includes('fred')||n.includes('albert')||n.includes('zarvox')||n.includes('robot')) s-=50;
+  if(n.includes('espeak')) s-=80;
+  if(n.includes('compact')) s-=40;
+  if(/(microsoft (david|zira|mark|james)\b)/.test(n)) s-=25; // older US non-neural MS voices
+  if(n.includes('fred')||n.includes('albert')||n.includes('zarvox')||n.includes('robot')) s-=90;
   // Prefer voices the OS marks as local (usually higher fidelity than fallback)
   if(v && v.localService) s+=8;
   if(v && v.default) s+=4;
@@ -1798,9 +1799,14 @@ function voiceQuality(v){
 }
 function pickVoice(locale){
   try{
+    const lang = (locale||'en-US').toLowerCase();
+    // Resolve the best voice for a language only once per session, then reuse it
+    // everywhere. This guarantees the intro narrator and every lesson "Listen"
+    // button speak with the SAME voice, even though getVoices() can return a
+    // changing list as the browser streams voices in asynchronously.
+    if(state.voiceCache && state.voiceCache[lang]) return state.voiceCache[lang];
     const vs = window.speechSynthesis.getVoices()||[];
-    if(!vs.length) return null;
-    const lang = locale.toLowerCase();
+    if(!vs.length) return null;            // not loaded yet; don't cache an empty result
     const base = lang.split('-')[0];
     // Candidates that match the language (exact locale first, then base language).
     let cands = vs.filter(v=>v.lang && v.lang.toLowerCase()===lang);
@@ -1812,7 +1818,9 @@ function pickVoice(locale){
       const qa=voiceQuality(a)+(a.lang.toLowerCase()===lang?5:0);
       return qb-qa;
     });
-    return cands[0]||null;
+    const chosen = cands[0]||null;
+    if(chosen && state.voiceCache) state.voiceCache[lang]=chosen;  // lock it in for the session
+    return chosen;
   }catch(e){ return null; }
 }
 function lessonReadText(l){

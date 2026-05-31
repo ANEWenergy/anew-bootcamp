@@ -1347,14 +1347,14 @@ function moduleLessons(mod){return mod.lessons;}
 function lessonKey(modId,lesId){return modId+':'+lesId;}
 function lessonPassed(modId,lesId){return !!state.lessonDone[lessonKey(modId,lesId)];}
 function moduleProgress(mod){
-  const ls=mod.lessons; const done=ls.filter(l=>lessonPassed(mod.id,l.id)).length;
-  return {done,total:ls.length,pct:Math.round(done/ls.length*100)};
+  const ls=mod.lessons||[]; const done=ls.filter(l=>lessonPassed(mod.id,l.id)).length;
+  return {done,total:ls.length,pct: ls.length>0 ? Math.round(done/ls.length*100) : 0};
 }
 function lessonUnlocked(mod,idx){ if(idx===0)return true; return lessonPassed(mod.id,mod.lessons[idx-1].id); }
 function moduleUnlocked(i){ if(i===0)return true; const prev=COURSE.modules[i-1]; return moduleProgress(prev).pct===100; }
 function coursePct(){
   let d=0,tot=0; COURSE.modules.forEach(m=>{const p=moduleProgress(m);d+=p.done;tot+=p.total;});
-  return Math.round(d/tot*100);
+  return tot>0 ? Math.round(d/tot*100) : 0;
 }
 function lessonsCompleted(){let n=0;COURSE.modules.forEach(m=>{n+=moduleProgress(m).done;});return n;}
 function lessonsTotal(){let n=0;COURSE.modules.forEach(m=>{n+=m.lessons.length;});return n;}
@@ -1976,15 +1976,35 @@ function tr2(en,es){return state.lang==='es'?es:en;}
 
 function renderHome(){
   const o=coursePct();
+  const tradeId=(state.trade)||'mold';
+  const cat=TRADES.find(x=>x.id===tradeId)||{};
   let mods='';
-  COURSE.modules.forEach((m,i)=>{
-    const p=moduleProgress(m);const unlocked=moduleUnlocked(i);
-    mods+=`<div class="mod ${p.pct===100?'done':''} ${unlocked?'':'locked'}" onclick="${unlocked?`openModule('${m.id}')`:`toast('${t('locked')}')`}">
-      <div class="mnum">${p.pct===100?'\u2713':i+1}</div>
-      <div class="minfo"><b>${tr(m.title)}</b><span>${tr(m.sub)} \u00B7 ${p.done}/${p.total} ${t('done').toLowerCase()}</span>
-        <div class="mbar"><i style="width:${p.pct}%"></i></div></div>
-      <div class="chev">${unlocked?'\u203A':'\uD83D\uDD12'}</div></div>`;
-  });
+  if(COURSE.modules && COURSE.modules.length){
+    COURSE.modules.forEach((m,i)=>{
+      const p=moduleProgress(m);const unlocked=moduleUnlocked(i);
+      mods+=`<div class="mod ${p.pct===100?'done':''} ${unlocked?'':'locked'}" onclick="${unlocked?`openModule('${m.id}')`:`toast('${t('locked')}')`}">
+        <div class="mnum">${p.pct===100?'\u2713':i+1}</div>
+        <div class="minfo"><b>${tr(m.title)}</b><span>${tr(m.sub)} \u00B7 ${p.done}/${p.total} ${t('done').toLowerCase()}</span>
+          <div class="mbar"><i style="width:${p.pct}%"></i></div></div>
+        <div class="chev">${unlocked?'\u203A':'\uD83D\uDD12'}</div></div>`;
+    });
+  } else {
+    // Content not loaded yet (or unavailable): show the planned curriculum
+    // outline from the catalog so the trade is never an empty screen.
+    const outline=cat.outline||[];
+    if(outline.length){
+      mods+=`<div class="muted" style="padding:2px 2px 10px;font-size:13px">${tr2('Planned curriculum \u2014 lessons load when you open a module.','Currículo planeado \u2014 las lecciones se cargan al abrir un módulo.')}</div>`;
+      outline.forEach((o2,i)=>{
+        mods+=`<div class="mod locked">
+          <div class="mnum">${i+1}</div>
+          <div class="minfo"><b>${o2}</b><span>${tr2('In development','En desarrollo')}</span>
+            <div class="mbar"><i style="width:0%"></i></div></div>
+          <div class="chev">\uD83D\uDD12</div></div>`;
+      });
+    } else {
+      mods+=`<div class="muted" style="padding:10px 2px">${tr2('Lessons are being prepared for this trade.','Las lecciones de este oficio se están preparando.')}</div>`;
+    }
+  }
   app.innerHTML=`${topbar()}
    <div style="padding:14px 16px 0"><button class="back" onclick="sfx('tap');state.screen='hub';state.activeModule=null;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0">\u2039 ${t('backhub')}</button></div>
    <div class="hero fade"><div class="greet">${t('welcome')}${firstName()?', '+firstName():''}</div>

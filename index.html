@@ -2490,7 +2490,13 @@ function renderLang(){
     const d=document.createElement('div');
     d.className='lang'+(state.lang===l.code?' sel':'');
     d.innerHTML=`<span class="fl">${l.fl}</span><div><b>${l.native}</b><span>${l.name}</span></div>`;
-    d.onclick=()=>{state.lang=l.code;sfx('tap');renderLang();};
+    d.onclick=()=>{
+      state.lang=l.code; sfx('tap');
+      // Selecting a language is the first real user gesture, so it's the right
+      // moment to begin the intro music. The mute button can stop it any time after.
+      try{ audioInit(); audioResume(); if(!AUDIO.muted && !AUDIO.started){ musicStart(); } }catch(e){}
+      renderLang();
+    };
     lg.appendChild(d);
   });
   const b=document.getElementById('startbtn');
@@ -2630,7 +2636,7 @@ function startIntroTimeline(){
     introTimer=setTimeout(()=>{ if(state.screen==='intro'){ introNext(); } }, dur);
   }
 }
-function endIntro(){ stopReading(); sfx('success'); state.screen='signup'; render(); musicResume(); }
+function endIntro(){ stopReading(); sfx('success'); state.screen='signup'; render(); if(!AUDIO.muted){ musicResume(); } }
 function introSlideSound(){
   const s=INTRO_SLIDES[state.intro];
   if(s && s.kind==='fam') sfx('section'); else sfx('tap');
@@ -2842,7 +2848,7 @@ const TAG_LABEL = {
   bigpicture:L('planning & leading','planear y liderar'), problem:L('problem-solving','resoluci\u00F3n de problemas'),
   quality:L('quality & testing','calidad y pruebas'),
 };
-function startSurvey(){ state.surveyQ=-1; state.profile.survey={}; state.screen='survey'; musicResume(); }
+function startSurvey(){ state.surveyQ=-1; state.profile.survey={}; state.screen='survey'; if(!AUDIO.muted){ musicResume(); } }
 function answerSurvey(qi,oi){ state.profile.survey[qi]=oi;
   if(qi<SURVEY.length-1){ sfx('select'); state.surveyQ=qi+1; renderSurvey(); }
   else { sfx('success'); musicStop(); computeMatches(); state.screen='matches'; saveProfile(); render(); app.scrollTop=0; }

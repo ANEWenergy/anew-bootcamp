@@ -2496,14 +2496,17 @@ function renderLang(){
   const b=document.getElementById('startbtn');
   if(state.lang){b.onclick=()=>{
     sfx('select');
-    // The Start/continue press (after a language is chosen) is the audio-ON moment.
-    // This is a real user gesture, so the song is allowed to play here. After this,
-    // the mute button can turn it off or back on anywhere in the journey.
-    try{ audioInit(); audioResume(); if(!AUDIO.muted){ musicStart(); } }catch(e){}
+    // Prime the audio context on this user gesture, but DON'T start the song yet.
+    // The slideshow (intro) render is what actually starts the music — see renderIntro.
+    // Priming here keeps playback allowed once the slideshow kicks it off.
+    try{ audioInit(); audioResume(); }catch(e){}
     state.intro=0; state.screen='intro'; render();
   };}
   const sk=document.getElementById('skipbtn');
-  if(sk){ sk.onclick=()=>{ sfx('tap'); try{ audioInit(); audioResume(); if(!AUDIO.muted){ musicStart(); } }catch(e){} state.screen='hub'; render(); }; }
+  // Skips the slideshow straight to the hub. Music only auto-starts WITH the
+  // slideshow, so we don't start it here — the learner can toggle it on via the
+  // sound button. We still prime the audio context on this gesture.
+  if(sk){ sk.onclick=()=>{ sfx('tap'); try{ audioInit(); audioResume(); }catch(e){} state.screen='hub'; render(); }; }
 }
 
 /* ---------- animated intro slides ---------- */
@@ -2686,7 +2689,7 @@ function introNarrateToggleOff(){
   const was=state.introNarrating;
   introNarrateStop();
   if(was && state.screen==='intro'){
-    try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}
+    try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}
     startIntroTimeline();
   }
 }
@@ -2731,7 +2734,7 @@ function introSkip(){
   sfx('tap');
   state.screen='signup'; render();
   /* keep the music playing into the learner area instead of stopping it */
-  try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}
+  try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}
 }
 
 /* ---------- sign-up: name, phone, email, consent ---------- */
@@ -2922,7 +2925,7 @@ function renderSurvey(){
     </div>
   </div>`;
 }
-function skipSurvey(){ state.screen='hub'; render(); app.scrollTop=0; try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){} }
+function skipSurvey(){ state.screen='hub'; render(); app.scrollTop=0; try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){} }
 function retakeSurvey(){ startSurvey(); render(); app.scrollTop=0; }
 function renderMatches(){
   const ms=state.profile.matches||[];
@@ -3073,7 +3076,7 @@ function onSearch(v){state.query=v;render();const qi=document.getElementById('q'
 function openTrade(id){
   /* keep the ambient music playing through the learner/course browsing area;
      it is paused only on an actual video lesson (see openLesson). */
-  try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}
+  try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}
   const tr=TRADES.find(x=>x.id===id);
   if(tr && tr.preview){
     /* Preview trade: curriculum is still in development. Go straight to the
@@ -3954,9 +3957,9 @@ function renderTabs(){
 }
 
 /* ---------- actions ---------- */
-function goTab(k){stopReading();state.tab=k;state.activeModule=null;state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();}
+function goTab(k){stopReading();state.tab=k;state.activeModule=null;state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}render();}
 function openModule(id){state.activeModule=id;state.activeLesson=null;state.inQuiz=false;render();app.scrollTop=0;}
-function closeModule(){stopReading();state.activeModule=null;state.activeLesson=null;state.inQuiz=false;state.tab='home';try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
+function closeModule(){stopReading();state.activeModule=null;state.activeLesson=null;state.inQuiz=false;state.tab='home';try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}render();app.scrollTop=0;}
 function openLesson(id){
   /* Prerequisite gate: a learner must complete the Soft Skills Foundation
      before starting any trade lesson (refreshed every 3 months). Parent preview
@@ -3967,7 +3970,7 @@ function openLesson(id){
   }
   state.activeLesson=id;state.inQuiz=false;try{ if(songEl){ songEl.pause(); } synthMusicStop(); }catch(e){}render();app.scrollTop=0;
 }
-function closeLesson(){stopReading();state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } else { musicStart(); } } }catch(e){}render();app.scrollTop=0;}
+function closeLesson(){stopReading();state.activeLesson=null;state.inQuiz=false;try{ if(!AUDIO.muted){ if(AUDIO.started){ musicResume(); } } }catch(e){}render();app.scrollTop=0;}
 function playVideo(id, el){
   /* Play in-app: works for any video box (lesson OR tool panel). Use the box
      that was clicked; fall back to #vidbox for older callers. */

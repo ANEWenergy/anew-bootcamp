@@ -2490,17 +2490,18 @@ function renderLang(){
     const d=document.createElement('div');
     d.className='lang'+(state.lang===l.code?' sel':'');
     d.innerHTML=`<span class="fl">${l.fl}</span><div><b>${l.native}</b><span>${l.name}</span></div>`;
-    d.onclick=()=>{
-      state.lang=l.code; sfx('tap');
-      // Selecting a language is the first real user gesture, so it's the right
-      // moment to begin the intro music. The mute button can stop it any time after.
-      try{ audioInit(); audioResume(); if(!AUDIO.muted && !AUDIO.started){ musicStart(); } }catch(e){}
-      renderLang();
-    };
+    d.onclick=()=>{state.lang=l.code;sfx('tap');renderLang();};
     lg.appendChild(d);
   });
   const b=document.getElementById('startbtn');
-  if(state.lang){b.onclick=()=>{ audioInit(); audioResume(); sfx('select'); state.intro=0; state.screen='intro'; render(); };}
+  if(state.lang){b.onclick=()=>{
+    sfx('select');
+    // The Start/continue press (after a language is chosen) is the audio-ON moment.
+    // This is a real user gesture, so the song is allowed to play here. After this,
+    // the mute button can turn it off or back on anywhere in the journey.
+    try{ audioInit(); audioResume(); if(!AUDIO.muted){ musicStart(); } }catch(e){}
+    state.intro=0; state.screen='intro'; render();
+  };}
   const sk=document.getElementById('skipbtn');
   if(sk){ sk.onclick=()=>{ sfx('tap'); try{ audioInit(); audioResume(); if(!AUDIO.muted){ musicStart(); } }catch(e){} state.screen='hub'; render(); }; }
 }

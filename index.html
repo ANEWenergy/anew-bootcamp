@@ -2234,8 +2234,9 @@ function armSongOnNextTap(){
     document.removeEventListener('touchstart', go, true);
     document.removeEventListener('keydown', go, true);
     try{ audioInit(); audioResume(); }catch(e){}
+    if(AUDIO.muted) return;   // learner muted before the gesture landed — stay silent
     const el=songSetup();
-    if(el){ try{ el.volume=AUDIO.muted?0:0.9; el.play().catch(()=>{}); AUDIO.started=true; }catch(e){} }
+    if(el){ try{ el.volume=0.9; el.play().catch(()=>{}); AUDIO.started=true; }catch(e){} }
   };
   document.addEventListener('pointerdown', go, true);
   document.addEventListener('touchstart', go, true);
@@ -2323,7 +2324,11 @@ function toggleMute(){
     var videoPlaying = !!document.querySelector('.video.embed.playing');
     if(!videoPlaying){ try{ if(AUDIO.started){ musicResume(); } else { musicStart(); } }catch(e){} }
   } else {
-    // Muting: also stop the synth loop so it doesn't keep scheduling silently.
+    // Muting: actually PAUSE the song element. Setting volume=0 is unreliable —
+    // iOS Safari ignores the volume property on media elements — so the song
+    // would keep playing audibly. Pausing guarantees silence.
+    if(songEl){ try{ songEl.pause(); }catch(e){} }
+    // Also stop the synth loop so it doesn't keep scheduling silently.
     synthMusicStop();
   }
   document.querySelectorAll('.mutebtn').forEach(b=>{ b.textContent = AUDIO.muted?'\uD83D\uDD07':'\uD83D\uDD0A'; });

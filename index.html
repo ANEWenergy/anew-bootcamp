@@ -3905,6 +3905,9 @@ function renderSoftSkills(){
       state.profile=state.profile||{};
       state.profile.softSkills={date:new Date().toISOString(), score:pct};
       try{ saveProfile(); }catch(e){}
+      // Celebrate finishing Shop Ready with confetti (same as trade lessons).
+      // Fire once per result view, after the screen has rendered.
+      if(burstOnce!=='softskills'){ burstOnce='softskills'; sfx('success'); setTimeout(()=>{ try{ burst(); }catch(e){} }, 60); }
     }
     app.innerHTML=`${topbar()}<div class="pad fade" style="text-align:center">
       <div class="ssresultic">${passed?'\uD83C\uDF89':'\uD83D\uDCAA'}</div>

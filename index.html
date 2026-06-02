@@ -781,9 +781,43 @@ ANEW.registerTrade = function(id, course){
 /* Each trade is its own standalone .html file in trades/. The filenames are
    friendly so the team can recognize and edit them. Add new trades here. */
 ANEW.tradeFiles = {
+  // Built-out trades
   'mold':     'trades/advanced-mold-making.html',
   'pcb':      'trades/pcb-design.html',
-  'embedded': 'trades/embedded-microprocessors.html'
+  'embedded': 'trades/embedded-microprocessors.html',
+  // Scaffolded trades — each is an independent file in trades/ ready for curriculum.
+  'plasticpart': 'trades/plastic-part-design.html',
+  'moldflow':    'trades/mold-flow-simulations.html',
+  'molddesign':  'trades/mold-design.html',
+  'material':    'trades/material-science.html',
+  'cnc':         'trades/cnc-machine-operations.html',
+  'multiaxis':   'trades/multi-axis-machining.html',
+  'cycle':       'trades/calculating-cycle-times.html',
+  'cadcam':      'trades/cad-cam-cae-programming.html',
+  'weld':        'trades/automated-welding.html',
+  'seal':        'trades/seal-dispensing.html',
+  'sheet':       'trades/sheet-metal-stamping-fabrication.html',
+  'diestamp':    'trades/metal-stamping-die-design.html',
+  'fixture':     'trades/fixture-design.html',
+  'wire':        'trades/electrical-wire-schematics.html',
+  'pcbmfg':      'trades/pcb-manufacturing.html',
+  'robot':       'trades/robotics-plc-programming.html',
+  'power':       'trades/power-system-designs.html',
+  'battery':     'trades/battery-fundamentals.html',
+  'industrial':  'trades/industrial-design.html',
+  'styling':     'trades/product-styling.html',
+  'drawing':     'trades/drawings-revision-control.html',
+  'assembly':    'trades/complex-assembly-design.html',
+  'facility':    'trades/facility-design.html',
+  'maint':       'trades/machine-maintenance.html',
+  'nesting':     'trades/nesting-factory-travelers.html',
+  'pid':         'trades/pid-diagramming.html',
+  'logic':       'trades/system-logic-diagrams.html',
+  'pm':          'trades/project-management.html',
+  'cost':        'trades/purchasing-project-costing.html',
+  'quality':     'trades/quality-controls-analytics.html',
+  'safety':      'trades/safety-regulatory-compliance.html',
+  'digitaltwin': 'trades/factory-digital-twin.html'
 };
 /* Map a trade id to its content file. */
 ANEW.tradeFile = function(id){
@@ -854,8 +888,14 @@ const TOOLS = {
   'blender':{name:'Blender', url:'https://www.blender.org/download/', vid:'z-Xl9tGqH14', free:true, blurb:L('Free, open-source 3D modeling, rendering and design.','Modelado 3D, renderizado y dise\u00f1o gratuitos y de c\u00f3digo abierto.')},
   'projectlibre':{name:'ProjectLibre', url:'https://www.projectlibre.com/', vid:'9xwR4JCBaIU', free:true, blurb:L('Free, open-source project management (Gantt, WBS, critical path).','Gesti\u00f3n de proyectos gratuita y de c\u00f3digo abierto (Gantt, WBS, ruta cr\u00edtica).')},
   'tinkercad':{name:'Tinkercad', url:'https://www.tinkercad.com/', vid:'60xfIu-lqAs', free:true, blurb:L('Free Autodesk browser tool for 3D, electronics and code.','Herramienta gratuita de Autodesk en el navegador para 3D, electr\u00f3nica y c\u00f3digo.')},
+  'pybamm':{name:'PyBaMM', url:'https://pybamm.org/', vid:'DBLHaLhyo2w', free:true, blurb:L('Free, open-source physics-based battery simulation (loads, discharge, performance). Used by researchers worldwide; sponsored by NumFOCUS.','Simulaci\u00f3n de bater\u00edas basada en f\u00edsica, gratuita y de c\u00f3digo abierto (cargas, descarga, rendimiento). Usada por investigadores en todo el mundo; patrocinada por NumFOCUS.')},
   'visualcomp':{name:'Visual Components / KUKA.Sim', url:'https://www.visualcomponents.com/companies/academia/', vid:'3wUFy8Dovyo', free:false, price:'$ \u2014 (request academic quote)', blurb:L('Professional robot simulation & offline programming (KUKA.Sim add-on). Academic licenses are request-based.','Simulaci\u00f3n de robots y programaci\u00f3n fuera de l\u00ednea de nivel profesional (complemento KUKA.Sim). Las licencias acad\u00e9micas se solicitan.')},
   'tandem':{name:'Autodesk Tandem', url:'https://intandem.autodesk.com/', vid:'I8sNN74MzJM', free:true, blurb:L('Autodesk\u2019s cloud digital-twin platform. A free version lets students import Revit/IFC models, build a twin and connect sample sensors.','Plataforma de gemelo digital en la nube de Autodesk. Una versi\u00f3n gratuita permite a los estudiantes importar modelos Revit/IFC, crear un gemelo y conectar sensores de ejemplo.')},
+  'siemens':{name:'Siemens TIA Portal (Engineering Copilot)', url:'https://www.siemens.com/en-us/products/tia-portal/engineering-copilot-tia-standard/', vid:'GWLPwbotz8Y', free:false, price:'$ \u2014 (request academic/trial license)', blurb:L('Industry-standard PLC programming for Siemens S7 controllers, now with a generative-AI Engineering Copilot that writes and explains PLC code. Student/trial licenses are request-based.','Programaci\u00f3n de PLC est\u00e1ndar de la industria para controladores Siemens S7, ahora con un Copilot de IA generativa que escribe y explica c\u00f3digo PLC. Las licencias de estudiante/prueba se solicitan.')},
+  'adobefirefly':{name:'Adobe Firefly', url:'https://www.adobe.com/products/firefly.html', vid:'Gni6gzKrXzY', free:false, price:'$ \u2014 (Adobe subscription; limited free tier)', blurb:L('Adobe\u2019s generative-AI tool for creating and restyling images, vectors and designs from text prompts \u2014 great for rapid styling concepts. A limited free tier exists; full use needs an Adobe plan.','Herramienta de IA generativa de Adobe para crear y reestilizar im\u00e1genes, vectores y dise\u00f1os a partir de texto \u2014 ideal para conceptos r\u00e1pidos de estilo. Hay un nivel gratuito limitado; el uso completo requiere un plan de Adobe.')},
+  'lucidchart':{name:'Lucidchart', url:'https://www.lucidchart.com/pages/examples/p-and-id-software', vid:'BteH7EHuAZo', free:false, price:'$ \u2014 (free tier; paid plan for full use)', blurb:L('Web-based diagramming with an industry-standard P&ID shape library (pipes, valves, vessels, pumps, instruments). A free tier exists; full use needs a paid plan.','Diagramaci\u00f3n en la web con una biblioteca de s\u00edmbolos P&ID est\u00e1ndar de la industria (tuber\u00edas, v\u00e1lvulas, recipientes, bombas, instrumentos). Hay un nivel gratuito; el uso completo requiere un plan de pago.')},
+  'zeiss':{name:'ZEISS CALYPSO', url:'https://www.zeiss.com/metrology/en/software/zeiss-calypso.html', vid:'4bXz1Ja6h3E', free:false, price:'$ \u2014 (professional metrology software; request academic access)', blurb:L('Industry-standard measuring software for coordinate measuring machines (CMMs) \u2014 tactile probes, scanning, and optical/camera multisensor (O-INSPECT). Reads GD&T and reports results. A professional, paid tool; academic access is request-based.','Software de medici\u00f3n est\u00e1ndar de la industria para m\u00e1quinas de medici\u00f3n por coordenadas (CMM) \u2014 palpadores t\u00e1ctiles, escaneo y multisensor \u00f3ptico/c\u00e1mara (O-INSPECT). Lee GD&T y reporta resultados. Herramienta profesional de pago; el acceso acad\u00e9mico se solicita.')},
+  'osha':{name:'OSHA (US Dept. of Labor)', url:'https://www.osha.gov/training', vid:'H6wRRWi6i0c', free:true, web:true, blurb:L('The US Occupational Safety and Health Administration sets and enforces workplace safety standards. Its standards, training materials, and video library are free, and the OSHA 10/30-Hour outreach courses are the industry-standard credential.','La Administraci\u00f3n de Seguridad y Salud Ocupacional de EE. UU. (OSHA) establece y hace cumplir las normas de seguridad laboral. Sus normas, materiales de capacitaci\u00f3n y videoteca son gratuitos, y los cursos OSHA de 10/30 horas son la credencial est\u00e1ndar de la industria.')},
 };
 const TRADE_TOOL = {
   'mold':'fusion',
@@ -876,22 +916,22 @@ const TRADE_TOOL = {
   'embedded':'arduino',
   'pcb':'fusion',
   'pcbmfg':'fusion',
-  'robot':'openplc',
+  'robot':'visualcomp',
   'power':'openplc',
-  'battery':'tinkercad',
+  'battery':'pybamm',
   'industrial':'blender',
   'styling':'blender',
   'drawing':'fusion',
-  'assembly':'freecad',
+  'assembly':'fusion',
   'facility':'fusion',
   'maint':'freecad',
   'nesting':'fusion',
-  'pid':'fusion',
+  'pid':'lucidchart',
   'logic':'fusion',
   'pm':'projectlibre',
   'cost':'projectlibre',
-  'quality':'projectlibre',
-  'safety':'projectlibre',
+  'quality':'zeiss',
+  'safety':'osha',
   'digitaltwin':'tandem',
 };
 
@@ -908,17 +948,47 @@ const TRADE_TOOL_OVER = {
   'seal':{cap:L('Robotic Seal Dispensing','Dispensado de Sellador Rob\u00f3tico'), vid:'3wUFy8Dovyo'},
   'sheet':{cap:L('Sheet Metal','Chapa Met\u00e1lica'), vid:'NXu8vVYvjrg'},
   'diestamp':{cap:L('Sheet Metal & Forming','Chapa Met\u00e1lica y Formado'), vid:'NXu8vVYvjrg'},
-  'fixture':{cap:L('Assemblies & Joints','Ensamblajes y Uniones'), vid:'Izh99EnGLGw'},
-  'wire':{cap:L('Electronics: Schematics','Electr\u00f3nica: Esquemas'), vid:'-Xwl6lk3xDI'},
+  'fixture':{cap:L('Fixtures and Work Holding','Sujeciones y Posicionamiento'), vid:'RLADvozs78w'},
+  'wire':{cap:L('PLC Control Panel Wiring','Cableado de Panel de Control PLC'), vid:'6DtsjAgp28k'},
   'pcb':{cap:L('Electronics: PCB Design','Electr\u00f3nica: Dise\u00f1o de PCB'), vid:'-Xwl6lk3xDI'},
   'pcbmfg':{cap:L('Electronics: PCB & Manufacture','Electr\u00f3nica: PCB y Manufactura'), vid:'-Xwl6lk3xDI'},
-  'drawing':{cap:L('Drawings (2D from 3D)','Dibujos (2D desde 3D)'), vid:'oQvcJ7p83Xo'},
+  'drawing':{cap:L('2D & 3D Drawings (Lars Christensen)','Dibujos 2D y 3D (Lars Christensen)'), vid:'uinJ2I_SgKI'},
   'facility':{cap:L('Design & Layout','Dise\u00f1o y Distribuci\u00f3n'), vid:'Izh99EnGLGw'},
   'nesting':{cap:L('Manufacture & Nesting','Manufactura y Anidamiento'), vid:'VPMvnzmuTOw'},
-  'pid':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
+  'pid':{cap:L('P&ID Diagramming','Diagramas P&ID'), vid:'BteH7EHuAZo'},
   'logic':{cap:L('Drawings & Diagrams','Dibujos y Diagramas'), vid:'oQvcJ7p83Xo'},
   'material':{cap:L('Materials & Material Selection','Materiales y Selecci\u00f3n de Materiales'), vid:'580l8i9iISI'},
   'digitaltwin':{cap:L('Digital Twin: Build & Operate','Gemelo Digital: Construir y Operar'), vid:'I8sNN74MzJM'},
+  'robot':{cap:L('Robot Simulation & Programming (KUKA.Sim)','Simulaci\u00f3n y Programaci\u00f3n de Robots (KUKA.Sim)'), vid:'dSr2iST10Fs'},
+  'assembly':{cap:L('Large & Complex Assemblies (Lars Christensen)','Ensamblajes Grandes y Complejos (Lars Christensen)'), vid:'iH0uWFBBo28'},
+  'quality':{cap:L('CMM Inspection & Probes','Inspecci\u00f3n CMM y Palpadores'), vid:'4bXz1Ja6h3E'},
+  'safety':{cap:L('Workplace Safety & OSHA Compliance','Seguridad Laboral y Cumplimiento de OSHA'), vid:'H6wRRWi6i0c'},
+};
+
+/* Additional tool cards for trades that use MORE THAN ONE tool. Each entry is a
+   list of extra tools shown below the primary tool card, in order. Each item:
+     tool : a key into TOOLS (the software/license + its free/paid flag drive the
+            install link, price line, and sponsorship button automatically)
+     cap  : a subject-specific capability label for this trade
+     vid  : the intro video to show on this card (overrides the tool's default)
+   The primary tool stays in TRADE_TOOL / TRADE_TOOL_OVER above. */
+const TRADE_TOOL_EXTRA = {
+  'robot':[
+    {tool:'siemens', cap:L('PLC Programming with AI (TIA Portal Copilot)','Programaci\u00f3n de PLC con IA (Copilot de TIA Portal)'), vid:'GWLPwbotz8Y'}
+  ],
+  'industrial':[
+    {tool:'fusion', cap:L('Industrial Design in Fusion 360','Dise\u00f1o Industrial en Fusion 360'), vid:'aQ9R6Q-IsZI'}
+  ],
+  'styling':[
+    {tool:'adobefirefly', cap:L('AI Styling & Concepts (Firefly)','Estilo y Conceptos con IA (Firefly)'), vid:'Gni6gzKrXzY'},
+    {tool:'fusion', cap:L('Form & Surfacing in Fusion 360','Forma y Superficies en Fusion 360'), vid:'8uVYv86-LfQ'}
+  ],
+  'drawing':[
+    {tool:'fusion', cap:L('Revision & Version Control (Fusion Manage)','Control de Revisiones y Versiones (Fusion Manage)'), vid:'KiAjHbF1TBo'}
+  ],
+  'quality':[
+    {tool:'zeiss', cap:L('From Drawing to Measurement (CALYPSO workflow)','Del Dibujo a la Medici\u00f3n (flujo CALYPSO)'), vid:'GPP9zWWReUs'}
+  ],
 };
 
 /* Spanish translations for trade titles & categories. Titles in TRADES are
@@ -3261,37 +3331,36 @@ function tradeBanner(tradeId){
 }
 
 /* ---------- software tool panel ----------
-   Shows the recommended (free / student) software for a trade, with an install
-   link and an intro video, plus instructions to install it and use it for the
-   hands-on part of the learning. Sits above the curriculum on the course page. */
-function toolPanel(tradeId){
-  const key = TRADE_TOOL[tradeId];
-  if(!key) return '';
+   Shows the recommended software for a trade, with an install link and an intro
+   video, plus instructions. Sits above the curriculum on the course page.
+   A trade can list ADDITIONAL tools in TRADE_TOOL_EXTRA (e.g. Robotics & PLC uses
+   both KUKA.Sim and Siemens TIA Portal); each renders its own card + video, and
+   any paid tool shows its own "Request Sponsorship" button. */
+function toolCard(tradeId, key, over, headingOverride){
   const tool = TOOLS[key];
   if(!tool) return '';
-  /* Optional per-trade override: a subject-specific capability label and a
-     subject-specific intro video (used for the Fusion trades so each shows the
-     relevant capability, e.g. "Simulation: Injection Molding"). Install link
-     stays the tool's. */
-  const over = (typeof TRADE_TOOL_OVER!=='undefined') ? TRADE_TOOL_OVER[tradeId] : null;
   const displayName = over ? (tool.name + ' \u2014 ' + tr(over.cap)) : tool.name;
   const vid = (over && over.vid) ? over.vid : tool.vid;
-  const heading = tr2('Software for this trade','Software para este oficio');
+  const heading = headingOverride || tr2('Software for this trade','Software para este oficio');
   const isFree = (tool.free !== false); /* default to free unless explicitly marked paid */
+  const isWeb = (tool.web === true);    /* web resource (visit) vs installable software */
   const instr = isFree
-    ? tr2('Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
-          'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.')
+    ? (isWeb
+        ? tr2('Click the button to open '+tool.name+' (free), then use its resources for the hands-on parts of this trade.',
+              'Haz clic en el bot\u00f3n para abrir '+tool.name+' (gratis) y usa sus recursos para las partes pr\u00e1cticas de este oficio.')
+        : tr2('Click the button to install '+tool.name+' on your computer (it\u2019s free for students), then use it to complete the hands-on parts of this trade.',
+              'Haz clic en el bot\u00f3n para instalar '+tool.name+' en tu computadora (es gratis para estudiantes) y \u00fasalo para completar las partes pr\u00e1cticas de este oficio.'))
     : tr2('This trade uses '+tool.name+'. It is a professional, paid tool \u2014 request access below, or ask a sponsor to fund a student license.',
           'Este oficio usa '+tool.name+'. Es una herramienta profesional de pago: solicita acceso abajo o pide a un patrocinador que financie una licencia para estudiantes.');
-  /* Price / cost line: free tools show a simple label; paid tools show the price. */
   const priceLine = isFree
     ? `<div class="toolprice free">\u2713 ${tr2('Free for students','Gratis para estudiantes')}</div>`
     : `<div class="toolprice paid"><span class="pricelbl">${tr2('Student license','Licencia de estudiante')}:</span> <b>${tool.price||'\u2014'}</b></div>`;
-  /* Request Sponsorship button only for paid tools. */
+  /* Request Sponsorship button only for paid tools; pass the specific tool key so
+     the sponsor form names the right software even for secondary tools. */
   const sponsorBtn = isFree ? '' :
-    `<button class="toolsponsor" onclick="openSponsor('${tradeId}')">\u2764 ${tr2('Request Sponsorship','Solicitar Patrocinio')}</button>`;
+    `<button class="toolsponsor" onclick="openSponsor('${tradeId}','${key}')">\u2764 ${tr2('Find a Sponsor','Buscar Patrocinador')}</button>`;
   const installLabel = isFree
-    ? (tr2('Install','Instalar')+' '+tool.name)
+    ? ((isWeb ? tr2('Open','Abrir') : tr2('Install','Instalar'))+' '+tool.name)
     : (tr2('Get access','Obtener acceso')+' \u2014 '+tool.name);
   return `<div class="toolpanel">
     <div class="toolhdr"><span class="toolkicker">${heading}</span><b>${displayName}</b><span class="toolblurb">${tr(tool.blurb)}</span></div>
@@ -3306,6 +3375,21 @@ function toolPanel(tradeId){
       ${sponsorBtn}
     </div>
   </div>`;
+}
+function toolPanel(tradeId){
+  const key = TRADE_TOOL[tradeId];
+  if(!key) return '';
+  const over = (typeof TRADE_TOOL_OVER!=='undefined') ? TRADE_TOOL_OVER[tradeId] : null;
+  let html = toolCard(tradeId, key, over);
+  /* Extra tools (a trade can use more than one). Each gets its own card. */
+  const extras = (typeof TRADE_TOOL_EXTRA!=='undefined') ? TRADE_TOOL_EXTRA[tradeId] : null;
+  if(extras && extras.length){
+    const altHeading = tr2('Also used in this trade','Tambi\u00e9n se usa en este oficio');
+    extras.forEach(function(ex){
+      html += toolCard(tradeId, ex.tool, {cap:ex.cap, vid:ex.vid}, altHeading);
+    });
+  }
+  return html;
 }
 
 function renderHome(){
@@ -4011,8 +4095,8 @@ async function saveSponsorReqs(){
     }
   }catch(e){ /* storage unavailable — in-memory copy still holds for this session */ }
 }
-function openSponsor(tradeId){
-  const key = TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
+function openSponsor(tradeId, toolKey){
+  const key = toolKey || TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
   const cat = (typeof TRADES!=='undefined') ? (TRADES.find(x=>x.id===tradeId)||{}) : {};
   const tradeName = cat.title || tradeId;
   const price = tool.price || '\u2014';
@@ -4032,7 +4116,7 @@ function openSponsor(tradeId){
       <label class="sponsorlbl">${tr2('Your email','Tu correo')}<input id="sp_email" type="email" autocomplete="email"></label>
       <label class="sponsorlbl">${tr2('Organization (optional)','Organizaci\u00f3n (opcional)')}<input id="sp_org" type="text"></label>
       <label class="sponsorlbl">${tr2('Message (optional)','Mensaje (opcional)')}<textarea id="sp_msg" rows="2"></textarea></label>
-      <button class="sponsorsubmit" onclick="submitSponsor('${tradeId}')">${tr2('Submit request','Enviar solicitud')}</button>
+      <button class="sponsorsubmit" onclick="submitSponsor('${tradeId}','${key}')">${tr2('Submit request','Enviar solicitud')}</button>
       <div class="sponsornote">${tr2('Your request is recorded for the ANEW team to follow up.','Tu solicitud queda registrada para que el equipo de ANEW d\u00e9 seguimiento.')}</div>
     </div>`;
   wrap.addEventListener('click', (e)=>{ if(e.target===wrap) closeSponsor(); });
@@ -4041,8 +4125,8 @@ function openSponsor(tradeId){
   try{ musicStop(); }catch(e){}
 }
 function closeSponsor(){ const o=document.querySelector('.sponsoroverlay'); if(o) o.remove(); }
-async function submitSponsor(tradeId){
-  const key = TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
+async function submitSponsor(tradeId, toolKey){
+  const key = toolKey || TRADE_TOOL[tradeId]; const tool = TOOLS[key]||{};
   const cat = (typeof TRADES!=='undefined') ? (TRADES.find(x=>x.id===tradeId)||{}) : {};
   const g = (id)=>{ const el=document.getElementById(id); return el?el.value.trim():''; };
   const name = g('sp_name'); const email = g('sp_email');

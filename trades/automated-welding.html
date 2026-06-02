@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANEW Boot Camp — Automated Welding</title>
+<style>
+  html,body{margin:0;height:100%;background:#1b1b1f;color:#f3f3f5;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{height:100%;display:grid;place-items:center;text-align:center;padding:24px}
+  .card{max-width:420px}
+  h1{font-size:20px;margin:0 0 6px} p{opacity:.8;line-height:1.6;font-size:14px}
+  a.btn{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:12px;
+    background:linear-gradient(140deg,#ffb347,#f39019);color:#241500;
+    font-weight:700;text-decoration:none}
+  .spin{width:30px;height:30px;margin:18px auto;border:3px solid #3a3a40;
+    border-top-color:#f39019;border-radius:50%;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TRADE: Automated Welding  (id: weld)
+     This file works two ways:
+       1) The index.html hub loads it on demand and runs the content
+          script below to register this trade's lessons.
+       2) Opened on its own, it launches the full simulator focused
+          on this trade.
+
+     >>> HOW TO BUILD THIS CURRICULUM <<<
+     Everything you edit lives in the lesson-content script block
+     below. You do NOT need to touch index.html or any other trade file.
+     Edit this file, save it, drop it back into the trades/ folder, and
+     the hub picks it up the next time this trade is opened.
+
+     The block already contains ONE starter module with two PLACEHOLDER
+     lessons so the trade renders in the demo. Replace the placeholder
+     text with real curriculum, add more lessons/modules, and you're done.
+     ============================================================ -->
+<div class="wrap"><div class="card">
+  <h1>ANEW Boot Camp — Automated Welding</h1>
+  <div class="spin"></div>
+  <p id="msg">Opening the Boot Camp simulator…</p>
+  <a class="btn" id="manual" href="index.html#trade=weld" style="display:none">Open the simulator →</a>
+</div></div>
+
+<!-- The trade's lesson/quiz content. The hub reads THIS script by id. -->
+<script id="trade-content" type="text/anew-trade">
+/* trades/automated-welding.html — Automated Welding
+   Loaded on demand by the index.html hub. Relies on the global helper
+   L(en,es) defined in the hub. Registers via ANEW.registerTrade('weld', COURSE).
+
+   ----------------------------------------------------------------------
+   AUTHORING GUIDE (read once, then just fill in the blanks)
+   ----------------------------------------------------------------------
+   Every learner-facing string is bilingual:  _L('English','Espanol')
+   If you only have English for now, write _L('English text') and the app
+   will show the English for both languages until the Spanish is added.
+
+   STRUCTURE:
+     COURSE  ->  modules: [ M1, M2, ... ]
+     each MODULE  ->  lessons: [ {lesson}, {lesson}, ... ]
+     each LESSON  ->  body: [...content blocks...]  +  quiz: [...questions...]
+
+   CONTENT BLOCKS you can put in a lesson's body array:
+     {p:  _L('A paragraph of text.','Un parrafo.')}              // paragraph
+     {ul:[_L('Bullet one','Vineta uno'), _L('Bullet two','...')]} // bullet list
+
+   OPTIONAL per-lesson:
+     tip: _L('A short pro-tip shown in a callout.','Un consejo breve.')
+
+   QUIZ questions (1 or more per lesson):
+     {tag:'check',                          // 'check' or 'recall' (a label only)
+      stem: _L('Question text?','Pregunta?'),
+      opts:[_L('Option A','Opcion A'), _L('Option B','Opcion B'),
+            _L('Option C','Opcion C'), _L('Option D','Opcion D')],
+      a: 0,                                 // 0-based index of the CORRECT option
+      fb: _L('Why that answer is correct.','Por que es correcta.')}
+
+   Add as many lessons and modules as you like. Keep ids unique within
+   this file (m1l1, m1l2, m2l1, ...). That's it.
+   ---------------------------------------------------------------------- */
+(function(){
+'use strict';
+var _L = (typeof L==='function') ? L : function(en,es){return {en:en,es:es||en};};
+
+/* ======================= MODULE 1 ======================= */
+var M1 = {
+ id:'m1',
+ title:_L('Module 1 — Getting Started','Modulo 1 — Para Empezar'),
+ sub:_L('2 lessons \u00b7 Level 1','2 lecciones \u00b7 Nivel 1'),
+ lessons:[
+
+  /* ---- LESSON 1 (placeholder — replace with real content) ---- */
+  {id:'m1l1',
+   title:_L('Lesson 1 — Overview','Leccion 1 — Vision General'),
+   obj:_L('TODO: state what the learner will be able to do after this lesson.',
+          'TODO: indicar que podra hacer el aprendiz despues de esta leccion.'),
+   body:[
+     {p:_L('TODO: Write the first teaching paragraph for Automated Welding here. Explain the core idea in plain language a grade 6\u201312 learner can follow.',
+           'TODO: Escribe aqui el primer parrafo de ensenanza para Automated Welding. Explica la idea central en lenguaje sencillo.')},
+     {ul:[_L('TODO: key point one.','TODO: punto clave uno.'),
+          _L('TODO: key point two.','TODO: punto clave dos.'),
+          _L('TODO: key point three.','TODO: punto clave tres.')]}
+   ],
+   tip:_L('TODO: optional pro-tip for this lesson (or delete this line).',
+          'TODO: consejo opcional para esta leccion (o elimina esta linea).'),
+   quiz:[
+     {tag:'check',
+      stem:_L('TODO: write a question that checks the lesson\u2019s main idea.',
+              'TODO: escribe una pregunta que verifique la idea principal.'),
+      opts:[_L('TODO: correct answer','TODO: respuesta correcta'),
+            _L('TODO: wrong answer','TODO: respuesta incorrecta'),
+            _L('TODO: wrong answer','TODO: respuesta incorrecta'),
+            _L('TODO: wrong answer','TODO: respuesta incorrecta')],
+      a:0,
+      fb:_L('TODO: explain why the first option is correct.',
+            'TODO: explica por que la primera opcion es correcta.')}
+   ]},
+
+  /* ---- LESSON 2 (placeholder — replace with real content) ---- */
+  {id:'m1l2',
+   title:_L('Lesson 2 — Core Concept','Leccion 2 — Concepto Central'),
+   obj:_L('TODO: state the objective of lesson 2.',
+          'TODO: indicar el objetivo de la leccion 2.'),
+   body:[
+     {p:_L('TODO: Write the teaching content for the second lesson of Automated Welding here.',
+           'TODO: Escribe aqui el contenido de la segunda leccion de Automated Welding.')}
+   ],
+   quiz:[
+     {tag:'recall',
+      stem:_L('TODO: write a recall question for lesson 2.',
+              'TODO: escribe una pregunta de repaso para la leccion 2.'),
+      opts:[_L('TODO: correct answer','TODO: respuesta correcta'),
+            _L('TODO: wrong answer','TODO: respuesta incorrecta'),
+            _L('TODO: wrong answer','TODO: respuesta incorrecta')],
+      a:0,
+      fb:_L('TODO: explain the correct answer.','TODO: explica la respuesta correcta.')}
+   ]}
+
+ ]
+};
+
+/* To add MODULE 2, copy the M1 block above, rename it M2 with id:'m2',
+   give its lessons ids m2l1, m2l2, ..., then add M2 to the modules array below. */
+
+var COURSE = {
+  id:'weld',
+  title:_L('Automated Welding','Automated Welding'),
+  modules:[ M1 ]   // add more modules here: [ M1, M2, M3 ]
+};
+
+if (typeof ANEW !== 'undefined' && ANEW.registerTrade) {
+  ANEW.registerTrade('weld', COURSE);
+}
+})();
+</script>
+
+<!-- Bootstrap: register-in-hub OR launch-standalone. (Do not edit.) -->
+<script>
+(function(){
+  var TID = 'weld';
+  function runContent(){
+    var s = document.getElementById('trade-content');
+    if (!s) return false;
+    try { (0, eval)(s.textContent); return true; } catch(e) { return false; }
+  }
+  if (window.ANEW && window.ANEW.registerTrade) { runContent(); return; }
+  var target = 'index.html#trade=' + encodeURIComponent(TID);
+  var msg = document.getElementById('msg'), manual = document.getElementById('manual');
+  try { window.location.replace(target); } catch(e) {}
+  setTimeout(function(){
+    if (msg) msg.textContent = 'If the simulator did not open automatically:';
+    if (manual) manual.style.display = 'inline-block';
+  }, 1200);
+})();
+</script>
+</body>
+</html>

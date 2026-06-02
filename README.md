@@ -41,6 +41,77 @@ If a trade ever fails to load, the app shows a "try again" screen rather than
 breaking, and the intro music falls back to a built-in synthesized track if the
 song file can't be played — so a funder demo never breaks or plays silence.
 
+## Trade file index (all 35 trades)
+
+Every trade now has its own independently-editable file in `trades/`. Three are
+built out; the rest are scaffolded with a starter module, two placeholder
+lessons, and an authoring guide inside each file. Edit one file without touching
+any other trade or the hub.
+
+Built out:
+
+```
+trades/advanced-mold-making.html        Advanced Mold Making      (complete)
+trades/pcb-design.html                  PCB Design                (built)
+trades/embedded-microprocessors.html    Embedded Microprocessors  (built)
+```
+
+Scaffolded — ready for curriculum (id : file):
+
+```
+plasticpart  trades/plastic-part-design.html             Plastic Part Design
+moldflow     trades/mold-flow-simulations.html           Mold Flow Simulations
+molddesign   trades/mold-design.html                     Mold Design
+material     trades/material-science.html                Material Science
+cnc          trades/cnc-machine-operations.html          CNC Machine Operations
+multiaxis    trades/multi-axis-machining.html            Multi-Axis Machining
+cycle        trades/calculating-cycle-times.html         Calculating Cycle Times
+cadcam       trades/cad-cam-cae-programming.html         CAD/CAM/CAE Programming
+weld         trades/automated-welding.html               Automated Welding
+seal         trades/seal-dispensing.html                 Seal Dispensing
+sheet        trades/sheet-metal-stamping-fabrication.html Sheet Metal Stamping & Fabrication
+diestamp     trades/metal-stamping-die-design.html       Metal Stamping & Die Design
+fixture      trades/fixture-design.html                  Fixture Design
+wire         trades/electrical-wire-schematics.html      Electrical Wire Schematics
+pcbmfg       trades/pcb-manufacturing.html               PCB Manufacturing
+robot        trades/robotics-plc-programming.html        Robotics & PLC Programming
+power        trades/power-system-designs.html            Power System Designs
+battery      trades/battery-fundamentals.html            Battery Fundamentals
+industrial   trades/industrial-design.html               Industrial Design
+styling      trades/product-styling.html                 Product Styling
+drawing      trades/drawings-revision-control.html       2D & 3D Drawings & Revision Control
+assembly     trades/complex-assembly-design.html         Complex Assembly Design & Management
+facility     trades/facility-design.html                 Facility Design
+maint        trades/machine-maintenance.html             Machine Maintenance
+nesting      trades/nesting-factory-travelers.html       Nesting & Factory Travelers
+pid          trades/pid-diagramming.html                 P&ID Diagramming
+logic        trades/system-logic-diagrams.html           System Logic Diagrams
+pm           trades/project-management.html              Project Management
+cost         trades/purchasing-project-costing.html      Purchasing & Project Costing
+quality      trades/quality-controls-analytics.html      Quality Controls & Statistical Analytics
+safety       trades/safety-regulatory-compliance.html    Safety & Regulatory Compliance
+digitaltwin  trades/factory-digital-twin.html            Factory Industrial Design + Digital Twin
+```
+
+## Building out a scaffolded trade
+
+1. Open the trade's file in `trades/` (e.g. `cnc-machine-operations.html`).
+2. Scroll to the `lesson-content` script block. A commented AUTHORING GUIDE at
+   the top explains the format. In short:
+   - Each learner-facing string is bilingual: `_L('English','Espanol')`.
+     If you only have English, write `_L('English')` for now.
+   - A lesson has a `body` array (use `{p:...}` paragraphs and `{ul:[...]}`
+     bullet lists) and a `quiz` array. Each quiz item has `opts`, plus `a` =
+     the 0-based index of the correct option, and `fb` = feedback text.
+   - Copy the `M1` module block to add `M2`, `M3`, ... then list them in
+     `modules:[ M1, M2, ... ]`. Keep lesson ids unique (m1l1, m1l2, m2l1, ...).
+3. Save and drop the file back into `trades/`. The hub picks it up the next time
+   that trade is opened. No change to index.html is required.
+
+Each scaffolded trade already renders in the demo with its placeholder lessons,
+so funders see every trade working; replace the placeholders as curriculum is
+written.
+
 ## How a trade loads (for developers)
 
 1. Learner taps a trade card -> openTrade(id) shows a brief loading screen.
